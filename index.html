@@ -167,8 +167,9 @@
         /* Hero Section */
         .hero {
             height: 100vh;
-            background: linear-gradient(rgba(26, 26, 26, 0.7), rgba(45, 45, 45, 0.7)),
-            url('https://raw.githubusercontent.com/CoachPete86/images/3749c527ecaa3e8a8d6b597d4604fa57023f18b1/coach_hero_ext.png') center/cover;
+            background: linear-gradient(rgba(26, 26, 26, 0.5), rgba(45, 45, 45, 0.5)),
+            url('hero-bg.jpg') center/cover no-repeat;
+            background-position: center center;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -184,7 +185,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: radial-gradient(circle at center, transparent 0%, rgba(26, 26, 26, 0.3) 100%);
+            background: radial-gradient(circle at center, transparent 0%, rgba(26, 26, 26, 0.2) 100%);
         }
 
         .hero-content {
@@ -382,6 +383,7 @@
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            height: 100%;
         }
 
         .service-card::before {
@@ -423,6 +425,14 @@
         .service-card p {
             color: var(--text-medium);
             line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        
+        .service-card p strong {
+            color: var(--primary-orange);
+            font-size: 1.2rem;
+            font-family: 'Oswald', sans-serif;
+            letter-spacing: 1px;
         }
 
         /* Process Section */
@@ -787,7 +797,8 @@
         <h1 class="hero-title" data-aos="fade-up">Coach Pete Ryan</h1>
         <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="200">Mindset • Fitness • Health</p>
         <p class="hero-description" data-aos="fade-up" data-aos-delay="400">
-            I don't sell fitness. I build better people. Transform your mindset, transform your life.
+            I don't sell fitness. I build better people. Transform your mindset, transform your body, transform your life. 
+            Professional coaching packages starting from just £25 per session.
         </p>
         <a href="#contact" class="cta-button" data-aos="fade-up" data-aos-delay="600">Start Your Journey</a>
     </div>
@@ -848,6 +859,7 @@
                 </div>
                 <h3>Personal Training</h3>
                 <p>Customised fitness programmes designed to push your limits and achieve results you never thought possible. Every session is tailored to your goals and capabilities.</p>
+                <p><strong>£60 per session</strong></p>
             </div>
             <div class="service-card" data-aos="fade-up" data-aos-delay="200">
                 <div class="service-icon">
@@ -855,6 +867,7 @@
                 </div>
                 <h3>Mindset Coaching</h3>
                 <p>Transform your mental game with proven psychological techniques. Break through limiting beliefs and develop the mindset of a champion.</p>
+                <p><strong>£75 per session</strong></p>
             </div>
             <div class="service-card" data-aos="fade-up" data-aos-delay="300">
                 <div class="service-icon">
@@ -862,6 +875,7 @@
                 </div>
                 <h3>Group Training</h3>
                 <p>High-energy group sessions that combine the motivation of training with others and the expertise of professional coaching.</p>
+                <p><strong>£25 per person/session</strong></p>
             </div>
             <div class="service-card" data-aos="fade-up" data-aos-delay="400">
                 <div class="service-icon">
@@ -869,6 +883,7 @@
                 </div>
                 <h3>Online Coaching</h3>
                 <p>Get world-class coaching from anywhere. Comprehensive online programmes with regular check-ins and constant support.</p>
+                <p><strong>£199 per month</strong></p>
             </div>
             <div class="service-card" data-aos="fade-up" data-aos-delay="500">
                 <div class="service-icon">
@@ -876,6 +891,7 @@
                 </div>
                 <h3>Nutrition Guidance</h3>
                 <p>Sustainable nutrition strategies that fuel your performance and support your lifestyle. No fad diets, just proven science.</p>
+                <p><strong>£149 per month</strong></p>
             </div>
             <div class="service-card" data-aos="fade-up" data-aos-delay="600">
                 <div class="service-icon">
@@ -883,6 +899,7 @@
                 </div>
                 <h3>Lifestyle Transformation</h3>
                 <p>Complete life overhaul programmes that address fitness, mindset, nutrition, and habits for total transformation.</p>
+                <p><strong>£299 per month</strong></p>
             </div>
         </div>
     </div>
