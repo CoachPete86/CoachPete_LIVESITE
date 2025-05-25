@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nutrition Guidance - Coach Pete Ryan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-orange: #ff6b35;
+            --secondary-orange: #ff8c42;
+            --dark-grey: #1a1a1a;
+            --medium-grey: #2d2d2d;
+            --light-grey: #3d3d3d;
+            --text-light: #e0e0e0;
+            --text-medium: #b0b0b0;
+            --text-dark: #808080;
+            --concrete: #4a4a4a;
+            --metal: #6a6a6a;
+            --accent-blue: #00d4ff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: linear-gradient(135deg, var(--dark-grey) 0%, var(--medium-grey) 100%);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(26, 26, 26, 0.98);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-orange);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--primary-orange);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-orange);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .mobile-menu span {
+            width: 25px;
+            height: 3px;
+            background: var(--text-light);
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Service Hero Section */
+        .service-hero {
+            height: 50vh;
+            background: linear-gradient(rgba(26, 26, 26, 0.7), rgba(45, 45, 45, 0.7)), 
+                        url('https://images.unsplash.com/photo-1494390248081-4e521a5940db?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1806&q=80') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            margin-top: 80px;
+        }
+
+        .service-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, transparent 0%, rgba(26, 26, 26, 0.3) 100%);
+        }
+
+        .service-hero-content {
+            max-width: 800px;
+            z-index: 2;
+            position: relative;
+            padding: 0 2rem;
+        }
+
+        .service-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 700;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .service-subtitle {
+            font-size: clamp(1rem, 2vw, 1.5rem);
+            color: var(--primary-orange);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Main Content */
+        .service-content {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2.5rem;
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-bottom: 3px solid var(--primary-orange);
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        .section-description {
+            font-size: 1.1rem;
+            color: var(--text-medium);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        /* Benefits Section */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .benefit-card {
+            background: rgba(61, 61, 61, 0.3);
+            padding: 2rem;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 107, 53, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-orange);
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.2);
+        }
+
+        .benefit-icon {
+            font-size: 2.5rem;
+            color: var(--primary-orange);
+            margin-bottom: 1.5rem;
+        }
+
+        .benefit-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.3rem;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .benefit-description {
+            color: var(--text-medium);
+            line-height: 1.6;
+        }
+
+        /* Pricing Section */
+        .pricing-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2rem;
+        }
+
+        .pricing-table th,
+        .pricing-table td {
+            padding: 1.5rem;
+            text-align: left;
+            border-bottom: 1px solid var(--light-grey);
+        }
+
+        .pricing-table th {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.2rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            background: rgba(61, 61, 61, 0.3);
+        }
+
+        .pricing-table td {
+            color: var(--text-medium);
+            font-size: 1.1rem;
+        }
+
+        .price {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.3rem;
+            color: var(--primary-orange);
+            font-weight: 600;
+        }
+
+        .package-name {
+            font-weight: 600;
+            color: var(--text-light);
+        }
+
+        /* What's Included Section */
+        .included-list {
+            list-style: none;
+        }
+
+        .included-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+
+        .included-icon {
+            color: var(--primary-orange);
+            font-size: 1.2rem;
+            margin-right: 1rem;
+            min-width: 20px;
+        }
+
+        .included-text {
+            color: var(--text-medium);
+            font-size: 1.1rem;
+        }
+
+        /* FAQ Section */
+        .faq-container {
+            margin-top: 2rem;
+        }
+
+        .faq-item {
+            margin-bottom: 1.5rem;
+        }
+
+        .faq-question {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.3rem;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-question:hover {
+            color: var(--primary-orange);
+        }
+
+        .faq-answer {
+            color: var(--text-medium);
+            font-size: 1.1rem;
+            padding-left: 1rem;
+            border-left: 2px solid var(--primary-orange);
+            margin-top: 0.5rem;
+            line-height: 1.8;
+        }
+
+        /* Testimonials Section */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: rgba(61, 61, 61, 0.3);
+            padding: 2rem;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 107, 53, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-text {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .testimonial-author {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1rem;
+            color: var(--primary-orange);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(rgba(26, 26, 26, 0.7), rgba(45, 45, 45, 0.7)), 
+                        url('https://images.unsplash.com/photo-1498837167922-ddd27525d352?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80') center/cover;
+            padding: 6rem 0;
+            text-align: center;
+        }
+
+        .cta-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .cta-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 3rem;
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .cta-description {
+            font-size: 1.2rem;
+            color: var(--text-medium);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--primary-orange), var(--secondary-orange));
+            color: white;
+            padding: 1rem 2.5rem;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark-grey);
+            padding: 3rem 0 1rem;
+            text-align: center;
+            border-top: 3px solid var(--primary-orange);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-links a {
+            color: var(--text-medium);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--primary-orange);
+            transform: translateY(-3px);
+        }
+
+        .footer-text {
+            color: var(--text-dark);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .service-title {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .pricing-table th,
+            .pricing-table td {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">Coach Pete Ryan</a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="index.html#about" class="nav-link">About</a></li>
+                <li><a href="index.html#services" class="nav-link active">Services</a></li>
+                <li><a href="index.html#process" class="nav-link">Process</a></li>
+                <li><a href="index.html#testimonials" class="nav-link">Testimonials</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="mobile-menu" id="mobileMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Service Hero Section -->
+    <section class="service-hero" id="service-hero">
+        <div class="service-hero-content">
+            <h1 class="service-title" data-aos="fade-up">Nutrition Guidance</h1>
+            <p class="service-subtitle" data-aos="fade-up" data-aos-delay="200">Fuel Your Body, Transform Your Life</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="service-content">
+        <!-- Service Description -->
+        <section class="section" data-aos="fade-up">
+            <h2 class="section-title">About Nutrition Guidance</h2>
+            <p class="section-description">
+                My nutrition guidance service is built on the understanding that what you eat fundamentally shapes your health, performance, and body composition. Unlike fad diets or one-size-fits-all meal plans, I provide science-based, personalized nutrition strategies that work with your lifestyle, preferences, and specific goals—whether that's fat loss, muscle gain, improved energy, athletic performance, or overall health enhancement.
+            </p>
+            <p class="section-description">
+                Through detailed assessment, customized planning, and ongoing support, I help you develop a sustainable approach to nutrition that delivers results while eliminating confusion and overwhelm. You'll learn not just what to eat, but why and how to adapt your nutrition as your body changes and goals evolve, creating a foundation for lifelong nutritional success rather than short-term fixes.
+            </p>
+        </section>
+
+        <!-- Benefits Section -->
+        <section class="section" data-aos="fade-up">
+            <h2 class="section-title">Benefits & Features</h2>
+            <div class="benefits-grid">
+                <div class="benefit-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="benefit-icon">
+                        <i class="fas fa-weight"></i>
+                    </div>
+                    <h3 class="benefit-title">Body Composition</h3>
+                    <p class="benefit-description">
+                        Achieve lasting changes in body fat and muscle mass through strategic nutrition rather than unsustainable crash dieting.
+                    </p>
+                </div>
+                <div class="benefit-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="benefit-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3 class="benefit-title">Enhanced Energy</h3>
+                    <p class="benefit-description">
+                        Optimize your meal timing and macronutrient balance to eliminate energy crashes and fuel consistent performance.
+                    </p>
+                </div>
+                <div class="benefit-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="benefit-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <h3 class="benefit-title">Food Freedom</h3>
+                    <p class="benefit-description">
+                        Develop a healthy relationship with food that eliminates restriction mentality while supporting your health and fitness goals.
+                    </p>
+                </div>
+                <div class="benefit-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="benefit-icon">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <h3 class="benefit-title">Health Optimization</h3>
+                    <p class="benefit-description">
+                        Improve key health markers including blood pressure, cholesterol, blood sugar regulation, and immune function through targeted nutrition.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Section -->
+        <section class="section" data-aos="fade-up">
+            <h2 class="section-title">Pricing Breakdown</h2>
+            <table class="pricing-table">
+                <thead>
+                    <tr>
+                        <th>Package</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="package-name">Basic Nutrition Plan</td>
+                        <td>Personalized nutrition plan with bi-weekly check-ins</td>
+                        <td class="price">£149 per month</td>
+                    </tr>
+                    <tr>
+                        <td class="package-name">Complete Nutrition Coaching</td>
+                        <td>Comprehensive plan with weekly adjustments and meal recipes</td>
+                        <td class="price">£249 per month</td>
+                    </tr>
+                    <tr>
+                        <td class="package-name">Body Transformation Nutrition</td>
+                        <td>Intensive fat loss or muscle gain nutrition programming</td>
+                        <td class="price">£349 per month</td>
+                    </tr>
+                    <tr>
+                        <td class="package-name">Elite Performance Nutrition</td>
+                        <td>Advanced nutrient timing and sport-specific fueling strategies</td>
+                        <td class="price">£449 per month</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="section-description">
+                All packages include personalized macronutrient targets, food preference accommodation, structured meal planning, and educational resources. Higher-tier packages include additional features such as meal prep guides, restaurant eating strategies, supplement recommendations, and more frequent adjustments.
+            </p>
+        </section>
+
+        <!-- What's Included Section -->
+        <section class="section" data-aos="fade-up">
+            <h2 class="section-title">What's Included</h2>
+            <ul class="included-list">
+                <li class="included-item">
+                    <span class="included-icon"><i class="fas fa-check-circle"></i></span>
+                    <p class="included-text">
+                        <strong>Comprehensive Nutrition Assessment</strong> - Detailed analysis of your current eating patterns, food preferences, lifestyle factors, medical history, and goals to create your personalized nutrition strategy.
+                    </p>
+                </li>
+                <li class="included-item">
+                    <span class="included-icon"><i class="fas fa-check-circle"></i></span>
+                    <p class="included-text">
+                        <strong>Customized Macro Prescription</strong> - Precisely calculated protein, carbohydrate, and fat targets based on your metabolism, body composition, activity level, and specific goals.
+                    </p>
+                </li>
+                <li class="included-item">
+                    <span class="included-icon"><i class="fas fa-check-circle"></i></span>
+                    <p class="included-text">
+                        <strong>Structured Meal Plans</strong> - Sample daily eating templates showing how to distribute your macros across meals and snacks for optimal energy and results.
+                    </p>
+                </li>
+                <li class="included-item">
+                    <span class="included-icon"><i class="fas fa-check-circle"></i></span>
+                    <p class="included-text">
+                        <strong>Food Database & Recipes</strong> - Access to a curated list of recommended foods and simple, nutritious recipes that align with your targets and preferences.
+                    </p>
+                </li>
+                <li class="included-item">
+                    <span class="included-icon"><i class="fas fa-check-circle"></i></span>
+                    <p class="included-text">
+                        <strong>Nutrition Tracking System</strong> - User-friendly digital tools for logging your food intake and monitoring adherence to your nutrition plan.
+                    </p>
+                </li>
+                <li class="included-item">
+                    <span class="included-icon"><i class="fas fa-check-circle"></i></span>
+                    <p class="included-text">
+                        <strong>Regular Progress Assessments</strong> - Systematic evaluation of your results including body composition changes, energy levels, performance metrics, and adjustment of your plan as needed.
+                    </p>
+                </li>
+                <li class="included-item">
+                    <span class="included-icon"><i class="fas fa-check-circle"></i></span>
+                    <p class="included-text">
+                        <strong>Educational Resources</strong> - Learning materials to help you understand nutrition principles, food quality, portion control, and behavioral strategies for long-term success.
+                    </p>
+                </li>
+                <li class="included-item">
+                    <span class="included-icon"><i class="fas fa-check-circle"></i></span>
+                    <p class="included-text">
+                        <strong>Ongoing Support</strong> - Regular check-ins and communication to address questions, overcome challenges, and keep you accountable (frequency varies by package).
+                    </p>
+                </li>
+            </ul>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="section" data-aos="fade-up">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <h3 class="faq-question">Is this just another diet plan? <i class="fas fa-chevron-down"></i></h3>
+                    <p class="faq-answer">
+                        No. My nutrition guidance is fundamentally different from typical "diets" in several important ways. First, there's no single prescribed food list that works for everyone—your plan is personalized to your body, preferences, and lifestyle. Second, we focus on sustainable habits rather than temporary restrictions. Third, I emphasize education so you understand the "why" behind nutrition recommendations, empowering you to make informed choices long-term. Finally, we adapt your nutrition strategy as your body and goals evolve, rather than following a rigid plan that inevitably stops working. The goal is to help you develop a healthy, flexible relationship with food that supports your goals for life, not just for a few weeks.
+                    </p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question">Do I have to count calories and macros forever? <i class="fas fa-chevron-down"></i></h3>
+                    <p class="faq-answer">
+                        Absolutely not. Tracking nutrition is a learning tool, not a lifelong requirement. Initially, most clients benefit from some level of tracking to develop awareness of portion sizes, macronutrient balance, and eating patterns. However, we gradually transition to more intuitive approaches as you internalize what appropriate meals look like for your goals. Many clients use a hybrid approach—tracking during periods of specific goals (like fat loss or competition prep) and using simpler guidelines during maintenance phases. The ultimate goal is nutrition autonomy, where you can maintain your results without constant measuring and logging.
+                    </p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question">I have dietary restrictions. Can you accommodate them? <i class="fas fa-chevron-down"></i></h3>
+                    <p class="faq-answer">
+                        Yes, I work with clients following various dietary approaches including vegetarian, vegan, gluten-free, dairy-free, and many others. Whether your restrictions are due to allergies, ethical choices, religious practices, or personal preferences, we'll design a nutrition plan that respects these boundaries while optimizing your results. During your initial assessment, we'll discuss all food limitations in detail and ensure your plan includes plenty of appealing options that work for your situation. I pride myself on finding creative solutions that make nutrition plans feasible and enjoyable regardless of dietary constraints.
+                    </p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question">How does nutrition guidance integrate with your training services? <i class="fas fa-chevron-down"></i></h3>
+                    <p class="faq-answer">
+                        While nutrition guidance can be provided as a standalone service, combining it with training creates powerful synergy. When I manage both aspects of your program, we can precisely align your nutrition with your training cycles—increasing calories during strength phases, adjusting macros on training versus rest days, and timing nutrients around workouts for optimal recovery and performance. Clients who combine nutrition and training services typically see faster results because every aspect of their program is coordinated. If you're already working with another trainer, I can also collaborate with them to ensure your nutrition complements their programming.
+                    </p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question">How quickly will I see results with your nutrition guidance? <i class="fas fa-chevron-down"></i></h3>
+                    <p class="faq-answer">
+                        Most clients notice initial improvements within the first two weeks, including better energy levels, improved sleep quality, and reduced cravings. Physical changes typically begin to appear within 3-4 weeks, with more substantial transformations occurring over 2-6 months of consistent implementation. The exact timeline depends on your starting point, goals, adherence to the plan, and individual metabolic factors. What sets my approach apart is not just the initial results, but the sustainability—clients maintain their improvements because they've built lasting habits rather than following unsustainable restrictions. During your consultation, I can provide a more specific timeline based on your particular situation and objectives.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="section" data-aos="fade-up">
+            <h2 class="section-title">Client Testimonials</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="100">
+                    <p class="testimonial-text">
+                        "I've tried countless diets before, but Pete's nutrition guidance was completely different. He taught me how to eat for my goals while still enjoying food. I've lost 15kg and kept it off for the first time in my life. More importantly, I've developed a healthy relationship with food."
+                    </p>
+                    <p class="testimonial-author">- Lisa M., 6-Month Client</p>
+                </div>
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="200">
+                    <p class="testimonial-text">
+                        "After years of following fad diets with temporary results, Pete's approach to nutrition was a revelation. He taught me the science behind proper fueling, but more importantly, he helped me develop a healthier relationship with food. For the first time, I'm maintaining my weight without feeling deprived or obsessing over calories."
+                    </p>
+                    <p class="testimonial-author">- Jennifer T., 3-Month Client</p>
+                </div>
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="300">
+                    <p class="testimonial-text">
+                        "As an athlete, nutrition was always something I neglected. Working with Pete changed everything. His sport-specific approach helped me fuel properly for training and competitions. My recovery is better, my performance has improved, and I finally understand how to eat for my goals."
+                    </p>
+                    <p class="testimonial-author">- Mark R., Performance Athlete</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+<section class="cta-section">
+    <div class="cta-container">
+        <h2 class="cta-title" data-aos="fade-up">Transform Your Nutrition Today</h2>
+        <p class="cta-description" data-aos="fade-up" data-aos-delay="100">
+            Proper nutrition is the foundation of health, fitness, and wellbeing. Take the first step toward fueling your body optimally.
+        </p>
+        <a href="#contact" class="cta-button" data-aos="fade-up" data-aos-delay="200">Start Your Journey</a>
+    </div>
+</section>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-content">
+        <div class="social-links">
+            <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-youtube"></i></a>
+        </div>
+        <p class="footer-text">&copy; 2025 Coach Pete Ryan. All rights reserved.</p>
+    </div>
+</footer>
+
+<!-- Scripts -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    // Initialize AOS
+    AOS.init({
+        duration: 1000,
+        once: true,
+        offset: 100
+    });
+
+    // Navbar scroll effect
+    window.addEventListener("scroll", function () {
+        const navbar = document.getElementById("navbar");
+        if (window.scrollY > 50) {
+            navbar.classList.add("scrolled");
+        } else {
+            navbar.classList.remove("scrolled");
+        }
+    });
+
+    // FAQ toggle
+    document.querySelectorAll(".faq-question").forEach((question) => {
+        question.addEventListener("click", () => {
+            const answer = question.nextElementSibling;
+            const icon = question.querySelector("i");
+
+            if (answer.style.display === "block") {
+                answer.style.display = "none";
+                icon.classList.remove("fa-chevron-up");
+                icon.classList.add("fa-chevron-down");
+            } else {
+                answer.style.display = "block";
+                icon.classList.remove("fa-chevron-down");
+                icon.classList.add("fa-chevron-up");
+            }
+        });
+    });
+
+    // Form submission handler
+    document.getElementById('contactForm')?.addEventListener('submit', function(e) {
+        e.preventDefault();
+        // Form submission logic would go here
+        alert('Thank you for your interest in nutrition guidance! I will contact you within 24 hours to discuss your goals.');
+        this.reset();
+    });
+</script>
+</body>
+</html>
