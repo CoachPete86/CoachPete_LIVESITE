@@ -1,812 +1,105 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lifestyle Transformation - Coach Pete Ryan</title>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <style>
-        :root {
-            --primary-orange: #ff6b35;
-            --secondary-orange: #ff8c42;
-            --dark-grey: #1a1a1a;
-            --medium-grey: #2d2d2d;
-            --light-grey: #3d3d3d;
-            --text-light: #e0e0e0;
-            --text-medium: #b0b0b0;
-            --text-dark: #808080;
-            --concrete: #4a4a4a;
-            --metal: #6a6a6a;
-            --accent-blue: #00d4ff;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Open Sans', sans-serif;
-            background: linear-gradient(135deg, var(--dark-grey) 0%, var(--medium-grey) 100%);
-            color: var(--text-light);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        /* Navigation */
-        .navbar {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(26, 26, 26, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            padding: 1rem 0;
-            transition: all 0.3s ease;
-        }
-
-        .navbar.scrolled {
-            background: rgba(26, 26, 26, 0.98);
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 2rem;
-        }
-
-        .logo {
-            font-family: 'Oswald', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--primary-orange);
-            text-decoration: none;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .nav-menu {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        .nav-link {
-            color: var(--text-light);
-            text-decoration: none;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .nav-link:hover,
-        .nav-link.active {
-            color: var(--primary-orange);
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary-orange);
-            transition: width 0.3s ease;
-        }
-
-        .nav-link:hover::after,
-        .nav-link.active::after {
-            width: 100%;
-        }
-
-        .mobile-menu {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-        }
-
-        .mobile-menu span {
-            width: 25px;
-            height: 3px;
-            background: var(--text-light);
-            margin: 3px 0;
-            transition: 0.3s;
-        }
-
-        /* Service Hero Section */
-        .service-hero {
-            height: 50vh;
-            background: linear-gradient(rgba(26, 26, 26, 0.7), rgba(45, 45, 45, 0.7)), 
-                        url('https://images.unsplash.com/photo-1579126038374-6064e9370f0f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1964&q=80') center/cover;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            margin-top: 80px;
-        }
-
-        .service-hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at center, transparent 0%, rgba(26, 26, 26, 0.3) 100%);
-        }
-
-        .service-hero-content {
-            max-width: 800px;
-            z-index: 2;
-            position: relative;
-            padding: 0 2rem;
-        }
-
-        .service-title {
-            font-family: 'Oswald', sans-serif;
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            font-weight: 700;
-            color: var(--text-light);
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        .service-subtitle {
-            font-size: clamp(1rem, 2vw, 1.5rem);
-            color: var(--primary-orange);
-            font-weight: 600;
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        /* Main Content */
-        .service-content {
-            max-width: 1200px;
-            margin: 4rem auto;
-            padding: 0 2rem;
-        }
-
-        .section {
-            margin-bottom: 4rem;
-        }
-
-        .section-title {
-            font-family: 'Oswald', sans-serif;
-            font-size: 2.5rem;
-            color: var(--text-light);
-            margin-bottom: 1.5rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            border-bottom: 3px solid var(--primary-orange);
-            padding-bottom: 0.5rem;
-            display: inline-block;
-        }
-
-        .section-description {
-            font-size: 1.1rem;
-            color: var(--text-medium);
-            margin-bottom: 2rem;
-            line-height: 1.8;
-        }
-
-        /* Benefits Section */
-        .benefits-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .benefit-card {
-            background: rgba(61, 61, 61, 0.3);
-            padding: 2rem;
-            border-radius: 10px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 107, 53, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .benefit-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary-orange);
-            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.2);
-        }
-
-        .benefit-icon {
-            font-size: 2.5rem;
-            color: var(--primary-orange);
-            margin-bottom: 1.5rem;
-        }
-
-        .benefit-title {
-            font-family: 'Oswald', sans-serif;
-            font-size: 1.3rem;
-            color: var(--text-light);
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .benefit-description {
-            color: var(--text-medium);
-            line-height: 1.6;
-        }
-
-        /* Pricing Section */
-        .pricing-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 2rem;
-        }
-
-        .pricing-table th,
-        .pricing-table td {
-            padding: 1.5rem;
-            text-align: left;
-            border-bottom: 1px solid var(--light-grey);
-        }
-
-        .pricing-table th {
-            font-family: 'Oswald', sans-serif;
-            font-size: 1.2rem;
-            color: var(--text-light);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            background: rgba(61, 61, 61, 0.3);
-        }
-
-        .pricing-table td {
-            color: var(--text-medium);
-            font-size: 1.1rem;
-        }
-
-        .price {
-            font-family: 'Oswald', sans-serif;
-            font-size: 1.3rem;
-            color: var(--primary-orange);
-            font-weight: 600;
-        }
-
-        .package-name {
-            font-weight: 600;
-            color: var(--text-light);
-        }
-
-        /* What's Included Section */
-        .included-list {
-            list-style: none;
-        }
-
-        .included-item {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 1.5rem;
-        }
-
-        .included-icon {
-            color: var(--primary-orange);
-            font-size: 1.2rem;
-            margin-right: 1rem;
-            min-width: 20px;
-        }
-
-        .included-text {
-            color: var(--text-medium);
-            font-size: 1.1rem;
-        }
-
-        /* FAQ Section */
-        .faq-container {
-            margin-top: 2rem;
-        }
-
-        .faq-item {
-            margin-bottom: 1.5rem;
-        }
-
-        .faq-question {
-            font-family: 'Oswald', sans-serif;
-            font-size: 1.3rem;
-            color: var(--text-light);
-            margin-bottom: 0.5rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .faq-question:hover {
-            color: var(--primary-orange);
-        }
-
-        .faq-answer {
-            color: var(--text-medium);
-            font-size: 1.1rem;
-            padding-left: 1rem;
-            border-left: 2px solid var(--primary-orange);
-            margin-top: 0.5rem;
-            line-height: 1.8;
-        }
-
-        /* Testimonials Section */
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .testimonial-card {
-            background: rgba(61, 61, 61, 0.3);
-            padding: 2rem;
-            border-radius: 10px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 107, 53, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .testimonial-text {
-            font-size: 1.1rem;
-            color: var(--text-light);
-            font-style: italic;
-            margin-bottom: 1.5rem;
-            line-height: 1.8;
-        }
-
-        .testimonial-author {
-            font-family: 'Oswald', sans-serif;
-            font-size: 1rem;
-            color: var(--primary-orange);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* CTA Section */
-        .cta-section {
-            background: linear-gradient(rgba(26, 26, 26, 0.7), rgba(45, 45, 45, 0.7)), 
-                        url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80') center/cover;
-            padding: 6rem 0;
-            text-align: center;
-        }
-
-        .cta-container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .cta-title {
-            font-family: 'Oswald', sans-serif;
-            font-size: 3rem;
-            color: var(--text-light);
-            margin-bottom: 1.5rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        .cta-description {
-            font-size: 1.2rem;
-            color: var(--text-medium);
-            margin-bottom: 2rem;
-            line-height: 1.8;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .cta-button {
-            display: inline-block;
-            background: linear-gradient(45deg, var(--primary-orange), var(--secondary-orange));
-            color: white;
-            padding: 1rem 2.5rem;
-            text-decoration: none;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border-radius: 5px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
-        }
-
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
-        }
-
-        /* Footer */
-        .footer {
-            background: var(--dark-grey);
-            padding: 3rem 0 1rem;
-            text-align: center;
-            border-top: 3px solid var(--primary-orange);
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .social-links a {
-            color: var(--text-medium);
-            font-size: 1.5rem;
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            color: var(--primary-orange);
-            transform: translateY(-3px);
-        }
-
-        .footer-text {
-            color: var(--text-dark);
-            font-size: 0.9rem;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .nav-menu {
-                display: none;
-            }
-
-            .mobile-menu {
-                display: flex;
-            }
-
-            .service-title {
-                font-size: 2.5rem;
-            }
-
-            .section-title {
-                font-size: 2rem;
-            }
-
-            .pricing-table th,
-            .pricing-table td {
-                padding: 1rem;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lifestyle Transformation - Coach Pete Ryan</title>
+  <!-- Stylesheets, Fonts, Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar" id="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="logo">Coach Pete Ryan</a>
-            <ul class="nav-menu" id="navMenu">
-                <li><a href="index.html" class="nav-link">Home</a></li>
-                <li><a href="index.html#about" class="nav-link">About</a></li>
-                <li><a href="index.html#services" class="nav-link active">Services</a></li>
-                <li><a href="index.html#process" class="nav-link">Process</a></li>
-                <li><a href="index.html#testimonials" class="nav-link">Testimonials</a></li>
-                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
-            </ul>
-            <div class="mobile-menu" id="mobileMenu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
-    </nav>
+  <section class="service-hero">
+    <div class="service-hero-content">
+      <h1 class="service-title">Lifestyle Transformation</h1>
+      <p class="service-subtitle">Total Mind & Body Reinvention</p>
+    </div>
+  </section>
 
-    <!-- Service Hero Section -->
-    <section class="service-hero" id="service-hero">
-        <div class="service-hero-content">
-            <h1 class="service-title" data-aos="fade-up">Lifestyle Transformation</h1>
-            <p class="service-subtitle" data-aos="fade-up" data-aos-delay="200">Total Mind & Body Reinvention</p>
-        </div>
-    </section>
+  <section class="service-content">
+    <div class="section">
+      <h2 class="section-title">What This Is</h2>
+      <p class="section-description">
+        This programme is not just about fitness or nutrition in isolation. It’s a complete overhaul of your habits, mindset, training, routines, nutrition, and lifestyle.
+      </p>
+      <p class="section-description">
+        Lifestyle Transformation is where we take every part of your current routine — and rebuild it for long-term, sustainable, identity-level change. We remove chaos. Build structure. And teach you how to think, act and move like the future version of yourself you want to become.
+      </p>
+    </div>
 
-    <!-- Main Content -->
-    <div class="service-content">
-        <!-- Service Description -->
-        <section class="section" data-aos="fade-up">
-            <h2 class="section-title">About Lifestyle Transformation</h2>
-            <p class="section-description">
-                The Lifestyle Transformation program is my most comprehensive service, designed for those seeking profound change across all aspects of their life. This is not just about fitness or nutrition in isolation—it's a complete overhaul of your physical, mental, and lifestyle habits that create lasting transformation and unlock your full potential.
-            </p>
-            <p class="section-description">
-                By integrating personalized training, nutrition coaching, mindset development, habit engineering, and continuous accountability, this holistic approach addresses the root causes that have prevented your success in the past. Together, we'll rebuild your relationship with fitness, food, and yourself, creating a new lifestyle that supports your goals and sustains your results long-term.
-            </p>
-        </section>
+    <div class="section">
+      <h2 class="section-title">What's Included</h2>
+      <ul class="included-list">
+        <li><strong>Initial Deep-Dive Consultation</strong> — Assess physical/mental baseline, obstacles, strengths, time resources and goals</li>
+        <li><strong>Custom Training Plan</strong> — Built from scratch around your real-world life, goals and constraints</li>
+        <li><strong>Nutrition Strategy</strong> — Calibrated to your needs (fat loss, performance, recovery, hormone balance, etc)</li>
+        <li><strong>Mindset Rewiring</strong> — Weekly 1:1 mindset sessions + accountability to shift thought patterns and rebuild confidence</li>
+        <li><strong>Full Habit Engineering Protocol</strong> — Build a sustainable identity and daily systems around your goals</li>
+        <li><strong>Weekly Coaching Sessions</strong> — 60-minute strategy/tactical check-in sessions</li>
+        <li><strong>Daily Accountability</strong> — Voice, text or task-based accountability between sessions</li>
+        <li><strong>Full Progress Dashboard</strong> — Track metrics, mindset, feedback and future targets</li>
+        <li><strong>Private Client Hub</strong> — Mobile-friendly area for accessing session recordings, plans and progress data</li>
+      </ul>
+    </div>
 
-        <!-- Benefits Section -->
-        <section class="section" data-aos="fade-up">
-            <h2 class="section-title">Benefits & Features</h2>
-            <div class="benefits-grid">
-                <div class="benefit-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="benefit-icon">
-                        <i class="fas fa-sync-alt"></i>
-                    </div>
-                    <h3 class="benefit-title">Complete Transformation</h3>
-                    <p class="benefit-description">
-                        Experience dramatic physical change combined with powerful mental shifts for a total reinvention of your body and mindset.
-                    </p>
-                </div>
-                <div class="benefit-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="benefit-icon">
-                        <i class="fas fa-cogs"></i>
-                    </div>
-                    <h3 class="benefit-title">System-Based Approach</h3>
-                    <p class="benefit-description">
-                        Follow a proven, systematic process that eliminates guesswork and integrates all components of successful change.
-                    </p>
-                </div>
-                <div class="benefit-card" data-aos="fade-up" data-aos-delay="300">
-                    <div class="benefit-icon">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <h3 class="benefit-title">Sustainable Results</h3>
-                    <p class="benefit-description">
-                        Build habits and mindsets that maintain your results for life, eliminating the cycle of temporary fixes and relapses.
-                    </p>
-                </div>
-                <div class="benefit-card" data-aos="fade-up" data-aos-delay="400">
-                    <div class="benefit-icon">
-                        <i class="fas fa-user-shield"></i>
-                    </div>
-                    <h3 class="benefit-title">Elite-Level Support</h3>
-                    <p class="benefit-description">
-                        Receive the highest level of guidance, accountability, and personalized attention throughout your journey.
-                    </p>
-                </div>
-            </div>
-        </section>
+    <div class="section">
+      <h2 class="section-title">Food Diary Analysis</h2>
+      <p class="section-description">
+        You’ll be asked to keep a full 7-day food diary — recording <strong>everything</strong> you consume: times, amounts, reasons and how you felt after each meal or snack. This must be 100% honest — there’s no judgement. In fact, it’s often the <em>act</em> of writing down your intake that already starts to shift behaviour.
+      </p>
+      <p class="section-description">
+        This diary gives me insight into your routines, triggers and relationship with food — so we can build strategies that prevent pitfalls before they happen. In the premium package, you can also upload <strong>images of your meals</strong>, and I’ll personally break down your macro intake and send you the full analysis.
+      </p>
+    </div>
 
-        <!-- Pricing Section -->
-        <section class="section" data-aos="fade-up">
-            <h2 class="section-title">Pricing Breakdown</h2>
-            <table class="pricing-table">
-                <thead>
-                    <tr>
-                        <th>Package</th>
-                        <th>Description</th>
-                        <th>Price</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="package-name">3-Month Foundation</td>
-                        <td>Establish core habits and kickstart your transformation</td>
-                        <td class="price">£299 per month</td>
-                    </tr>
-                    <tr>
-                        <td class="package-name">6-Month Transformation</td>
-                        <td>Comprehensive program for significant physical & mental change</td>
-                        <td class="price">£599 per month</td>
-                    </tr>
-                    <tr>
-                        <td class="package-name">12-Month Elite</td>
-                        <td>Complete reinvention with long-term habit integration</td>
-                        <td class="price">£899 per month</td>
-                    </tr>
-                    <tr>
-                        <td class="package-name">VIP Package</td>
-                        <td>Unlimited access with highest priority support & weekly in-person sessions</td>
-                        <td class="price">£1,499 per month</td>
-                    </tr>
-                </tbody>
-            </table>
-            <p class="section-description">
-                All packages include comprehensive training programming, nutrition planning, mindset coaching, weekly check-ins, and progress tracking. Longer commitments and higher-tier packages include additional features such as more frequent in-person sessions, priority support, advanced biometric tracking, and VIP perks.
-            </p>
-        </section>
+    <div class="section">
+      <h2 class="section-title">Packages</h2>
+      <table class="pricing-table">
+        <thead>
+          <tr><th>Package</th><th>Includes</th><th>Price</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Core (3 months)</td>
+            <td>
+              Weekly coaching + full habit transformation plan + nutrition guidance + training
+            </td>
+            <td>£299/month</td>
+          </tr>
+          <tr>
+            <td>Advanced (6 months)</td>
+            <td>
+              Everything in Core + deeper mindset rewiring, behaviour loops, and physical rebuild
+            </td>
+            <td>£599/month</td>
+          </tr>
+          <tr>
+            <td>Elite (12 months)</td>
+            <td>
+              Full-spectrum mind/body/life rebuild, food diary photo analysis, lifetime tools, full habit rewiring
+            </td>
+            <td>£899/month</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-        <!-- What's Included Section -->
-        <section class="section" data-aos="fade-up">
-            <h2 class="section-title">What's Included</h2>
-            <ul class="included-list">
-                <li class="included-item">
-                    <span class="included-icon"><i class="fas fa-check-circle"></i></span>
-                    <p class="included-text">
-                        <strong>Comprehensive Assessment</strong> - In-depth evaluation of your current fitness level, nutrition habits, mindset patterns, lifestyle factors, and goals to create your personalized transformation roadmap.
-                    </p>
-                </li>
-                <li class="included-item">
-                    <span class="included-icon"><i class="fas fa-check-circle"></i></span>
-                    <p class="included-text">
-                        <strong>Personalized Training Program</strong> - Custom workout programming that evolves with your progress, designed specifically for your body, goals, and available resources.
-                    </p>
-                </li>
-                <li class="included-item">
-                    <span class="included-icon"><i class="fas fa-check-circle"></i></span>
-                    <p class="included-text">
-                        <strong>Comprehensive Nutrition Strategy</strong> - Detailed nutrition plan with macronutrient targets, meal planning guidance, food suggestions, and strategic adjustments as your body changes.
-                    </p>
-                </li>
-                <li class="included-item">
-                    <span class="included-icon"><i class="fas fa-check-circle"></i></span>
-                    <p class="included-text">
-                        <strong>Mindset & Psychology Coaching</strong> - Structured mental training to identify and overcome limiting beliefs, develop resilience, enhance motivation, and establish a success psychology.
-                    </p>
-                </li>
-                <li class="included-item">
-                    <span class="included-icon"><i class="fas fa-check-circle"></i></span>
-                    <p class="included-text">
-                        <strong>Habit Engineering System</strong> - Science-based approach to breaking negative patterns and establishing powerful new habits that automate your success behaviors.
-                    </p>
-                </li>
-                <li class="included-item">
-                    <span class="included-icon"><i class="fas fa-check-circle"></i></span>
-                    <p class="included-text">
-                        <strong>Regular Coaching Sessions</strong> - Scheduled one-on-one sessions combining training, strategy discussions, and accountability (frequency varies by package).
-                    </p>
-                </li>
-                <li class="included-item">
-                    <span class="included-icon"><i class="fas fa-check-circle"></i></span>
-                    <p class="included-text">
-                        <strong>Comprehensive Progress Tracking</strong> - Systematic monitoring of physical metrics, performance data, habit compliance, and psychological shifts to validate progress and guide adjustments.
-                    </p>
-                </li>
-                <li class="included-item">
-                    <span class="included-icon"><i class="fas fa-check-circle"></i></span>
-                    <p class="included-text">
-                        <strong>Ongoing Communication & Support</strong> - Direct access to me via messaging and email for questions, feedback, and motivation between formal sessions.
-                    </p>
-                </li>
-                <li class="included-item">
-                    <span class="included-icon"><i class="fas fa-check-circle"></i></span>
-                    <p class="included-text">
-                        <strong>Advanced Educational Resources</strong> - Curated materials to develop your knowledge of fitness, nutrition, psychology, and behavior change principles that support your transformation.
-                    </p>
-                </li>
-            </ul>
-        </section>
-
-        <!-- FAQ Section -->
-        <section class="section" data-aos="fade-up">
-            <h2 class="section-title">Frequently Asked Questions</h2>
-            <div class="faq-container">
-                <div class="faq-item">
-                    <h3 class="faq-question">How is this different from your other services? <i class="fas fa-chevron-down"></i></h3>
-                    <p class="faq-answer">
-                        The Lifestyle Transformation program differs from my other services in both scope and intensity. While my standard training, nutrition, and mindset coaching services focus on specific aspects of fitness and wellbeing, this program integrates all these elements into a comprehensive system. You receive training programming, nutrition guidance, and mindset coaching simultaneously, with each component strategically aligned to support the others. Additionally, this program includes more frequent check-ins, deeper accountability structures, and advanced habit engineering techniques not included in my standard services. Think of it as having a complete team of specialists working in perfect coordination, but all provided by me with a unified vision for your transformation.
-                    </p>
-                </div>
-                <div class="faq-item">
-                    <h3 class="faq-question">I've tried everything before. Why would this work when nothing else has? <i class="fas fa-chevron-down"></i></h3>
-                    <p class="faq-answer">
-                        Most approaches fail because they address symptoms rather than root causes. They focus on short-term tactics without addressing the underlying psychological patterns, lifestyle factors, and habit structures that determine long-term success. My program is fundamentally different in several ways: First, we identify and address the specific psychological and behavioral barriers that have sabotaged your previous attempts. Second, we implement a systems-based approach rather than relying on motivation, creating environments and triggers that make success behaviors automatic. Third, I provide a level of accountability and support that bridges the gap between knowing what to do and actually doing it consistently. Finally, this program evolves with you, continuously adapting as you progress rather than following a rigid template that inevitably stops working.
-                    </p>
-                </div>
-                <div class="faq-item">
-                    <h3 class="faq-question">How much time will I need to commit each week? <i class="fas fa-chevron-down"></i></h3>
-                    <p class="faq-answer">
-                        The Lifestyle Transformation program typically requires 5-8 hours per week, though this varies based on your specific goals and starting point. This time includes 3-5 hours of physical training (3-5 sessions of 45-60 minutes each), 1-2 hours for meal preparation beyond your normal cooking time, 30-60 minutes for check-ins and tracking, and 30-60 minutes for mindset practices and education. While this represents a significant commitment, we'll implement strategies to integrate these elements efficiently into your existing schedule. Many activities can be time-stacked or incorporated into daily routines to minimize disruption. The program is designed to work with real-world constraints while still delivering transformative results.
-                    </p>
-                </div>
-                <div class="faq-item">
-                    <h3 class="faq-question">What kind of results can I expect and how quickly? <i class="fas fa-chevron-down"></i></h3>
-                    <p class="faq-answer">
-                        Results vary based on your starting point, genetics, adherence, and program specifics, but here's a general timeline: Within the first 2-3 weeks, you'll experience noticeable improvements in energy, mood, sleep quality, and mental clarity. Physical changes typically begin to appear in weeks 3-6, with more substantial visible transformations occurring within 2-4 months. By 6 months, most clients achieve dramatic changes in body composition, strength, confidence, and overall lifestyle integration. The most remarkable aspect isn't just the physical transformation, but the psychological shift—clients develop a completely different relationship with fitness, food, and themselves. While I can't promise specific numbers, clients who fully commit to the process consistently achieve results that exceed their initial expectations.
-                    </p>
-                </div>
-                <div class="faq-item">
-                    <h3 class="faq-question">What happens after the program ends? <i class="fas fa-chevron-down"></i></h3>
-                    <p class="faq-answer">
-                        The Lifestyle Transformation program is designed with the end in mind from day one. Throughout our work together, we progressively build your autonomy and self-reliance. You'll develop the knowledge, skills, and mindset necessary to maintain your results independently. The final phase of our work focuses specifically on transition planning—establishing the habits, systems, and mindset practices that will serve you long-term. Many clients choose to continue with less frequent "maintenance" coaching sessions, while others feel fully equipped to continue their journey independently. Either way, you'll always have access to my online resources and can reconnect for "tune-up" sessions whenever needed.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Testimonials Section -->
-        <section class="section" data-aos="fade-up">
-            <h2 class="section-title">Client Testimonials</h2>
-            <div class="testimonials-grid">
-                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="100">
-                    <p class="testimonial-text">
-                        "Working with Pete on the Lifestyle Transformation program has completely changed my life. After years of yo-yo dieting and inconsistent exercise, I've finally developed a sustainable approach that works with my busy schedule. I've lost 25kg, but more importantly, I've maintained it for over a year now. The mindset work was the game-changer for me."
-                    </p>
-                    <p class="testimonial-author">- Jennifer R., 12-Month Program</p>
-                </div>
-                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="200">
-                    <p class="testimonial-text">
-                        "When I started, I was skeptical that this would be any different from other programs I'd tried. But Pete's approach is completely different—he addressed the root causes of my struggles rather than just giving me a diet plan. The habit engineering systems and psychological tools have transformed not just my health but my entire outlook on life."
-                    </p>
-                    <p class="testimonial-author">- Marcus T., 6-Month Program</p>
-                </div>
-                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="300">
-                    <p class="testimonial-text">
-                        "I invested in the VIP package at a time when my health was in serious decline. It was a significant financial commitment, but it's been the best investment I've ever made. The transformation has extended beyond my physical appearance to my energy, confidence, career performance, and relationships. You can't put a price on the quality of life I've gained."
-                    </p>
-                    <p class="testimonial-author">- Catherine L., VIP Package</p>
-                </div>
-            </div>
-        </section>
-
-<!-- CTA Section -->
-<section class="cta-section">
-    <div class="cta-container">
-        <h2 class="cta-title" data-aos="fade-up">Ready for Complete Transformation?</h2>
-        <p class="cta-description" data-aos="fade-up" data-aos-delay="100">
-            Take the first step toward a total life change. Your future self will thank you for the decision you make today.
+    <div class="section">
+      <h2 class="section-title">FAQ</h2>
+      <div class="faq-item">
+        <h3 class="faq-question">Is this for me if I’ve failed before?</h3>
+        <p class="faq-answer">
+          Especially if you’ve failed before. This isn’t a surface-level coaching plan — this is about removing the underlying reasons why things haven’t worked in the past.
         </p>
-        <a href="#contact" class="cta-button" data-aos="fade-up" data-aos-delay="200">Start Your Journey</a>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-question">How fast will I see results?</h3>
+        <p class="faq-answer">
+          Clients typically see mindset and routine improvements in 2–3 weeks. Physical and visible results begin around week 4. Big transformations occur over 3–12 months.
+        </p>
+      </div>
     </div>
-</section>
-
-<!-- Footer -->
-<footer class="footer">
-    <div class="footer-content">
-        <div class="social-links">
-            <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
-            <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
-            <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-            <a href="#" target="_blank"><i class="fab fa-youtube"></i></a>
-        </div>
-        <p class="footer-text">&copy; 2025 Coach Pete Ryan. All rights reserved.</p>
-    </div>
-</footer>
-
-<!-- Scripts -->
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>
-    // Initialize AOS
-    AOS.init({
-        duration: 1000,
-        once: true,
-        offset: 100
-    });
-
-    // Navbar scroll effect
-    window.addEventListener("scroll", function () {
-        const navbar = document.getElementById("navbar");
-        if (window.scrollY > 50) {
-            navbar.classList.add("scrolled");
-        } else {
-            navbar.classList.remove("scrolled");
-        }
-    });
-
-    // FAQ toggle
-    document.querySelectorAll(".faq-question").forEach((question) => {
-        question.addEventListener("click", () => {
-            const answer = question.nextElementSibling;
-            const icon = question.querySelector("i");
-
-            if (answer.style.display === "block") {
-                answer.style.display = "none";
-                icon.classList.remove("fa-chevron-up");
-                icon.classList.add("fa-chevron-down");
-            } else {
-                answer.style.display = "block";
-                icon.classList.remove("fa-chevron-down");
-                icon.classList.add("fa-chevron-up");
-            }
-        });
-    });
-    
-    // Form submission handler
-    document.getElementById('contactForm')?.addEventListener('submit', function(e) {
-        e.preventDefault();
-        // Form submission logic would go here
-        alert('Thank you for your interest in the Lifestyle Transformation program! I will contact you within 24 hours to discuss the next steps.');
-        this.reset();
-    });
-</script>
+  </section>
 </body>
 </html>
