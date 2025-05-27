@@ -5,164 +5,158 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Group Training - Coach Pete Ryan</title>
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <style>
+    :root {
+      --primary-orange: #ff6b35;
+      --secondary-orange: #ff8c42;
+      --dark-grey: #1a1a1a;
+      --medium-grey: #2d2d2d;
+      --light-grey: #3d3d3d;
+      --text-light: #e0e0e0;
+      --text-medium: #b0b0b0;
+      --text-dark: #808080;
+    }
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+      margin: 0;
+      background: linear-gradient(135deg, var(--dark-grey) 0%, var(--medium-grey) 100%);
+      color: var(--text-light);
+    }
+
+    .service-hero {
+      background: linear-gradient(rgba(26, 26, 26, 0.7), rgba(45, 45, 45, 0.7)), url('https://raw.githubusercontent.com/CoachPete86/images/main/coach_hero_ext.png') center/cover;
+      height: 80vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .service-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 3rem;
+      color: var(--text-light);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .service-subtitle {
+      font-size: 1.5rem;
+      color: var(--primary-orange);
+      margin-top: 1rem;
+    }
+
+    .service-content {
+      max-width: 1000px;
+      margin: 3rem auto;
+      padding: 0 2rem;
+    }
+
+    .section {
+      margin-bottom: 3rem;
+    }
+
+    .section-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: var(--primary-orange);
+    }
+
+    .section-description, p {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--text-medium);
+    }
+
+    ul.included-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    ul.included-list li {
+      margin-bottom: 0.5rem;
+      position: relative;
+      padding-left: 1.5rem;
+    }
+
+    ul.included-list li::before {
+      content: "\2713";
+      color: var(--primary-orange);
+      position: absolute;
+      left: 0;
+    }
+
+    .testimonial-card {
+      background: rgba(255, 255, 255, 0.05);
+      border-left: 4px solid var(--primary-orange);
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .testimonial-author {
+      color: var(--primary-orange);
+      font-weight: bold;
+      margin-top: 1rem;
+    }
+  </style>
 </head>
 <body>
-  <section class="service-hero" id="service-hero">
-    <div class="service-hero-content">
-      <h1 class="service-title" data-aos="fade-up">Group Training</h1>
-      <p class="service-subtitle" data-aos="fade-up" data-aos-delay="200">Train Together, Achieve Together</p>
+  <section class="service-hero">
+    <div>
+      <h1 class="service-title">Group Training</h1>
+      <p class="service-subtitle">Push harder. Laugh louder. Level up together.</p>
+      <p style="font-style: italic; color: #ccc; margin-top: 1rem;">"The energy in Pete’s classes is next level. It’s the highlight of my week."</p>
     </div>
   </section>
 
   <section class="service-content">
-    <div class="section" data-aos="fade-up">
-      <h2 class="section-title">What is Group Training?</h2>
-      <p class="section-description">
-        Group training combines expert coaching with community motivation. The atmosphere created when you train alongside others can drive effort, encourage consistency, and transform your workouts from a task into a high-energy, fulfilling experience. My sessions are engineered to challenge and support you — whatever your current level.
-      </p>
-      <p class="section-description">
-        Whether you're joining solo or with friends, you'll never feel lost or overlooked. My groups are deliberately small so that everyone receives proper technique guidance, individualised encouragement, and smart progression. 
-      </p>
+    <div class="section">
+      <h2 class="section-title">Why Group Training?</h2>
+      <p class="section-description">There’s something powerful about shared effort. Group training delivers the coaching quality of personal sessions with the energy, motivation, and community of a team. You’ll train smarter, sweat harder, and leave every session buzzing.</p>
     </div>
 
-    <div class="section" data-aos="fade-up">
-      <h2 class="section-title">What You’ll Gain</h2>
-      <div class="benefits-grid">
-        <div class="benefit-card">
-          <div class="benefit-icon"><i class="fas fa-users"></i></div>
-          <h3 class="benefit-title">Supportive Community</h3>
-          <p class="benefit-description">
-            Be part of a team that lifts each other up. The people beside you will become part of your routine, your accountability, and your reason to keep showing up.
-          </p>
-        </div>
-        <div class="benefit-card">
-          <div class="benefit-icon"><i class="fas fa-pound-sign"></i></div>
-          <h3 class="benefit-title">Cost-Efficient Coaching</h3>
-          <p class="benefit-description">
-            Enjoy high-quality coaching and personalised attention at a fraction of the cost of one-to-one sessions.
-          </p>
-        </div>
-        <div class="benefit-card">
-          <div class="benefit-icon"><i class="fas fa-random"></i></div>
-          <h3 class="benefit-title">Dynamic Training</h3>
-          <p class="benefit-description">
-            Never plateau or get bored. From team challenges to skill drills, formats change to keep you improving and engaged.
-          </p>
-        </div>
-        <div class="benefit-card">
-          <div class="benefit-icon"><i class="fas fa-handshake"></i></div>
-          <h3 class="benefit-title">Accountability</h3>
-          <p class="benefit-description">
-            When others expect you to show up, you do. Consistency becomes easier — and results follow.
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <div class="section" data-aos="fade-up">
-      <h2 class="section-title">Training Packages</h2>
-      <table class="pricing-table">
-        <thead>
-          <tr>
-            <th>Package</th>
-            <th>Description</th>
-            <th>Price</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="package-name">Drop-In Session</td>
-            <td>Try a one-off session to experience the energy of group training.</td>
-            <td class="price">£25</td>
-          </tr>
-          <tr>
-            <td class="package-name">Monthly Group Pass</td>
-            <td>8 sessions/month — structured for progression and results.</td>
-            <td class="price">£180</td>
-          </tr>
-          <tr>
-            <td class="package-name">Partner Training</td>
-            <td>Train with a friend or partner. Shared experience, tailored to both.</td>
-            <td class="price">£80 (£40pp)</td>
-          </tr>
-          <tr>
-            <td class="package-name">Private Small Group</td>
-            <td>3–4 people. Your crew, your schedule, your goals. Custom coaching.</td>
-            <td class="price">£35pp</td>
-          </tr>
-        </tbody>
-      </table>
-      <p class="section-description">All packages include expert-designed sessions, technique guidance, fitness app support, and flexible scheduling for your group.</p>
-    </div>
-
-    <div class="section" data-aos="fade-up">
-      <h2 class="section-title">What’s Included</h2>
+    <div class="section">
+      <h2 class="section-title">What Makes These Different</h2>
       <ul class="included-list">
-        <li><strong>Progressive Programming:</strong> Structured weekly blocks designed to build strength, endurance, and confidence.
-        </li>
-        <li><strong>Training Variety:</strong> Circuits, EMOMs, Tabatas, partner work, challenges — every week is fresh.
-        </li>
-        <li><strong>Small Groups:</strong> No more than 8 per session. I see you. I coach you.
-        </li>
-        <li><strong>Form Corrections:</strong> Personal technique cues in every session.
-        </li>
-        <li><strong>Group Community:</strong> Connect in the private WhatsApp group — for support, updates, and banter.
-        </li>
-        <li><strong>Goal Tracking:</strong> Fitness testing and tracking checkpoints to measure progress.
-        </li>
-        <li><strong>Light Nutrition Advice:</strong> Basics to complement your training goals.
-        </li>
+        <li>Coach-led from start to finish — no guessing, no winging it.</li>
+        <li>Planned progressive structure — each week builds on the last.</li>
+        <li>Training blocks that mix strength, conditioning, and mobility.</li>
+        <li>Focus on proper technique and form — not just keeping up.</li>
+        <li>Personal modifications to suit all levels, injuries, and needs.</li>
       </ul>
     </div>
 
-    <div class="section" data-aos="fade-up">
-      <h2 class="section-title">FAQs</h2>
-      <div class="faq-item">
-        <h3>Can beginners join?</h3>
-        <p>Yes — everyone starts somewhere. I scale every exercise to your level. Whether you're new or returning, you’ll be safe and supported.</p>
-      </div>
-      <div class="faq-item">
-        <h3>Is this like a fitness class?</h3>
-        <p>No — this is coaching. Not a workout you're thrown into. I keep numbers small, tailor movements, and build rapport with each member. You're coached, not just cued.</p>
-      </div>
-      <div class="faq-item">
-        <h3>Can I bring friends?</h3>
-        <p>Absolutely. Build your own squad and let’s create a time slot for your group. Or join an existing group — it’s all about finding the right fit.</p>
-      </div>
-      <div class="faq-item">
-        <h3>What if I miss a session?</h3>
-        <p>You’ll have access to the workout via my app, or you can reschedule if space allows. The goal is consistency, but I’ll work with your real life schedule.</p>
-      </div>
+    <div class="section">
+      <h2 class="section-title">Session Types</h2>
+      <p><strong>SWEAT 45:</strong> High-intensity, no-nonsense fat-burning circuits using a mix of dumbbells, kettlebells, sleds, rowers, and bodyweight drills.</p>
+      <p><strong>ENGINE:</strong> Cardio-focused workouts to improve heart health, VO2 max, and endurance with ski ergs, rowers, and bikes.</p>
+      <p><strong>TEAM TRAIN:</strong> Partner or small-group drills designed to challenge teamwork and motivation. You’ll go further with others in your corner.</p>
     </div>
 
-    <div class="section" data-aos="fade-up">
-      <h2 class="section-title">What Others Are Saying</h2>
-      <div class="testimonials-grid">
-        <div class="testimonial-card">
-          <p class="testimonial-text">"The small group feel means I never feel lost — and Pete still gives individual tips. I've dropped 12kg and gained confidence I never had before."</p>
-          <p class="testimonial-author">– Emma, group member</p>
-        </div>
-        <div class="testimonial-card">
-          <p class="testimonial-text">"My wife and I do the partner sessions. We’re stronger, more connected, and feel like we have our own little gym squad."</p>
-          <p class="testimonial-author">– Michael & Kate, Partner Sessions</p>
-        </div>
-        <div class="testimonial-card">
-          <p class="testimonial-text">"Work runs a group session every Tuesday — it’s boosted morale and energy levels across the team. Can’t recommend it enough."</p>
-          <p class="testimonial-author">– David, Corporate Training</p>
-        </div>
-      </div>
+    <div class="section">
+      <h2 class="section-title">Schedule + Pricing</h2>
+      <ul class="included-list">
+        <li>Group sessions held at PureGym West Byfleet</li>
+        <li>Class sizes capped for quality coaching</li>
+        <li>Drop-in: £12 per session</li>
+        <li>Monthly unlimited pass: £85</li>
+        <li>Free trial for first-timers — message to book</li>
+      </ul>
     </div>
-  </section>
 
-  <section class="cta-section">
-    <div class="cta-container">
-      <h2 class="cta-title" data-aos="fade-up">Ready to Join?</h2>
-      <p class="cta-description" data-aos="fade-up" data-aos-delay="100">
-        Come train with me and find your fitness tribe. Book your first session and let’s make moves together.
-      </p>
-      <a href="#contact" class="cta-button" data-aos="fade-up" data-aos-delay="200">Start Group Training</a>
+    <div class="section">
+      <h2 class="section-title">What Clients Say</h2>
+      <div class="testimonial-card">
+        <p>"It feels like PT but with your mates cheering you on. Pete’s attention to form and energy is unmatched."</p>
+        <p class="testimonial-author">– Ash D.</p>
+      </div>
+      <div class="testimonial-card">
+        <p>"I hated the gym. These sessions flipped that on its head. I'm the fittest and most confident I've ever been."</p>
+        <p class="testimonial-author">– Louisa P.</p>
+      </div>
     </div>
   </section>
 </body>
