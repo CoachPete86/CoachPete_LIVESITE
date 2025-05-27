@@ -5,101 +5,160 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mindset Coaching - Coach Pete Ryan</title>
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <style>
+    :root {
+      --primary-orange: #ff6b35;
+      --secondary-orange: #ff8c42;
+      --dark-grey: #1a1a1a;
+      --medium-grey: #2d2d2d;
+      --light-grey: #3d3d3d;
+      --text-light: #e0e0e0;
+      --text-medium: #b0b0b0;
+      --text-dark: #808080;
+    }
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+      margin: 0;
+      background: linear-gradient(135deg, var(--dark-grey) 0%, var(--medium-grey) 100%);
+      color: var(--text-light);
+    }
+
+    .service-hero {
+      background: linear-gradient(rgba(26, 26, 26, 0.7), rgba(45, 45, 45, 0.7)), url('https://raw.githubusercontent.com/CoachPete86/images/main/coach_hero_ext.png') center/cover;
+      height: 80vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .service-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 3rem;
+      color: var(--text-light);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .service-subtitle {
+      font-size: 1.5rem;
+      color: var(--primary-orange);
+      margin-top: 1rem;
+    }
+
+    .service-content {
+      max-width: 1000px;
+      margin: 3rem auto;
+      padding: 0 2rem;
+    }
+
+    .section {
+      margin-bottom: 3rem;
+    }
+
+    .section-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: var(--primary-orange);
+    }
+
+    .section-description, p {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--text-medium);
+    }
+
+    ul.included-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    ul.included-list li {
+      margin-bottom: 0.5rem;
+      position: relative;
+      padding-left: 1.5rem;
+    }
+
+    ul.included-list li::before {
+      content: "\2713";
+      color: var(--primary-orange);
+      position: absolute;
+      left: 0;
+    }
+
+    .testimonial-card {
+      background: rgba(255, 255, 255, 0.05);
+      border-left: 4px solid var(--primary-orange);
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .testimonial-author {
+      color: var(--primary-orange);
+      font-weight: bold;
+      margin-top: 1rem;
+    }
+  </style>
 </head>
 <body>
   <section class="service-hero">
-    <div class="service-hero-content">
+    <div>
       <h1 class="service-title">Mindset Coaching</h1>
-      <p class="service-subtitle">Strengthen your mental game and unlock your full potential</p>
+      <p class="service-subtitle">Upgrade your thinking. Transform your life.</p>
+      <p style="font-style: italic; color: #ccc; margin-top: 1rem;">"I thought mindset work was fluff — turns out it’s what I was missing all along."</p>
     </div>
   </section>
 
   <section class="service-content">
     <div class="section">
       <h2 class="section-title">Why Mindset Coaching?</h2>
-      <p class="section-description">
-        Your mindset shapes every decision, behaviour, and outcome in your life. If you’re stuck in negative loops, self-doubt, or inconsistent progress — your mindset is the key. This coaching is designed to clear mental clutter, build resilience, and refocus you with strategies rooted in neuroscience and performance psychology.
-      </p>
+      <p class="section-description">Because motivation wears off. Because discipline is built. Because no physical transformation sticks if the mental game stays the same. This is for those ready to break through the noise in their heads, rewrite internal scripts, and become someone who follows through – not someone who keeps restarting.</p>
     </div>
 
     <div class="section">
-      <h2 class="section-title">What You'll Gain</h2>
-      <div class="benefits-grid">
-        <div class="benefit-card">
-          <h3 class="benefit-title">Clarity & Direction</h3>
-          <p class="benefit-description">We define exactly what you want and identify the internal blocks getting in the way.</p>
-        </div>
-        <div class="benefit-card">
-          <h3 class="benefit-title">Resilience Under Pressure</h3>
-          <p class="benefit-description">Mental tools to stay focused and motivated — even when life gets difficult.</p>
-        </div>
-        <div class="benefit-card">
-          <h3 class="benefit-title">Identity Upgrade</h3>
-          <p class="benefit-description">We rewire your internal narrative — moving you from doubt and fear to control and confidence.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="section">
-      <h2 class="section-title">Coaching Options</h2>
-      <table class="pricing-table">
-        <thead>
-          <tr>
-            <th>Package</th>
-            <th>Details</th>
-            <th>Price</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="package-name">Single Session</td>
-            <td>One 75-minute breakthrough session (clarity, action plan, tools)</td>
-            <td class="price">£75</td>
-          </tr>
-          <tr>
-            <td class="package-name">Breakthrough Pack (5)</td>
-            <td>Five sessions with personalised follow-ups and between-session prompts</td>
-            <td class="price">£350</td>
-          </tr>
-          <tr>
-            <td class="package-name">Elite Rewire (10)</td>
-            <td>Ten sessions with mindset mapping, identity-level rewiring, and direct messaging support</td>
-            <td class="price">£650</td>
-          </tr>
-          <tr>
-            <td class="package-name">Accelerator Programme</td>
-            <td>One month of coaching with weekly calls and unlimited direct support</td>
-            <td class="price">£499/month</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="section">
-      <h2 class="section-title">What's Included</h2>
+      <h2 class="section-title">What You’ll Gain</h2>
       <ul class="included-list">
-        <li><i class="fas fa-check-circle"></i> 1:1 coaching sessions with structured follow-up notes</li>
-        <li><i class="fas fa-check-circle"></i> Between-session mental exercises</li>
-        <li><i class="fas fa-check-circle"></i> Personalised mindset blueprints</li>
-        <li><i class="fas fa-check-circle"></i> Optional integration with fitness or nutrition coaching</li>
-        <li><i class="fas fa-check-circle"></i> Unlimited support via email or message</li>
+        <li><strong>Clarity</strong> – Discover what’s really driving (or blocking) your actions.</li>
+        <li><strong>Confidence</strong> – Build internal certainty and belief in your direction.</li>
+        <li><strong>Resilience</strong> – Navigate stress, setbacks and sabotage without spiralling.</li>
+        <li><strong>Consistency</strong> – Become the person who shows up – no matter what.</li>
+        <li><strong>Awareness</strong> – Identify and interrupt self-sabotage in real time.</li>
       </ul>
     </div>
 
     <div class="section">
-      <h2 class="section-title">What Clients Say</h2>
-      <blockquote>
-        <p><em>"I didn’t realise how much my thinking was sabotaging me until Pete helped me step back. Within two months, I launched the business I'd been avoiding for years." – Alex R.</em></p>
-        <p><em>"My mindset used to fall apart under pressure. Now I have tools to keep me calm, confident and on task — even on bad days." – Jess W.</em></p>
-      </blockquote>
+      <h2 class="section-title">How It Works</h2>
+      <p class="section-description">This isn’t therapy. It’s not a pep talk. It’s coaching designed to create action, change behaviour, and upgrade your self-leadership. Each session blends structured reflection, mental reprogramming tools, and goal-focused accountability.</p>
     </div>
 
     <div class="section">
-      <h2 class="section-title">Ready for Change?</h2>
-      <p>Mindset coaching is for those who are done being stuck. This is about permanent internal change — not temporary motivation. Book your first session now and take control of your narrative.</p>
-      <a href="#contact" class="cta-button">Book a Consultation</a>
+      <h2 class="section-title">Client Feedback</h2>
+      <div class="testimonial-card">
+        <p>"I’ve done years of therapy and journalling. One month of mindset coaching with Pete did more for my action-taking than the last two combined."</p>
+        <p class="testimonial-author">– Daniel W.</p>
+      </div>
+      <div class="testimonial-card">
+        <p>"Mindset coaching gave me back control. I now show up for myself like I’ve always wanted to. It’s changed my training, my career and my relationships."</p>
+        <p class="testimonial-author">– Hannah S.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">Session Format & Cost</h2>
+      <ul class="included-list">
+        <li>All sessions delivered via Zoom or in-person by arrangement</li>
+        <li>Each session is 60 minutes and goal-focused</li>
+        <li>Support via email between sessions included</li>
+      </ul>
+      <p><strong>Investment:</strong> £75 per session or £275 for 4-session pack</p>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">Not Sure If It's For You?</h2>
+      <p class="section-description">If you feel stuck, frustrated, or like you keep getting in your own way — mindset coaching can change the game. Book a single session, feel the shift, and then decide. First-time clients can upgrade to the full pack after session one with the cost deducted.</p>
     </div>
   </section>
 </body>
