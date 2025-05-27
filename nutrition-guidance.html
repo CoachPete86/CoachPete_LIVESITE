@@ -4,11 +4,129 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Nutrition Guidance - Coach Pete Ryan</title>
-  <!-- Fonts and Icons -->
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <style>
+    :root {
+      --primary-orange: #ff6b35;
+      --secondary-orange: #ff8c42;
+      --dark-grey: #1a1a1a;
+      --medium-grey: #2d2d2d;
+      --light-grey: #3d3d3d;
+      --text-light: #e0e0e0;
+      --text-medium: #b0b0b0;
+      --text-dark: #808080;
+    }
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+      margin: 0;
+      background: linear-gradient(135deg, var(--dark-grey), var(--medium-grey));
+      color: var(--text-light);
+    }
+
+    .service-hero {
+      background: linear-gradient(rgba(26, 26, 26, 0.7), rgba(45, 45, 45, 0.7)), url('https://raw.githubusercontent.com/CoachPete86/images/main/coach_hero_ext.png') center/cover;
+      height: 80vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .service-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 3rem;
+      color: var(--text-light);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .service-subtitle {
+      font-size: 1.5rem;
+      color: var(--primary-orange);
+      margin-top: 1rem;
+    }
+
+    .service-content {
+      max-width: 1000px;
+      margin: 3rem auto;
+      padding: 0 2rem;
+    }
+
+    .section {
+      margin-bottom: 3rem;
+    }
+
+    .section-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: var(--primary-orange);
+    }
+
+    .section-description, p {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--text-medium);
+    }
+
+    .benefits-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+
+    .benefit-card {
+      flex: 1;
+      min-width: 280px;
+      background: rgba(255, 255, 255, 0.05);
+      border-left: 4px solid var(--primary-orange);
+      padding: 1.5rem;
+      border-radius: 10px;
+    }
+
+    .benefit-icon {
+      font-size: 2rem;
+      color: var(--primary-orange);
+      margin-bottom: 0.75rem;
+    }
+
+    .benefit-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+      color: var(--text-light);
+    }
+
+    .benefit-description {
+      font-size: 1rem;
+      color: var(--text-medium);
+      margin-bottom: 0.75rem;
+    }
+
+    .pricing-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 2rem;
+    }
+
+    .pricing-table th,
+    .pricing-table td {
+      border: 1px solid #444;
+      padding: 1rem;
+      text-align: left;
+    }
+
+    .pricing-table th {
+      background: #2d2d2d;
+      color: var(--text-light);
+    }
+
+    .pricing-table td ul {
+      padding-left: 1.5rem;
+    }
+
     .highlight-badge {
       background: var(--primary-orange);
       color: #fff;
@@ -19,6 +137,27 @@
       text-transform: uppercase;
       margin-left: 1rem;
     }
+
+    .testimonial {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 2rem;
+      border-radius: 10px;
+      margin-top: 2rem;
+    }
+
+    .faq-container {
+      margin-top: 2rem;
+    }
+
+    .faq-item {
+      margin-bottom: 1.5rem;
+    }
+
+    .faq-question {
+      font-weight: bold;
+      color: var(--primary-orange);
+    }
+
     .cta-sticky {
       position: fixed;
       bottom: 20px;
@@ -36,7 +175,7 @@
 </head>
 <body>
   <section class="service-hero">
-    <div class="service-hero-content">
+    <div>
       <h1 class="service-title">Nutrition Guidance</h1>
       <p class="service-subtitle">Eat better. Feel stronger. Live fully.</p>
       <p style="margin-top: 1rem; font-style: italic; color: #ccc">"I thought I had to give up my favourite foods. Pete taught me balance — I lost 10kg and kept it off."</p>
@@ -104,35 +243,35 @@
           <tr>
             <td class="package-name">Quick Start</td>
             <td>
-              <ul class="included-list">
-                <li><i class="fas fa-check"></i> One 60-minute coaching call</li>
-                <li><i class="fas fa-check"></i> Custom Nutrition Snapshot (PDF)</li>
+              <ul>
+                <li>One 60-minute coaching call</li>
+                <li>Custom Nutrition Snapshot (PDF)</li>
               </ul>
             </td>
-            <td class="price">£49</td>
+            <td>£49</td>
           </tr>
           <tr>
             <td class="package-name">Coaching Bundle <span class="highlight-badge">Best Value</span></td>
             <td>
-              <ul class="included-list">
-                <li><i class="fas fa-check"></i> Four weekly email or video check-ins</li>
-                <li><i class="fas fa-check"></i> Habit tracking + meal framework guides</li>
+              <ul>
+                <li>Four weekly email or video check-ins</li>
+                <li>Habit tracking + meal framework guides</li>
               </ul>
-              <p style="margin-top: 0.5rem; color: #aaa; font-size: 0.9rem;">Avg. result: 4–6kg lost in 5 weeks</p>
+              <p style="color: #aaa; font-size: 0.9rem;">Avg. result: 4–6kg lost in 5 weeks</p>
             </td>
-            <td class="price">£129</td>
+            <td>£129</td>
           </tr>
           <tr>
             <td class="package-name">Full Nutrition Coaching</td>
             <td>
-              <ul class="included-list">
-                <li><i class="fas fa-check"></i> Initial consultation + weekly 1:1 calls</li>
-                <li><i class="fas fa-check"></i> Unlimited messaging support</li>
-                <li><i class="fas fa-check"></i> Recipe packs + ongoing resources</li>
-                <li><i class="fas fa-check"></i> Submit food diary image uploads — I’ll break down and return your full macronutrient analysis</li>
+              <ul>
+                <li>Initial consultation + weekly 1:1 calls</li>
+                <li>Unlimited messaging support</li>
+                <li>Recipe packs + ongoing resources</li>
+                <li>Submit food diary image uploads for full macro breakdown</li>
               </ul>
             </td>
-            <td class="price">£249</td>
+            <td>£249</td>
           </tr>
         </tbody>
       </table>
@@ -151,11 +290,11 @@
       <div class="faq-container">
         <div class="faq-item">
           <h3 class="faq-question">Is this suitable for vegetarians or vegans?</h3>
-          <p class="faq-answer">Absolutely. All coaching is fully adaptable to plant-based diets and any dietary needs.</p>
+          <p>Absolutely. All coaching is fully adaptable to plant-based diets and any dietary needs.</p>
         </div>
         <div class="faq-item">
           <h3 class="faq-question">Will I receive a meal plan?</h3>
-          <p class="faq-answer">No fixed plans. Instead, I’ll teach you how to build meals using flexible frameworks you can sustain long-term.</p>
+          <p>No fixed plans. Instead, I’ll teach you how to build meals using flexible frameworks you can sustain long-term.</p>
         </div>
       </div>
     </div>
