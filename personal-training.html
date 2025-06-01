@@ -1,806 +1,213 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personal Training - Coach Pete Ryan</title>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <style>
-        :root {
-            --primary-orange: #ff6b35;
-            --secondary-orange: #ff8c42;
-            --dark-grey: #1a1a1a;
-            --medium-grey: #2d2d2d;
-            --light-grey: #3d3d3d;
-            --text-light: #e0e0e0;
-            --text-medium: #b0b0b0;
-            --text-dark: #808080;
-            --concrete: #4a4a4a;
-            --metal: #6a6a6a;
-            --accent-blue: #00d4ff;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Open Sans', sans-serif;
-            background: linear-gradient(135deg, var(--dark-grey) 0%, var(--medium-grey) 100%);
-            color: var(--text-light);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        /* Navigation */
-        .navbar {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(26, 26, 26, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            padding: 1rem 0;
-            transition: all 0.3s ease;
-        }
-
-        .navbar.scrolled {
-            background: rgba(26, 26, 26, 0.98);
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 2rem;
-        }
-
-        .logo {
-            font-family: 'Oswald', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--primary-orange);
-            text-decoration: none;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .nav-menu {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        .nav-link {
-            color: var(--text-light);
-            text-decoration: none;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .nav-link:hover,
-        .nav-link.active {
-            color: var(--primary-orange);
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary-orange);
-            transition: width 0.3s ease;
-        }
-
-        .nav-link:hover::after,
-        .nav-link.active::after {
-            width: 100%;
-        }
-
-        .mobile-menu {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-        }
-
-        .mobile-menu span {
-            width: 25px;
-            height: 3px;
-            background: var(--text-light);
-            margin: 3px 0;
-            transition: 0.3s;
-        }
-
-        /* Service Hero Section */
-        .service-hero {
-            height: 50vh;
-            background: linear-gradient(rgba(26, 26, 26, 0.7), rgba(45, 45, 45, 0.7)), 
-                        url('https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80') center/cover;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            margin-top: 80px;
-        }
-
-        .service-hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at center, transparent 0%, rgba(26, 26, 26, 0.3) 100%);
-        }
-
-        .service-hero-content {
-            max-width: 800px;
-            z-index: 2;
-            position: relative;
-            padding: 0 2rem;
-        }
-
-        .service-title {
-            font-family: 'Oswald', sans-serif;
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            font-weight: 700;
-            color: var(--text-light);
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        .service-subtitle {
-            font-size: clamp(1rem, 2vw, 1.5rem);
-            color: var(--primary-orange);
-            font-weight: 600;
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        /* Main Content */
-        .service-content {
-            max-width: 1200px;
-            margin: 4rem auto;
-            padding: 0 2rem;
-        }
-
-        .section {
-            margin-bottom: 4rem;
-        }
-
-        .section-title {
-            font-family: 'Oswald', sans-serif;
-            font-size: 2.5rem;
-            color: var(--text-light);
-            margin-bottom: 1.5rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            border-bottom: 3px solid var(--primary-orange);
-            padding-bottom: 0.5rem;
-            display: inline-block;
-        }
-
-        .section-description {
-            font-size: 1.1rem;
-            color: var(--text-medium);
-            margin-bottom: 2rem;
-            line-height: 1.8;
-        }
-
-        /* Benefits Section */
-        .benefits-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .benefit-card {
-            background: rgba(61, 61, 61, 0.3);
-            padding: 2rem;
-            border-radius: 10px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 107, 53, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .benefit-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary-orange);
-            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.2);
-        }
-
-        .benefit-icon {
-            font-size: 2.5rem;
-            color: var(--primary-orange);
-            margin-bottom: 1.5rem;
-        }
-
-        .benefit-title {
-            font-family: 'Oswald', sans-serif;
-            font-size: 1.3rem;
-            color: var(--text-light);
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .benefit-description {
-            color: var(--text-medium);
-            line-height: 1.6;
-        }
-
-        /* Pricing Section */
-        .pricing-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 2rem;
-        }
-
-        .pricing-table th,
-        .pricing-table td {
-            padding: 1.5rem;
-            text-align: left;
-            border-bottom: 1px solid var(--light-grey);
-        }
-
-        .pricing-table th {
-            font-family: 'Oswald', sans-serif;
-            font-size: 1.2rem;
-            color: var(--text-light);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            background: rgba(61, 61, 61, 0.3);
-        }
-
-        .pricing-table td {
-            color: var(--text-medium);
-            font-size: 1.1rem;
-        }
-
-        .price {
-            font-family: 'Oswald', sans-serif;
-            font-size: 1.3rem;
-            color: var(--primary-orange);
-            font-weight: 600;
-        }
-
-        .package-name {
-            font-weight: 600;
-            color: var(--text-light);
-        }
-
-        /* What's Included Section */
-        .included-list {
-            list-style: none;
-        }
-
-        .included-item {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 1.5rem;
-        }
-
-        .included-icon {
-            color: var(--primary-orange);
-            font-size: 1.2rem;
-            margin-right: 1rem;
-            min-width: 20px;
-        }
-
-        .included-text {
-            color: var(--text-medium);
-            font-size: 1.1rem;
-        }
-
-        /* FAQ Section */
-        .faq-container {
-            margin-top: 2rem;
-        }
-
-        .faq-item {
-            margin-bottom: 1.5rem;
-        }
-
-        .faq-question {
-            font-family: 'Oswald', sans-serif;
-            font-size: 1.3rem;
-            color: var(--text-light);
-            margin-bottom: 0.5rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .faq-question:hover {
-            color: var(--primary-orange);
-        }
-
-        .faq-answer {
-            color: var(--text-medium);
-            font-size: 1.1rem;
-            padding-left: 1rem;
-            border-left: 2px solid var(--primary-orange);
-            margin-top: 0.5rem;
-            line-height: 1.8;
-        }
-
-        /* Testimonials Section */
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .testimonial-card {
-            background: rgba(61, 61, 61, 0.3);
-            padding: 2rem;
-            border-radius: 10px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 107, 53, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .testimonial-text {
-            font-size: 1.1rem;
-            color: var(--text-light);
-            font-style: italic;
-            margin-bottom: 1.5rem;
-            line-height: 1.8;
-        }
-
-        .testimonial-author {
-            font-family: 'Oswald', sans-serif;
-            font-size: 1rem;
-            color: var(--primary-orange);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* CTA Section */
-        .cta-section {
-            background: linear-gradient(rgba(26, 26, 26, 0.7), rgba(45, 45, 45, 0.7)), 
-                        url('https://images.unsplash.com/photo-1605296867304-46d5465a13f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80') center/cover;
-            padding: 6rem 0;
-            text-align: center;
-        }
-
-        .cta-container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .cta-title {
-            font-family: 'Oswald', sans-serif;
-            font-size: 3rem;
-            color: var(--text-light);
-            margin-bottom: 1.5rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        .cta-description {
-            font-size: 1.2rem;
-            color: var(--text-medium);
-            margin-bottom: 2rem;
-            line-height: 1.8;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .cta-button {
-            display: inline-block;
-            background: linear-gradient(45deg, var(--primary-orange), var(--secondary-orange));
-            color: white;
-            padding: 1rem 2.5rem;
-            text-decoration: none;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border-radius: 5px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
-        }
-
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
-        }
-
-        /* Footer */
-        .footer {
-            background: var(--dark-grey);
-            padding: 3rem 0 1rem;
-            text-align: center;
-            border-top: 3px solid var(--primary-orange);
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .social-links a {
-            color: var(--text-medium);
-            font-size: 1.5rem;
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            color: var(--primary-orange);
-            transform: translateY(-3px);
-        }
-
-        .footer-text {
-            color: var(--text-dark);
-            font-size: 0.9rem;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .nav-menu {
-                display: none;
-            }
-
-            .mobile-menu {
-                display: flex;
-            }
-
-            .service-title {
-                font-size: 2.5rem;
-            }
-
-            .section-title {
-                font-size: 2rem;
-            }
-
-            .pricing-table th,
-            .pricing-table td {
-                padding: 1rem;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personal Training - Coach Pete Ryan</title>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-orange: #ff6b35;
+      --secondary-orange: #ff8c42;
+      --dark-grey: #1a1a1a;
+      --medium-grey: #2d2d2d;
+      --light-grey: #3d3d3d;
+      --text-light: #e0e0e0;
+      --text-medium: #b0b0b0;
+      --text-dark: #808080;
+    }
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+      margin: 0;
+      background: linear-gradient(135deg, var(--dark-grey) 0%, var(--medium-grey) 100%);
+      color: var(--text-light);
+    }
+
+    .service-hero {
+      background: linear-gradient(rgba(26, 26, 26, 0.7), rgba(45, 45, 45, 0.7)), url('https://raw.githubusercontent.com/CoachPete86/images/main/coach_hero_ext.png') center/cover;
+      height: 80vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .service-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 3rem;
+      color: var(--text-light);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .service-subtitle {
+      font-size: 1.5rem;
+      color: var(--primary-orange);
+      margin-top: 1rem;
+    }
+
+    .service-content {
+      max-width: 1000px;
+      margin: 3rem auto;
+      padding: 0 2rem;
+    }
+
+    .section {
+      margin-bottom: 3rem;
+    }
+
+    .section-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: var(--primary-orange);
+    }
+
+    .section-description, p {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--text-medium);
+    }
+
+    ul.included-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    ul.included-list li {
+      margin-bottom: 0.5rem;
+      position: relative;
+      padding-left: 1.5rem;
+    }
+
+    ul.included-list li::before {
+      content: "\2713";
+      color: var(--primary-orange);
+      position: absolute;
+      left: 0;
+    }
+
+    .pricing-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .pricing-table th,
+    .pricing-table td {
+      border: 1px solid var(--light-grey);
+      padding: 1rem;
+      text-align: left;
+    }
+
+    .pricing-table th {
+      background: var(--medium-grey);
+    }
+
+    .pricing-table td {
+      background: rgba(255,255,255,0.05);
+    }
+
+    .testimonial-card {
+      background: rgba(255, 255, 255, 0.05);
+      border-left: 4px solid var(--primary-orange);
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .testimonial-author {
+      color: var(--primary-orange);
+      font-weight: bold;
+      margin-top: 1rem;
+    }
+
+    .faq h3 {
+      color: var(--primary-orange);
+      margin-top: 1.5rem;
+    }
+
+    .faq p {
+      margin-bottom: 1rem;
+      color: var(--text-medium);
+    }
+  </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar" id="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="logo">Coach Pete Ryan</a>
-            <ul class="nav-menu" id="navMenu">
-                <li><a href="index.html" class="nav-link">Home</a></li>
-                <li><a href="index.html#about" class="nav-link">About</a></li>
-                <li><a href="index.html#services" class="nav-link active">Services</a></li>
-                <li><a href="index.html#process" class="nav-link">Process</a></li>
-                <li><a href="index.html#testimonials" class="nav-link">Testimonials</a></li>
-                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
-            </ul>
-            <div class="mobile-menu" id="mobileMenu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
-    </nav>
+  <section class="service-hero">
+    <div>
+      <h1 class="service-title">Personal Training</h1>
+      <p class="service-subtitle">Training Tailored for Real Transformation</p>
+      <p style="font-style: italic; color: #ccc; margin-top: 1rem;">"I never thought I'd enjoy working out — now I can't imagine my week without it."</p>
+    </div>
+  </section>
 
-    <!-- Service Hero Section -->
-    <section class="service-hero" id="service-hero">
-        <div class="service-hero-content">
-            <h1 class="service-title" data-aos="fade-up">Personal Training</h1>
-            <p class="service-subtitle" data-aos="fade-up" data-aos-delay="200">Customized Training for Extraordinary Results</p>
-        </div>
-    </section>
-
-    <!-- Main Content -->
-    <div class="service-content">
-        <!-- Service Description -->
-        <section class="section" data-aos="fade-up">
-            <h2 class="section-title">About Personal Training</h2>
-            <p class="section-description">
-                My personal training service is built on the principle that every body is unique, and so should be every fitness journey. I don't believe in one-size-fits-all programs or generic workouts. Instead, I create bespoke training experiences tailored specifically to your body type, fitness level, goals, and lifestyle.
-            </p>
-            <p class="section-description">
-                Whether you're looking to build strength, lose weight, improve athletic performance, or simply feel better in your body, my personalized approach ensures you get exactly what you need to succeed. Each session combines cutting-edge exercise science with motivational coaching to push your limits and unlock your full potential.
-            </p>
-        </section>
-
-        <!-- Benefits Section -->
-        <section class="section" data-aos="fade-up">
-            <h2 class="section-title">Benefits & Features</h2>
-            <div class="benefits-grid">
-                <div class="benefit-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="benefit-icon">
-                        <i class="fas fa-bullseye"></i>
-                    </div>
-                    <h3 class="benefit-title">Customized Programming</h3>
-                    <p class="benefit-description">
-                        Tailored workout plans designed specifically for your goals, body type, and fitness level, ensuring optimal results.
-                    </p>
-                </div>
-                <div class="benefit-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="benefit-icon">
-                        <i class="fas fa-bolt"></i>
-                    </div>
-                    <h3 class="benefit-title">Progressive Challenges</h3>
-                    <p class="benefit-description">
-                        Systematic progression that continuously challenges your body, preventing plateaus and accelerating results.
-                    </p>
-                </div>
-                <div class="benefit-card" data-aos="fade-up" data-aos-delay="300">
-                    <div class="benefit-icon">
-                        <i class="fas fa-clipboard-check"></i>
-                    </div>
-                    <h3 class="benefit-title">Form Perfection</h3>
-                    <p class="benefit-description">
-                        Expert guidance on proper technique to maximize effectiveness and prevent injuries during every exercise.
-                    </p>
-                </div>
-                <div class="benefit-card" data-aos="fade-up" data-aos-delay="400">
-                    <div class="benefit-icon">
-                        <i class="fas fa-brain"></i>
-                    </div>
-                    <h3 class="benefit-title">Mental Conditioning</h3>
-                    <p class="benefit-description">
-                        Mental strategies to overcome barriers, build resilience, and develop the mindset needed for long-term success.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Pricing Section -->
-        <section class="section" data-aos="fade-up">
-            <h2 class="section-title">Pricing Breakdown</h2>
-            <table class="pricing-table">
-                <thead>
-                    <tr>
-                        <th>Package</th>
-                        <th>Description</th>
-                        <th>Price</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="package-name">Single Session</td>
-                        <td>One-off personal training session (60 minutes)</td>
-                        <td class="price">£60</td>
-                    </tr>
-                    <tr>
-                        <td class="package-name">Starter Pack (5 Sessions)</td>
-                        <td>Ideal for beginners or those testing the waters</td>
-                        <td class="price">£275 (£55 per session)</td>
-                    </tr>
-                    <tr>
-                        <td class="package-name">Commitment Pack (10 Sessions)</td>
-                        <td>Perfect for those committed to seeing significant changes</td>
-                        <td class="price">£500 (£50 per session)</td>
-                    </tr>
-                    <tr>
-                        <td class="package-name">Transformation Pack (20 Sessions)</td>
-                        <td>Comprehensive package for total body transformation</td>
-                        <td class="price">£900 (£45 per session)</td>
-                    </tr>
-                    <tr>
-                        <td class="package-name">Elite Coaching (Monthly)</td>
-                        <td>Unlimited sessions (up to 3 per week) for maximum results</td>
-                        <td class="price">£799 per month</td>
-                    </tr>
-                </tbody>
-            </table>
-            <p class="section-description">
-                All packages include personalized training plans, progress tracking, and between-session support via messaging. Payments can be made in full or through flexible payment plans.
-            </p>
-        </section>
-
-        <!-- What's Included Section -->
-        <section class="section" data-aos="fade-up">
-            <h2 class="section-title">What's Included</h2>
-            <ul class="included-list">
-                <li class="included-item">
-                    <span class="included-icon"><i class="fas fa-check-circle"></i></span>
-                    <p class="included-text">
-                        <strong>Initial Consultation & Assessment</strong> - Comprehensive evaluation of your current fitness level, medical history, lifestyle factors, and goals to create your personalized roadmap.
-                    </p>
-                </li>
-                <li class="included-item">
-                    <span class="included-icon"><i class="fas fa-check-circle"></i></span>
-                    <p class="included-text">
-                        <strong>Bespoke Training Program</strong> - Custom-designed workout regimen tailored to your specific needs, preferences, and objectives that evolves as you progress.
-                    </p>
-                </li>
-                <li class="included-item">
-                    <span class="included-icon"><i class="fas fa-check-circle"></i></span>
-                    <p class="included-text">
-                        <strong>One-on-One Training Sessions</strong> - Focused, high-energy training with my undivided attention ensuring perfect form, maximum effort, and optimal results.
-                    </p>
-                </li>
-                <li class="included-item">
-                    <span class="included-icon"><i class="fas fa-check-circle"></i></span>
-                    <p class="included-text">
-                        <strong>Nutritional Guidance</strong> - Basic nutritional advice to complement your training program and accelerate your results (comprehensive nutrition plans available as an add-on).
-                    </p>
-                </li>
-                <li class="included-item">
-                    <span class="included-icon"><i class="fas fa-check-circle"></i></span>
-                    <p class="included-text">
-                        <strong>Progress Tracking</strong> - Regular assessments and measurements to monitor your progress and adjust your program accordingly.
-                    </p>
-                </li>
-                <li class="included-item">
-                    <span class="included-icon"><i class="fas fa-check-circle"></i></span>
-                    <p class="included-text">
-                        <strong>Mobile App Access</strong> - Access to my training app with your personalized workout programs, exercise demonstrations, and progress tracking.
-                    </p>
-                </li>
-                <li class="included-item">
-                    <span class="included-icon"><i class="fas fa-check-circle"></i></span>
-                    <p class="included-text">
-                        <strong>Ongoing Support</strong> - Between-session support via messaging for questions, guidance, and motivation to keep you on track.
-                    </p>
-                </li>
-            </ul>
-        </section>
-
-        <!-- FAQ Section -->
-        <section class="section" data-aos="fade-up">
-            <h2 class="section-title">Frequently Asked Questions</h2>
-            <div class="faq-container">
-                <div class="faq-item">
-                    <h3 class="faq-question">How often should I train to see results? <i class="fas fa-chevron-down"></i></h3>
-                    <p class="faq-answer">
-                        For optimal results, I recommend 2-3 sessions per week, but this varies based on your goals, current fitness level, and lifestyle. During your initial consultation, we'll determine the ideal frequency for your specific situation. Even one session per week can yield significant improvements when combined with independent workouts following my guidance.
-                    </p>
-                </div>
-                <div class="faq-item">
-                    <h3 class="faq-question">I'm a complete beginner. Is personal training right for me? <i class="fas fa-chevron-down"></i></h3>
-                    <p class="faq-answer">
-                        Absolutely! In fact, beginners often benefit the most from personal training as it establishes proper form and technique from the start. I specialize in creating comfortable, progressive programs for beginners that build confidence and capabilities without overwhelming you. We'll start exactly where you are and progress at a pace that challenges but doesn't intimidate you.
-                    </p>
-                </div>
-                <div class="faq-item">
-                    <h3 class="faq-question">Where do the training sessions take place? <i class="fas fa-chevron-down"></i></h3>
-                    <p class="faq-answer">
-                        I offer flexible training locations to suit your preferences. Sessions can take place at my private studio in Surrey, at your home (travel fees may apply), or at a mutually agreed public gym. I also offer outdoor training sessions in local parks during favorable weather. The location will be discussed during your consultation to find what works best for you.
-                    </p>
-                </div>
-                <div class="faq-item">
-                    <h3 class="faq-question">How quickly will I see results? <i class="fas fa-chevron-down"></i></h3>
-                    <p class="faq-answer">
-                        Most clients notice initial changes within 2-3 weeks, such as increased energy, improved mood, and better sleep. Physical changes typically become noticeable around 4-6 weeks, with significant transformations occurring within 8-12 weeks of consistent training. Your results timeline depends on factors including training frequency, nutritional adherence, recovery quality, and genetic factors.
-                    </p>
-                </div>
-                <div class="faq-item">
-                    <h3 class="faq-question">Do you offer any guarantees? <i class="fas fa-chevron-down"></i></h3>
-                    <p class="faq-answer">
-                        I offer a 100% satisfaction guarantee for your first session. If you don't feel it was valuable or a good fit, you won't be charged. For long-term results, I can't provide specific guarantees as outcomes depend heavily on your commitment and adherence to the program. However, clients who fully follow my guidance consistently achieve impressive results, which is why I maintain a 98% success rate.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Testimonials Section -->
-        <section class="section" data-aos="fade-up">
-            <h2 class="section-title">Client Testimonials</h2>
-            <div class="testimonials-grid">
-                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="100">
-                    <p class="testimonial-text">
-                        "Working with Pete has completely transformed my relationship with fitness. Before starting personal training, I dreaded workouts and never saw results. Now, I look forward to each session and have lost 15kg in just 4 months. Pete's personalized approach and constant encouragement made all the difference."
-                    </p>
-                    <p class="testimonial-author">- James T., Lost 15kg in 4 months</p>
-                </div>
-                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="200">
-                    <p class="testimonial-text">
-                        "At 58, I thought my best fitness days were behind me. Pete proved me wrong. His careful programming respects my limitations while still pushing me to get stronger every week. I've regained mobility I thought was lost forever and have more energy than I did in my 40s."
-                    </p>
-                    <p class="testimonial-author">- Margaret L., Age 58</p>
-                </div>
-                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="300">
-                    <p class="testimonial-text">
-                        "As an executive with a hectic schedule, I needed training that would give me maximum results in minimum time. Pete delivered exactly that. His efficient workouts and practical nutrition advice fit perfectly into my busy life, and I've achieved more in 6 months with him than in years of gym memberships."
-                    </p>
-                    <p class="testimonial-author">- Richard K., CEO</p>
-                </div>
-            </div>
-        </section>
+  <section class="service-content">
+    <div class="section">
+      <h2 class="section-title">What Personal Training Means Here</h2>
+      <p class="section-description">Forget one-size-fits-all. My personal training approach is about building <strong>your</strong> results around <strong>your</strong> life. Whether you're chasing strength, fat loss, pain-free movement, or just confidence in your body again — I make sure every session counts.</p>
+      <p class="section-description">You won’t just “turn up and sweat”. You'll learn the right movement for your body, with precision coaching and a plan that adapts with you. You'll be held accountable, challenged, and supported every step of the way.</p>
     </div>
 
-    <!-- CTA Section -->
-    <section class="cta-section">
-        <div class="cta-container">
-            <h2 class="cta-title" data-aos="fade-up">Ready to Transform Your Body?</h2>
-            <p class="cta-description" data-aos="fade-up" data-aos-delay="200">
-                Take the first step towards becoming the strongest version of yourself. Let's work together to create a personalized training plan that will help you achieve results beyond what you thought possible.
-            </p>
-            <a href="index.html#contact" class="cta-button" data-aos="fade-up" data-aos-delay="400">Book Your First Session</a>
-        </div>
-    </section>
+    <div class="section">
+      <h2 class="section-title">What’s Included</h2>
+      <ul class="included-list">
+        <li><strong>Initial Consultation & Movement Screen</strong> – Assess your mobility, past injuries, training history, and lifestyle habits to form your game plan.</li>
+        <li><strong>Tailored Weekly Training</strong> – Bespoke programming built around your exact goal, schedule, recovery, and equipment access.</li>
+        <li><strong>1-to-1 In-Person Coaching</strong> – Form checks, performance tweaks, and intensity you just can’t replicate solo.</li>
+        <li><strong>Ongoing Feedback</strong> – Direct messaging, habit tracking, and video feedback between sessions.</li>
+        <li><strong>Nutritional Guidance</strong> – Goal-aligned strategies you can actually stick to (full nutrition coaching available separately).</li>
+      </ul>
+    </div>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="social-links">
-                <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
-                <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
-                <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                <a href="#" target="_blank"><i class="fab fa-youtube"></i></a>
-            </div>
-            <p class="footer-text">&copy; 2025 Coach Pete Ryan. All rights reserved.</p>
-        </div>
-    </footer>
+    <div class="section">
+      <h2 class="section-title">Pricing Options</h2>
+      <table class="pricing-table">
+        <thead>
+          <tr><th>Package</th><th>Details</th><th>Price</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Single Session</td><td>One-off 60-minute session</td><td>£60</td></tr>
+          <tr><td>Starter Pack</td><td>5 x 60-min sessions + initial consult</td><td>£275 (£55/session)</td></tr>
+          <tr><td>Commitment Pack</td><td>10 x 60-min sessions + full support</td><td>£500 (£50/session)</td></tr>
+          <tr><td>Transformation Pack</td><td>20 x 60-min sessions + tailored progression and support</td><td>£900 (£45/session)</td></tr>
+          <tr><td>Elite Coaching</td><td>Up to 3 sessions/week, unlimited support</td><td>£799/month</td></tr>
+        </tbody>
+      </table>
+    </div>
 
-    <!-- Scripts -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        // Initialize AOS
-        AOS.init({
-            duration: 1000,
-            once: true,
-            offset: 100
-        });
+    <div class="section">
+      <h2 class="section-title">Client Transformations</h2>
+      <div class="testimonial-card">
+        <p>"Working with Pete has completely transformed my mindset and my body. I’ve lost 15kg in 4 months and for the first time I actually <em>enjoy</em> exercise."</p>
+        <p class="testimonial-author">– James T., lost 15kg</p>
+      </div>
+      <div class="testimonial-card">
+        <p>"I started training at 58, worried I was too late. Pete proved otherwise. I’m now moving better, stronger, and I feel younger than I have in years."</p>
+        <p class="testimonial-author">– Margaret L., age 58</p>
+      </div>
+      <div class="testimonial-card">
+        <p>"As a CEO, time is precious. Pete built a programme that gave maximum return for minimal time. The results speak for themselves — stronger, leaner, more energy than ever."</p>
+        <p class="testimonial-author">– Richard K., Executive Coaching Client</p>
+      </div>
+    </div>
 
-        // Navbar scroll effect
-        window.addEventListener('scroll', function() {
-            const navbar = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
+    <div class="section">
+      <h2 class="section-title">Still Wondering if This is For You?</h2>
+      <div class="faq">
+        <h3>Is personal training right for beginners?</h3>
+        <p>Absolutely. Beginners benefit the most from smart programming and expert form coaching. I'll meet you where you're at — not where you think you 'should' be.</p>
 
-        // FAQ toggle
-        document.querySelectorAll('.faq-question').forEach(question => {
-            question.addEventListener('click', () => {
-                const answer = question.nextElementSibling;
-                const icon = question.querySelector('i');
-                
-                if (answer.style.display === 'block') {
-                    answer.style.display = 'none';
-                    icon.classList.remove('fa-chevron-up');
-                    icon.classList.add('fa-chevron-down');
-                } else {
-                    answer.style.display = 'block';
-                    icon.classList.remove('fa-chevron-down');
-                    icon.classList.add('fa-chevron-up');
-                }
-            });
-        });
+        <h3>Where do sessions take place?</h3>
+<p>All sessions are based at <strong>PureGym West Byfleet</strong> by default — this is Coach Pete Ryan’s home base. If you prefer outdoor locations or have a private setup in mind, I can accommodate with advance notice. We'll always choose what works best for your goals and schedule.</p>
 
-        // Form submission handler
-        document.getElementById('contactForm')?.addEventListener('submit', function(e) {
-            e.preventDefault();
-            // Form submission logic would go here
-            alert('Thank you for your interest in personal training! I will contact you within 24 hours to discuss your goals.');
-            this.reset();
-        });
-    </script>
+        <h3>How quickly will I see results?</h3>
+        <p>Most feel changes in week one. You’ll move better, sleep better, and feel more energised. Body changes follow fast when you stay consistent — expect noticeable change in 4–6 weeks and major shifts from week 8+.</p>
+
+        <h3>Do you guarantee results?</h3>
+        <p>First session satisfaction is 100% guaranteed. Beyond that, I coach — you execute. If you show up and commit, the results <em>will</em> come.</p>
+      </div>
+    </div>
+  </section>
 </body>
 </html>

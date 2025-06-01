@@ -1,800 +1,163 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Group Training - Coach Pete Ryan</title>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <style>
-        :root {
-            --primary-orange: #ff6b35;
-            --secondary-orange: #ff8c42;
-            --dark-grey: #1a1a1a;
-            --medium-grey: #2d2d2d;
-            --light-grey: #3d3d3d;
-            --text-light: #e0e0e0;
-            --text-medium: #b0b0b0;
-            --text-dark: #808080;
-            --concrete: #4a4a4a;
-            --metal: #6a6a6a;
-            --accent-blue: #00d4ff;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Open Sans', sans-serif;
-            background: linear-gradient(135deg, var(--dark-grey) 0%, var(--medium-grey) 100%);
-            color: var(--text-light);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        /* Navigation */
-        .navbar {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(26, 26, 26, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            padding: 1rem 0;
-            transition: all 0.3s ease;
-        }
-
-        .navbar.scrolled {
-            background: rgba(26, 26, 26, 0.98);
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 2rem;
-        }
-
-        .logo {
-            font-family: 'Oswald', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--primary-orange);
-            text-decoration: none;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .nav-menu {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        .nav-link {
-            color: var(--text-light);
-            text-decoration: none;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .nav-link:hover,
-        .nav-link.active {
-            color: var(--primary-orange);
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary-orange);
-            transition: width 0.3s ease;
-        }
-
-        .nav-link:hover::after,
-        .nav-link.active::after {
-            width: 100%;
-        }
-
-        .mobile-menu {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-        }
-
-        .mobile-menu span {
-            width: 25px;
-            height: 3px;
-            background: var(--text-light);
-            margin: 3px 0;
-            transition: 0.3s;
-        }
-
-        /* Service Hero Section */
-        .service-hero {
-            height: 50vh;
-            background: linear-gradient(rgba(26, 26, 26, 0.7), rgba(45, 45, 45, 0.7)), 
-                        url('https://images.unsplash.com/photo-1540497077202-7c8a3999166f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80') center/cover;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            margin-top: 80px;
-        }
-
-        .service-hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at center, transparent 0%, rgba(26, 26, 26, 0.3) 100%);
-        }
-
-        .service-hero-content {
-            max-width: 800px;
-            z-index: 2;
-            position: relative;
-            padding: 0 2rem;
-        }
-
-        .service-title {
-            font-family: 'Oswald', sans-serif;
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            font-weight: 700;
-            color: var(--text-light);
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        .service-subtitle {
-            font-size: clamp(1rem, 2vw, 1.5rem);
-            color: var(--primary-orange);
-            font-weight: 600;
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        /* Main Content */
-        .service-content {
-            max-width: 1200px;
-            margin: 4rem auto;
-            padding: 0 2rem;
-        }
-
-        .section {
-            margin-bottom: 4rem;
-        }
-
-        .section-title {
-            font-family: 'Oswald', sans-serif;
-            font-size: 2.5rem;
-            color: var(--text-light);
-            margin-bottom: 1.5rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            border-bottom: 3px solid var(--primary-orange);
-            padding-bottom: 0.5rem;
-            display: inline-block;
-        }
-
-        .section-description {
-            font-size: 1.1rem;
-            color: var(--text-medium);
-            margin-bottom: 2rem;
-            line-height: 1.8;
-        }
-
-        /* Benefits Section */
-        .benefits-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .benefit-card {
-            background: rgba(61, 61, 61, 0.3);
-            padding: 2rem;
-            border-radius: 10px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 107, 53, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .benefit-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary-orange);
-            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.2);
-        }
-
-        .benefit-icon {
-            font-size: 2.5rem;
-            color: var(--primary-orange);
-            margin-bottom: 1.5rem;
-        }
-
-        .benefit-title {
-            font-family: 'Oswald', sans-serif;
-            font-size: 1.3rem;
-            color: var(--text-light);
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .benefit-description {
-            color: var(--text-medium);
-            line-height: 1.6;
-        }
-
-        /* Pricing Section */
-        .pricing-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 2rem;
-        }
-
-        .pricing-table th,
-        .pricing-table td {
-            padding: 1.5rem;
-            text-align: left;
-            border-bottom: 1px solid var(--light-grey);
-        }
-
-        .pricing-table th {
-            font-family: 'Oswald', sans-serif;
-            font-size: 1.2rem;
-            color: var(--text-light);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            background: rgba(61, 61, 61, 0.3);
-        }
-
-        .pricing-table td {
-            color: var(--text-medium);
-            font-size: 1.1rem;
-        }
-
-        .price {
-            font-family: 'Oswald', sans-serif;
-            font-size: 1.3rem;
-            color: var(--primary-orange);
-            font-weight: 600;
-        }
-
-        .package-name {
-            font-weight: 600;
-            color: var(--text-light);
-        }
-
-        /* What's Included Section */
-        .included-list {
-            list-style: none;
-        }
-
-        .included-item {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 1.5rem;
-        }
-
-        .included-icon {
-            color: var(--primary-orange);
-            font-size: 1.2rem;
-            margin-right: 1rem;
-            min-width: 20px;
-        }
-
-        .included-text {
-            color: var(--text-medium);
-            font-size: 1.1rem;
-        }
-
-        /* FAQ Section */
-        .faq-container {
-            margin-top: 2rem;
-        }
-
-        .faq-item {
-            margin-bottom: 1.5rem;
-        }
-
-        .faq-question {
-            font-family: 'Oswald', sans-serif;
-            font-size: 1.3rem;
-            color: var(--text-light);
-            margin-bottom: 0.5rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .faq-question:hover {
-            color: var(--primary-orange);
-        }
-
-        .faq-answer {
-            color: var(--text-medium);
-            font-size: 1.1rem;
-            padding-left: 1rem;
-            border-left: 2px solid var(--primary-orange);
-            margin-top: 0.5rem;
-            line-height: 1.8;
-        }
-
-        /* Testimonials Section */
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .testimonial-card {
-            background: rgba(61, 61, 61, 0.3);
-            padding: 2rem;
-            border-radius: 10px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 107, 53, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .testimonial-text {
-            font-size: 1.1rem;
-            color: var(--text-light);
-            font-style: italic;
-            margin-bottom: 1.5rem;
-            line-height: 1.8;
-        }
-
-        .testimonial-author {
-            font-family: 'Oswald', sans-serif;
-            font-size: 1rem;
-            color: var(--primary-orange);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* CTA Section */
-        .cta-section {
-            background: linear-gradient(rgba(26, 26, 26, 0.7), rgba(45, 45, 45, 0.7)), 
-                        url('https://images.unsplash.com/photo-1571902943202-507ec2618e8f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80') center/cover;
-            padding: 6rem 0;
-            text-align: center;
-        }
-
-        .cta-container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .cta-title {
-            font-family: 'Oswald', sans-serif;
-            font-size: 3rem;
-            color: var(--text-light);
-            margin-bottom: 1.5rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        .cta-description {
-            font-size: 1.2rem;
-            color: var(--text-medium);
-            margin-bottom: 2rem;
-            line-height: 1.8;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .cta-button {
-            display: inline-block;
-            background: linear-gradient(45deg, var(--primary-orange), var(--secondary-orange));
-            color: white;
-            padding: 1rem 2.5rem;
-            text-decoration: none;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border-radius: 5px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
-        }
-
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
-        }
-
-        /* Footer */
-        .footer {
-            background: var(--dark-grey);
-            padding: 3rem 0 1rem;
-            text-align: center;
-            border-top: 3px solid var(--primary-orange);
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .social-links a {
-            color: var(--text-medium);
-            font-size: 1.5rem;
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            color: var(--primary-orange);
-            transform: translateY(-3px);
-        }
-
-        .footer-text {
-            color: var(--text-dark);
-            font-size: 0.9rem;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .nav-menu {
-                display: none;
-            }
-
-            .mobile-menu {
-                display: flex;
-            }
-
-            .service-title {
-                font-size: 2.5rem;
-            }
-
-            .section-title {
-                font-size: 2rem;
-            }
-
-            .pricing-table th,
-            .pricing-table td {
-                padding: 1rem;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Group Training - Coach Pete Ryan</title>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-orange: #ff6b35;
+      --secondary-orange: #ff8c42;
+      --dark-grey: #1a1a1a;
+      --medium-grey: #2d2d2d;
+      --light-grey: #3d3d3d;
+      --text-light: #e0e0e0;
+      --text-medium: #b0b0b0;
+      --text-dark: #808080;
+    }
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+      margin: 0;
+      background: linear-gradient(135deg, var(--dark-grey) 0%, var(--medium-grey) 100%);
+      color: var(--text-light);
+    }
+
+    .service-hero {
+      background: linear-gradient(rgba(26, 26, 26, 0.7), rgba(45, 45, 45, 0.7)), url('https://raw.githubusercontent.com/CoachPete86/images/main/coach_hero_ext.png') center/cover;
+      height: 80vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .service-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 3rem;
+      color: var(--text-light);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .service-subtitle {
+      font-size: 1.5rem;
+      color: var(--primary-orange);
+      margin-top: 1rem;
+    }
+
+    .service-content {
+      max-width: 1000px;
+      margin: 3rem auto;
+      padding: 0 2rem;
+    }
+
+    .section {
+      margin-bottom: 3rem;
+    }
+
+    .section-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: var(--primary-orange);
+    }
+
+    .section-description, p {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--text-medium);
+    }
+
+    ul.included-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    ul.included-list li {
+      margin-bottom: 0.5rem;
+      position: relative;
+      padding-left: 1.5rem;
+    }
+
+    ul.included-list li::before {
+      content: "\2713";
+      color: var(--primary-orange);
+      position: absolute;
+      left: 0;
+    }
+
+    .testimonial-card {
+      background: rgba(255, 255, 255, 0.05);
+      border-left: 4px solid var(--primary-orange);
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .testimonial-author {
+      color: var(--primary-orange);
+      font-weight: bold;
+      margin-top: 1rem;
+    }
+  </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar" id="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="logo">Coach Pete Ryan</a>
-            <ul class="nav-menu" id="navMenu">
-                <li><a href="index.html" class="nav-link">Home</a></li>
-                <li><a href="index.html#about" class="nav-link">About</a></li>
-                <li><a href="index.html#services" class="nav-link active">Services</a></li>
-                <li><a href="index.html#process" class="nav-link">Process</a></li>
-                <li><a href="index.html#testimonials" class="nav-link">Testimonials</a></li>
-                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
-            </ul>
-            <div class="mobile-menu" id="mobileMenu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
-    </nav>
+  <section class="service-hero">
+    <div>
+      <h1 class="service-title">Group Training</h1>
+      <p class="service-subtitle">Push harder. Laugh louder. Level up together.</p>
+      <p style="font-style: italic; color: #ccc; margin-top: 1rem;">"The energy in Pete’s classes is next level. It’s the highlight of my week."</p>
+    </div>
+  </section>
 
-    <!-- Service Hero Section -->
-    <section class="service-hero" id="service-hero">
-        <div class="service-hero-content">
-            <h1 class="service-title" data-aos="fade-up">Group Training</h1>
-            <p class="service-subtitle" data-aos="fade-up" data-aos-delay="200">Train Together, Achieve Together</p>
-        </div>
-    </section>
+  <section class="service-content">
+    <div class="section">
+      <h2 class="section-title">Why Group Training?</h2>
+      <p class="section-description">There’s something powerful about shared effort. Group training delivers the coaching quality of personal sessions with the energy, motivation, and community of a team. You’ll train smarter, sweat harder, and leave every session buzzing.</p>
+    </div>
 
-    <!-- Main Content -->
-    <div class="service-content">
-        <!-- Service Description -->
-        <section class="section" data-aos="fade-up">
-            <h2 class="section-title">About Group Training</h2>
-            <p class="section-description">
-                My group training sessions combine the expertise of professional coaching with the motivational power of community. Working out alongside others creates a unique energy that drives performance, accountability, and enjoyment—often pushing you further than you'd go alone. These dynamic sessions are designed to deliver maximum results in a social, supportive environment.
-            </p>
-            <p class="section-description">
-                Each session is carefully structured to accommodate varying fitness levels while ensuring everyone is appropriately challenged. You'll benefit from personalized attention within a group setting, learning proper technique, pushing your limits, and building connections with like-minded individuals who share your commitment to health and fitness.
-            </p>
-        </section>
+    <div class="section">
+      <h2 class="section-title">What Makes These Different</h2>
+      <ul class="included-list">
+        <li>Coach-led from start to finish — no guessing, no winging it.</li>
+        <li>Planned progressive structure — each week builds on the last.</li>
+        <li>Training blocks that mix strength, conditioning, and mobility.</li>
+        <li>Focus on proper technique and form — not just keeping up.</li>
+        <li>Personal modifications to suit all levels, injuries, and needs.</li>
+      </ul>
+    </div>
 
-        <!-- Benefits Section -->
-        <section class="section" data-aos="fade-up">
-            <h2 class="section-title">Benefits & Features</h2>
-            <div class="benefits-grid">
-                <div class="benefit-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="benefit-icon">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <h3 class="benefit-title">Community Support</h3>
-                    <p class="benefit-description">
-                        Train in a motivating environment where group energy and camaraderie push you to new levels of performance and commitment.
-                    </p>
-                </div>
-                <div class="benefit-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="benefit-icon">
-                        <i class="fas fa-pound-sign"></i>
-                    </div>
-                    <h3 class="benefit-title">Cost-Effective Training</h3>
-                    <p class="benefit-description">
-                        Access professional coaching at a more affordable price point while still receiving personalized attention and guidance.
-                    </p>
-                </div>
-                <div class="benefit-card" data-aos="fade-up" data-aos-delay="300">
-                    <div class="benefit-icon">
-                        <i class="fas fa-random"></i>
-                    </div>
-                    <h3 class="benefit-title">Varied Workouts</h3>
-                    <p class="benefit-description">
-                        Experience diverse training formats designed to prevent plateaus, maintain interest, and target different aspects of fitness.
-                    </p>
-                </div>
-                <div class="benefit-card" data-aos="fade-up" data-aos-delay="400">
-                    <div class="benefit-icon">
-                        <i class="fas fa-handshake"></i>
-                    </div>
-                    <h3 class="benefit-title">Accountability Network</h3>
-                    <p class="benefit-description">
-                        Stay consistent with your fitness goals through the power of group commitment and positive peer influence.
-                    </p>
-                </div>
-            </div>
-        </section>
+    <div class="section">
+      <h2 class="section-title">Session Types</h2>
+      <p><strong>SWEAT 45:</strong> High-intensity, no-nonsense fat-burning circuits using a mix of dumbbells, kettlebells, sleds, rowers, and bodyweight drills.</p>
+      <p><strong>ENGINE:</strong> Cardio-focused workouts to improve heart health, VO2 max, and endurance with ski ergs, rowers, and bikes.</p>
+      <p><strong>TEAM TRAIN:</strong> Partner or small-group drills designed to challenge teamwork and motivation. You’ll go further with others in your corner.</p>
+    </div>
 
-        <!-- Pricing Section -->
-        <section class="section" data-aos="fade-up">
-            <h2 class="section-title">Pricing Breakdown</h2>
-            <table class="pricing-table">
-                <thead>
-                    <tr>
-                        <th>Package</th>
-                        <th>Description</th>
-                        <th>Price</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="package-name">Single Session</td>
-                        <td>Try out a group session (60 minutes)</td>
-                        <td class="price">£25 per person</td>
-                    </tr>
-                    <tr>
-                        <td class="package-name">Monthly Package (8 Sessions)</td>
-                        <td>Two sessions per week for maximum results</td>
-                        <td class="price">£180 (£22.50 per session)</td>
-                    </tr>
-                    <tr>
-                        <td class="package-name">Partner Training (2 People)</td>
-                        <td>Train with a friend, spouse, or family member</td>
-                        <td class="price">£40 per person (£80 total)</td>
-                    </tr>
-                    <tr>
-                        <td class="package-name">Small Group (3-4 People)</td>
-                        <td>Create your own private training group</td>
-                        <td class="price">£35 per person</td>
-                    </tr>
-                </tbody>
-            </table>
-            <p class="section-description">
-                All packages include professionally designed workouts, technique coaching, progress tracking, and access to my fitness app for between-session support. Flexible scheduling is available to accommodate your group's needs.
-            </p>
-        </section>
+    <div class="section">
+      <h2 class="section-title">Schedule + Pricing</h2>
+      <ul class="included-list">
+        <li>Group sessions held at PureGym West Byfleet</li>
+        <li>Class sizes capped for quality coaching</li>
+        <li>Drop-in: £12 per session</li>
+        <li>Monthly unlimited pass: £85</li>
+        <li>Free trial for first-timers — message to book</li>
+      </ul>
+    </div>
 
-        <!-- What's Included Section -->
-        <section class="section" data-aos="fade-up">
-            <h2 class="section-title">What's Included</h2>
-            <ul class="included-list">
-                <li class="included-item">
-                    <span class="included-icon"><i class="fas fa-check-circle"></i></span>
-                    <p class="included-text">
-                        <strong>Professional Group Programming</strong> - Expertly designed workouts that effectively accommodate multiple fitness levels while ensuring everyone is appropriately challenged.
-                    </p>
-                </li>
-                <li class="included-item">
-                    <span class="included-icon"><i class="fas fa-check-circle"></i></span>
-                    <p class="included-text">
-                        <strong>Dynamic Workout Variety</strong> - Constantly evolving session formats including circuit training, partner exercises, team challenges, and skill-based drills to keep workouts fresh and engaging.
-                    </p>
-                </li>
-                <li class="included-item">
-                    <span class="included-icon"><i class="fas fa-check-circle"></i></span>
-                    <p class="included-text">
-                        <strong>Small Group Sizes</strong> - Limited to 8 participants maximum to ensure quality coaching, proper form correction, and personalized attention for every member.
-                    </p>
-                </li>
-                <li class="included-item">
-                    <span class="included-icon"><i class="fas fa-check-circle"></i></span>
-                    <p class="included-text">
-                        <strong>Individual Modifications</strong> - Personalized exercise adaptations based on your fitness level, injury history, or specific goals within the group format.
-                    </p>
-                </li>
-                <li class="included-item">
-                    <span class="included-icon"><i class="fas fa-check-circle"></i></span>
-                    <p class="included-text">
-                        <strong>Community Support System</strong> - Built-in accountability network through a private online group where members share successes, challenges, and motivation.
-                    </p>
-                </li>
-                <li class="included-item">
-                    <span class="included-icon"><i class="fas fa-check-circle"></i></span>
-                    <p class="included-text">
-                        <strong>Fitness Assessment</strong> - Initial and periodic evaluations to track progress and ensure your training continues to align with your evolving goals.
-                    </p>
-                </li>
-                <li class="included-item">
-                    <span class="included-icon"><i class="fas fa-check-circle"></i></span>
-                    <p class="included-text">
-                        <strong>Nutrition Guidance</strong> - Basic nutritional advice and resources to support your fitness goals and maximize the results of your group training.
-                    </p>
-                </li>
-            </ul>
-        </section>
-
-        <!-- FAQ Section -->
-        <section class="section" data-aos="fade-up">
-            <h2 class="section-title">Frequently Asked Questions</h2>
-            <div class="faq-container">
-                <div class="faq-item">
-                    <h3 class="faq-question">I'm a beginner. Will I be able to keep up with the group? <i class="fas fa-chevron-down"></i></h3>
-                    <p class="faq-answer">
-                        Absolutely! My group sessions are specifically designed to accommodate various fitness levels simultaneously. Every exercise has multiple progression and regression options, allowing beginners and advanced participants to train effectively side by side. I'll help you select the appropriate intensity level for each movement, and you'll never be pushed beyond what's safe or productive for your current fitness stage. Many beginners actually find they progress faster in a group environment due to the motivational aspect.
-                    </p>
-                </div>
-                <div class="faq-item">
-                    <h3 class="faq-question">What's the difference between your group training and typical fitness classes? <i class="fas fa-chevron-down"></i></h3>
-                    <p class="faq-answer">
-                        Unlike large fitness classes where individual attention is minimal, my group training maintains a maximum 8:1 client-to-coach ratio, ensuring personalized guidance. Standard classes often use one-size-fits-all approaches, while my sessions provide individual movement modifications, intensity adjustments, and progress tracking. Additionally, my groups develop strong supportive communities with consistent membership, rather than constantly changing participants. You get the benefits of personalized coaching combined with the motivation and affordability of group formats.
-                    </p>
-                </div>
-                <div class="faq-item">
-                    <h3 class="faq-question">Can I create a private group with my friends/colleagues? <i class="fas fa-chevron-down"></i></h3>
-                    <p class="faq-answer">
-                        Yes! Private group sessions are a popular option. You can form your own training group with 2-8 people of your choosing—friends, family members, colleagues, or neighbors. I can schedule these sessions at times that work for your group, including early mornings, evenings, or weekends. Private groups often develop special camaraderie and can be customized to address specific goals or interests shared by your group. Contact me to discuss creating your own training crew.
-                    </p>
-                </div>
-                <div class="faq-item">
-                    <h3 class="faq-question">Where do group sessions take place? <i class="fas fa-chevron-down"></i></h3>
-                    <p class="faq-answer">
-                        Group training sessions are held at various locations depending on the season and format. Indoor sessions take place at my fully-equipped training studio in Surrey. During favorable weather, we often utilize local parks and outdoor spaces for refreshing open-air workouts. For corporate or private groups, I can also bring the training to your location if suitable space is available. All locations are carefully selected to ensure a safe, effective training environment with appropriate equipment and facilities.
-                    </p>
-                </div>
-                <div class="faq-item">
-                    <h3 class="faq-question">What if I have to miss a session? <i class="fas fa-chevron-down"></i></h3>
-                    <p class="faq-answer">
-                        Life happens, and I understand that. If you're on a monthly package and need to miss a session, you can reschedule to another group session within the same month, subject to availability. For unplanned absences, I provide the workout details via the mobile app so you can complete it independently if you wish. I recommend aiming for consistent attendance as the group dynamic is a powerful motivator, but my flexible rescheduling policy ensures you get full value from your investment.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Testimonials Section -->
-        <section class="section" data-aos="fade-up">
-            <h2 class="section-title">Client Testimonials</h2>
-            <div class="testimonials-grid">
-                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="100">
-                    <p class="testimonial-text">
-                        "I was intimidated by gyms and had tried fitness classes where I felt lost in the crowd. Pete's group training has been completely different. The small group size means I get personal attention, and the community aspect keeps me coming back. I've lost 12kg and made genuine friends who keep me accountable."
-                    </p>
-                    <p class="testimonial-author">- Emma L., Group Member for 8 months</p>
-                </div>
-                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="200">
-                    <p class="testimonial-text">
-                        "My wife and I do the partner training sessions together twice a week. It's become our quality time that benefits both our relationship and our health. Pete tailors the workouts so we can both get what we need despite being at different fitness levels. It's more affordable than separate personal training but still gives us personalized coaching."
-                    </p>
-                    <p class="testimonial-author">- Michael & Kate T., Partner Training</p>
-                </div>
-                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="300">
-                    <p class="testimonial-text">
-                        "I organized a small group of colleagues from work, and we train with Pete twice a week. It's the perfect team-building activity - challenging but fun. Pete knows how to adjust the intensity for each person while keeping the group dynamic. We've all seen great results, and our workplace morale has improved too!"
-                    </p>
-                    <p class="testimonial-author">- David B., Corporate Group Member</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- CTA Section -->
-        <section class="cta-section">
-            <div class="cta-container">
-                <h2 class="cta-title" data-aos="fade-up">Ready to Train Together?</h2>
-                <p class="cta-description" data-aos="fade-up" data-aos-delay="100">
-                    Join one of my existing groups or gather your friends for a custom group training experience. The journey is better when shared!
-                </p>
-                <a href="#contact" class="cta-button" data-aos="fade-up" data-aos-delay="200">Book Your First Session</a>
-            </div>
-        </section>
-
-        <!-- Footer -->
-        <footer class="footer">
-            <div class="footer-content">
-                <div class="social-links">
-                    <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
-                    <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
-                    <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="#" target="_blank"><i class="fab fa-youtube"></i></a>
-                </div>
-                <p class="footer-text">&copy; 2025 Coach Pete Ryan. All rights reserved.</p>
-            </div>
-        </footer>
-
-        <!-- Scripts -->
-        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-        <script>
-            // Initialize AOS
-            AOS.init({
-                duration: 1000,
-                once: true,
-                offset: 100
-            });
-
-            // Navbar scroll effect
-            window.addEventListener('scroll', function() {
-                const navbar = document.getElementById('navbar');
-                if (window.scrollY > 50) {
-                    navbar.classList.add('scrolled');
-                } else {
-                    navbar.classList.remove('scrolled');
-                }
-            });
-
-            // FAQ toggle
-            document.querySelectorAll('.faq-question').forEach(question => {
-                question.addEventListener('click', () => {
-                    const answer = question.nextElementSibling;
-                    const icon = question.querySelector('i');
-                    
-                    if (answer.style.display === 'block') {
-                        answer.style.display = 'none';
-                        icon.classList.remove('fa-chevron-up');
-                        icon.classList.add('fa-chevron-down');
-                    } else {
-                        answer.style.display = 'block';
-                        icon.classList.remove('fa-chevron-down');
-                        icon.classList.add('fa-chevron-up');
-                    }
-                });
-            });
-
-            // Form submission handler
-            document.getElementById('contactForm')?.addEventListener('submit', function(e) {
-                e.preventDefault();
-                // Form submission logic would go here
-                alert('Thank you for your interest in group training! I will get back to you within 24 hours.');
-                this.reset();
-            });
-        </script>
-    </body>
+    <div class="section">
+      <h2 class="section-title">What Clients Say</h2>
+      <div class="testimonial-card">
+        <p>"It feels like PT but with your mates cheering you on. Pete’s attention to form and energy is unmatched."</p>
+        <p class="testimonial-author">– Ash D.</p>
+      </div>
+      <div class="testimonial-card">
+        <p>"I hated the gym. These sessions flipped that on its head. I'm the fittest and most confident I've ever been."</p>
+        <p class="testimonial-author">– Louisa P.</p>
+      </div>
+    </div>
+  </section>
+</body>
 </html>

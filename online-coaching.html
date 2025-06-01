@@ -1,806 +1,159 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Online Coaching - Coach Pete Ryan</title>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <style>
-        :root {
-            --primary-orange: #ff6b35;
-            --secondary-orange: #ff8c42;
-            --dark-grey: #1a1a1a;
-            --medium-grey: #2d2d2d;
-            --light-grey: #3d3d3d;
-            --text-light: #e0e0e0;
-            --text-medium: #b0b0b0;
-            --text-dark: #808080;
-            --concrete: #4a4a4a;
-            --metal: #6a6a6a;
-            --accent-blue: #00d4ff;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Open Sans', sans-serif;
-            background: linear-gradient(135deg, var(--dark-grey) 0%, var(--medium-grey) 100%);
-            color: var(--text-light);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        /* Navigation */
-        .navbar {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(26, 26, 26, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            padding: 1rem 0;
-            transition: all 0.3s ease;
-        }
-
-        .navbar.scrolled {
-            background: rgba(26, 26, 26, 0.98);
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 2rem;
-        }
-
-        .logo {
-            font-family: 'Oswald', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--primary-orange);
-            text-decoration: none;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .nav-menu {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        .nav-link {
-            color: var(--text-light);
-            text-decoration: none;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .nav-link:hover,
-        .nav-link.active {
-            color: var(--primary-orange);
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary-orange);
-            transition: width 0.3s ease;
-        }
-
-        .nav-link:hover::after,
-        .nav-link.active::after {
-            width: 100%;
-        }
-
-        .mobile-menu {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-        }
-
-        .mobile-menu span {
-            width: 25px;
-            height: 3px;
-            background: var(--text-light);
-            margin: 3px 0;
-            transition: 0.3s;
-        }
-
-        /* Service Hero Section */
-        .service-hero {
-            height: 50vh;
-            background: linear-gradient(rgba(26, 26, 26, 0.7), rgba(45, 45, 45, 0.7)), 
-                        url('https://images.unsplash.com/photo-1599058917212-d750089bc07e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1769&q=80') center/cover;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            margin-top: 80px;
-        }
-
-        .service-hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at center, transparent 0%, rgba(26, 26, 26, 0.3) 100%);
-        }
-
-        .service-hero-content {
-            max-width: 800px;
-            z-index: 2;
-            position: relative;
-            padding: 0 2rem;
-        }
-
-        .service-title {
-            font-family: 'Oswald', sans-serif;
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            font-weight: 700;
-            color: var(--text-light);
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        .service-subtitle {
-            font-size: clamp(1rem, 2vw, 1.5rem);
-            color: var(--primary-orange);
-            font-weight: 600;
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        /* Main Content */
-        .service-content {
-            max-width: 1200px;
-            margin: 4rem auto;
-            padding: 0 2rem;
-        }
-
-        .section {
-            margin-bottom: 4rem;
-        }
-
-        .section-title {
-            font-family: 'Oswald', sans-serif;
-            font-size: 2.5rem;
-            color: var(--text-light);
-            margin-bottom: 1.5rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            border-bottom: 3px solid var(--primary-orange);
-            padding-bottom: 0.5rem;
-            display: inline-block;
-        }
-
-        .section-description {
-            font-size: 1.1rem;
-            color: var(--text-medium);
-            margin-bottom: 2rem;
-            line-height: 1.8;
-        }
-
-        /* Benefits Section */
-        .benefits-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .benefit-card {
-            background: rgba(61, 61, 61, 0.3);
-            padding: 2rem;
-            border-radius: 10px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 107, 53, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .benefit-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary-orange);
-            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.2);
-        }
-
-        .benefit-icon {
-            font-size: 2.5rem;
-            color: var(--primary-orange);
-            margin-bottom: 1.5rem;
-        }
-
-        .benefit-title {
-            font-family: 'Oswald', sans-serif;
-            font-size: 1.3rem;
-            color: var(--text-light);
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .benefit-description {
-            color: var(--text-medium);
-            line-height: 1.6;
-        }
-
-        /* Pricing Section */
-        .pricing-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 2rem;
-        }
-
-        .pricing-table th,
-        .pricing-table td {
-            padding: 1.5rem;
-            text-align: left;
-            border-bottom: 1px solid var(--light-grey);
-        }
-
-        .pricing-table th {
-            font-family: 'Oswald', sans-serif;
-            font-size: 1.2rem;
-            color: var(--text-light);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            background: rgba(61, 61, 61, 0.3);
-        }
-
-        .pricing-table td {
-            color: var(--text-medium);
-            font-size: 1.1rem;
-        }
-
-        .price {
-            font-family: 'Oswald', sans-serif;
-            font-size: 1.3rem;
-            color: var(--primary-orange);
-            font-weight: 600;
-        }
-
-        .package-name {
-            font-weight: 600;
-            color: var(--text-light);
-        }
-
-        /* What's Included Section */
-        .included-list {
-            list-style: none;
-        }
-
-        .included-item {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 1.5rem;
-        }
-
-        .included-icon {
-            color: var(--primary-orange);
-            font-size: 1.2rem;
-            margin-right: 1rem;
-            min-width: 20px;
-        }
-
-        .included-text {
-            color: var(--text-medium);
-            font-size: 1.1rem;
-        }
-
-        /* FAQ Section */
-        .faq-container {
-            margin-top: 2rem;
-        }
-
-        .faq-item {
-            margin-bottom: 1.5rem;
-        }
-
-        .faq-question {
-            font-family: 'Oswald', sans-serif;
-            font-size: 1.3rem;
-            color: var(--text-light);
-            margin-bottom: 0.5rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .faq-question:hover {
-            color: var(--primary-orange);
-        }
-
-        .faq-answer {
-            color: var(--text-medium);
-            font-size: 1.1rem;
-            padding-left: 1rem;
-            border-left: 2px solid var(--primary-orange);
-            margin-top: 0.5rem;
-            line-height: 1.8;
-        }
-
-        /* Testimonials Section */
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .testimonial-card {
-            background: rgba(61, 61, 61, 0.3);
-            padding: 2rem;
-            border-radius: 10px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 107, 53, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .testimonial-text {
-            font-size: 1.1rem;
-            color: var(--text-light);
-            font-style: italic;
-            margin-bottom: 1.5rem;
-            line-height: 1.8;
-        }
-
-        .testimonial-author {
-            font-family: 'Oswald', sans-serif;
-            font-size: 1rem;
-            color: var(--primary-orange);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* CTA Section */
-        .cta-section {
-            background: linear-gradient(rgba(26, 26, 26, 0.7), rgba(45, 45, 45, 0.7)), 
-                        url('https://images.unsplash.com/photo-1576678927484-cc907957088c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80') center/cover;
-            padding: 6rem 0;
-            text-align: center;
-        }
-
-        .cta-container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .cta-title {
-            font-family: 'Oswald', sans-serif;
-            font-size: 3rem;
-            color: var(--text-light);
-            margin-bottom: 1.5rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        .cta-description {
-            font-size: 1.2rem;
-            color: var(--text-medium);
-            margin-bottom: 2rem;
-            line-height: 1.8;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .cta-button {
-            display: inline-block;
-            background: linear-gradient(45deg, var(--primary-orange), var(--secondary-orange));
-            color: white;
-            padding: 1rem 2.5rem;
-            text-decoration: none;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border-radius: 5px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
-        }
-
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
-        }
-
-        /* Footer */
-        .footer {
-            background: var(--dark-grey);
-            padding: 3rem 0 1rem;
-            text-align: center;
-            border-top: 3px solid var(--primary-orange);
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .social-links a {
-            color: var(--text-medium);
-            font-size: 1.5rem;
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            color: var(--primary-orange);
-            transform: translateY(-3px);
-        }
-
-        .footer-text {
-            color: var(--text-dark);
-            font-size: 0.9rem;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .nav-menu {
-                display: none;
-            }
-
-            .mobile-menu {
-                display: flex;
-            }
-
-            .service-title {
-                font-size: 2.5rem;
-            }
-
-            .section-title {
-                font-size: 2rem;
-            }
-
-            .pricing-table th,
-            .pricing-table td {
-                padding: 1rem;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Online Coaching - Coach Pete Ryan</title>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-orange: #ff6b35;
+      --secondary-orange: #ff8c42;
+      --dark-grey: #1a1a1a;
+      --medium-grey: #2d2d2d;
+      --light-grey: #3d3d3d;
+      --text-light: #e0e0e0;
+      --text-medium: #b0b0b0;
+      --text-dark: #808080;
+    }
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+      margin: 0;
+      background: linear-gradient(135deg, var(--dark-grey) 0%, var(--medium-grey) 100%);
+      color: var(--text-light);
+    }
+
+    .service-hero {
+      background: linear-gradient(rgba(26, 26, 26, 0.7), rgba(45, 45, 45, 0.7)), url('https://raw.githubusercontent.com/CoachPete86/images/main/coach_hero_ext.png') center/cover;
+      height: 80vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .service-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 3rem;
+      color: var(--text-light);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .service-subtitle {
+      font-size: 1.5rem;
+      color: var(--primary-orange);
+      margin-top: 1rem;
+    }
+
+    .service-content {
+      max-width: 1000px;
+      margin: 3rem auto;
+      padding: 0 2rem;
+    }
+
+    .section {
+      margin-bottom: 3rem;
+    }
+
+    .section-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: var(--primary-orange);
+    }
+
+    .section-description, p {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--text-medium);
+    }
+
+    ul.included-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    ul.included-list li {
+      margin-bottom: 0.5rem;
+      position: relative;
+      padding-left: 1.5rem;
+    }
+
+    ul.included-list li::before {
+      content: "\2713";
+      color: var(--primary-orange);
+      position: absolute;
+      left: 0;
+    }
+
+    .testimonial-card {
+      background: rgba(255, 255, 255, 0.05);
+      border-left: 4px solid var(--primary-orange);
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .testimonial-author {
+      color: var(--primary-orange);
+      font-weight: bold;
+      margin-top: 1rem;
+    }
+  </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar" id="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="logo">Coach Pete Ryan</a>
-            <ul class="nav-menu" id="navMenu">
-                <li><a href="index.html" class="nav-link">Home</a></li>
-                <li><a href="index.html#about" class="nav-link">About</a></li>
-                <li><a href="index.html#services" class="nav-link active">Services</a></li>
-                <li><a href="index.html#process" class="nav-link">Process</a></li>
-                <li><a href="index.html#testimonials" class="nav-link">Testimonials</a></li>
-                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
-            </ul>
-            <div class="mobile-menu" id="mobileMenu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
-    </nav>
+  <section class="service-hero">
+    <div>
+      <h1 class="service-title">Online Coaching</h1>
+      <p class="service-subtitle">Train anywhere. Stay accountable. Never guess again.</p>
+      <p style="font-style: italic; color: #ccc; margin-top: 1rem;">"I get better results now remotely than I ever did in the gym on my own."</p>
+    </div>
+  </section>
 
-    <!-- Service Hero Section -->
-    <section class="service-hero" id="service-hero">
-        <div class="service-hero-content">
-            <h1 class="service-title" data-aos="fade-up">Online Coaching</h1>
-            <p class="service-subtitle" data-aos="fade-up" data-aos-delay="200">World-Class Coaching Anywhere, Anytime</p>
-        </div>
-    </section>
+  <section class="service-content">
+    <div class="section">
+      <h2 class="section-title">What Is Online Coaching?</h2>
+      <p class="section-description">It’s personal training — without borders. I build your full fitness programme based on your goals, experience, equipment, and time available. You train when and where suits you best — I’ll be there with guidance, structure, and direct support.</p>
+    </div>
 
-    <!-- Main Content -->
-    <div class="service-content">
-        <!-- Service Description -->
-        <section class="section" data-aos="fade-up">
-            <h2 class="section-title">About Online Coaching</h2>
-            <p class="section-description">
-                My online coaching service delivers the same level of expertise and personalization as my in-person training, but with the flexibility to fit seamlessly into your lifestyle no matter where you are in the world. This comprehensive approach combines cutting-edge technology with my proven coaching methods to create a fully customized fitness experience that adapts to your schedule, location, and available resources.
-            </p>
-            <p class="section-description">
-                Through detailed assessments, personalized programming, video analysis, and constant communication, I provide the structure, accountability, and expertise you need to transform your body and health. Whether you travel frequently, have a demanding schedule, or simply prefer the convenience of training on your own terms, online coaching gives you access to professional guidance without the constraints of traditional training.
-            </p>
-        </section>
+    <div class="section">
+      <h2 class="section-title">What You’ll Get</h2>
+      <ul class="included-list">
+        <li>Custom weekly training plan adjusted as you progress</li>
+        <li>App-based workout tracking with video demos + cues</li>
+        <li>Ongoing WhatsApp and email access for questions + check-ins</li>
+        <li>Monthly Zoom review call to analyse progress + challenges</li>
+        <li>Form checks — send your videos, get personal technique feedback</li>
+      </ul>
+    </div>
 
-        <!-- Benefits Section -->
-        <section class="section" data-aos="fade-up">
-            <h2 class="section-title">Benefits & Features</h2>
-            <div class="benefits-grid">
-                <div class="benefit-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="benefit-icon">
-                        <i class="fas fa-clock"></i>
-                    </div>
-                    <h3 class="benefit-title">Ultimate Flexibility</h3>
-                    <p class="benefit-description">
-                        Train when and where it works for you, eliminating schedule conflicts and making consistency possible even with the busiest lifestyle.
-                    </p>
-                </div>
-                <div class="benefit-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="benefit-icon">
-                        <i class="fas fa-mobile-alt"></i>
-                    </div>
-                    <h3 class="benefit-title">Technology-Enhanced</h3>
-                    <p class="benefit-description">
-                        Access your custom training plans, track progress, and communicate with me through a professional coaching app on your smartphone.
-                    </p>
-                </div>
-                <div class="benefit-card" data-aos="fade-up" data-aos-delay="300">
-                    <div class="benefit-icon">
-                        <i class="fas fa-video"></i>
-                    </div>
-                    <h3 class="benefit-title">Video Form Analysis</h3>
-                    <p class="benefit-description">
-                        Receive detailed technique feedback and corrections through video analysis to ensure proper form and prevent injuries.
-                    </p>
-                </div>
-                <div class="benefit-card" data-aos="fade-up" data-aos-delay="400">
-                    <div class="benefit-icon">
-                        <i class="fas fa-sync-alt"></i>
-                    </div>
-                    <h3 class="benefit-title">Adaptive Programming</h3>
-                    <p class="benefit-description">
-                        Workouts continuously adjust based on your progress, feedback, and changing circumstances for optimal results throughout your journey.
-                    </p>
-                </div>
-            </div>
-        </section>
+    <div class="section">
+      <h2 class="section-title">Who It’s For</h2>
+      <p class="section-description">Busy professionals. Parents. Gym introverts. Athletes. Anyone tired of winging it or plateauing. You’ll never waste another session wondering what to do. You’ll train with clarity and strategy — from anywhere in the world.</p>
+    </div>
 
-        <!-- Pricing Section -->
-        <section class="section" data-aos="fade-up">
-            <h2 class="section-title">Pricing Breakdown</h2>
-            <table class="pricing-table">
-                <thead>
-                    <tr>
-                        <th>Package</th>
-                        <th>Description</th>
-                        <th>Price</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="package-name">Monthly Essentials</td>
-                        <td>Custom monthly programming with weekly check-ins</td>
-                        <td class="price">£199 per month</td>
-                    </tr>
-                    <tr>
-                        <td class="package-name">Quarterly Program</td>
-                        <td>3-month commitment for more substantial progress</td>
-                        <td class="price">£549 (£183 per month)</td>
-                    </tr>
-                    <tr>
-                        <td class="package-name">6-Month Transformation</td>
-                        <td>Comprehensive program for significant body changes</td>
-                        <td class="price">£999 (£166 per month)</td>
-                    </tr>
-                    <tr>
-                        <td class="package-name">Annual Elite</td>
-                        <td>Complete 12-month coaching with highest priority support</td>
-                        <td class="price">£1,799 (£150 per month)</td>
-                    </tr>
-                </tbody>
-            </table>
-            <p class="section-description">
-                All packages include personalized training plans, nutrition guidance, form analysis, progress tracking, and messaging support. Longer commitments include additional benefits such as more frequent video calls, nutrition plan adjustments, and priority response times.
-            </p>
-        </section>
+    <div class="section">
+      <h2 class="section-title">Pricing</h2>
+      <ul class="included-list">
+        <li>£129/month</li>
+        <li>No contract — cancel anytime</li>
+        <li>Discount for 3+ month prepay</li>
+      </ul>
+    </div>
 
-        <!-- What's Included Section -->
-        <section class="section" data-aos="fade-up">
-            <h2 class="section-title">What's Included</h2>
-            <ul class="included-list">
-                <li class="included-item">
-                    <span class="included-icon"><i class="fas fa-check-circle"></i></span>
-                    <p class="included-text">
-                        <strong>Comprehensive Assessment</strong> - Detailed questionnaire and video movement analysis to understand your current fitness level, injury history, goals, training environment, and equipment access.
-                    </p>
-                </li>
-                <li class="included-item">
-                    <span class="included-icon"><i class="fas fa-check-circle"></i></span>
-                    <p class="included-text">
-                        <strong>Customized Training Program</strong> - Fully personalized workout plan designed specifically for your goals, schedule, and available equipment, delivered through a professional coaching app.
-                    </p>
-                </li>
-                <li class="included-item">
-                    <span class="included-icon"><i class="fas fa-check-circle"></i></span>
-                    <p class="included-text">
-                        <strong>Nutrition Planning</strong> - Tailored nutrition guidance with meal suggestions, calorie and macro targets, and strategic adjustments based on your progress and preferences.
-                    </p>
-                </li>
-                <li class="included-item">
-                    <span class="included-icon"><i class="fas fa-check-circle"></i></span>
-                    <p class="included-text">
-                        <strong>Exercise Video Library</strong> - Access to a comprehensive library of video demonstrations showing proper form and technique for all prescribed exercises.
-                    </p>
-                </li>
-                <li class="included-item">
-                    <span class="included-icon"><i class="fas fa-check-circle"></i></span>
-                    <p class="included-text">
-                        <strong>Regular Video Analysis</strong> - Submit videos of your exercise technique for professional review and receive detailed feedback to ensure proper form and maximize results.
-                    </p>
-                </li>
-                <li class="included-item">
-                    <span class="included-icon"><i class="fas fa-check-circle"></i></span>
-                    <p class="included-text">
-                        <strong>Progress Tracking</strong> - Systematic monitoring of key metrics including body measurements, weight, performance data, and progress photos to ensure you're on track.
-                    </p>
-                </li>
-                <li class="included-item">
-                    <span class="included-icon"><i class="fas fa-check-circle"></i></span>
-                    <p class="included-text">
-                        <strong>Regular Check-ins</strong> - Scheduled video or voice calls to discuss progress, answer questions, and make program adjustments (frequency depends on your package).
-                    </p>
-                </li>
-                <li class="included-item">
-                    <span class="included-icon"><i class="fas fa-check-circle"></i></span>
-                    <p class="included-text">
-                        <strong>Ongoing Messaging Support</strong> - Direct communication channel for questions, feedback, and guidance between formal check-ins.
-                    </p>
-                </li>
-            </ul>
-        </section>
-
-        <!-- FAQ Section -->
-        <section class="section" data-aos="fade-up">
-            <h2 class="section-title">Frequently Asked Questions</h2>
-            <div class="faq-container">
-                <div class="faq-item">
-                    <h3 class="faq-question">How does online coaching actually work? <i class="fas fa-chevron-down"></i></h3>
-                    <p class="faq-answer">
-                        After signing up, you'll complete a comprehensive assessment covering your fitness history, goals, schedule, available equipment, and other relevant factors. I'll then create your personalized training program, which you'll access through a professional coaching app on your smartphone or computer. The app delivers your workouts, nutrition guidance, and allows you to log your progress and communicate with me. You'll follow the program independently, submitting regular progress updates and form videos for review. We'll have scheduled check-in calls to discuss your progress, make adjustments, and address any questions or challenges. The program evolves continuously based on your progress and feedback.
-                    </p>
-                </div>
-                <div class="faq-item">
-                    <h3 class="faq-question">I don't have much equipment. Can online coaching still work for me? <i class="fas fa-chevron-down"></i></h3>
-                    <p class="faq-answer">
-                        Absolutely! One of the strengths of my online coaching is adaptability to different equipment situations. Whether you have a fully-equipped home gym, basic equipment like dumbbells and bands, or nothing at all, I can design an effective program for your circumstances. During our assessment, I'll learn exactly what you have access to and create workouts accordingly. If your equipment situation changes (like when traveling), I can quickly modify your program. I've successfully coached clients who train in commercial gyms, home setups, hotel fitness centers, and even with no equipment at all using bodyweight training approaches.
-                    </p>
-                </div>
-                <div class="faq-item">
-                    <h3 class="faq-question">How does online coaching compare to in-person training? <i class="fas fa-chevron-down"></i></h3>
-                    <p class="faq-answer">
-                        Both approaches have their advantages. Online coaching offers greater flexibility, allowing you to train on your own schedule rather than booking specific time slots. It's also more cost-effective while still providing personalized guidance. The biggest difference is that you'll execute workouts independently, with form corrections happening through video review rather than in real-time. This actually helps many clients develop greater body awareness and exercise autonomy. Online coaching also provides more consistent support throughout the week rather than just during sessions. Many clients find they achieve comparable or even better results with online coaching due to the flexibility promoting greater consistency.
-                    </p>
-                </div>
-                <div class="faq-item">
-                    <h3 class="faq-question">How quickly will I see results with online coaching? <i class="fas fa-chevron-down"></i></h3>
-                    <p class="faq-answer">
-                        Most clients notice initial changes within 2-4 weeks, including increased energy, improved sleep quality, and enhanced mood. Visual changes typically become noticeable around 6-8 weeks, with significant transformations occurring within 3-6 months of consistent effort. Your results timeline depends on several factors including your starting point, goals, adherence to the program, nutrition compliance, and genetic factors. The key advantage of online coaching is the consistency it enables—you can train regardless of travel, work schedule changes, or other life events that might normally disrupt your fitness routine. This consistency is what drives results more than anything else.
-                    </p>
-                </div>
-                <div class="faq-item">
-                    <h3 class="faq-question">What if I need to take a break or pause my coaching? <i class="fas fa-chevron-down"></i></h3>
-                    <p class="faq-answer">
-                        Life happens, and I understand that. For monthly subscriptions, you can pause your coaching for up to 30 days once per year, effectively extending your service period. For longer-term packages, you can pause for up to 60 days during your program duration. During pauses, you'll maintain access to your existing program and materials but won't receive new programming or check-ins until you resume. If you need to take an extended break beyond these allowances, we can discuss options including partial credits toward future services. My goal is to be flexible while ensuring you maintain momentum toward your goals.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Testimonials Section -->
-        <section class="section" data-aos="fade-up">
-            <h2 class="section-title">Client Testimonials</h2>
-            <div class="testimonials-grid">
-                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="100">
-                    <p class="testimonial-text">
-                        "As someone who travels constantly for work, Pete's online coaching has been a game-changer. I'm able to maintain a consistent fitness routine no matter which city I'm in. Pete adapts my workouts based on the equipment available at each hotel gym, and his detailed video analysis helps me maintain proper form even when we're not physically together."
-                    </p>
-                    <p class="testimonial-author">- Michael B., Business Executive</p>
-                </div>
-                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="200">
-                    <p class="testimonial-text">
-                        "I was skeptical about online coaching at first, but Pete proved me wrong. His attention to detail and constant communication make me feel like he's right there with me during every workout. The personalized program fits perfectly with my busy mom schedule, and I've lost 18kg in 7 months without ever stepping foot in a gym."
-                    </p>
-                    <p class="testimonial-author">- Sarah K., Mother of 3</p>
-                </div>
-                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="300">
-                    <p class="testimonial-text">
-                        "Living in a rural area, I never had access to quality fitness coaching until I found Pete's online program. The combination of tailored workouts, nutrition guidance, and his motivational approach has helped me completely transform my body and confidence. The results speak for themselves!"
-                    </p>
-                    <p class="testimonial-author">- Thomas J., Lost 22kg</p>
-                </div>
-            </div>
-        </section>
-
-    <!-- CTA Section -->
-    <section class="cta-section">
-        <div class="cta-container">
-            <h2 class="cta-title" data-aos="fade-up">Ready to Train Anywhere, Anytime?</h2>
-            <p class="cta-description" data-aos="fade-up" data-aos-delay="100">
-                Distance is no barrier to results. Take the first step toward expert coaching that fits your schedule and location.
-            </p>
-            <a href="#contact" class="cta-button" data-aos="fade-up" data-aos-delay="200">Get Started Today</a>
-        </div>
-    </section>
-</div>
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="social-links">
-                <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
-                <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
-                <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                <a href="#" target="_blank"><i class="fab fa-youtube"></i></a>
-            </div>
-            <p class="footer-text">© 2025 Coach Pete Ryan. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <!-- Scripts -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        // Initialize AOS
-        AOS.init({
-            duration: 1000,
-            once: true,
-            offset: 100
-        });
-
-        // Navbar scroll effect
-        window.addEventListener('scroll', function() {
-            const navbar = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
-
-        // FAQ toggle
-        document.querySelectorAll('.faq-question').forEach(question => {
-            question.addEventListener('click', () => {
-                const answer = question.nextElementSibling;
-                const icon = question.querySelector('i');
-                
-                if (answer.style.display === 'block') {
-                    answer.style.display = 'none';
-                    icon.classList.remove('fa-chevron-up');
-                    icon.classList.add('fa-chevron-down');
-                } else {
-                    answer.style.display = 'block';
-                    icon.classList.remove('fa-chevron-down');
-                    icon.classList.add('fa-chevron-up');
-                }
-            });
-        });
-
-        // Form submission handler
-        document.getElementById('contactForm')?.addEventListener('submit', function(e) {
-            e.preventDefault();
-            // Form submission logic would go here
-            alert('Thank you for your interest in online coaching! I will contact you within 24 hours to discuss how we can work together.');
-            this.reset();
-        });
-    </script>
+    <div class="section">
+      <h2 class="section-title">What Clients Say</h2>
+      <div class="testimonial-card">
+        <p>"I travel for work constantly. Pete’s online coaching gave me consistency, a plan, and actual progress — even from hotel gyms."</p>
+        <p class="testimonial-author">– Marcus J.</p>
+      </div>
+      <div class="testimonial-card">
+        <p>"Every week feels tailored. I never feel like I’m guessing or doing ‘filler’ workouts. Best investment I’ve made for my health."</p>
+        <p class="testimonial-author">– Jess K.</p>
+      </div>
+    </div>
+  </section>
 </body>
 </html>
