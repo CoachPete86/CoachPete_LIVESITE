@@ -1,13 +1,14 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Personalized hand and thumb recovery guide for Hayley, with exercises, visual guides, and support from Coach Pete Ryan.">
-  <title>Hayley Hand & Thumb Recovery Pack – Coach Pete Ryan</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👍</text></svg>">
-  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="Personalized hand and thumb recovery guide for Hayley, with exercises, visual guides, and support from Coach Pete Ryan." name="description"/>
+<title>Hayley Hand &amp; Thumb Recovery Pack – Coach Pete Ryan</title>
+<link href="data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22&gt;&lt;text y=%22.9em%22 font-size=%2290%22&gt;👍&lt;/text&gt;&lt;/svg&gt;" rel="icon"/>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&amp;family=Open+Sans:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<style>
     :root {
       --primary-orange: #ff6b35;
       --secondary-orange: #ff8c42;
@@ -156,199 +157,347 @@
         margin: 10px 0;
       }
     }
-  </style>
+  
+.lightbox-img {
+  cursor: zoom-in;
+  transition: transform 0.2s ease;
+  border-radius: 8px;
+}
+#overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.85);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+#overlay img {
+  max-width: 90vw;
+  max-height: 90vh;
+  border-radius: 10px;
+  box-shadow: 0 0 15px #000;
+  cursor: zoom-out;
+}
+
+.toolbox {
+  background: #1a1a1a;
+  padding: 1.5em;
+  border-left: 5px solid var(--primary-orange);
+  border-radius: 12px;
+  margin: 2.5em 0;
+}
+.toolbox h2 {
+  color: var(--accent-blue);
+  margin-top: 0;
+}
+.toolbox ul {
+  list-style: none;
+  padding-left: 0;
+}
+.toolbox ul li {
+  margin: 0.6em 0;
+  line-height: 1.5em;
+}
+.toolbox ul li::before {
+  content: "✔";
+  margin-right: 0.6em;
+  color: var(--primary-orange);
+}
+
+.timer-box {
+  background: #2a2a2a;
+  color: #fff;
+  border: 2px solid var(--accent-blue);
+  padding: 1em;
+  margin: 2em auto;
+  border-radius: 12px;
+  max-width: 400px;
+  text-align: center;
+  box-shadow: 0 0 10px #0004;
+}
+.timer-display {
+  font-size: 2em;
+  margin: 0.5em 0;
+}
+.timer-controls button {
+  background: var(--primary-orange);
+  border: none;
+  color: white;
+  padding: 0.5em 1.2em;
+  margin: 0.5em;
+  font-weight: bold;
+  font-size: 1em;
+  border-radius: 8px;
+  cursor: pointer;
+}
+</style>
 </head>
 <body>
 <div class="main-container">
-
-  <!-- Welcome Section -->
-  <div class="hero">
-    <img src="final_visual_hero.png" alt="Coach Pete Ryan">
-    <div class="hero-content">
-      <h1>Welcome, Hayley!</h1>
-      <p>Thank you for attending class and trusting me with your recovery. <br>
+<!-- Welcome Section -->
+<div class="hero">
+<img alt="Coach Pete Ryan" class="lightbox-img" src="final_visual_hero.png"/>
+<div class="hero-content">
+<h1>Welcome, Hayley!</h1>
+<p>Apologies in the delay, but i think you will be pleased with my end result for you. <br/>
       Below is your complete support pack—follow the steps, and message me any time.</p>
-    </div>
-  </div>
-
-  <!-- Recovery Guide -->
-  <div class="section">
-    <h2>Hand & Thumb Recovery Guide</h2>
-    <p>This guide is your personal recovery toolkit after our session. Every step is chosen to relieve your thumb/hand discomfort and speed your recovery. Please follow these steps, listen to your body, and let me know if you need anything clarified.</p>
-  </div>
-  <div class="section">
-    <h3>📸 Your 5 Visual Exercise Guides</h3>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(185px,1fr));gap:15px;">
-      <div>
-        <img src="thumb_mobility.png" alt="Thumb Mobility Circles" style="width:90%;max-width:110px;border-radius:7px;">
-        <h4>Thumb Mobility Circles</h4>
-        <div>10 circles each way – keeps your thumb joint mobile.<br>
-        <span>Make a loose fist, move thumb in a circular motion. 10 clockwise, 10 anti-clockwise.</span></div>
-      </div>
-      <div>
-        <img src="glides.jpeg" alt="Tendon Glides" style="width:90%;max-width:110px;border-radius:7px;">
-        <h4>Tendon Glides</h4>
-        <div>3-step movement for wrist tension relief.<br>
-        <span>Open hand → form fist → open fully. Repeat 10x.</span></div>
-      </div>
-      <div>
-        <img src="massage.png" alt="Palm Massage" style="width:90%;max-width:110px;border-radius:7px;">
-        <h4>Palm Massage Technique</h4>
-        <div>Thumb base relief points.<br>
-        <span>Massage thick muscle at base of thumb, from edge inward.</span></div>
-      </div>
-      <div>
-        <img src="warm_soak.png" alt="Warm Water Therapy" style="width:90%;max-width:110px;border-radius:7px;">
-        <h4>Warm Water Therapy</h4>
-        <div>10-minute anti-inflammatory relief.<br>
-        <span>Soak hand in warm water for 10 minutes. Add Epsom salt if possible.</span></div>
-      </div>
-      <div>
-        <img src="grip.png" alt="Grip Strength Recovery" style="width:90%;max-width:110px;border-radius:7px;">
-        <h4>Grip Strength Recovery</h4>
-        <div>Light resistance post-inflammation.<br>
-        <span>Gently squeeze soft putty or stress ball, 10 reps.</span></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="section">
-    <h3>🎁 Bonus Recovery Exercises</h3>
-    <ul>
-      <li><b>Wrist Flexor Stretch:</b> Hold for 30 seconds each hand. Extend arm, palm up. Pull fingers back gently with other hand.</li>
-      <li><b>Prayer Stretch:</b> Hold for 20–30 seconds. Palms together at chest, lower hands to feel stretch in wrists/forearms.</li>
-      <li><b>Finger Extensions:</b> 10 slow repetitions. Make a fist, then spread fingers wide, repeat slowly.</li>
-      <li><b>Wrist Circles:</b> 5 circles each direction. Gentle circles, gradually increasing range.</li>
-    </ul>
-  </div>
-
-  <!-- Self-Care Summary -->
-  <hr>
-  <div class="section">
-    <h2>Quick Self-Care Guide</h2>
-    <div class="summary-note">
+</div>
+</div>
+<!-- Recovery Guide -->
+<div class="section toolbox">
+<h2>🧰 Extra Tools &amp; Recovery Support</h2>
+<ul>
+<li><strong>Downloadable PDF:</strong> A printer-friendly PDF version is available at the bottom of document.</li>
+<li><strong>7-Day Challenge:</strong> Complete the plan daily and you should see a big difference in 7 days.</li>
+<li><strong>Custom Modifications:</strong> Let me know if any exercise needs to be adapted.</li>
+</ul>
+</div>
+<div class="section">
+<h2>Hand &amp; Thumb Recovery Guide</h2>
+<p>This guide is your personal recovery toolkit after our session. Every step is chosen to relieve your thumb/hand discomfort and speed your recovery and to use in future occurances. Please follow these steps, listen to your body, and let me know if you need anything clarified and the main rule.... NO HIGH FIVES for a while.</p>
+</div>
+<div class="section">
+<h3>📸 Your 5 Visual Exercise Guides</h3>
+<div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(185px,1fr));gap:15px;">
+<div>
+<img alt="Thumb Mobility Circles" class="lightbox-img" src="thumb_mobility.png" style="width:90%;max-width:110px;border-radius:7px;"/>
+<h4>Thumb Mobility Circles</h4>
+<div>10 circles each way – keeps your thumb joint mobile.<br/>
+<span>Make a loose fist, move thumb in a circular motion. 10 clockwise, 10 anti-clockwise.</span></div>
+</div>
+<div>
+<img alt="Tendon Glides" class="lightbox-img" src="glides.jpeg" style="width:90%;max-width:110px;border-radius:7px;"/>
+<h4>Tendon Glides</h4>
+<div>3-step movement for wrist tension relief.<br/>
+<span>Open hand → form fist → open fully. Repeat 10x.</span></div>
+</div>
+<div>
+<img alt="Palm Massage" class="lightbox-img" src="massage.png" style="width:90%;max-width:110px;border-radius:7px;"/>
+<h4>Palm Massage Technique</h4>
+<div>Thumb base relief points.<br/>
+<span>Massage thick muscle at base of thumb, from edge inward.</span></div>
+</div>
+<div>
+<img alt="Warm Water Therapy" class="lightbox-img" src="warm_soak.png" style="width:90%;max-width:110px;border-radius:7px;"/>
+<h4>Warm Water Therapy</h4>
+<div>10-minute anti-inflammatory relief.<br/>
+<span>Soak hand in warm water for 10 minutes. Add Epsom salt if possible.</span></div>
+</div>
+<div>
+<img alt="Grip Strength Recovery" class="lightbox-img" src="grip.png" style="width:90%;max-width:110px;border-radius:7px;"/>
+<h4>Grip Strength Recovery</h4>
+<div>Light resistance post-inflammation.<br/>
+<span>Gently squeeze soft putty or stress ball, 10 reps.</span></div>
+</div>
+</div>
+</div>
+<div class="section">
+<h3>🎁 Bonus Recovery Exercises</h3>
+<ul>
+<li><b>Wrist Flexor Stretch:</b> Hold for 30 seconds each hand. Extend arm, palm up. Pull fingers back gently with other hand.</li>
+<li><b>Prayer Stretch:</b> Hold for 20–30 seconds. Palms together at chest, lower hands to feel stretch in wrists/forearms.</li>
+<li><b>Finger Extensions:</b> 10 slow repetitions. Make a fist, then spread fingers wide, repeat slowly.</li>
+<li><b>Wrist Circles:</b> 5 circles each direction. Gentle circles, gradually increasing range.</li>
+</ul>
+</div>
+<!-- Self-Care Summary -->
+<hr/>
+<div class="section">
+<h2>Quick Self-Care Guide</h2>
+<div class="summary-note">
       Save these steps to your phone or print them out! (Message me if you want a visual guide or have questions.)
     </div>
-    <ul>
-      <li><b>Thumb Mobility Circles:</b> Make a loose fist, move your thumb in a circle. 10 times each direction, 2-3x/day.</li>
-      <li><b>Tendon Glides:</b> Open your hand, make a fist, then open again. Repeat 10 times, 2x/day.</li>
-      <li><b>Palm Massage:</b> Massage the thick muscle at the thumb base for 2-3 minutes, 1-2x/day.</li>
-      <li><b>Warm Water Therapy:</b> Soak your hand in warm water for 10 min (with Epsom salt if you have it), once daily.</li>
-      <li><b>Grip Strength:</b> Squeeze and release a soft stress ball or putty, 10 reps, 1-2x/day.</li>
-      <li><b>Bonus:</b> Wrist/finger stretches (flexor, prayer, extensions, circles) – 1 round daily.</li>
-      <li><b>Stop any movement if you feel sharp pain.</b> Gentle discomfort is normal; sharp pain is not.</li>
-    </ul>
-  </div>
-  <!-- Exercise Timing & Additional Techniques -->
-  <hr>
-  <div class="section">
-    <h2>Exercise Timing & Baker's Technique</h2>
-    <div class="summary-note">
+<ul>
+<li><b>Thumb Mobility Circles:</b> Make a loose fist, move your thumb in a circle. 10 times each direction, 2-3x/day.</li>
+<li><b>Tendon Glides:</b> Open your hand, make a fist, then open again. Repeat 10 times, 2x/day.</li>
+<li><b>Palm Massage:</b> Massage the thick muscle at the thumb base for 2-3 minutes, 1-2x/day.</li>
+<li><b>Warm Water Therapy:</b> Soak your hand in warm water for 10 min (with Epsom salt if you have it), once daily.</li>
+<li><b>Grip Strength:</b> Squeeze and release a soft stress ball or putty, 10 reps, 1-2x/day.</li>
+<li><b>Bonus:</b> Wrist/finger stretches (flexor, prayer, extensions, circles) – 1 round daily.</li>
+<li><b>Stop any movement if you feel sharp pain.</b> Gentle discomfort is normal; sharp pain is not.</li>
+</ul>
+</div>
+<!-- Exercise Timing & Additional Techniques -->
+<hr/>
+<div class="section">
+<h2>Exercise Timing &amp; Baker's Technique</h2><div class="summary-note">⏰ Suggested timings: 2–3 rounds per day, ideally once in the morning and again in the evening. Avoid close to sleep if inflammation is active.</div>
+<div class="summary-note">
       Proper timing and technique are crucial for optimal recovery. Follow this detailed guide for when and how to perform your exercises.
     </div>
-    
-    <!-- When to Exercise -->
-    <div style="margin: 2em 0;">
-      <h3>📅 When to Exercise</h3>
-      <div style="display: flex; flex-direction: column; gap: 1.5em; align-items: center;">
-        <img src="when.png" alt="Daily Exercise Timeline" style="max-width: 100%; border-radius: 8px;">
-        <img src="when2diagram.png" alt="Exercise Timing Diagram" style="max-width: 100%; border-radius: 8px;">
-      </div>
-    </div>
-    
-    <!-- Baker's Exercise Guide -->
-    <div style="margin: 2.5em 0;">
-      <h3>🔄 Baker's Exercise Technique</h3>
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5em; margin: 1.5em 0;">
-        <div>
-          <img src="bakers.png" alt="Basic Baker's Exercise" style="width: 100%; border-radius: 8px;">
-          <p style="text-align: center; margin-top: 0.8em;"><strong>Starting Position</strong></p>
-        </div>
-        <div>
-          <img src="bakers_extra.png" alt="Advanced Baker's Exercise" style="width: 100%; border-radius: 8px;">
-          <p style="text-align: center; margin-top: 0.8em;"><strong>Advanced Variation</strong></p>
-        </div>
-      </div>
-    </div>
-    
-    <!-- Complete Recovery Routine -->
-    <div style="margin: 2.5em 0;">
-      <h3>📋 Daily Recovery Routine</h3>
-      <img src="recovery_routine.png" alt="Complete Recovery Routine" style="width: 100%; border-radius: 8px; margin: 1em 0;">
-      <div class="summary-note">
+<!-- When to Exercise -->
+<div style="margin: 2em 0;">
+<h3>📅 When to Exercise</h3>
+<p>So i have also made a few more infographics to help add some extra value in this submission to you, these are more towards the "When and when not to" side of the recovery/healing process</p>
+<div style="display: flex; flex-direction: column; gap: 1.5em; align-items: center;">
+<img alt="Daily Exercise Timeline" class="lightbox-img" src="when.png" style="max-width: 100%; border-radius: 8px;"/>
+<img alt="Exercise Timing Diagram" class="lightbox-img" src="when2diagram.png" style="max-width: 100%; border-radius: 8px;"/>
+</div>
+</div>
+<!-- Baker's Exercise Guide -->
+<div style="margin: 2.5em 0;">
+<h3>🔄 Baker's Exercise Technique</h3>
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5em; margin: 1.5em 0;">
+<div>
+  <p> Lastly, 10 extra tips tricks for everyday life which may help prevent as regular occurances</p>
+<img alt="Basic Baker's Exercise" class="lightbox-img" src="bakers.png" style="width: 100%; border-radius: 8px;"/>
+</div>
+<div>
+<img alt="Advanced Baker's Exercise" class="lightbox-img" src="bakers_extra.png" style="width: 100%; border-radius: 8px;"/>
+<p style="text-align: center; margin-top: 0.8em;"><strong>Advanced Variation</strong></p>
+</div>
+</div>
+</div>
+<!-- Complete Recovery Routine -->
+<div style="margin: 2.5em 0;">
+<h3>📋 Daily Recovery Routine</h3>
+<img alt="Complete Recovery Routine" class="lightbox-img" src="recovery_routine.png" style="width: 100%; border-radius: 8px; margin: 1em 0;"/>
+<div class="summary-note">
         Follow this routine daily, adjusting the intensity based on your comfort level. If you experience any sharp pain, stop and contact me immediately.
       </div>
-    </div>
+</div>
+</div>
+<!-- Recovery Protocol and Support -->
+<div class="section">
+<h2>💡 Recovery Protocol &amp; Support</h2>
+<ul>
+<li>Visual guides: <b>2–3 times daily</b></li>
+<li>Bonus exercises: <b>Once daily</b></li>
+<li>If pain worsens or movement is lost, <b>contact me or your GP immediately</b></li>
+<li>I'll check in at your next session – message anytime for support!</li>
+</ul>
+</div>
+<!-- Exclusive Offers -->
+<div class="section" style="background:linear-gradient(120deg,#232323 70%,#ff6b35 130%);box-shadow:0 4px 16px #0003;border-left:5px solid #ff6b35;">
+<h2 style="color:#fff;">🎯 Exclusive Offers for You</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;">
+<div style="background:#232323;border-radius:12px;box-shadow:0 2px 10px #0002;padding:22px 14px 16px 14px;min-width:215px;max-width:350px;">
+<h3 style="color:#ff6b35;">£20 OFF First Personal Training Session</h3>
+<p><s>£60</s> <b>£40</b></p>
+<p>Try a tailored session: assessment, workout &amp; recovery plan.</p>
+<a href="mailto:pete@coachpeteryan.com?subject=First Session Offer - Hayley" style="background:#ff6b35;color:#fff;padding:11px 20px;border-radius:7px;text-decoration:none;display:inline-block;margin-top:8px;font-weight:600;font-size:1em;">Book Now</a>
+</div>
+<div style="background:linear-gradient(120deg,#232323 70%,#ff6b35 130%);border-radius:12px;box-shadow:0 2px 10px #0002;padding:22px 14px 16px 14px;min-width:215px;max-width:350px;border:2px solid #ff6b35;">
+<h3 style="color:#ff6b35;">£50 OFF 6-Session Block</h3>
+<p><s>£300</s> <b>£250</b></p>
+<p>Full transformation package, ongoing support, biggest savings.</p>
+<a href="mailto:pete@coachpeteryan.com?subject=6-Session Block Offer - Hayley" style="background:#ff6b35;color:#fff;padding:11px 20px;border-radius:7px;text-decoration:none;display:inline-block;margin-top:8px;font-weight:600;font-size:1em;">Enquire Now</a>
+</div>
+</div>
+<p style="color:#fff;margin-top:18px;font-size:1em;"><b>Available for 7 days only as a thank you for joining my group class!</b></p>
+</div>
+<!-- Contact Card -->
+<hr/>
+<div class="section" style="text-align:center;">
+<h2>Contact &amp; Book</h2>
+<a href="https://wa.me/447308518428" style="background:#ff6b35;color:#fff;font-weight:600;border-radius:9px;font-size:1.1em;padding:0.9em 2.2em;margin:1em 0.7em 1em 0.7em;text-decoration:none;display:inline-block;" target="_blank">💬 WhatsApp</a>
+<a href="tel:+447308518428" style="background:#ff6b35;color:#fff;font-weight:600;border-radius:9px;font-size:1.1em;padding:0.9em 2.2em;margin:1em 0.7em 1em 0.7em;text-decoration:none;display:inline-block;">📞 Call</a>
+<a href="mailto:info@coachpeteryan.com?subject=Enquiry%20from%20Hayley" style="background:#ff6b35;color:#fff;font-weight:600;border-radius:9px;font-size:1.1em;padding:0.9em 2.2em;margin:1em 0.7em 1em 0.7em;text-decoration:none;display:inline-block;">✉️ Email</a>
+  <div style="margin-top:1em;color:#00d4ff;font-size:1.12em;">
+    Coach Pete Ryan<br/>
+    <a href="https://coachpeteryan.com" style="color:#00d4ff;" target="_blank">coachpeteryan.com</a><br/>
+    <a href="mailto:pete@coachpeteryan.com" style="color:#00d4ff;">pete@coachpeteryan.com</a><br/>
+    07308 518 428
   </div>
-
-
-  <!-- Recovery Protocol and Support -->
-  <div class="section">
-    <h2>💡 Recovery Protocol & Support</h2>
-    <ul>
-      <li>Visual guides: <b>2–3 times daily</b></li>
-      <li>Bonus exercises: <b>Once daily</b></li>
-      <li>If pain worsens or movement is lost, <b>contact me or your GP immediately</b></li>
-      <li>I'll check in at your next session – message anytime for support!</li>
-    </ul>
-  </div>
-
-  <!-- Exclusive Offers -->
-  <div class="section" style="background:linear-gradient(120deg,#232323 70%,#ff6b35 130%);box-shadow:0 4px 16px #0003;border-left:5px solid #ff6b35;">
-    <h2 style="color:#fff;">🎯 Exclusive Offers for You</h2>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;">
-      <div style="background:#232323;border-radius:12px;box-shadow:0 2px 10px #0002;padding:22px 14px 16px 14px;min-width:215px;max-width:350px;">
-        <h3 style="color:#ff6b35;">£20 OFF First Personal Training Session</h3>
-        <p><s>£60</s> <b>£40</b></p>
-        <p>Try a tailored session: assessment, workout & recovery plan.</p>
-        <a href="mailto:pete@coachpeteryan.com?subject=First Session Offer - Hayley" style="background:#ff6b35;color:#fff;padding:11px 20px;border-radius:7px;text-decoration:none;display:inline-block;margin-top:8px;font-weight:600;font-size:1em;">Book Now</a>
-      </div>
-      <div style="background:linear-gradient(120deg,#232323 70%,#ff6b35 130%);border-radius:12px;box-shadow:0 2px 10px #0002;padding:22px 14px 16px 14px;min-width:215px;max-width:350px;border:2px solid #ff6b35;">
-        <h3 style="color:#ff6b35;">£50 OFF 6-Session Block</h3>
-        <p><s>£300</s> <b>£250</b></p>
-        <p>Full transformation package, ongoing support, biggest savings.</p>
-        <a href="mailto:pete@coachpeteryan.com?subject=6-Session Block Offer - Hayley" style="background:#ff6b35;color:#fff;padding:11px 20px;border-radius:7px;text-decoration:none;display:inline-block;margin-top:8px;font-weight:600;font-size:1em;">Enquire Now</a>
-      </div>
-    </div>
-    <p style="color:#fff;margin-top:18px;font-size:1em;"><b>Available for 7 days only as a thank you for joining my group class!</b></p>
-  </div>
-
-  <!-- Contact Card -->
-  <hr>
+</div>
+<!-- Progress Tracker -->
+<hr/>
+<div class="section" style="text-align:center; margin-top: 3em;">
+<h2>🖨️ Download &amp; Print</h2>
+<p>You can download a printable version of this guide below:</p>
+<a download="" href="Hayley_Recovery_Guide.pdf" style="background:#ff6b35;color:#fff;font-weight:600;border-radius:9px;font-size:1.1em;padding:0.9em 2.2em;margin-top:1em;text-decoration:none;display:inline-block;">⬇️ Download PDF</a>
+</div>
   <div class="section" style="text-align:center;">
-    <h2>Contact & Book</h2>
-    <a href="https://wa.me/447308518428" target="_blank" style="background:#ff6b35;color:#fff;font-weight:600;border-radius:9px;font-size:1.1em;padding:0.9em 2.2em;margin:1em 0.7em 1em 0.7em;text-decoration:none;display:inline-block;">💬 WhatsApp</a>
-    <a href="tel:+447308518428" style="background:#ff6b35;color:#fff;font-weight:600;border-radius:9px;font-size:1.1em;padding:0.9em 2.2em;margin:1em 0.7em 1em 0.7em;text-decoration:none;display:inline-block;">📞 Call</a>
-    <a href="mailto:info@coachpeteryan.com?subject=Enquiry%20from%20Hayley" style="background:#ff6b35;color:#fff;font-weight:600;border-radius:9px;font-size:1.1em;padding:0.9em 2.2em;margin:1em 0.7em 1em 0.7em;text-decoration:none;display:inline-block;">✉️ Email</a>
-    <div style="margin-top:1em;color:#00d4ff;font-size:1.12em;">
-      Coach Pete Ryan<br>
-      <a href="https://coachpeteryan.com" style="color:#00d4ff;" target="_blank">coachpeteryan.com</a><br>
-      07308 518 428
+    <h2>⏱️ 10-Minute Timer</h2>
+    <p style="max-width: 600px; margin: 0 auto 1.2em; color: #ccc;">
+      Use the timer below to guide your active recovery sessions. Press <strong>Start</strong> to begin a 10-minute countdown and focus on your wrist mobility, thumb glides, or soak/stretch combos during this time. You can pause and reset if needed. Try to complete this 2–3 times a day for optimal results.
+    </p>
+    <div class="timer-box">
+      <div class="timer-display" id="timer">10:00</div>
+      <div class="timer-controls">
+        <button onclick="startTimer()">▶ Start</button>
+        <button onclick="resetTimer()">⏹ Reset</button>
+      </div>
     </div>
   </div>
+<div class="section tracker">
+<div class="tracker-instructions" style="margin-bottom:1em;">
+<p><strong>How to Use This Tracker:</strong></p>
+<ul style="text-align:left; max-width:600px; margin:0 auto; padding-left:1.2em;">
+<li>✅ Tick off the box each time you complete a round of the routine.</li>
+<li>🎯 Aim for at least 2–3 full rounds daily for the best recovery outcomes.</li>
+<li>📅 Use the chart to track which activities you completed on each day.</li>
+<li>🧠 Consistency is key—try to space sessions morning, midday, and evening.</li>
+</ul>
+</div>
 
-  <!-- Progress Tracker -->
-  <hr>
-  <div class="section tracker">
-    <h2>Progress Tracker</h2>
-    <div class="summary-note" style="color:#b0b0b0;">Tick off each time you complete a round (aim for at least 2-3 each day):</div>
-    <table>
-      <tr><th>Day</th><th>Mobility</th><th>Massage</th><th>Water Soak</th><th>Grip</th></tr>
-      <tr><td>Mon</td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td></tr>
-      <tr><td>Tue</td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td></tr>
-      <tr><td>Wed</td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td></tr>
-      <tr><td>Thu</td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td></tr>
-      <tr><td>Fri</td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td></tr>
-      <tr><td>Sat</td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td></tr>
-      <tr><td>Sun</td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td></tr>
-    </table>
-    <div class="summary-note">Print this, or screenshot to your phone for easy daily tracking!</div>
-  </div>
-
-  <div class="branded-footer">
-    <b>Coach Pete Ryan</b> | <a href="https://coachpeteryan.com" style="color:var(--accent-blue)">coachpeteryan.com</a> |
+<h2>Progress Tracker</h2>
+<div class="summary-note" style="color:#b0b0b0;">Tick off each time you complete a round (aim for at least 2-3 each day):</div>
+<table>
+<tr><th>Day</th><th>Mobility</th><th>Massage</th><th>Water Soak</th><th>Grip</th></tr>
+<tr><td>Mon</td><td><input type="checkbox"/></td><td><input type="checkbox"/></td><td><input type="checkbox"/></td><td><input type="checkbox"/></td></tr>
+<tr><td>Tue</td><td><input type="checkbox"/></td><td><input type="checkbox"/></td><td><input type="checkbox"/></td><td><input type="checkbox"/></td></tr>
+<tr><td>Wed</td><td><input type="checkbox"/></td><td><input type="checkbox"/></td><td><input type="checkbox"/></td><td><input type="checkbox"/></td></tr>
+<tr><td>Thu</td><td><input type="checkbox"/></td><td><input type="checkbox"/></td><td><input type="checkbox"/></td><td><input type="checkbox"/></td></tr>
+<tr><td>Fri</td><td><input type="checkbox"/></td><td><input type="checkbox"/></td><td><input type="checkbox"/></td><td><input type="checkbox"/></td></tr>
+<tr><td>Sat</td><td><input type="checkbox"/></td><td><input type="checkbox"/></td><td><input type="checkbox"/></td><td><input type="checkbox"/></td></tr>
+<tr><td>Sun</td><td><input type="checkbox"/></td><td><input type="checkbox"/></td><td><input type="checkbox"/></td><td><input type="checkbox"/></td></tr>
+</table>
+<div class="summary-note">Print this, or screenshot to your phone for easy daily tracking!</div>
+</div>
+<div class="branded-footer">
+<b>Coach Pete Ryan</b> | <a href="https://coachpeteryan.com" style="color:var(--accent-blue)">coachpeteryan.com</a> |
     Phone/WhatsApp: 07308 518 428
   </div>
 </div>
+<div id="overlay" onclick="closeOverlay()"><img alt="Zoomed Image" class="lightbox-img" id="overlay-img" src=""/></div><script>
+function openOverlay(src) {
+  document.getElementById("overlay-img").src = src;
+  document.getElementById("overlay").style.display = "flex";
+}
+
+function closeOverlay() {
+  document.getElementById("overlay").style.display = "none";
+}
+
+document.querySelectorAll(".lightbox-img").forEach(img => {
+  img.addEventListener("click", () => openOverlay(img.src));
+});
+</script>
+<script>
+let timer;
+let timeLeft = 600;
+
+function updateDisplay() {
+  const minutes = Math.floor(timeLeft / 60);
+  const seconds = timeLeft % 60;
+  document.getElementById("timer").textContent = 
+    minutes.toString().padStart(2, '0') + ":" + 
+    seconds.toString().padStart(2, '0');
+}
+
+function startTimer() {
+  if (timer) return;
+  timer = setInterval(() => {
+    if (timeLeft <= 0) {
+      clearInterval(timer);
+      timer = null;
+      return;
+    }
+    timeLeft--;
+    updateDisplay();
+  }, 1000);
+}
+
+function resetTimer() {
+  clearInterval(timer);
+  timer = null;
+  timeLeft = 600;
+  updateDisplay();
+}
+
+document.addEventListener("DOMContentLoaded", updateDisplay);
+</script>
 </body>
 </html>
