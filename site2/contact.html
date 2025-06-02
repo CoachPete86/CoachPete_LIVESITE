@@ -1,0 +1,356 @@
+							<!DOCTYPE html>
+							<html lang="en">
+							<head>
+								<meta charset="UTF-8">
+								<meta name="viewport" content="width=device-width, initial-scale=1.0">
+								<title>Contact Coach Pete Ryan | Building Better People</title>
+								<link href="output.css" rel="stylesheet">
+								<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+							    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+								<script src="https://cdn.tailwindcss.com"></script>
+								<script>
+									tailwind.config = {
+										theme: {
+											extend: {
+												colors: {
+													primary: '#ff6b35',
+													primaryDark: '#ff8c42',
+													secondary: '#ff8c42',
+													accent: '#00d4ff',
+													graybg1: '#1a1a1a',
+													graybg2: '#2d2d2d',
+													graybg3: '#3d3d3d',
+													textlight: '#e0e0e0',
+													textmedium: '#b0b0b0',
+													textdark: '#808080'
+												},
+												fontFamily: {
+													'headings': ['Oswald', 'sans-serif'],
+													'body': ['Open Sans', 'sans-serif']
+												}
+											}
+										}
+									}
+								</script>
+								<style>
+									body { font-family: 'Open Sans', sans-serif; background-color: #1a1a1a; color: #b0b0b0; }
+									h1, h2, h3, h4, h5, h6 { font-family: 'Oswald', sans-serif; color: #e0e0e0; }
+									.nav-link { transition: all 0.3s ease; color: #b0b0b0; }
+									.nav-link:hover { color: #ff8c42; }
+									.nav-link.active { color: #ff6b35; font-weight: 600; }
+									.sticky-nav { backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+
+							        .form-input, .form-textarea {
+							            background-color: #3d3d3d; /* graybg3 */
+							            border: 1px solid #4a4a4a; /* slightly lighter graybg3 for definition */
+							            color: #e0e0e0; /* textlight */
+							            border-radius: 0.25rem;
+							            padding: 0.75rem 1rem;
+							            width: 100%;
+							            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+							        }
+							        .form-input::placeholder, .form-textarea::placeholder { color: #808080; /* textdark */ }
+							        .form-input:focus, .form-textarea:focus {
+							            border-color: #ff6b35; /* primary */
+							            box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.3); /* primary with alpha */
+							            outline: none;
+							        }
+
+							        .btn {
+							            display: inline-block; padding: 0.75rem 1.5rem; border-radius: 0.25rem; font-weight: 700;
+							            text-transform: uppercase; letter-spacing: 0.05em; transition: all 0.2s ease-in-out;
+							            border: 2px solid transparent; text-align:center;
+							        }
+							        .btn-primary { background-color: #ff6b35; color: #1a1a1a; border-color: #ff6b35; }
+							        .btn-primary:hover { background-color: #ff8c42; border-color: #ff8c42; transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.3); }
+							        .btn-secondary { background-color: #00d4ff; color: #1a1a1a; border-color: #00d4ff; } /* Using accent for secondary actions here */
+							        .btn-secondary:hover { background-color: #3d3d3d; color: #e0e0e0; border-color: #3d3d3d; transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
+							        .contact-icon-bg {
+							            width: 3rem; /* 48px */
+							            height: 3rem; /* 48px */
+							            background-color: #ff6b35; /* primary */
+							            border-radius: 50%;
+							            display: flex;
+							            align-items: center;
+							            justify-content: center;
+							            color: #1a1a1a; /* graybg1 for icon contrast */
+							            font-size: 1.25rem; /* text-xl */
+							            margin-right: 1rem;
+							            flex-shrink: 0; /* Prevent icon from shrinking */
+							        }
+								</style>
+							</head>
+							<body class="font-body">
+							<script>
+								document.documentElement.classList.add('dark');
+							</script>
+
+							<nav class="fixed top-0 left-0 right-0 bg-graybg2/90 sticky-nav z-50 border-b border-graybg3">
+								<div class="container mx-auto px-4">
+									<div class="flex justify-between items-center py-4">
+										<a href="index.html" class="flex items-center space-x-2">
+											<div class="w-10 h-10 bg-primary rounded-md flex items-center justify-center shadow-md">
+												<span class="text-graybg1 font-bold text-lg">P</span>
+											</div>
+											<div>
+												<div class="font-bold text-textlight text-lg font-headings">Coach Pete Ryan</div>
+												<div class="text-xs text-textdark">Building Better People</div>
+											</div>
+										</a>
+										<div class="hidden md:flex space-x-6 items-center">
+											<a href="index.html" class="nav-link">Home</a>
+											<a href="about.html" class="nav-link">About</a>
+											<a href="services.html" class="nav-link">Services</a>
+											<a href="tools.html" class="nav-link">Assessment Tools</a>
+											<a href="onboarding.html" class="nav-link">Client Registration</a>
+											<a href="testimonials.html" class="nav-link">Testimonials</a>
+							                <a href="client_zone.html" class="nav-link"><i class="fas fa-user-shield mr-1"></i>Client Zone</a>
+											<a href="contact.html" class="nav-link btn btn-primary !py-2 !px-4 !text-sm">Contact</a>
+										</div>
+										<button onclick="toggleMobileMenu()" class="md:hidden p-2 text-textlight">
+											<i class="fas fa-bars fa-lg"></i>
+										</button>
+									</div>
+									<div id="mobileMenu" class="hidden md:hidden pb-4 border-t border-graybg3 mt-2">
+										<div class="flex flex-col space-y-2 pt-2">
+											<a href="index.html" onclick="toggleMobileMenu()" class="nav-link block py-2">Home</a>
+											<a href="about.html" onclick="toggleMobileMenu()" class="nav-link block py-2">About</a>
+											<a href="services.html" onclick="toggleMobileMenu()" class="nav-link block py-2">Services</a>
+											<a href="tools.html" onclick="toggleMobileMenu()" class="nav-link block py-2">Assessment Tools</a>
+											<a href="onboarding.html" onclick="toggleMobileMenu()" class="nav-link block py-2">Client Registration</a>
+											<a href="testimonials.html" onclick="toggleMobileMenu()" class="nav-link block py-2">Testimonials</a>
+							                <a href="client_zone.html" onclick="toggleMobileMenu()" class="nav-link block py-2"><i class="fas fa-user-shield mr-1"></i>Client Zone</a>
+											<a href="contact.html" onclick="toggleMobileMenu()" class="nav-link block py-2 bg-primary text-center text-graybg1 rounded-md mt-2 hover:bg-primaryDark">Contact Us</a>
+										</div>
+									</div>
+								</div>
+							</nav>
+
+							<main id="contact-section" class="min-h-screen pt-24">
+								<div class="container mx-auto px-4 py-16">
+									<div class="max-w-5xl mx-auto"> {/* Increased max-width */}
+										<h1 class="text-4xl md:text-6xl font-bold text-textlight mb-4 text-center font-headings leading-tight">GET IN TOUCH</h1>
+										<p class="text-xl text-textmedium text-center mb-16 max-w-2xl mx-auto">
+							                Ready to Transform Your Life? Take the first step towards becoming the best version of yourself. Reach out today!
+							            </p>
+										<div class="grid md:grid-cols-2 gap-10 lg:gap-16 items-start"> {/* Increased gap */}
+											<div class="bg-graybg2 rounded-xl shadow-xl p-8 order-2 md:order-1">
+												<h2 class="text-3xl font-bold text-accent mb-6 font-headings border-b border-graybg3 pb-3"><i class="fas fa-paper-plane mr-3"></i>Send a Message</h2>
+												<form class="space-y-6" id="contactForm">
+													<div>
+														<label for="contactName" class="block text-sm font-medium text-textmedium mb-1">Full Name <span class="text-primary">*</span></label>
+														<input type="text" id="contactName" name="name" required class="form-input" placeholder="Your full name">
+													</div>
+													<div>
+														<label for="contactEmail" class="block text-sm font-medium text-textmedium mb-1">Email Address <span class="text-primary">*</span></label>
+														<input type="email" id="contactEmail" name="email" required class="form-input" placeholder="your.email@example.com">
+													</div>
+													<div>
+														<label for="contactPhone" class="block text-sm font-medium text-textmedium mb-1">Phone Number</label>
+														<input type="tel" id="contactPhone" name="phone" class="form-input" placeholder="e.g., 07123 456789">
+													</div>
+													<div>
+														<label for="contactMessage" class="block text-sm font-medium text-textmedium mb-1">Your Message <span class="text-primary">*</span></label>
+														<textarea id="contactMessage" rows="5" name="message" required class="form-textarea" placeholder="Tell me about your goals and how I can help..."></textarea>
+													</div>
+													<button type="submit" class="w-full btn btn-primary text-lg">
+														Send Message <i class="fas fa-location-arrow ml-2"></i>
+													</button>
+												</form>
+											</div>
+											<div class="order-1 md:order-2 space-y-8">
+												<div class="bg-graybg2 rounded-xl shadow-xl p-8">
+													<h3 class="text-2xl font-bold text-accent mb-6 font-headings border-b border-graybg3 pb-3"><i class="fas fa-address-book mr-3"></i>Contact Information</h3>
+													<div class="space-y-5">
+														<div class="flex items-center">
+															<div class="contact-icon-bg"><i class="fas fa-phone-alt"></i></div>
+															<div>
+																<div class="font-semibold text-textlight text-lg">Phone</div>
+																<a href="tel:+447123456789" class="text-textmedium hover:text-primary">+44 7123 456789</a>
+															</div>
+														</div>
+														<div class="flex items-center">
+															<div class="contact-icon-bg"><i class="fas fa-envelope"></i></div>
+															<div>
+																<div class="font-semibold text-textlight text-lg">Email</div>
+																<a href="mailto:pete@coachpeteryan.com" class="text-textmedium hover:text-primary">pete@coachpeteryan.com</a>
+															</div>
+														</div>
+														<div class="flex items-center">
+															<div class="contact-icon-bg"><i class="fas fa-map-marker-alt"></i></div>
+															<div>
+																<div class="font-semibold text-textlight text-lg">Location</div>
+																<div class="text-textmedium">Thorpe, Surrey, UK</div>
+															</div>
+														</div>
+														<div class="flex items-center">
+															<div class="contact-icon-bg"><i class="fas fa-clock"></i></div>
+															<div>
+																<div class="font-semibold text-textlight text-lg">Operating Hours</div>
+																<div class="text-textmedium">
+																	Mon-Fri: 6 AM - 8 PM<br>
+																	Sat-Sun: 8 AM - 6 PM (By Appointment)
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="bg-graybg3 rounded-xl p-6 shadow-lg border border-accent"> {/* Using graybg3 and accent border */}
+													<h3 class="text-xl font-bold text-textlight mb-3 font-headings"><i class="fas fa-rocket mr-2 text-accent"></i>Prefer to Start Online?</h3>
+													<p class="text-textmedium mb-4 text-sm">Skip the back-and-forth. Begin your journey immediately with our streamlined online registration system.</p>
+													<button onclick="window.location.href='onboarding.html'" class="w-full btn btn-secondary"> {/* Using accent for this secondary CTA */}
+														Start Registration Now
+													</button>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</main>
+
+							<footer class="bg-graybg1 text-textlight py-12 border-t-4 border-primary">
+								<div class="container mx-auto px-4">
+									<div class="grid md:grid-cols-4 gap-8 mb-8">
+										<div>
+											<div class="flex items-center space-x-2 mb-4">
+												<div class="w-10 h-10 bg-primary rounded-md flex items-center justify-center">
+													<span class="text-graybg1 font-bold text-lg">P</span>
+												</div>
+												<div>
+													<a href="index.html" class="font-bold text-lg font-headings">Coach Pete Ryan</a>
+													<div class="text-xs text-textdark">Building Better People</div>
+												</div>
+											</div>
+											<p class="text-textdark text-sm mb-4">Transforming lives through the perfect blend of fitness training and mindset coaching.</p>
+							                <div class="flex space-x-3">
+							                    <a href="#" class="text-textmedium hover:text-primary text-xl"><i class="fab fa-facebook-f"></i></a>
+							                    <a href="#" class="text-textmedium hover:text-primary text-xl"><i class="fab fa-instagram"></i></a>
+							                    <a href="#" class="text-textmedium hover:text-primary text-xl"><i class="fab fa-youtube"></i></a>
+							                </div>
+										</div>
+										<div>
+											<h4 class="font-semibold mb-4 font-headings text-textlight">Quick Links</h4>
+											<ul class="text-sm text-textdark space-y-2">
+												<li><a href="about.html" class="hover:text-primary transition-colors">About Pete</a></li>
+												<li><a href="services.html" class="hover:text-primary transition-colors">Services</a></li>
+												<li><a href="testimonials.html" class="hover:text-primary transition-colors">Testimonials</a></li>
+												<li><a href="contact.html" class="hover:text-primary transition-colors">Contact Us</a></li>
+											</ul>
+										</div>
+										<div>
+											<h4 class="font-semibold mb-4 font-headings text-textlight">Resources</h4>
+											<ul class="text-sm text-textdark space-y-2">
+												<li><a href="tools.html" class="hover:text-primary transition-colors">Assessment Tools</a></li>
+												<li><a href="onboarding.html" class="hover:text-primary transition-colors">Client Registration</a></li>
+							                    <li><a href="client_zone.html" class="hover:text-primary transition-colors">Client Zone Login</a></li>
+												<li><a href="#" class="hover:text-primary transition-colors">Blog/Articles</a></li>
+											</ul>
+										</div>
+										<div>
+											<h4 class="font-semibold mb-4 font-headings text-textlight">Get In Touch</h4>
+											<ul class="text-sm text-textdark space-y-2">
+												<li><i class="fas fa-phone fa-fw mr-2 text-primary"></i>+44 7123 456789</li>
+												<li><i class="fas fa-envelope fa-fw mr-2 text-primary"></i>pete@coachpeteryan.com</li>
+												<li><i class="fas fa-map-marker-alt fa-fw mr-2 text-primary"></i>Thorpe, Surrey, UK</li>
+												<li><i class="fas fa-clock fa-fw mr-2 text-primary"></i>Mon-Fri: 6AM-8PM</li>
+											</ul>
+										</div>
+									</div>
+									<div class="border-t border-graybg3 mt-8 pt-8 text-center">
+											<p class="text-textdark text-sm">© <span id="currentYear"></span> Coach Pete Ryan. All rights reserved. | Building Better People, One Life at a Time.</p>
+									</div>
+								</div>
+							</footer>
+							<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+							<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.2/marked.min.js"></script>
+							<script>
+								document.getElementById('currentYear').textContent = new Date().getFullYear();
+								function toggleMobileMenu() {
+									const mobileMenu = document.getElementById('mobileMenu');
+							        const burgerIcon = document.querySelector('.md\\:hidden i');
+									mobileMenu.classList.toggle('hidden');
+							        if (mobileMenu.classList.contains('hidden')) {
+							            burgerIcon.classList.remove('fa-times');
+							            burgerIcon.classList.add('fa-bars');
+							        } else {
+							            burgerIcon.classList.remove('fa-bars');
+							            burgerIcon.classList.add('fa-times');
+							        }
+								}
+								function setActiveNavLink() {
+									const navLinks = document.querySelectorAll('nav a.nav-link');
+									let currentPath = window.location.pathname.split('/').pop();
+									if (currentPath === '' || currentPath === 'index.html') {
+											currentPath = 'index.html';
+									}
+							        if (window.location.pathname.includes('contact.html')) {
+							            currentPath = 'contact.html';
+							        }
+									navLinks.forEach(link => {
+							            const linkHref = link.getAttribute('href');
+										if (linkHref === currentPath) {
+											link.classList.add('active');
+										} else {
+											link.classList.remove('active');
+										}
+									});
+								}
+								document.addEventListener('DOMContentLoaded', function() {
+									setActiveNavLink();
+									const contactForm = document.getElementById('contactForm');
+									if (contactForm) {
+							            const submitButton = contactForm.querySelector('button[type="submit"]');
+							            const originalButtonText = submitButton.innerHTML;
+
+							            contactForm.addEventListener('submit', function(e) {
+							                e.preventDefault();
+							                const name = document.getElementById('contactName').value;
+							                const email = document.getElementById('contactEmail').value;
+							                const message = document.getElementById('contactMessage').value;
+
+							                // Client-side validation
+							                let isValid = true;
+							                contactForm.querySelectorAll('[required]').forEach(input => {
+							                    if (!input.value.trim()) {
+							                        isValid = false;
+							                        input.classList.add('border-red-500', '!border-primaryDark'); // More prominent error
+							                        input.classList.remove('border-graybg3', 'border-4a4a4a');
+							                    } else {
+							                         input.classList.remove('border-red-500', '!border-primaryDark');
+							                         input.classList.add('border-4a4a4a'); // Assuming this is the default defined in style
+							                    }
+							                });
+							                const emailField = document.getElementById('contactEmail');
+							                if(emailField.value.trim() && !/^\S+@\S+\.\S+$/.test(emailField.value.trim())){
+							                     isValid = false;
+							                     emailField.classList.add('border-red-500', '!border-primaryDark');
+							                     emailField.classList.remove('border-graybg3', 'border-4a4a4a');
+							                }
+
+
+							                if(!isValid){
+							                    alert('Please fill in all required (*) fields correctly.');
+							                    return;
+							                }
+
+							                // Simulate submission
+							                submitButton.disabled = true;
+							                submitButton.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Sending...';
+
+							                setTimeout(() => { // Replace with actual AJAX call
+							                    alert('Message sent successfully! Pete will get back to you soon.');
+							                    contactForm.reset();
+							                    submitButton.disabled = false;
+							                    submitButton.innerHTML = originalButtonText;
+							                    contactForm.querySelectorAll('.border-red-500').forEach(input => {
+							                        input.classList.remove('border-red-500', '!border-primaryDark');
+							                        input.classList.add('border-4a4a4a');
+							                    });
+							                }, 1500);
+							            });
+									}
+								});
+							</script>
+							</body>
+							</html>

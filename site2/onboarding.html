@@ -1,0 +1,893 @@
+						<!DOCTYPE html>
+						<html lang="en">
+						<head>
+							<meta charset="UTF-8">
+							<meta name="viewport" content="width=device-width, initial-scale=1.0">
+							<title>Client Registration - Coach Pete Ryan | Building Better People</title>
+							<link href="output.css" rel="stylesheet">
+							<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+						    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+							<script src="https://cdn.tailwindcss.com"></script>
+							<script>
+								tailwind.config = {
+									theme: {
+										extend: {
+											colors: {
+												primary: '#ff6b35',
+												primaryDark: '#ff8c42',
+												secondary: '#ff8c42',
+												accent: '#00d4ff',
+												graybg1: '#1a1a1a',
+												graybg2: '#2d2d2d',
+												graybg3: '#3d3d3d',
+												textlight: '#e0e0e0',
+												textmedium: '#b0b0b0',
+												textdark: '#808080'
+											},
+											fontFamily: {
+												'headings': ['Oswald', 'sans-serif'],
+												'body': ['Open Sans', 'sans-serif']
+											}
+										}
+									}
+								}
+							</script>
+							<style>
+								body { font-family: 'Open Sans', sans-serif; background-color: #1a1a1a; color: #b0b0b0; }
+								h1, h2, h3, h4, h5, h6 { font-family: 'Oswald', sans-serif; color: #e0e0e0; }
+								.nav-link { transition: all 0.3s ease; color: #b0b0b0; }
+								.nav-link:hover { color: #ff8c42; }
+								.nav-link.active { color: #ff6b35; font-weight: 600; }
+								.sticky-nav { backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+
+								.step { display: none; animation: fadeIn 0.5s ease-out; }
+								.step.active { display: block; }
+						        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+								.progress-step {
+						            transition: all 0.4s ease-in-out;
+						            background-color: #3d3d3d; /* graybg3 - inactive */
+						            color: #808080; /* textdark - inactive text */
+						            border: 2px solid #3d3d3d; /* graybg3 */
+						        }
+								.progress-step.completed {
+						            background-color: #ff8c42; /* primaryDark */
+						            color: #1a1a1a; /* graybg1 for contrast */
+						            border-color: #ff8c42;
+						        }
+								.progress-step.current {
+						            background-color: #ff6b35; /* primary */
+						            color: #1a1a1a; /* graybg1 for contrast */
+						            border-color: #ff6b35;
+						            box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.3); /* primary with alpha */
+						            transform: scale(1.1);
+						        }
+						        .progress-bar-segment {
+						            height: 4px; /* Thicker bar */
+						            background-color: #3d3d3d; /* graybg3 - inactive */
+						            transition: background-color 0.4s ease-in-out;
+						        }
+						        .progress-bar-segment.completed {
+						            background-color: #ff6b35; /* primary */
+						        }
+						        .step-label { color: #808080; /* textdark */ transition: color 0.3s ease; }
+						        .step-label.current { color: #ff6b35; /* primary */ font-weight: 600; }
+
+
+						        .form-input, .form-select, .form-textarea {
+						            background-color: #3d3d3d; /* graybg3 */
+						            border: 1px solid #4a4a4a; /* slightly lighter graybg3 */
+						            color: #e0e0e0; /* textlight */
+						            border-radius: 0.25rem;
+						            padding: 0.75rem 1rem;
+						            width: 100%;
+						            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+						        }
+						        .form-input::placeholder, .form-textarea::placeholder { color: #808080; /* textdark */ }
+						        .form-input:focus, .form-select:focus, .form-textarea:focus {
+						            border-color: #ff6b35; /* primary */
+						            box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.3); /* primary with alpha */
+						            outline: none;
+						        }
+						        .form-select {
+						            appearance: none;
+						            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%23b0b0b0'%3E%3Cpath fill-rule='evenodd' d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z' clip-rule='evenodd'/%3E%3C/svg%3E");
+						            background-repeat: no-repeat;
+						            background-position: right 0.75rem center;
+						            background-size: 1.5em 1.5em;
+						        }
+						        .form-checkbox { /* Custom checkbox style might be needed for better dark theme appearance */
+						            width: 1.25em; height: 1.25em;
+						            margin-right: 0.5em;
+						            border: 1px solid #808080; /* textdark */
+						            border-radius: 0.125rem;
+						            appearance: none;
+						            background-color: #3d3d3d; /* graybg3 */
+						            position: relative;
+						            cursor: pointer;
+						            vertical-align: middle;
+						        }
+						        .form-checkbox:checked {
+						            background-color: #ff6b35; /* primary */
+						            border-color: #ff6b35;
+						        }
+						        .form-checkbox:checked::after {
+						            content: "\\f00c"; /* Font Awesome check icon */
+						            font-family: "Font Awesome 6 Free";
+						            font-weight: 900;
+						            color: #1a1a1a; /* graybg1 */
+						            position: absolute;
+						            left: 50%; top: 50%;
+						            transform: translate(-50%, -50%);
+						            font-size: 0.8em;
+						        }
+
+
+						         .btn {
+						            display: inline-block; padding: 0.75rem 1.5rem; border-radius: 0.25rem; font-weight: 700;
+						            text-transform: uppercase; letter-spacing: 0.05em; transition: all 0.2s ease-in-out;
+						            border: 2px solid transparent; text-align:center;
+						        }
+						        .btn-primary { background-color: #ff6b35; color: #1a1a1a; border-color: #ff6b35; }
+						        .btn-primary:hover { background-color: #ff8c42; border-color: #ff8c42; transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.3); }
+						        .btn-secondary { background-color: #3d3d3d; color: #e0e0e0; border-color: #3d3d3d; }
+						        .btn-secondary:hover { background-color: #4a4a4a; border-color: #4a4a4a; transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
+						        .btn-disabled { background-color: #3d3d3d !important; color: #808080 !important; cursor: not-allowed !important; opacity:0.6 !important; border-color: #3d3d3d !important; }
+						        .btn-disabled:hover { transform: none !important; box-shadow: none !important; }
+
+							</style>
+						</head>
+						<body class="font-body">
+						<script>
+							document.documentElement.classList.add('dark');
+						</script>
+
+						<nav class="fixed top-0 left-0 right-0 bg-graybg2/90 sticky-nav z-50 border-b border-graybg3">
+							<div class="container mx-auto px-4">
+								<div class="flex justify-between items-center py-4">
+									<a href="index.html" class="flex items-center space-x-2">
+										<div class="w-10 h-10 bg-primary rounded-md flex items-center justify-center shadow-md">
+											<span class="text-graybg1 font-bold text-lg">P</span>
+										</div>
+										<div>
+											<div class="font-bold text-textlight text-lg font-headings">Coach Pete Ryan</div>
+											<div class="text-xs text-textdark">Building Better People</div>
+										</div>
+									</a>
+									<div class="hidden md:flex space-x-6 items-center">
+										<a href="index.html" class="nav-link">Home</a>
+										<a href="about.html" class="nav-link">About</a>
+										<a href="services.html" class="nav-link">Services</a>
+										<a href="tools.html" class="nav-link">Assessment Tools</a>
+										<a href="onboarding.html" class="nav-link">Client Registration</a>
+										<a href="testimonials.html" class="nav-link">Testimonials</a>
+						                <a href="client_zone.html" class="nav-link"><i class="fas fa-user-shield mr-1"></i>Client Zone</a>
+										<a href="contact.html" class="nav-link btn btn-primary !py-2 !px-4 !text-sm">Contact</a>
+									</div>
+									<button onclick="toggleMobileMenu()" class="md:hidden p-2 text-textlight">
+										<i class="fas fa-bars fa-lg"></i>
+									</button>
+								</div>
+								<div id="mobileMenu" class="hidden md:hidden pb-4 border-t border-graybg3 mt-2">
+									<div class="flex flex-col space-y-2 pt-2">
+										<a href="index.html" onclick="toggleMobileMenu()" class="nav-link block py-2">Home</a>
+										<a href="about.html" onclick="toggleMobileMenu()" class="nav-link block py-2">About</a>
+										<a href="services.html" onclick="toggleMobileMenu()" class="nav-link block py-2">Services</a>
+										<a href="tools.html" onclick="toggleMobileMenu()" class="nav-link block py-2">Assessment Tools</a>
+										<a href="onboarding.html" onclick="toggleMobileMenu()" class="nav-link block py-2">Client Registration</a>
+										<a href="testimonials.html" onclick="toggleMobileMenu()" class="nav-link block py-2">Testimonials</a>
+						                <a href="client_zone.html" onclick="toggleMobileMenu()" class="nav-link block py-2"><i class="fas fa-user-shield mr-1"></i>Client Zone</a>
+										<a href="contact.html" onclick="toggleMobileMenu()" class="nav-link block py-2 bg-primary text-center text-graybg1 rounded-md mt-2 hover:bg-primaryDark">Contact Us</a>
+									</div>
+								</div>
+							</div>
+						</nav>
+
+						<main id="onboarding-section" class="min-h-screen pt-24">
+							<div class="container mx-auto px-4 py-8 max-w-4xl">
+								<div class="text-center mb-10">
+									<h1 class="text-4xl md:text-5xl font-bold text-textlight mb-2 font-headings">CLIENT REGISTRATION & ONBOARDING</h1>
+									<p class="text-xl text-primary font-semibold mb-6">Begin Your Transformation Journey With Coach Pete</p>
+									<div class="bg-graybg2 p-4 rounded-lg shadow-md inline-block">
+										<p class="text-textmedium italic">"Building Better People - Let's start your transformation journey, together."</p>
+									</div>
+								</div>
+						        <div class="mb-10">
+									<div class="flex items-center mb-2">
+						                <div class="progress-step w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold" id="step-indicator-1">1</div>
+										<div class="flex-1 progress-bar-segment mx-1" id="progress-segment-1"></div>
+						                <div class="progress-step w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold" id="step-indicator-2">2</div>
+										<div class="flex-1 progress-bar-segment mx-1" id="progress-segment-2"></div>
+						                <div class="progress-step w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold" id="step-indicator-3">3</div>
+										<div class="flex-1 progress-bar-segment mx-1" id="progress-segment-3"></div>
+						                <div class="progress-step w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold" id="step-indicator-4">4</div>
+						                <div class="flex-1 progress-bar-segment mx-1" id="progress-segment-4"></div>
+						                <div class="progress-step w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold" id="step-indicator-5">5</div>
+						                <div class="flex-1 progress-bar-segment mx-1" id="progress-segment-5"></div>
+						                <div class="progress-step w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold" id="step-indicator-6">6</div>
+									</div>
+									<div class="flex justify-between text-xs md:text-sm">
+										<span id="step-label-1" class="step-label text-center flex-1 px-1">Personal Details</span>
+										<span id="step-label-2" class="step-label text-center flex-1 px-1">Medical History</span>
+										<span id="step-label-3" class="step-label text-center flex-1 px-1">Training & Lifestyle</span>
+										<span id="step-label-4" class="step-label text-center flex-1 px-1">Goals & Motivation</span>
+										<span id="step-label-5" class="step-label text-center flex-1 px-1">Emergency & Consent</span>
+										<span id="step-label-6" class="step-label text-center flex-1 px-1">Review & Complete</span>
+									</div>
+								</div>
+
+								<form id="onboardingForm" class="space-y-8">
+						            <div id="onboarding-step1" class="step active">
+										<div class="bg-graybg2 rounded-xl shadow-xl p-8">
+											<h2 class="text-3xl font-bold text-accent mb-6 font-headings border-b border-graybg3 pb-3"><i class="fas fa-user-edit mr-3"></i>Personal Details</h2>
+											<div class="grid md:grid-cols-2 gap-x-6 gap-y-5">
+												<div>
+													<label for="firstName" class="block text-sm font-medium text-textmedium mb-1">First Name <span class="text-primary">*</span></label>
+													<input type="text" id="firstName" name="firstName" required class="form-input" placeholder="Enter your first name">
+												</div>
+												<div>
+													<label for="lastName" class="block text-sm font-medium text-textmedium mb-1">Last Name <span class="text-primary">*</span></label>
+													<input type="text" id="lastName" name="lastName" required class="form-input" placeholder="Enter your last name">
+												</div>
+												<div>
+													<label for="dateOfBirth" class="block text-sm font-medium text-textmedium mb-1">Date of Birth <span class="text-primary">*</span></label>
+													<input type="date" id="dateOfBirth" name="dateOfBirth" required class="form-input" style="color-scheme: dark;">
+												</div>
+												<div>
+													<label for="gender" class="block text-sm font-medium text-textmedium mb-1">Gender <span class="text-primary">*</span></label>
+													<select id="gender" name="gender" required class="form-select">
+														<option value="">Select gender</option> <option value="male">Male</option> <option value="female">Female</option> <option value="non-binary">Non-binary</option> <option value="prefer-not-to-say">Prefer not to say</option>
+													</select>
+												</div>
+												<div>
+													<label for="email" class="block text-sm font-medium text-textmedium mb-1">Email Address <span class="text-primary">*</span></label>
+													<input type="email" id="email" name="email" required class="form-input" placeholder="your.email@example.com">
+												</div>
+												<div>
+													<label for="phone" class="block text-sm font-medium text-textmedium mb-1">Phone Number <span class="text-primary">*</span></label>
+													<input type="tel" id="phone" name="phone" required class="form-input" placeholder="07XXX XXXXXX">
+												</div>
+												<div class="md:col-span-2">
+													<label for="address" class="block text-sm font-medium text-textmedium mb-1">Address <span class="text-primary">*</span></label>
+													<input type="text" id="address" name="address" required class="form-input" placeholder="Street address, City, Postcode">
+												</div>
+												<div>
+													<label for="occupation" class="block text-sm font-medium text-textmedium mb-1">Occupation</label>
+													<input type="text" id="occupation" name="occupation" class="form-input" placeholder="Your occupation">
+												</div>
+												<div>
+													<label for="referralSource" class="block text-sm font-medium text-textmedium mb-1">How did you hear about Pete?</label>
+													<select id="referralSource" name="referralSource" class="form-select">
+														<option value="">Select source</option> <option value="google">Google Search</option> <option value="social-media">Social Media</option> <option value="friend">Friend/Family Referral</option> <option value="existing-client">Existing Client</option> <option value="website">Website</option> <option value="other">Other</option>
+													</select>
+												</div>
+											</div>
+											<div class="flex justify-end mt-10">
+												<button type="button" onclick="nextOnboardingStep()" class="btn btn-primary">
+													Next Step <i class="fas fa-arrow-right ml-2"></i>
+												</button>
+											</div>
+										</div>
+									</div>
+
+						            <div id="onboarding-step2" class="step">
+										<div class="bg-graybg2 rounded-xl shadow-xl p-8">
+											<h2 class="text-3xl font-bold text-accent mb-6 font-headings border-b border-graybg3 pb-3"><i class="fas fa-file-medical-alt mr-3"></i>Medical History</h2>
+											<p class="text-textmedium mb-6 text-sm">Please provide details about any existing medical conditions, past injuries, allergies, or medications you are currently taking. This information is confidential and crucial for designing a safe and effective program.</p>
+											<div class="space-y-5">
+						                        <div>
+						                            <label for="medicalConditions" class="block text-sm font-medium text-textmedium mb-1">Existing Medical Conditions <span class="text-textdark text-xs">(e.g., asthma, diabetes, heart conditions)</span></label>
+						                            <textarea id="medicalConditions" name="medicalConditions" rows="3" class="form-textarea" placeholder="List any conditions or N/A"></textarea>
+						                        </div>
+						                        <div>
+						                            <label for="pastInjuries" class="block text-sm font-medium text-textmedium mb-1">Past Injuries or Surgeries <span class="text-textdark text-xs">(include dates if possible)</span></label>
+						                            <textarea id="pastInjuries" name="pastInjuries" rows="3" class="form-textarea" placeholder="e.g., ACL reconstruction (2018), lower back pain, or N/A"></textarea>
+						                        </div>
+						                        <div>
+						                            <label for="allergies" class="block text-sm font-medium text-textmedium mb-1">Allergies or Adverse Reactions <span class="text-textdark text-xs">(medication, food, etc.)</span></label>
+						                            <textarea id="allergies" name="allergies" rows="2" class="form-textarea" placeholder="e.g., Penicillin, nuts, or N/A"></textarea>
+						                        </div>
+						                        <div>
+						                            <label for="medications" class="block text-sm font-medium text-textmedium mb-1">Current Medications <span class="text-textdark text-xs">(prescription and over-the-counter)</span></label>
+						                            <textarea id="medications" name="medications" rows="2" class="form-textarea" placeholder="List medications or N/A"></textarea>
+						                        </div>
+						                    </div>
+											<div class="flex justify-between mt-10">
+						                        <button type="button" onclick="prevOnboardingStep()" class="btn btn-secondary">
+						                            <i class="fas fa-arrow-left mr-2"></i>Previous Step
+						                        </button>
+												<button type="button" onclick="nextOnboardingStep()" class="btn btn-primary">
+													Next Step <i class="fas fa-arrow-right ml-2"></i>
+												</button>
+											</div>
+										</div>
+									</div>
+
+						            <div id="onboarding-step3" class="step">
+										<div class="bg-graybg2 rounded-xl shadow-xl p-8">
+											<h2 class="text-3xl font-bold text-accent mb-6 font-headings border-b border-graybg3 pb-3"><i class="fas fa-running mr-3"></i>Training History & Lifestyle</h2>
+						                    <div class="space-y-5">
+						                        <div class="grid md:grid-cols-2 gap-6">
+						                            <div>
+						                                <label for="currentActivityLevel" class="block text-sm font-medium text-textmedium mb-1">Current Physical Activity Level <span class="text-primary">*</span></label>
+						                                <select id="currentActivityLevel" name="currentActivityLevel" required class="form-select">
+						                                    <option value="">Select level</option>
+						                                    <option value="sedentary">Sedentary (little to no exercise)</option>
+						                                    <option value="light">Lightly Active (exercise 1-2 days/week)</option>
+						                                    <option value="moderate">Moderately Active (exercise 3-4 days/week)</option>
+						                                    <option value="active">Very Active (exercise 5+ days/week)</option>
+						                                </select>
+						                            </div>
+						                            <div>
+						                                <label for="previousTraining" class="block text-sm font-medium text-textmedium mb-1">Previous Training Experience <span class="text-textdark text-xs">(types, duration)</span></label>
+						                                <input type="text" id="previousTraining" name="previousTraining" class="form-input" placeholder="e.g., Gym 2 years, Running 6 months">
+						                            </div>
+						                        </div>
+						                        <div>
+						                            <label for="trainingPreferences" class="block text-sm font-medium text-textmedium mb-1">Training Preferences <span class="text-textdark text-xs">(activities you enjoy or dislike)</span></label>
+						                            <textarea id="trainingPreferences" name="trainingPreferences" rows="3" class="form-textarea" placeholder="e.g., Enjoy weightlifting, dislike long-distance running"></textarea>
+						                        </div>
+						                        <div>
+						                            <label for="sleepHabits" class="block text-sm font-medium text-textmedium mb-1">Average Sleep per Night <span class="text-primary">*</span></label>
+						                            <input type="text" id="sleepHabits" name="sleepHabits" required class="form-input" placeholder="e.g., 7-8 hours, 5 hours">
+						                        </div>
+						                        <div>
+						                            <label for="stressLevels" class="block text-sm font-medium text-textmedium mb-1">Typical Stress Levels (Low, Moderate, High) <span class="text-primary">*</span></label>
+						                            <select id="stressLevels" name="stressLevels" required class="form-select">
+						                                <option value="">Select level</option>
+						                                <option value="low">Low</option>
+						                                <option value="moderate">Moderate</option>
+						                                <option value="high">High</option>
+						                            </select>
+						                        </div>
+						                    </div>
+											<div class="flex justify-between mt-10">
+						                        <button type="button" onclick="prevOnboardingStep()" class="btn btn-secondary">
+						                            <i class="fas fa-arrow-left mr-2"></i>Previous Step
+						                        </button>
+												<button type="button" onclick="nextOnboardingStep()" class="btn btn-primary">
+													Next Step <i class="fas fa-arrow-right ml-2"></i>
+												</button>
+											</div>
+										</div>
+									</div>
+
+						            <div id="onboarding-step4" class="step">
+										<div class="bg-graybg2 rounded-xl shadow-xl p-8">
+											<h2 class="text-3xl font-bold text-accent mb-6 font-headings border-b border-graybg3 pb-3"><i class="fas fa-bullseye mr-3"></i>Goals & Motivation</h2>
+						                    <div class="space-y-5">
+						                        <div>
+						                            <label for="primaryGoal" class="block text-sm font-medium text-textmedium mb-1">Primary Fitness Goal <span class="text-primary">*</span> <span class="text-textdark text-xs">(e.g., weight loss, muscle gain, improve endurance)</span></label>
+						                            <input type="text" id="primaryGoal" name="primaryGoal" required class="form-input" placeholder="e.g., Lose 10kg, run a 5k, feel stronger">
+						                        </div>
+						                        <div>
+						                            <label for="secondaryGoals" class="block text-sm font-medium text-textmedium mb-1">Secondary Goals <span class="text-textdark text-xs">(if any)</span></label>
+						                            <textarea id="secondaryGoals" name="secondaryGoals" rows="2" class="form-textarea" placeholder="e.g., Improve posture, increase energy levels"></textarea>
+						                        </div>
+						                        <div>
+						                            <label for="motivation" class="block text-sm font-medium text-textmedium mb-1">What motivates you to achieve these goals? <span class="text-primary">*</span></label>
+						                            <textarea id="motivation" name="motivation" required rows="3" class="form-textarea" placeholder="e.g., Improve health, upcoming event, personal challenge"></textarea>
+						                        </div>
+						                        <div>
+						                            <label for="timeCommitment" class="block text-sm font-medium text-textmedium mb-1">How many days per week can you commit to training? <span class="text-primary">*</span></label>
+						                            <select id="timeCommitment" name="timeCommitment" required class="form-select">
+						                                <option value="">Select days</option>
+						                                <option value="1-2">1-2 days</option>
+						                                <option value="2-3">2-3 days</option>
+						                                <option value="3-4">3-4 days</option>
+						                                <option value="4-5">4-5 days</option>
+						                                <option value="5+">5+ days</option>
+						                            </select>
+						                        </div>
+						                        <div>
+						                            <label for="potentialObstacles" class="block text-sm font-medium text-textmedium mb-1">What are potential obstacles to your success?</label>
+						                            <textarea id="potentialObstacles" name="potentialObstacles" rows="2" class="form-textarea" placeholder="e.g., Busy work schedule, lack of motivation at times"></textarea>
+						                        </div>
+						                    </div>
+											<div class="flex justify-between mt-10">
+												<button type="button" onclick="prevOnboardingStep()" class="btn btn-secondary">
+						                            <i class="fas fa-arrow-left mr-2"></i>Previous Step
+						                        </button>
+												<button type="button" onclick="nextOnboardingStep()" class="btn btn-primary">
+													Next Step <i class="fas fa-arrow-right ml-2"></i>
+												</button>
+											</div>
+										</div>
+									</div>
+
+						            <div id="onboarding-step5" class="step">
+										<div class="bg-graybg2 rounded-xl shadow-xl p-8">
+											<h2 class="text-3xl font-bold text-accent mb-6 font-headings border-b border-graybg3 pb-3"><i class="fas fa-user-shield mr-3"></i>Emergency Contact & Consent</h2>
+						                    <div class="space-y-5">
+						                        <div class="grid md:grid-cols-2 gap-6">
+						                            <div>
+						                                <label for="emergencyContactName" class="block text-sm font-medium text-textmedium mb-1">Emergency Contact Name <span class="text-primary">*</span></label>
+						                                <input type="text" id="emergencyContactName" name="emergencyContactName" required class="form-input" placeholder="Full Name">
+						                            </div>
+						                            <div>
+						                                <label for="emergencyContactPhone" class="block text-sm font-medium text-textmedium mb-1">Emergency Contact Phone <span class="text-primary">*</span></label>
+						                                <input type="tel" id="emergencyContactPhone" name="emergencyContactPhone" required class="form-input" placeholder="Phone Number">
+						                            </div>
+						                            <div class="md:col-span-2">
+						                                <label for="emergencyContactRelationship" class="block text-sm font-medium text-textmedium mb-1">Relationship to You <span class="text-primary">*</span></label>
+						                                <input type="text" id="emergencyContactRelationship" name="emergencyContactRelationship" required class="form-input" placeholder="e.g., Spouse, Parent, Friend">
+						                            </div>
+						                        </div>
+						                        <div class="pt-4 border-t border-graybg3">
+						                            <label class="block text-sm font-medium text-textmedium mb-1">Physician's Approval</label>
+						                            <p class="text-xs text-textdark mb-2">It is recommended that you consult with your physician before starting any new exercise program. Have you received approval from your physician to engage in physical activity?</p>
+						                            <select id="physicianApproval" name="physicianApproval" class="form-select">
+						                                <option value="not_consulted">Have not consulted physician</option>
+						                                <option value="yes">Yes, approved</option>
+						                                <option value="yes_limitations">Yes, with limitations (please specify below)</option>
+						                                <option value="no">No, not approved</option>
+						                            </select>
+						                            <textarea id="physicianLimitations" name="physicianLimitations" rows="2" class="mt-2 form-textarea" placeholder="Specify limitations if applicable"></textarea>
+						                        </div>
+						                    </div>
+											<div class="flex justify-between mt-10">
+						                        <button type="button" onclick="prevOnboardingStep()" class="btn btn-secondary">
+						                            <i class="fas fa-arrow-left mr-2"></i>Previous Step
+						                        </button>
+												<button type="button" onclick="nextOnboardingStep()" class="btn btn-primary">
+													Review & Complete <i class="fas fa-arrow-right ml-2"></i>
+												</button>
+											</div>
+										</div>
+									</div>
+
+						            <div id="onboarding-step6" class="step">
+										<div class="bg-graybg2 rounded-xl shadow-xl p-8">
+											<h2 class="text-3xl font-bold text-accent mb-6 font-headings border-b border-graybg3 pb-3"><i class="fas fa-check-double mr-3"></i>Review & Complete</h2>
+											<p class="text-textmedium mb-6 text-sm">Please carefully review all the information you have provided. Ensure everything is accurate before submitting.</p>
+											<div id="review-data" class="mb-6 space-y-3 text-sm bg-graybg1 p-6 rounded-lg shadow-inner">
+												<p class="italic text-textdark">Your information will appear here for review...</p>
+											</div>
+						                    <div class="mt-8">
+						                        <h3 class="text-xl font-semibold text-textlight mb-3 font-headings">Liability Waiver & Photo Release</h3>
+						                        <div class="text-xs text-textmedium p-4 border border-graybg3 rounded-md max-h-40 overflow-y-auto mb-4 bg-graybg1 leading-relaxed">
+						                            <p><strong>Assumption of Risk:</strong> I acknowledge that participation in physical exercise and training programs involves inherent risks of injury. I voluntarily assume all such risks.</p>
+						                            <p class="mt-2"><strong>Release of Liability:</strong> I hereby release Coach Pete Ryan from any and all liability for any injuries or damages sustained during or as a result of participation in training programs, except those caused by gross negligence or willful misconduct.</p>
+						                            <p class="mt-2"><strong>Health Representation:</strong> I represent that I am in good physical condition and have no medical reason or impairment that might prevent me from participating in physical activity. If I have any doubts, I have consulted a physician.</p>
+						                            <p class="mt-2"><strong>Photo/Video Release (Optional):</strong> I <span id="photoReleaseConsentText" class="font-semibold"></span> consent to Coach Pete Ryan using photographs or videos of me for promotional or educational purposes. I understand I can opt-out by unchecking the box below.</p>
+						                        </div>
+						                        <label class="flex items-center mb-3 cursor-pointer">
+						                            <input type="checkbox" id="liabilityAgree" name="liabilityAgree" required class="form-checkbox">
+						                            <span class="ml-2 text-sm text-textmedium">I have read and agree to the Liability Waiver. <span class="text-primary">*</span></span>
+						                        </label>
+						                        <label class="flex items-center cursor-pointer">
+						                            <input type="checkbox" id="photoReleaseAgree" name="photoReleaseAgree" checked class="form-checkbox">
+						                            <span class="ml-2 text-sm text-textmedium">I agree to the Photo/Video Release (optional).</span>
+						                        </label>
+						                    </div>
+											<div class="flex justify-between mt-10">
+						                        <button type="button" onclick="prevOnboardingStep()" class="btn btn-secondary">
+						                            <i class="fas fa-arrow-left mr-2"></i>Previous Step
+						                        </button>
+												<button type="button" onclick="completeOnboarding()" id="completeBtn" disabled class="btn btn-primary btn-disabled">
+						                            Complete Registration <i class="fas fa-paper-plane ml-2"></i>
+						                        </button>
+											</div>
+										</div>
+									</div>
+								</form>
+
+						        <div id="onboarding-success" class="step">
+									<div class="bg-graybg2 rounded-xl shadow-xl p-8 md:p-12 text-center">
+										<div class="text-7xl mb-6 text-primary"><i class="fas fa-party-horn"></i>🎉</div> {/* Using Font Awesome icon */}
+										<h2 class="text-4xl font-bold text-textlight mb-4 font-headings">REGISTRATION COMPLETE!</h2>
+										<p class="text-xl text-textmedium mb-8">Welcome to the Coach Pete Ryan family! Your transformation journey starts <span class="text-accent font-semibold">NOW</span>.</p>
+										<div class="bg-graybg1 border border-accent rounded-lg p-6 mb-8 shadow-inner">
+											<h3 class="text-lg font-semibold text-accent mb-3 font-headings"><i class="fas fa-file-pdf mr-2"></i>Your Documents Are Ready!</h3>
+											<div id="download-links" class="space-y-2">
+												 <button onclick="downloadRegistrationPDF()" class="text-primary hover:text-primaryDark underline font-semibold">
+						                            <i class="fas fa-download mr-1"></i>Download Registration Summary (PDF)
+						                         </button>
+											</div>
+										</div>
+										<div class="text-textmedium mb-8">
+											<p class="mb-2">Coach Pete will be in touch within 24 hours to schedule your initial consultation.</p>
+											<p>Please check your email (including spam folder) for a confirmation message.</p>
+										</div>
+										<div class="space-y-4 md:space-y-0 md:space-x-4 md:flex md:justify-center">
+											<button onclick="window.location.href='tools.html'" class="w-full md:w-auto btn btn-primary">
+						                        <i class="fas fa-tools mr-2"></i>Explore Assessment Tools
+											</button>
+											<button onclick="window.location.href='onboarding.html'; location.reload();" class="w-full md:w-auto btn btn-secondary">
+						                        <i class="fas fa-user-plus mr-2"></i>Register Another Client
+											</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</main>
+
+						<footer class="bg-graybg1 text-textlight py-12 border-t-4 border-primary">
+							<div class="container mx-auto px-4">
+								<div class="grid md:grid-cols-4 gap-8 mb-8">
+									<div>
+										<div class="flex items-center space-x-2 mb-4">
+											<div class="w-10 h-10 bg-primary rounded-md flex items-center justify-center">
+												<span class="text-graybg1 font-bold text-lg">P</span>
+											</div>
+											<div>
+												<a href="index.html" class="font-bold text-lg font-headings">Coach Pete Ryan</a>
+												<div class="text-xs text-textdark">Building Better People</div>
+											</div>
+										</div>
+										<p class="text-textdark text-sm mb-4">Transforming lives through the perfect blend of fitness training and mindset coaching.</p>
+						                <div class="flex space-x-3">
+						                    <a href="#" class="text-textmedium hover:text-primary text-xl"><i class="fab fa-facebook-f"></i></a>
+						                    <a href="#" class="text-textmedium hover:text-primary text-xl"><i class="fab fa-instagram"></i></a>
+						                    <a href="#" class="text-textmedium hover:text-primary text-xl"><i class="fab fa-youtube"></i></a>
+						                </div>
+									</div>
+									<div>
+										<h4 class="font-semibold mb-4 font-headings text-textlight">Quick Links</h4>
+										<ul class="text-sm text-textdark space-y-2">
+											<li><a href="about.html" class="hover:text-primary transition-colors">About Pete</a></li>
+											<li><a href="services.html" class="hover:text-primary transition-colors">Services</a></li>
+											<li><a href="testimonials.html" class="hover:text-primary transition-colors">Testimonials</a></li>
+											<li><a href="contact.html" class="hover:text-primary transition-colors">Contact Us</a></li>
+										</ul>
+									</div>
+									<div>
+										<h4 class="font-semibold mb-4 font-headings text-textlight">Resources</h4>
+										<ul class="text-sm text-textdark space-y-2">
+											<li><a href="tools.html" class="hover:text-primary transition-colors">Assessment Tools</a></li>
+											<li><a href="onboarding.html" class="hover:text-primary transition-colors">Client Registration</a></li>
+						                    <li><a href="client_zone.html" class="hover:text-primary transition-colors">Client Zone Login</a></li>
+											<li><a href="#" class="hover:text-primary transition-colors">Blog/Articles</a></li>
+										</ul>
+									</div>
+									<div>
+										<h4 class="font-semibold mb-4 font-headings text-textlight">Get In Touch</h4>
+										<ul class="text-sm text-textdark space-y-2">
+											<li><i class="fas fa-phone fa-fw mr-2 text-primary"></i>+44 7123 456789</li>
+											<li><i class="fas fa-envelope fa-fw mr-2 text-primary"></i>pete@coachpeteryan.com</li>
+											<li><i class="fas fa-map-marker-alt fa-fw mr-2 text-primary"></i>Thorpe, Surrey, UK</li>
+											<li><i class="fas fa-clock fa-fw mr-2 text-primary"></i>Mon-Fri: 6AM-8PM</li>
+										</ul>
+									</div>
+								</div>
+								<div class="border-t border-graybg3 mt-8 pt-8 text-center">
+										<p class="text-textdark text-sm">© <span id="currentYear"></span> Coach Pete Ryan. All rights reserved. | Building Better People, One Life at a Time.</p>
+								</div>
+							</div>
+						</footer>
+						<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+						<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.2/marked.min.js"></script>
+						<script>
+							// --- Common JavaScript ---
+							document.getElementById('currentYear').textContent = new Date().getFullYear();
+							function toggleMobileMenu() {
+								const mobileMenu = document.getElementById('mobileMenu');
+						        const burgerIcon = document.querySelector('.md\\:hidden i');
+								mobileMenu.classList.toggle('hidden');
+						        if (mobileMenu.classList.contains('hidden')) {
+						            burgerIcon.classList.remove('fa-times');
+						            burgerIcon.classList.add('fa-bars');
+						        } else {
+						            burgerIcon.classList.remove('fa-bars');
+						            burgerIcon.classList.add('fa-times');
+						        }
+							}
+							function setActiveNavLink() {
+								const navLinks = document.querySelectorAll('nav a.nav-link');
+								let currentPath = window.location.pathname.split('/').pop();
+								if (currentPath === '' || currentPath === 'index.html') {
+										currentPath = 'index.html';
+								}
+						        if (window.location.pathname.includes('onboarding.html')) {
+						            currentPath = 'onboarding.html';
+						        }
+								navLinks.forEach(link => {
+						            const linkHref = link.getAttribute('href');
+									if (linkHref === currentPath) {
+										link.classList.add('active');
+									} else {
+										link.classList.remove('active');
+									}
+								});
+							}
+
+							// --- Onboarding Page Specific JavaScript ---
+							let currentOnboardingStep = 1;
+							const totalOnboardingSteps = 6; // Total number of steps including Review
+							let clientData = {}; // To store form data
+
+							function updateProgressIndicator() {
+								for (let i = 1; i <= totalOnboardingSteps; i++) {
+									const stepIndicator = document.getElementById(`step-indicator-${i}`);
+									const stepLabel = document.getElementById(`step-label-${i}`);
+									const progressSegment = i < totalOnboardingSteps ? document.getElementById(`progress-segment-${i}`) : null;
+
+									if (!stepIndicator || !stepLabel) continue;
+
+									// Reset classes
+									stepIndicator.classList.remove('current', 'completed');
+									stepLabel.classList.remove('current', 'font-semibold', 'text-primary');
+									if (progressSegment) progressSegment.classList.remove('completed');
+
+
+									if (i < currentOnboardingStep) { // Completed steps
+										stepIndicator.classList.add('completed');
+										stepLabel.classList.add('text-textmedium'); // Keep completed labels noticeable
+						                if (progressSegment) progressSegment.classList.add('completed');
+									} else if (i === currentOnboardingStep) { // Current step
+										stepIndicator.classList.add('current');
+										stepLabel.classList.add('current'); // CSS handles styling for .current label
+						                // Ensure previous segments are marked completed
+						                if (i > 1) {
+						                    for (let j = 1; j < i; j++) {
+						                         const prevSegment = document.getElementById(`progress-segment-${j}`);
+						                         if(prevSegment) prevSegment.classList.add('completed');
+						                    }
+						                }
+									} else { // Future steps
+						                stepLabel.classList.add('text-textdark'); // Future labels more subdued
+						            }
+								}
+							}
+
+							function collectStepData(stepNumber) {
+								const form = document.getElementById('onboardingForm');
+								const currentStepElement = document.getElementById(`onboarding-step${stepNumber}`);
+								if (!currentStepElement) return;
+
+								const inputs = currentStepElement.querySelectorAll('input, select, textarea');
+								inputs.forEach(input => {
+									if (input.name) {
+										if (input.type === 'checkbox') {
+											clientData[input.name] = input.checked;
+										} else {
+											clientData[input.name] = input.value;
+										}
+									}
+								});
+						        // For step 6, specific handling for consents
+						        if (stepNumber === totalOnboardingSteps) {
+						             clientData['liabilityAgree'] = document.getElementById('liabilityAgree')?.checked || false;
+						             clientData['photoReleaseAgree'] = document.getElementById('photoReleaseAgree')?.checked || false;
+						        }
+							}
+
+							function validateStep(stepNumber) {
+								let isValid = true;
+								let firstInvalidField = null;
+								const stepContainer = document.getElementById(`onboarding-step${stepNumber}`);
+								if (!stepContainer) return true;
+
+								const requiredInputs = stepContainer.querySelectorAll('[required]');
+								requiredInputs.forEach(input => {
+						            input.classList.remove('border-red-500', '!border-primaryDark'); // Reset validation style
+						            input.classList.add('border-graybg3'); // Default border
+
+									const isCheckbox = input.type === 'checkbox';
+									const isEmptyText = !isCheckbox && (!input.value || !input.value.trim());
+									const isUncheckedCheckbox = isCheckbox && !input.checked;
+
+									if (isEmptyText || isUncheckedCheckbox) {
+										isValid = false;
+						                input.classList.remove('border-graybg3');
+										input.classList.add('border-red-500', '!border-primaryDark'); // Use a more prominent error indication
+										if (!firstInvalidField) firstInvalidField = input;
+									} else if(input.type === 'email' && input.value.trim() && !/^\S+@\S+\.\S+$/.test(input.value.trim())){
+						                isValid = false;
+						                input.classList.remove('border-graybg3');
+										input.classList.add('border-red-500', '!border-primaryDark');
+										if (!firstInvalidField) firstInvalidField = input;
+						            }
+								});
+
+								if (!isValid && firstInvalidField) {
+									alert('Please fill in all required (*) fields correctly before proceeding.');
+									firstInvalidField.focus();
+								}
+								return isValid;
+							}
+
+
+							function nextOnboardingStep() {
+								if (!validateStep(currentOnboardingStep)) {
+									return;
+								}
+
+								collectStepData(currentOnboardingStep);
+
+								if (currentOnboardingStep < totalOnboardingSteps) {
+									document.getElementById(`onboarding-step${currentOnboardingStep}`).classList.remove('active');
+									currentOnboardingStep++;
+									document.getElementById(`onboarding-step${currentOnboardingStep}`).classList.add('active');
+									updateProgressIndicator();
+									window.scrollTo({ top: 0, behavior: 'smooth' });
+								}
+
+								if (currentOnboardingStep === totalOnboardingSteps) { // Review step actions
+									populateReviewData();
+									const photoReleaseCheckbox = document.getElementById('photoReleaseAgree');
+									const photoReleaseTextSpan = document.getElementById('photoReleaseConsentText');
+									if (photoReleaseCheckbox && photoReleaseTextSpan) {
+										photoReleaseTextSpan.textContent = photoReleaseCheckbox.checked ? "DO" : "DO NOT";
+										photoReleaseCheckbox.onchange = () => {
+											photoReleaseTextSpan.textContent = photoReleaseCheckbox.checked ? "DO" : "DO NOT";
+											clientData['photoReleaseAgree'] = photoReleaseCheckbox.checked;
+										};
+									}
+									const liabilityCheckbox = document.getElementById('liabilityAgree');
+									const completeBtn = document.getElementById('completeBtn');
+									if (liabilityCheckbox && completeBtn) {
+										completeBtn.disabled = !liabilityCheckbox.checked;
+						                completeBtn.classList.toggle('btn-disabled', completeBtn.disabled);
+										liabilityCheckbox.onchange = () => {
+											completeBtn.disabled = !liabilityCheckbox.checked;
+						                    completeBtn.classList.toggle('btn-disabled', completeBtn.disabled);
+											clientData['liabilityAgree'] = liabilityCheckbox.checked;
+										};
+									}
+								}
+							}
+							window.nextOnboardingStep = nextOnboardingStep;
+
+							function prevOnboardingStep() {
+								// No need to collect data again when going back, as it's collected on 'next'
+								if (currentOnboardingStep > 1) {
+									document.getElementById(`onboarding-step${currentOnboardingStep}`).classList.remove('active');
+									currentOnboardingStep--;
+									document.getElementById(`onboarding-step${currentOnboardingStep}`).classList.add('active');
+									updateProgressIndicator();
+									window.scrollTo({ top: 0, behavior: 'smooth' });
+								}
+							}
+							window.prevOnboardingStep = prevOnboardingStep;
+
+							function formatKey(key) {
+								// Improved key formatting
+								const result = key.replace(/([A-Z])/g, ' $1');
+								return result.charAt(0).toUpperCase() + result.slice(1);
+							}
+
+							function populateReviewData() {
+								const reviewContainer = document.getElementById('review-data');
+								if (!reviewContainer) return;
+
+								let html = `<h3 class="text-xl font-semibold mb-4 text-textlight font-headings border-b border-graybg3 pb-2">Confirm Your Details:</h3><dl class="divide-y divide-graybg3">`;
+						        const stepTitles = {
+						            firstName: "Personal Details", lastName: "Personal Details", dateOfBirth: "Personal Details", gender: "Personal Details", email: "Personal Details", phone: "Personal Details", address: "Personal Details", occupation: "Personal Details", referralSource: "Personal Details",
+						            medicalConditions: "Medical History", pastInjuries: "Medical History", allergies: "Medical History", medications: "Medical History",
+						            currentActivityLevel: "Training & Lifestyle", previousTraining: "Training & Lifestyle", trainingPreferences: "Training & Lifestyle", sleepHabits: "Training & Lifestyle", stressLevels: "Training & Lifestyle",
+						            primaryGoal: "Goals & Motivation", secondaryGoals: "Goals & Motivation", motivation: "Goals & Motivation", timeCommitment: "Goals & Motivation", potentialObstacles: "Goals & Motivation",
+						            emergencyContactName: "Emergency Contact", emergencyContactPhone: "Emergency Contact", emergencyContactRelationship: "Emergency Contact", physicianApproval: "Physician's Approval", physicianLimitations: "Physician's Approval",
+						            liabilityAgree: "Consents", photoReleaseAgree: "Consents"
+						        };
+						        let currentCategory = "";
+
+								for (const key in clientData) {
+						            if (clientData.hasOwnProperty(key) && clientData[key] !== undefined && clientData[key] !== '') {
+						                const category = stepTitles[key] || "Other Information";
+						                if (category !== currentCategory) {
+						                    if (currentCategory !== "") html += `</dl><dl class="mt-4 divide-y divide-graybg3">`; // Close previous dl if not first
+						                    html += `<dt class="col-span-2 text-lg font-semibold text-accent pt-3 pb-1 font-headings">${category}</dt>`;
+						                    currentCategory = category;
+						                }
+
+										let value = clientData[key];
+										if (typeof value === 'boolean') {
+											value = value ? 'Agreed / Yes' : 'Not Agreed / No';
+										} else if (!value && value !== 0) { // Handles empty strings, null, undefined but not 0
+											value = '<span class="text-textdark italic">Not provided</span>';
+										}
+
+										html += `<div class="py-2 grid grid-cols-3 gap-4 items-center">
+						                            <dt class="font-medium text-textmedium col-span-1">${formatKey(key)}</dt>
+						                            <dd class="text-textlight col-span-2">${value}</dd>
+						                         </div>`;
+									}
+								}
+								html += '</dl>';
+								reviewContainer.innerHTML = html || '<p class="italic text-textdark">No information to review yet. Please complete previous steps.</p>';
+							}
+
+							function completeOnboarding() {
+						        collectStepData(currentOnboardingStep); // Ensure consent data is collected
+								if (!validateStep(currentOnboardingStep)) { // Validate the consent checkboxes specifically
+						             alert('Please agree to the Liability Waiver to complete registration.');
+									return;
+								}
+								console.log("Client Data Submitted:", clientData);
+
+								document.getElementById(`onboarding-step${currentOnboardingStep}`).classList.remove('active');
+								document.getElementById('onboarding-success').classList.add('active');
+
+								const progressContainer = document.querySelector('.mb-10'); // Main container for progress indicator
+								if(progressContainer) progressContainer.style.display = 'none';
+
+								window.scrollTo({ top: 0, behavior: 'smooth' });
+							}
+							window.completeOnboarding = completeOnboarding;
+
+							function downloadRegistrationPDF() {
+								const { jsPDF } = window.jspdf;
+								const doc = new jsPDF({ unit: 'pt', format: 'a4' }); // Using points for better control
+						        const pageWidth = doc.internal.pageSize.getWidth();
+						        const margin = 40; // points
+						        let yPos = margin + 20;
+						        const lineHeight = 14; // points
+						        const fieldGap = 6;
+
+						        // Header
+								doc.setFont('Oswald', 'bold');
+								doc.setFontSize(24);
+								doc.setTextColor(tailwind.config.theme.extend.colors.primary);
+								doc.text("Client Registration Summary", pageWidth / 2, yPos, { align: 'center' });
+								yPos += 40;
+
+						        const name = `${clientData.firstName || ''} ${clientData.lastName || ''}`.trim();
+						        if (name) {
+						            doc.setFont('Open Sans', 'bold');
+						            doc.setFontSize(14);
+						            doc.setTextColor(tailwind.config.theme.extend.colors.textlight);
+						            doc.text(`Client: ${name}`, margin, yPos);
+						            yPos += lineHeight * 2;
+						        }
+						        doc.setLineWidth(0.5);
+						        doc.setDrawColor(tailwind.config.theme.extend.colors.graybg3);
+
+						        const stepTitles = { /* same as in populateReviewData */ };
+						        let currentCategory = "";
+
+								for (const key in clientData) {
+						            if (clientData.hasOwnProperty(key) && clientData[key] !== undefined && clientData[key] !== '') {
+						                const category = stepTitles[key] || "Other Information";
+						                if (category !== currentCategory) {
+						                    yPos += lineHeight; // Extra space before new category
+						                    doc.setFont('Oswald', 'bold');
+						                    doc.setFontSize(12);
+						                    doc.setTextColor(tailwind.config.theme.extend.colors.accent);
+						                    doc.text(category.toUpperCase(), margin, yPos);
+						                    yPos += lineHeight * 1.5;
+						                    doc.line(margin, yPos - (lineHeight *0.8), pageWidth - margin, yPos - (lineHeight *0.8)); // Category underline
+						                    currentCategory = category;
+						                }
+
+										let value = clientData[key];
+										if (typeof value === 'boolean') { value = value ? 'Yes' : 'No'; }
+						                else if (!value && value !== 0) { value = 'N/A';}
+
+
+						                doc.setFont('Open Sans', 'bold');
+						                doc.setFontSize(10);
+						                doc.setTextColor(tailwind.config.theme.extend.colors.textmedium);
+						                const formattedKey = formatKey(key) + ":";
+						                let textLines = doc.splitTextToSize(formattedKey, (pageWidth / 3) - margin);
+						                if (yPos + (textLines.length * lineHeight) > doc.internal.pageSize.getHeight() - margin) {
+						                    doc.addPage(); yPos = margin;
+						                }
+						                doc.text(textLines, margin, yPos);
+
+						                doc.setFont('Open Sans', 'normal');
+						                doc.setTextColor(tailwind.config.theme.extend.colors.textlight);
+						                textLines = doc.splitTextToSize(String(value), (pageWidth * (2/3)) - (margin*2) );
+						                doc.text(textLines, margin + (pageWidth / 3) - margin + 10, yPos);
+						                yPos += (textLines.length * lineHeight) + fieldGap;
+									}
+								}
+								doc.save(`CPR-Registration-${clientData.firstName || 'Client'}-${clientData.lastName || ''}.pdf`);
+							}
+							window.downloadRegistrationPDF = downloadRegistrationPDF;
+
+							document.addEventListener('DOMContentLoaded', function() {
+								setActiveNavLink();
+								if(document.getElementById('onboardingForm')) {
+									updateProgressIndicator(); // Initialize progress indicator
+						            // Attach onchange to inputs for dynamic validation feedback (optional)
+						            document.querySelectorAll('#onboardingForm input[required], #onboardingForm select[required], #onboardingForm textarea[required]').forEach(input => {
+						                input.addEventListener('blur', () => validateStep(currentOnboardingStep)); // Validate on blur
+						            });
+								}
+							});
+
+						</script>
+						</body>
+						</html>

@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Services - Coach Pete Ryan | Building Better People</title>
+	<script src="https://cdn.tailwindcss.com"></script>
+	<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="output.css" rel="stylesheet"> <script>
+		tailwind.config = {
+			theme: {
+				extend: {
+					colors: {
+						primary: '#ff6b35',
+						primaryDark: '#ff8c42',
+						secondary: '#ff8c42',
+						accent: '#00d4ff',
+						graybg1: '#1a1a1a',
+						graybg2: '#2d2d2d',
+						graybg3: '#3d3d3d',
+						textlight: '#e0e0e0',
+						textmedium: '#b0b0b0',
+						textdark: '#808080'
+					},
+					fontFamily: {
+						'headings': ['Oswald', 'sans-serif'],
+						'body': ['Open Sans', 'sans-serif']
+					}
+				}
+			}
+		}
+	</script>
+	<style>
+		body { font-family: 'Open Sans', sans-serif; background-color: #1a1a1a; color: #b0b0b0; }
+		h1, h2, h3, h4, h5, h6 { font-family: 'Oswald', sans-serif; color: #e0e0e0; }
+		.nav-link { transition: all 0.3s ease; color: #b0b0b0; }
+		.nav-link:hover { color: #ff8c42; }
+		.nav-link.active { color: #ff6b35; font-weight: 600; }
+		.sticky-nav { backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+
+        .btn {
+            display: inline-block; /* Ensures proper padding and width for <a> tags styled as buttons */
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.25rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: all 0.2s ease-in-out;
+            border: 2px solid transparent;
+            text-align: center; /* Center text for <a> tags acting as full-width buttons */
+        }
+        .btn-primary {
+            background-color: #ff6b35;
+            color: #1a1a1a; /* High contrast */
+            border-color: #ff6b35;
+        }
+        .btn-primary:hover {
+            background-color: #ff8c42;
+            border-color: #ff8c42;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+         .btn-secondary-outline {
+            border: 2px solid #e0e0e0;
+            color: #e0e0e0;
+            background-color: transparent;
+        }
+        .btn-secondary-outline:hover {
+            background-color: #e0e0e0;
+            color: #1a1a1a;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(255,255,255,0.1);
+        }
+
+        .service-card {
+            background-color: #2d2d2d; /* graybg2 */
+            border: 1px solid #3d3d3d; /* graybg3 */
+            border-radius: 0.5rem; /* Slightly more pronounced radius */
+            padding: 2rem; /* More padding */
+            transition: all 0.3s ease-in-out;
+            display: flex;
+            flex-direction: column; /* Ensure button stays at bottom */
+        }
+        .service-card:hover {
+            transform: translateY(-8px) scale(1.03); /* More noticeable hover */
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+            border-color: #ff6b35; /* Primary color border on hover */
+        }
+        .service-card .service-icon {
+            font-size: 3rem; /* Larger icons */
+            color: #ff6b35; /* Primary color for icons */
+            margin-bottom: 1.5rem;
+            text-align: center; /* Center icon if it's a block element */
+        }
+        .service-card ul {
+            margin-bottom: 1.5rem; /* Ensure space before button */
+            padding-left: 1.25rem; /* Indent list items */
+        }
+        .service-card ul li::before { /* Custom bullet point */
+            content: "\\f058"; /* Font Awesome check-circle icon */
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            color: #00d4ff; /* Accent color */
+            margin-right: 0.5rem;
+            font-size: 0.9em;
+        }
+        .service-card .btn {
+            margin-top: auto; /* Pushes button to the bottom of the card */
+        }
+
+	</style>
+</head>
+<body class="font-body">
+<script>
+	document.documentElement.classList.add('dark');
+</script>
+
+<nav class="fixed top-0 left-0 right-0 bg-graybg2/90 sticky-nav z-50 border-b border-graybg3">
+	<div class="container mx-auto px-4">
+		<div class="flex justify-between items-center py-4">
+			<a href="index.html" class="flex items-center space-x-2">
+				<div class="w-10 h-10 bg-primary rounded-md flex items-center justify-center shadow-md">
+					<span class="text-graybg1 font-bold text-lg">P</span>
+				</div>
+				<div>
+					<div class="font-bold text-textlight text-lg font-headings">Coach Pete Ryan</div>
+					<div class="text-xs text-textdark">Building Better People</div>
+				</div>
+			</a>
+			<div class="hidden md:flex space-x-6 items-center">
+				<a href="index.html" class="nav-link">Home</a>
+				<a href="about.html" class="nav-link">About</a>
+				<a href="services.html" class="nav-link">Services</a>
+				<a href="tools.html" class="nav-link">Assessment Tools</a>
+				<a href="onboarding.html" class="nav-link">Client Registration</a>
+				<a href="testimonials.html" class="nav-link">Testimonials</a>
+                <a href="client_zone.html" class="nav-link"><i class="fas fa-user-shield mr-1"></i>Client Zone</a>
+				<a href="contact.html" class="nav-link btn btn-primary !py-2 !px-4 !text-sm">Contact</a>
+			</div>
+			<button onclick="toggleMobileMenu()" class="md:hidden p-2 text-textlight">
+				<i class="fas fa-bars fa-lg"></i>
+			</button>
+		</div>
+		<div id="mobileMenu" class="hidden md:hidden pb-4 border-t border-graybg3 mt-2">
+			<div class="flex flex-col space-y-2 pt-2">
+				<a href="index.html" onclick="toggleMobileMenu()" class="nav-link block py-2">Home</a>
+				<a href="about.html" onclick="toggleMobileMenu()" class="nav-link block py-2">About</a>
+				<a href="services.html" onclick="toggleMobileMenu()" class="nav-link block py-2">Services</a>
+				<a href="tools.html" onclick="toggleMobileMenu()" class="nav-link block py-2">Assessment Tools</a>
+				<a href="onboarding.html" onclick="toggleMobileMenu()" class="nav-link block py-2">Client Registration</a>
+				<a href="testimonials.html" onclick="toggleMobileMenu()" class="nav-link block py-2">Testimonials</a>
+                <a href="client_zone.html" onclick="toggleMobileMenu()" class="nav-link block py-2"><i class="fas fa-user-shield mr-1"></i>Client Zone</a>
+				<a href="contact.html" onclick="toggleMobileMenu()" class="nav-link block py-2 bg-primary text-center text-graybg1 rounded-md mt-2 hover:bg-primaryDark">Contact Us</a>
+			</div>
+		</div>
+	</div>
+</nav>
+
+<main id="services-section" class="min-h-screen pt-24">
+	<div class="container mx-auto px-4 py-16">
+		<div class="max-w-6xl mx-auto">
+			<h1 class="text-4xl md:text-6xl font-bold text-textlight mb-4 text-center font-headings leading-tight">
+                OUR TRANSFORMATIVE SERVICES
+            </h1>
+            <p class="text-xl text-textmedium text-center mb-16 max-w-3xl mx-auto">
+                Tailored strategies to unlock your peak physical and mental potential. Discover the path to a stronger, more resilient you.
+            </p>
+            {/* Suggestion: Add AOS parent container and individual data-aos attributes to cards */}
+			<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" data-aos-parent>
+				<div class="service-card" data-aos="fade-up">
+					<div class="service-icon"><i class="fas fa-dumbbell"></i></div>
+					<h3 class="text-2xl font-bold text-textlight mb-4 font-headings text-center">Personal Training</h3>
+					<p class="text-textmedium mb-6 text-sm leading-relaxed">Customised fitness programmes designed to push your limits and achieve results you never thought possible. Every session is tailored to your goals and capabilities.</p>
+					<ul class="text-sm text-textmedium space-y-2">
+						<li>1-on-1 personalised sessions</li>
+						<li>Custom workout programmes</li>
+						<li>Progress tracking & adjustments</li>
+						<li>Form correction & technique</li>
+					</ul>
+					<button onclick="window.location.href='contact.html#contactForm'" class="w-full btn btn-primary">
+						Get Started
+					</button>
+				</div>
+				<div class="service-card" data-aos="fade-up" data-aos-delay="100">
+					<div class="service-icon"><i class="fas fa-brain"></i></div>
+					<h3 class="text-2xl font-bold text-textlight mb-4 font-headings text-center">Mindset Coaching</h3>
+					<p class="text-textmedium mb-6 text-sm leading-relaxed">Transform your mental game with proven psychological techniques. Break through limiting beliefs and develop the mindset of a champion.</p>
+					<ul class="text-sm text-textmedium space-y-2">
+						<li>Limiting belief identification</li>
+						<li>Mental resilience training</li>
+						<li>Goal setting & visualization</li>
+						<li>Confidence building</li>
+					</ul>
+					<button onclick="window.location.href='tools.html#mindset-tab'" class="w-full btn btn-primary">
+						Take Assessment
+					</button>
+				</div>
+				<div class="service-card" data-aos="fade-up" data-aos-delay="200">
+					<div class="service-icon"><i class="fas fa-users"></i></div>
+					<h3 class="text-2xl font-bold text-textlight mb-4 font-headings text-center">Group Training</h3>
+					<p class="text-textmedium mb-6 text-sm leading-relaxed">High-energy group sessions that combine the motivation of training with others and the expertise of professional coaching.</p>
+					<ul class="text-sm text-textmedium space-y-2">
+						<li>Small group sessions (2-6 people)</li>
+						<li>Team building exercises</li>
+						<li>Competitive challenges</li>
+						<li>Cost-effective training</li>
+					</ul>
+					<button onclick="window.location.href='contact.html#contactForm'" class="w-full btn btn-primary">
+						Join a Group
+					</button>
+				</div>
+				<div class="service-card" data-aos="fade-up" data-aos-delay="50"> {/* Stagger delay for next row */}
+					<div class="service-icon"><i class="fas fa-laptop-code"></i></div>
+					<h3 class="text-2xl font-bold text-textlight mb-4 font-headings text-center">Online Coaching</h3>
+					<p class="text-textmedium mb-6 text-sm leading-relaxed">Get world-class coaching from anywhere. Comprehensive online programmes with regular check-ins and constant support.</p>
+					<ul class="text-sm text-textmedium space-y-2">
+						<li>Video workout programmes</li>
+						<li>Weekly check-ins & feedback</li>
+						<li>Nutrition guidance integration</li>
+						<li>24/7 message support via Client Zone</li>
+					</ul>
+					<button onclick="window.location.href='onboarding.html'" class="w-full btn btn-primary">
+						Start Online
+					</button>
+				</div>
+				<div class="service-card" data-aos="fade-up" data-aos-delay="150">
+					<div class="service-icon"><i class="fas fa-utensils"></i></div>
+					<h3 class="text-2xl font-bold text-textlight mb-4 font-headings text-center">Nutrition Guidance</h3>
+					<p class="text-textmedium mb-6 text-sm leading-relaxed">Sustainable nutrition strategies that fuel your performance and support your lifestyle. No fad diets, just proven science.</p>
+					<ul class="text-sm text-textmedium space-y-2">
+						<li>Personalised meal plans</li>
+						<li>Macro & calorie guidance</li>
+						<li>Supplement recommendations</li>
+						<li>Habit formation support</li>
+					</ul>
+					<button onclick="window.location.href='tools.html#fitness-tab'" class="w-full btn btn-primary">
+						Calculate Needs
+					</button>
+				</div>
+				<div class="service-card" data-aos="fade-up" data-aos-delay="250">
+					<div class="service-icon"><i class="fas fa-sync-alt"></i></div>
+					<h3 class="text-2xl font-bold text-textlight mb-4 font-headings text-center">Lifestyle Transformation</h3>
+					<p class="text-textmedium mb-6 text-sm leading-relaxed">Complete life overhaul programmes that address fitness, mindset, nutrition, and habits for total transformation.</p>
+					<ul class="text-sm text-textmedium space-y-2">
+						<li>Holistic 360° approach</li>
+						<li>Habit restructuring & coaching</li>
+						<li>Long-term sustainability focus</li>
+						<li>Integrated life coaching elements</li>
+					</ul>
+					<button onclick="window.location.href='onboarding.html'" class="w-full btn btn-primary">
+						Transform Now
+					</button>
+				</div>
+			</div>
+			<div class="text-center mt-20 py-10 bg-graybg2 rounded-lg shadow-xl">
+				<h2 class="text-3xl font-bold text-textlight mb-6 font-headings">INVEST IN YOURSELF. <span class="text-primary">THE RETURNS ARE LIMITLESS.</span></h2>
+				<p class="text-lg text-textmedium mb-8 max-w-xl mx-auto">Ready to take control and forge the best version of yourself? The journey begins with a single step.</p>
+				<button onclick="window.location.href='onboarding.html'" class="btn btn-primary btn-lg text-xl !px-10 !py-4">
+                    <i class="fas fa-rocket mr-2"></i>Begin Client Registration
+				</button>
+			</div>
+		</div>
+	</div>
+</main>
+
+<footer class="bg-graybg1 text-textlight py-12 border-t-4 border-primary">
+	<div class="container mx-auto px-4">
+		<div class="grid md:grid-cols-4 gap-8 mb-8">
+			<div>
+				<div class="flex items-center space-x-2 mb-4">
+					<div class="w-10 h-10 bg-primary rounded-md flex items-center justify-center">
+						<span class="text-graybg1 font-bold text-lg">P</span>
+					</div>
+					<div>
+						<a href="index.html" class="font-bold text-lg font-headings">Coach Pete Ryan</a>
+						<div class="text-xs text-textdark">Building Better People</div>
+					</div>
+				</div>
+				<p class="text-textdark text-sm mb-4">Transforming lives through the perfect blend of fitness training and mindset coaching.</p>
+                <div class="flex space-x-3">
+                    <a href="#" class="text-textmedium hover:text-primary text-xl"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="text-textmedium hover:text-primary text-xl"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-textmedium hover:text-primary text-xl"><i class="fab fa-youtube"></i></a>
+                </div>
+			</div>
+			<div>
+				<h4 class="font-semibold mb-4 font-headings text-textlight">Quick Links</h4>
+				<ul class="text-sm text-textdark space-y-2">
+					<li><a href="about.html" class="hover:text-primary transition-colors">About Pete</a></li>
+					<li><a href="services.html" class="hover:text-primary transition-colors">Services</a></li>
+					<li><a href="testimonials.html" class="hover:text-primary transition-colors">Testimonials</a></li>
+					<li><a href="contact.html" class="hover:text-primary transition-colors">Contact Us</a></li>
+				</ul>
+			</div>
+			<div>
+				<h4 class="font-semibold mb-4 font-headings text-textlight">Resources</h4>
+				<ul class="text-sm text-textdark space-y-2">
+					<li><a href="tools.html" class="hover:text-primary transition-colors">Assessment Tools</a></li>
+					<li><a href="onboarding.html" class="hover:text-primary transition-colors">Client Registration</a></li>
+                    <li><a href="client_zone.html" class="hover:text-primary transition-colors">Client Zone Login</a></li>
+					<li><a href="#" class="hover:text-primary transition-colors">Blog/Articles</a></li>
+				</ul>
+			</div>
+			<div>
+				<h4 class="font-semibold mb-4 font-headings text-textlight">Get In Touch</h4>
+				<ul class="text-sm text-textdark space-y-2">
+					<li><i class="fas fa-phone fa-fw mr-2 text-primary"></i>+44 7123 456789</li>
+					<li><i class="fas fa-envelope fa-fw mr-2 text-primary"></i>pete@coachpeteryan.com</li>
+					<li><i class="fas fa-map-marker-alt fa-fw mr-2 text-primary"></i>Thorpe, Surrey, UK</li>
+					<li><i class="fas fa-clock fa-fw mr-2 text-primary"></i>Mon-Fri: 6AM-8PM</li>
+				</ul>
+			</div>
+		</div>
+		<div class="border-t border-graybg3 mt-8 pt-8 text-center">
+				<p class="text-textdark text-sm">© <span id="currentYear"></span> Coach Pete Ryan. All rights reserved. | Building Better People, One Life at a Time.</p>
+		</div>
+	</div>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.2/marked.min.js"></script>
+<script>
+	document.getElementById('currentYear').textContent = new Date().getFullYear();
+	function toggleMobileMenu() {
+		const mobileMenu = document.getElementById('mobileMenu');
+        const burgerIcon = document.querySelector('.md\\:hidden i');
+		mobileMenu.classList.toggle('hidden');
+        if (mobileMenu.classList.contains('hidden')) {
+            burgerIcon.classList.remove('fa-times');
+            burgerIcon.classList.add('fa-bars');
+        } else {
+            burgerIcon.classList.remove('fa-bars');
+            burgerIcon.classList.add('fa-times');
+        }
+	}
+	function setActiveNavLink() {
+		const navLinks = document.querySelectorAll('nav a.nav-link'); // Select all nav links for broader application
+		let currentPath = window.location.pathname.split('/').pop();
+		if (currentPath === '' || currentPath === 'index.html') {
+				currentPath = 'index.html'; // Default for root
+		}
+        // Normalize services.html path
+        if (window.location.pathname.includes('services.html')) {
+            currentPath = 'services.html';
+        }
+
+		navLinks.forEach(link => {
+            const linkHref = link.getAttribute('href');
+			if (linkHref === currentPath) {
+				link.classList.add('active');
+			} else {
+				link.classList.remove('active');
+			}
+		});
+	}
+	document.addEventListener('DOMContentLoaded', function() {
+		setActiveNavLink();
+        // Example: If you were to use AOS (Animate On Scroll)
+        // AOS.init({
+        //     duration: 700, // values from 0 to 3000, with step 50ms
+        //     easing: 'ease-in-out-cubic', // default easing for AOS animations
+        //     once: true, // whether animation should happen only once - while scrolling down
+        //     offset: 100, // offset (in px) from the original trigger point
+        // });
+	});
+</script>
+</body>
+</html>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Login - Coach Pete Ryan | Building Better People</title>
+	<link href="output.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+	<script src="https://cdn.tailwindcss.com"></script>
+	<script>
+		tailwind.config = {
+			theme: {
+				extend: {
+					colors: {
+						primary: '#ff6b35',
+						primaryDark: '#ff8c42',
+						secondary: '#ff8c42',
+						accent: '#00d4ff',
+						graybg1: '#1a1a1a',
+						graybg2: '#2d2d2d',
+						graybg3: '#3d3d3d',
+						textlight: '#e0e0e0',
+						textmedium: '#b0b0b0',
+						textdark: '#808080'
+					},
+					fontFamily: {
+						'headings': ['Oswald', 'sans-serif'],
+						'body': ['Open Sans', 'sans-serif']
+					}
+				}
+			}
+		}
+	</script>
+	<style>
+		body { font-family: 'Open Sans', sans-serif; background-color: #1a1a1a; color: #b0b0b0; display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 1rem;}
+		h1, h2, h3, h4, h5, h6 { font-family: 'Oswald', sans-serif; color: #e0e0e0; }
+
+		.form-input {
+			background-color: #3d3d3d; /* graybg3 */
+			border: 1px solid #4a4a4a; /* slightly lighter graybg3 for definition */
+			color: #e0e0e0; /* textlight */
+			border-radius: 0.25rem;
+			padding: 0.875rem 1rem; /* Slightly taller inputs */
+			width: 100%;
+			transition: border-color 0.2s ease, box-shadow 0.2s ease;
+			font-size: 1rem;
+		}
+		.form-input::placeholder { color: #808080; /* textdark */ }
+		.form-input:focus {
+			border-color: #ff6b35; /* primary */
+			box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.3); /* primary with alpha */
+			outline: none;
+		}
+		.input-icon-wrapper { position: relative; }
+		.input-icon { position: absolute; left: 0.75rem; top: 50%; transform: translateY(-50%); color: #808080; /* textdark */ }
+		.form-input.pl-10 { padding-left: 2.5rem; }
+
+
+		.btn {
+			display: inline-block; padding: 0.875rem 1.5rem; border-radius: 0.25rem; font-weight: 700;
+			text-transform: uppercase; letter-spacing: 0.05em; transition: all 0.2s ease-in-out;
+			border: 2px solid transparent; text-align:center; font-size: 1rem;
+		}
+		.btn-primary { background-color: #ff6b35; color: #1a1a1a; border-color: #ff6b35; }
+		.btn-primary:hover { background-color: #ff8c42; border-color: #ff8c42; transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.3); }
+		.btn-primary:disabled { background-color: #3d3d3d; color: #808080; border-color: #3d3d3d; cursor: not-allowed; }
+
+		.login-card {
+			background-color: #2d2d2d; /* graybg2 */
+			border-radius: 0.5rem;
+			padding: 2rem 2.5rem; /* More padding */
+			box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+			width: 100%;
+			max-width: 450px; /* Max width for the card */
+			border-top: 4px solid #ff6b35; /* Primary accent top border */
+		}
+		/* Subtle texture for the body background if desired */
+		/* body::before {
+			content: ""; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+			background-image: url('path/to/subtle-grit-texture.png');
+			opacity: 0.03; z-index: -1;
+		} */
+	</style>
+</head>
+<body class="font-body">
+<script>
+	document.documentElement.classList.add('dark');
+</script>
+
+	<div class="login-card">
+		<div class="text-center mb-8">
+			<a href="index.html" class="inline-block mb-4">
+				<div class="w-16 h-16 bg-primary rounded-md flex items-center justify-center shadow-lg mx-auto">
+					<span class="text-graybg1 font-bold text-3xl">P</span>
+				</div>
+			</a>
+			<h1 class="text-3xl font-headings text-textlight mb-1">CLIENT LOGIN</h1>
+			<p class="text-textmedium">Access your Coach Pete Ryan portal.</p>
+		</div>
+
+		<form id="loginForm" class="space-y-6">
+			<div>
+				<label for="email" class="block text-sm font-medium text-textmedium mb-1">Email Address</label>
+				<div class="input-icon-wrapper">
+					<i class="fas fa-envelope input-icon"></i>
+					<input type="email" id="email" name="email" required class="form-input pl-10" placeholder="you@example.com">
+				</div>
+			</div>
+
+			<div>
+				<div class="flex justify-between items-center mb-1">
+					<label for="password" class="block text-sm font-medium text-textmedium">Password</label>
+					<a href="#" class="text-xs text-accent hover:underline">Forgot Password?</a>
+				</div>
+				<div class="input-icon-wrapper">
+					<i class="fas fa-lock input-icon"></i>
+					<input type="password" id="password" name="password" required class="form-input pl-10" placeholder="Enter your password">
+				</div>
+			</div>
+			
+			<div id="loginMessage" class="text-sm text-center"></div>
+
+			<div>
+				<button type="submit" id="loginButton" class="w-full btn btn-primary">
+					<i class="fas fa-sign-in-alt mr-2"></i>Login
+				</button>
+			</div>
+		</form>
+
+		<div class="mt-8 text-center">
+			<p class="text-sm text-textdark">
+				Don't have an account?
+				<a href="onboarding.html" class="font-semibold text-primary hover:text-primaryDark hover:underline">Register Here</a>
+			</p>
+		</div>
+		<div class="mt-4 text-center">
+			 <a href="index.html" class="text-xs text-textdark hover:text-accent hover:underline"><i class="fas fa-arrow-left mr-1"></i>Back to Main Site</a>
+		</div>
+	</div>
+
+	<script>
+		const loginForm = document.getElementById('loginForm');
+		const loginButton = document.getElementById('loginButton');
+		const loginMessage = document.getElementById('loginMessage');
+
+		loginForm.addEventListener('submit', function(event) {
+			event.preventDefault();
+			loginMessage.textContent = '';
+			loginMessage.classList.remove('text-red-500', 'text-green-500'); // Assuming you might add Tailwind color classes
+
+			const email = document.getElementById('email').value.trim();
+			const password = document.getElementById('password').value.trim();
+
+			let isValid = true;
+			// Basic client-side validation
+			if (email === '') {
+				document.getElementById('email').classList.add('border-red-500');
+				isValid = false;
+			} else {
+				document.getElementById('email').classList.remove('border-red-500');
+			}
+
+			if (password === '') {
+				document.getElementById('password').classList.add('border-red-500');
+				isValid = false;
+			} else {
+				document.getElementById('password').classList.remove('border-red-500');
+			}
+
+			if (!isValid) {
+				loginMessage.textContent = 'Please fill in all fields.';
+				loginMessage.style.color = '#ff8c42'; // primaryDark for error
+				return;
+			}
+
+			// Simulate API call / authentication
+			loginButton.disabled = true;
+			loginButton.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Logging In...';
+
+			// In a real application, you would make an API call here.
+			// For demonstration, we'll use a timeout and then redirect.
+			setTimeout(() => {
+				// Simulate success/failure based on some mock credentials
+				// For this demo, we'll always succeed.
+				if (email && password) { // Replace with actual auth check
+					loginMessage.textContent = 'Login successful! Redirecting...';
+					loginMessage.style.color = '#00d4ff'; // accent for success
+					
+					// Store a mock login state (in a real app, backend sets a session/token)
+					try {
+						localStorage.setItem('isLoggedInCpr', 'true');
+						localStorage.setItem('loggedInUserEmailCpr', email); // Store email for personalization
+					} catch (e) {
+						console.warn("localStorage is not available. Mock login state won't persist.");
+					}
+
+					setTimeout(() => {
+						window.location.href = 'client_zone.html';
+					}, 1000);
+				} else {
+					// loginMessage.textContent = 'Invalid credentials. Please try again.';
+					// loginMessage.style.color = '#ff8c42'; // primaryDark for error
+					// loginButton.disabled = false;
+					// loginButton.innerHTML = '<i class="fas fa-sign-in-alt mr-2"></i>Login';
+				}
+			}, 1500);
+		});
+	</script>
+</body>
+</html>

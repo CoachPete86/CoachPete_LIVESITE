@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Testimonials - Coach Pete Ryan | Building Better People</title>
+	<link href="output.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+	<script src="https://cdn.tailwindcss.com"></script>
+	<script>
+		tailwind.config = {
+			theme: {
+				extend: {
+					colors: {
+						primary: '#ff6b35',
+						primaryDark: '#ff8c42',
+						secondary: '#ff8c42',
+						accent: '#00d4ff',
+						graybg1: '#1a1a1a',
+						graybg2: '#2d2d2d',
+						graybg3: '#3d3d3d',
+						textlight: '#e0e0e0',
+						textmedium: '#b0b0b0',
+						textdark: '#808080'
+					},
+					fontFamily: {
+						'headings': ['Oswald', 'sans-serif'],
+						'body': ['Open Sans', 'sans-serif']
+					}
+				}
+			}
+		}
+	</script>
+	<style>
+		body { font-family: 'Open Sans', sans-serif; background-color: #1a1a1a; color: #b0b0b0; }
+		h1, h2, h3, h4, h5, h6 { font-family: 'Oswald', sans-serif; color: #e0e0e0; }
+		.nav-link { transition: all 0.3s ease; color: #b0b0b0; }
+		.nav-link:hover { color: #ff8c42; }
+		.nav-link.active { color: #ff6b35; font-weight: 600; }
+		.sticky-nav { backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+
+        .btn {
+            display: inline-block; padding: 0.75rem 1.5rem; border-radius: 0.25rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 0.05em; transition: all 0.2s ease-in-out;
+            border: 2px solid transparent; text-align:center;
+        }
+        .btn-primary { background-color: #ff6b35; color: #1a1a1a; border-color: #ff6b35; }
+        .btn-primary:hover { background-color: #ff8c42; border-color: #ff8c42; transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.3); }
+        .btn-secondary-outline {
+            border: 2px solid #e0e0e0; color: #e0e0e0; background-color: transparent;
+        }
+        .btn-secondary-outline:hover {
+            background-color: #e0e0e0; color: #1a1a1a; transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(255,255,255,0.1);
+        }
+
+        .testimonial-card {
+            background-color: #2d2d2d; /* graybg2 */
+            border: 1px solid #3d3d3d; /* graybg3 */
+            border-radius: 0.5rem;
+            padding: 2rem;
+            transition: all 0.3s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            position: relative; /* For pseudo-elements if needed */
+        }
+        .testimonial-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+            border-color: #ff6b35; /* Primary color border on hover */
+        }
+        .testimonial-avatar {
+            width: 4rem; /* 64px */
+            height: 4rem; /* 64px */
+            background-color: #ff6b35; /* primary */
+            color: #1a1a1a; /* graybg1 for contrast */
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.875rem; /* text-3xl */
+            font-weight: 700;
+            margin-right: 1rem;
+            flex-shrink: 0;
+            border: 2px solid #ff8c42; /* primaryDark border for avatar */
+        }
+        .testimonial-quote {
+            font-style: italic;
+            color: #e0e0e0; /* textlight for quote */
+            line-height: 1.7; /* Improved readability */
+            margin-bottom: 1rem;
+            position: relative;
+            padding-left: 2.5rem; /* Space for quote icon */
+        }
+        .testimonial-quote::before {
+            content: "\\f10d"; /* Font Awesome quote-left */
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            color: #ff6b35; /* primary */
+            font-size: 2rem;
+            position: absolute;
+            left: 0;
+            top: -0.25rem;
+            opacity: 0.8;
+        }
+        .star-rating i { margin-right: 0.125rem; }
+
+	</style>
+</head>
+<body class="font-body">
+<script>
+	document.documentElement.classList.add('dark');
+</script>
+
+<nav class="fixed top-0 left-0 right-0 bg-graybg2/90 sticky-nav z-50 border-b border-graybg3">
+	<div class="container mx-auto px-4">
+		<div class="flex justify-between items-center py-4">
+			<a href="index.html" class="flex items-center space-x-2">
+				<div class="w-10 h-10 bg-primary rounded-md flex items-center justify-center shadow-md">
+					<span class="text-graybg1 font-bold text-lg">P</span>
+				</div>
+				<div>
+					<div class="font-bold text-textlight text-lg font-headings">Coach Pete Ryan</div>
+					<div class="text-xs text-textdark">Building Better People</div>
+				</div>
+			</a>
+			<div class="hidden md:flex space-x-6 items-center">
+				<a href="index.html" class="nav-link">Home</a>
+				<a href="about.html" class="nav-link">About</a>
+				<a href="services.html" class="nav-link">Services</a>
+				<a href="tools.html" class="nav-link">Assessment Tools</a>
+				<a href="onboarding.html" class="nav-link">Client Registration</a>
+				<a href="testimonials.html" class="nav-link">Testimonials</a>
+                <a href="client_zone.html" class="nav-link"><i class="fas fa-user-shield mr-1"></i>Client Zone</a>
+				<a href="contact.html" class="nav-link btn btn-primary !py-2 !px-4 !text-sm">Contact</a>
+			</div>
+			<button onclick="toggleMobileMenu()" class="md:hidden p-2 text-textlight">
+				<i class="fas fa-bars fa-lg"></i>
+			</button>
+		</div>
+		<div id="mobileMenu" class="hidden md:hidden pb-4 border-t border-graybg3 mt-2">
+			<div class="flex flex-col space-y-2 pt-2">
+				<a href="index.html" onclick="toggleMobileMenu()" class="nav-link block py-2">Home</a>
+				<a href="about.html" onclick="toggleMobileMenu()" class="nav-link block py-2">About</a>
+				<a href="services.html" onclick="toggleMobileMenu()" class="nav-link block py-2">Services</a>
+				<a href="tools.html" onclick="toggleMobileMenu()" class="nav-link block py-2">Assessment Tools</a>
+				<a href="onboarding.html" onclick="toggleMobileMenu()" class="nav-link block py-2">Client Registration</a>
+				<a href="testimonials.html" onclick="toggleMobileMenu()" class="nav-link block py-2">Testimonials</a>
+                <a href="client_zone.html" onclick="toggleMobileMenu()" class="nav-link block py-2"><i class="fas fa-user-shield mr-1"></i>Client Zone</a>
+				<a href="contact.html" onclick="toggleMobileMenu()" class="nav-link block py-2 bg-primary text-center text-graybg1 rounded-md mt-2 hover:bg-primaryDark">Contact Us</a>
+			</div>
+		</div>
+	</div>
+</nav>
+
+<main id="testimonials-section" class="min-h-screen pt-24">
+	<div class="container mx-auto px-4 py-16">
+		<div class="max-w-5xl mx-auto"> {/* Increased max-width */}
+			<h1 class="text-4xl md:text-6xl font-bold text-textlight mb-4 text-center font-headings leading-tight">
+                WORDS FROM <span class="text-primary">THE TRANSFORMED</span>
+            </h1>
+            <p class="text-xl text-textmedium text-center mb-16 max-w-3xl mx-auto">
+                Real stories from clients who've unlocked their potential and redefined their limits with Coach Pete.
+            </p>
+            {/* Suggestion: Add AOS parent container and individual data-aos attributes to cards */}
+			<div class="grid md:grid-cols-2 gap-8 mb-16" data-aos-parent>
+				<div class="testimonial-card" data-aos="fade-up">
+					<div class="flex items-center mb-6">
+						<div class="testimonial-avatar">S</div>
+						<div>
+							<div class="font-semibold text-xl text-textlight font-headings">Sarah M.</div>
+							<div class="text-sm text-textdark">Business Executive</div>
+						</div>
+					</div>
+					<p class="testimonial-quote">
+						"Pete didn't just change my body, he changed my entire mindset. I'm now stronger mentally and physically than I've ever been. His approach is unlike anything I've experienced. Truly world-class!"
+					</p>
+					<div class="star-rating text-primary mt-auto pt-4 border-t border-graybg3 text-lg">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+				</div>
+				<div class="testimonial-card" data-aos="fade-up" data-aos-delay="100">
+					<div class="flex items-center mb-6">
+						<div class="testimonial-avatar">M</div>
+						<div>
+							<div class="font-semibold text-xl text-textlight font-headings">Mike R.</div>
+							<div class="text-sm text-textdark">Software Developer</div>
+						</div>
+					</div>
+					<p class="testimonial-quote">
+						"Working with Pete has been life-changing. His 4-step process really works - I've lost 2 stone and gained confidence I never knew I had. The mindset coaching made all the difference. Highly recommend!"
+					</p>
+					<div class="star-rating text-primary mt-auto pt-4 border-t border-graybg3 text-lg">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+				</div>
+				<div class="testimonial-card" data-aos="fade-up" data-aos-delay="200">
+					<div class="flex items-center mb-6">
+						<div class="testimonial-avatar">L</div>
+						<div>
+							<div class="font-semibold text-xl text-textlight font-headings">Lisa T.</div>
+							<div class="text-sm text-textdark">Teacher</div>
+						</div>
+					</div>
+					<p class="testimonial-quote">
+						"Pete's online coaching programme kept me motivated and accountable, especially during challenging times. His constant support and tailored adjustments to my programme meant I actually came out stronger and more focused than before."
+					</p>
+					<div class="star-rating text-primary mt-auto pt-4 border-t border-graybg3 text-lg">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i> {/* Example for 4.5 stars */}
+                    </div>
+				</div>
+				<div class="testimonial-card" data-aos="fade-up" data-aos-delay="300">
+					<div class="flex items-center mb-6">
+						<div class="testimonial-avatar">J</div>
+						<div>
+							<div class="font-semibold text-xl text-textlight font-headings">James K.</div>
+							<div class="text-sm text-textdark">Entrepreneur</div>
+						</div>
+					</div>
+					<p class="testimonial-quote">
+						"The group training sessions are incredible - great energy, professional coaching, and amazing results. Pete pushes you to achieve things you didn't think were possible, all while fostering a supportive team environment."
+					</p>
+					<div class="star-rating text-primary mt-auto pt-4 border-t border-graybg3 text-lg">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+				</div>
+                {/* Add more testimonial cards here if available */}
+			</div>
+			<div class="text-center mt-20 py-10 bg-graybg2 rounded-lg shadow-xl border-t-4 border-accent">
+				<h3 class="text-3xl font-bold text-textlight mb-6 font-headings">READY TO SHARE YOUR <span class="text-primary">SUCCESS STORY?</span></h3>
+				<p class="text-lg text-textmedium mb-8 max-w-xl mx-auto">Your transformation is an inspiration. Start your journey today and become another testament to what's possible.</p>
+				<div class="space-y-4 md:space-y-0 md:space-x-6 md:flex md:justify-center">
+					<button onclick="window.location.href='onboarding.html'" class="w-full md:w-auto btn btn-primary text-lg">
+						<i class="fas fa-user-plus mr-2"></i>Start Your Journey
+					</button>
+					<button onclick="window.location.href='contact.html'" class="w-full md:w-auto btn btn-secondary-outline text-lg">
+						<i class="fas fa-comments mr-2"></i>Contact Pete
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</main>
+
+<footer class="bg-graybg1 text-textlight py-12 border-t-4 border-primary">
+	<div class="container mx-auto px-4">
+		<div class="grid md:grid-cols-4 gap-8 mb-8">
+			<div>
+				<div class="flex items-center space-x-2 mb-4">
+					<div class="w-10 h-10 bg-primary rounded-md flex items-center justify-center">
+						<span class="text-graybg1 font-bold text-lg">P</span>
+					</div>
+					<div>
+						<a href="index.html" class="font-bold text-lg font-headings">Coach Pete Ryan</a>
+						<div class="text-xs text-textdark">Building Better People</div>
+					</div>
+				</div>
+				<p class="text-textdark text-sm mb-4">Transforming lives through the perfect blend of fitness training and mindset coaching.</p>
+                <div class="flex space-x-3">
+                    <a href="#" class="text-textmedium hover:text-primary text-xl"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="text-textmedium hover:text-primary text-xl"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-textmedium hover:text-primary text-xl"><i class="fab fa-youtube"></i></a>
+                </div>
+			</div>
+			<div>
+				<h4 class="font-semibold mb-4 font-headings text-textlight">Quick Links</h4>
+				<ul class="text-sm text-textdark space-y-2">
+					<li><a href="about.html" class="hover:text-primary transition-colors">About Pete</a></li>
+					<li><a href="services.html" class="hover:text-primary transition-colors">Services</a></li>
+					<li><a href="testimonials.html" class="hover:text-primary transition-colors">Testimonials</a></li>
+					<li><a href="contact.html" class="hover:text-primary transition-colors">Contact Us</a></li>
+				</ul>
+			</div>
+			<div>
+				<h4 class="font-semibold mb-4 font-headings text-textlight">Resources</h4>
+				<ul class="text-sm text-textdark space-y-2">
+					<li><a href="tools.html" class="hover:text-primary transition-colors">Assessment Tools</a></li>
+					<li><a href="onboarding.html" class="hover:text-primary transition-colors">Client Registration</a></li>
+                    <li><a href="client_zone.html" class="hover:text-primary transition-colors">Client Zone Login</a></li>
+					<li><a href="#" class="hover:text-primary transition-colors">Blog/Articles</a></li>
+				</ul>
+			</div>
+			<div>
+				<h4 class="font-semibold mb-4 font-headings text-textlight">Get In Touch</h4>
+				<ul class="text-sm text-textdark space-y-2">
+					<li><i class="fas fa-phone fa-fw mr-2 text-primary"></i>+44 7123 456789</li>
+					<li><i class="fas fa-envelope fa-fw mr-2 text-primary"></i>pete@coachpeteryan.com</li>
+					<li><i class="fas fa-map-marker-alt fa-fw mr-2 text-primary"></i>Thorpe, Surrey, UK</li>
+					<li><i class="fas fa-clock fa-fw mr-2 text-primary"></i>Mon-Fri: 6AM-8PM</li>
+				</ul>
+			</div>
+		</div>
+		<div class="border-t border-graybg3 mt-8 pt-8 text-center">
+				<p class="text-textdark text-sm">© <span id="currentYear"></span> Coach Pete Ryan. All rights reserved. | Building Better People, One Life at a Time.</p>
+		</div>
+	</div>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.2/marked.min.js"></script>
+<script>
+	document.getElementById('currentYear').textContent = new Date().getFullYear();
+	function toggleMobileMenu() {
+		const mobileMenu = document.getElementById('mobileMenu');
+        const burgerIcon = document.querySelector('.md\\:hidden i');
+		mobileMenu.classList.toggle('hidden');
+        if (mobileMenu.classList.contains('hidden')) {
+            burgerIcon.classList.remove('fa-times');
+            burgerIcon.classList.add('fa-bars');
+        } else {
+            burgerIcon.classList.remove('fa-bars');
+            burgerIcon.classList.add('fa-times');
+        }
+	}
+	function setActiveNavLink() {
+		const navLinks = document.querySelectorAll('nav a.nav-link');
+		let currentPath = window.location.pathname.split('/').pop();
+		 if (currentPath === '' || currentPath === 'index.html') {
+				currentPath = 'index.html';
+		}
+        if (window.location.pathname.includes('testimonials.html')) {
+            currentPath = 'testimonials.html';
+        }
+		navLinks.forEach(link => {
+            const linkHref = link.getAttribute('href');
+			if (linkHref === currentPath) {
+				link.classList.add('active');
+			} else {
+				link.classList.remove('active');
+			}
+		});
+	}
+	document.addEventListener('DOMContentLoaded', function() {
+		setActiveNavLink();
+        // Optional: Add AOS init if you use scroll animations
+        // AOS.init({ duration: 700, once: true, offset: 100 });
+	});
+</script>
+</body>
+</html>
