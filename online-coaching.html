@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Online Coaching - Coach Pete Ryan</title>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-orange: #ff6b35;
+      --secondary-orange: #ff8c42;
+      --dark-grey: #1a1a1a;
+      --medium-grey: #2d2d2d;
+      --light-grey: #3d3d3d;
+      --text-light: #e0e0e0;
+      --text-medium: #b0b0b0;
+      --text-dark: #808080;
+    }
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+      margin: 0;
+      background: linear-gradient(135deg, var(--dark-grey) 0%, var(--medium-grey) 100%);
+      color: var(--text-light);
+    }
+
+    .service-hero {
+      background: linear-gradient(rgba(26, 26, 26, 0.7), rgba(45, 45, 45, 0.7)), url('https://raw.githubusercontent.com/CoachPete86/images/main/coach_hero_ext.png') center/cover;
+      height: 80vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .service-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 3rem;
+      color: var(--text-light);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .service-subtitle {
+      font-size: 1.5rem;
+      color: var(--primary-orange);
+      margin-top: 1rem;
+    }
+
+    .service-content {
+      max-width: 1000px;
+      margin: 3rem auto;
+      padding: 0 2rem;
+    }
+
+    .section {
+      margin-bottom: 3rem;
+    }
+
+    .section-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: var(--primary-orange);
+    }
+
+    .section-description, p {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--text-medium);
+    }
+
+    ul.included-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    ul.included-list li {
+      margin-bottom: 0.5rem;
+      position: relative;
+      padding-left: 1.5rem;
+    }
+
+    ul.included-list li::before {
+      content: "\2713";
+      color: var(--primary-orange);
+      position: absolute;
+      left: 0;
+    }
+
+    .testimonial-card {
+      background: rgba(255, 255, 255, 0.05);
+      border-left: 4px solid var(--primary-orange);
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .testimonial-author {
+      color: var(--primary-orange);
+      font-weight: bold;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <section class="service-hero">
+    <div>
+      <h1 class="service-title">Online Coaching</h1>
+      <p class="service-subtitle">Train anywhere. Stay accountable. Never guess again.</p>
+      <p style="font-style: italic; color: #ccc; margin-top: 1rem;">"I get better results now remotely than I ever did in the gym on my own."</p>
+    </div>
+  </section>
+
+  <section class="service-content">
+    <div class="section">
+      <h2 class="section-title">What Is Online Coaching?</h2>
+      <p class="section-description">It’s personal training — without borders. I build your full fitness programme based on your goals, experience, equipment, and time available. You train when and where suits you best — I’ll be there with guidance, structure, and direct support.</p>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">What You’ll Get</h2>
+      <ul class="included-list">
+        <li>Custom weekly training plan adjusted as you progress</li>
+        <li>App-based workout tracking with video demos + cues</li>
+        <li>Ongoing WhatsApp and email access for questions + check-ins</li>
+        <li>Monthly Zoom review call to analyse progress + challenges</li>
+        <li>Form checks — send your videos, get personal technique feedback</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">Who It’s For</h2>
+      <p class="section-description">Busy professionals. Parents. Gym introverts. Athletes. Anyone tired of winging it or plateauing. You’ll never waste another session wondering what to do. You’ll train with clarity and strategy — from anywhere in the world.</p>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">Pricing</h2>
+      <ul class="included-list">
+        <li>£129/month</li>
+        <li>No contract — cancel anytime</li>
+        <li>Discount for 3+ month prepay</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">What Clients Say</h2>
+      <div class="testimonial-card">
+        <p>"I travel for work constantly. Pete’s online coaching gave me consistency, a plan, and actual progress — even from hotel gyms."</p>
+        <p class="testimonial-author">– Marcus J.</p>
+      </div>
+      <div class="testimonial-card">
+        <p>"Every week feels tailored. I never feel like I’m guessing or doing ‘filler’ workouts. Best investment I’ve made for my health."</p>
+        <p class="testimonial-author">– Jess K.</p>
+      </div>
+    </div>
+  </section>
+</body>
+</html>

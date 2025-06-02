@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Group Training - Coach Pete Ryan</title>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-orange: #ff6b35;
+      --secondary-orange: #ff8c42;
+      --dark-grey: #1a1a1a;
+      --medium-grey: #2d2d2d;
+      --light-grey: #3d3d3d;
+      --text-light: #e0e0e0;
+      --text-medium: #b0b0b0;
+      --text-dark: #808080;
+    }
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+      margin: 0;
+      background: linear-gradient(135deg, var(--dark-grey) 0%, var(--medium-grey) 100%);
+      color: var(--text-light);
+    }
+
+    .service-hero {
+      background: linear-gradient(rgba(26, 26, 26, 0.7), rgba(45, 45, 45, 0.7)), url('https://raw.githubusercontent.com/CoachPete86/images/main/coach_hero_ext.png') center/cover;
+      height: 80vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .service-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 3rem;
+      color: var(--text-light);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .service-subtitle {
+      font-size: 1.5rem;
+      color: var(--primary-orange);
+      margin-top: 1rem;
+    }
+
+    .service-content {
+      max-width: 1000px;
+      margin: 3rem auto;
+      padding: 0 2rem;
+    }
+
+    .section {
+      margin-bottom: 3rem;
+    }
+
+    .section-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: var(--primary-orange);
+    }
+
+    .section-description, p {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--text-medium);
+    }
+
+    ul.included-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    ul.included-list li {
+      margin-bottom: 0.5rem;
+      position: relative;
+      padding-left: 1.5rem;
+    }
+
+    ul.included-list li::before {
+      content: "\2713";
+      color: var(--primary-orange);
+      position: absolute;
+      left: 0;
+    }
+
+    .testimonial-card {
+      background: rgba(255, 255, 255, 0.05);
+      border-left: 4px solid var(--primary-orange);
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .testimonial-author {
+      color: var(--primary-orange);
+      font-weight: bold;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <section class="service-hero">
+    <div>
+      <h1 class="service-title">Group Training</h1>
+      <p class="service-subtitle">Push harder. Laugh louder. Level up together.</p>
+      <p style="font-style: italic; color: #ccc; margin-top: 1rem;">"The energy in Pete’s classes is next level. It’s the highlight of my week."</p>
+    </div>
+  </section>
+
+  <section class="service-content">
+    <div class="section">
+      <h2 class="section-title">Why Group Training?</h2>
+      <p class="section-description">There’s something powerful about shared effort. Group training delivers the coaching quality of personal sessions with the energy, motivation, and community of a team. You’ll train smarter, sweat harder, and leave every session buzzing.</p>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">What Makes These Different</h2>
+      <ul class="included-list">
+        <li>Coach-led from start to finish — no guessing, no winging it.</li>
+        <li>Planned progressive structure — each week builds on the last.</li>
+        <li>Training blocks that mix strength, conditioning, and mobility.</li>
+        <li>Focus on proper technique and form — not just keeping up.</li>
+        <li>Personal modifications to suit all levels, injuries, and needs.</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">Session Types</h2>
+      <p><strong>SWEAT 45:</strong> High-intensity, no-nonsense fat-burning circuits using a mix of dumbbells, kettlebells, sleds, rowers, and bodyweight drills.</p>
+      <p><strong>ENGINE:</strong> Cardio-focused workouts to improve heart health, VO2 max, and endurance with ski ergs, rowers, and bikes.</p>
+      <p><strong>TEAM TRAIN:</strong> Partner or small-group drills designed to challenge teamwork and motivation. You’ll go further with others in your corner.</p>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">Schedule + Pricing</h2>
+      <ul class="included-list">
+        <li>Group sessions held at PureGym West Byfleet</li>
+        <li>Class sizes capped for quality coaching</li>
+        <li>Drop-in: £12 per session</li>
+        <li>Monthly unlimited pass: £85</li>
+        <li>Free trial for first-timers — message to book</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">What Clients Say</h2>
+      <div class="testimonial-card">
+        <p>"It feels like PT but with your mates cheering you on. Pete’s attention to form and energy is unmatched."</p>
+        <p class="testimonial-author">– Ash D.</p>
+      </div>
+      <div class="testimonial-card">
+        <p>"I hated the gym. These sessions flipped that on its head. I'm the fittest and most confident I've ever been."</p>
+        <p class="testimonial-author">– Louisa P.</p>
+      </div>
+    </div>
+  </section>
+</body>
+</html>

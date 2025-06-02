@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personal Training - Coach Pete Ryan</title>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-orange: #ff6b35;
+      --secondary-orange: #ff8c42;
+      --dark-grey: #1a1a1a;
+      --medium-grey: #2d2d2d;
+      --light-grey: #3d3d3d;
+      --text-light: #e0e0e0;
+      --text-medium: #b0b0b0;
+      --text-dark: #808080;
+    }
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+      margin: 0;
+      background: linear-gradient(135deg, var(--dark-grey) 0%, var(--medium-grey) 100%);
+      color: var(--text-light);
+    }
+
+    .service-hero {
+      background: linear-gradient(rgba(26, 26, 26, 0.7), rgba(45, 45, 45, 0.7)), url('https://raw.githubusercontent.com/CoachPete86/images/main/coach_hero_ext.png') center/cover;
+      height: 80vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .service-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 3rem;
+      color: var(--text-light);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .service-subtitle {
+      font-size: 1.5rem;
+      color: var(--primary-orange);
+      margin-top: 1rem;
+    }
+
+    .service-content {
+      max-width: 1000px;
+      margin: 3rem auto;
+      padding: 0 2rem;
+    }
+
+    .section {
+      margin-bottom: 3rem;
+    }
+
+    .section-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: var(--primary-orange);
+    }
+
+    .section-description, p {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--text-medium);
+    }
+
+    ul.included-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    ul.included-list li {
+      margin-bottom: 0.5rem;
+      position: relative;
+      padding-left: 1.5rem;
+    }
+
+    ul.included-list li::before {
+      content: "\2713";
+      color: var(--primary-orange);
+      position: absolute;
+      left: 0;
+    }
+
+    .pricing-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .pricing-table th,
+    .pricing-table td {
+      border: 1px solid var(--light-grey);
+      padding: 1rem;
+      text-align: left;
+    }
+
+    .pricing-table th {
+      background: var(--medium-grey);
+    }
+
+    .pricing-table td {
+      background: rgba(255,255,255,0.05);
+    }
+
+    .testimonial-card {
+      background: rgba(255, 255, 255, 0.05);
+      border-left: 4px solid var(--primary-orange);
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .testimonial-author {
+      color: var(--primary-orange);
+      font-weight: bold;
+      margin-top: 1rem;
+    }
+
+    .faq h3 {
+      color: var(--primary-orange);
+      margin-top: 1.5rem;
+    }
+
+    .faq p {
+      margin-bottom: 1rem;
+      color: var(--text-medium);
+    }
+  </style>
+</head>
+<body>
+  <section class="service-hero">
+    <div>
+      <h1 class="service-title">Personal Training</h1>
+      <p class="service-subtitle">Training Tailored for Real Transformation</p>
+      <p style="font-style: italic; color: #ccc; margin-top: 1rem;">"I never thought I'd enjoy working out — now I can't imagine my week without it."</p>
+    </div>
+  </section>
+
+  <section class="service-content">
+    <div class="section">
+      <h2 class="section-title">What Personal Training Means Here</h2>
+      <p class="section-description">Forget one-size-fits-all. My personal training approach is about building <strong>your</strong> results around <strong>your</strong> life. Whether you're chasing strength, fat loss, pain-free movement, or just confidence in your body again — I make sure every session counts.</p>
+      <p class="section-description">You won’t just “turn up and sweat”. You'll learn the right movement for your body, with precision coaching and a plan that adapts with you. You'll be held accountable, challenged, and supported every step of the way.</p>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">What’s Included</h2>
+      <ul class="included-list">
+        <li><strong>Initial Consultation & Movement Screen</strong> – Assess your mobility, past injuries, training history, and lifestyle habits to form your game plan.</li>
+        <li><strong>Tailored Weekly Training</strong> – Bespoke programming built around your exact goal, schedule, recovery, and equipment access.</li>
+        <li><strong>1-to-1 In-Person Coaching</strong> – Form checks, performance tweaks, and intensity you just can’t replicate solo.</li>
+        <li><strong>Ongoing Feedback</strong> – Direct messaging, habit tracking, and video feedback between sessions.</li>
+        <li><strong>Nutritional Guidance</strong> – Goal-aligned strategies you can actually stick to (full nutrition coaching available separately).</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">Pricing Options</h2>
+      <table class="pricing-table">
+        <thead>
+          <tr><th>Package</th><th>Details</th><th>Price</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Single Session</td><td>One-off 60-minute session</td><td>£60</td></tr>
+          <tr><td>Starter Pack</td><td>5 x 60-min sessions + initial consult</td><td>£275 (£55/session)</td></tr>
+          <tr><td>Commitment Pack</td><td>10 x 60-min sessions + full support</td><td>£500 (£50/session)</td></tr>
+          <tr><td>Transformation Pack</td><td>20 x 60-min sessions + tailored progression and support</td><td>£900 (£45/session)</td></tr>
+          <tr><td>Elite Coaching</td><td>Up to 3 sessions/week, unlimited support</td><td>£799/month</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">Client Transformations</h2>
+      <div class="testimonial-card">
+        <p>"Working with Pete has completely transformed my mindset and my body. I’ve lost 15kg in 4 months and for the first time I actually <em>enjoy</em> exercise."</p>
+        <p class="testimonial-author">– James T., lost 15kg</p>
+      </div>
+      <div class="testimonial-card">
+        <p>"I started training at 58, worried I was too late. Pete proved otherwise. I’m now moving better, stronger, and I feel younger than I have in years."</p>
+        <p class="testimonial-author">– Margaret L., age 58</p>
+      </div>
+      <div class="testimonial-card">
+        <p>"As a CEO, time is precious. Pete built a programme that gave maximum return for minimal time. The results speak for themselves — stronger, leaner, more energy than ever."</p>
+        <p class="testimonial-author">– Richard K., Executive Coaching Client</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">Still Wondering if This is For You?</h2>
+      <div class="faq">
+        <h3>Is personal training right for beginners?</h3>
+        <p>Absolutely. Beginners benefit the most from smart programming and expert form coaching. I'll meet you where you're at — not where you think you 'should' be.</p>
+
+        <h3>Where do sessions take place?</h3>
+<p>All sessions are based at <strong>PureGym West Byfleet</strong> by default — this is Coach Pete Ryan’s home base. If you prefer outdoor locations or have a private setup in mind, I can accommodate with advance notice. We'll always choose what works best for your goals and schedule.</p>
+
+        <h3>How quickly will I see results?</h3>
+        <p>Most feel changes in week one. You’ll move better, sleep better, and feel more energised. Body changes follow fast when you stay consistent — expect noticeable change in 4–6 weeks and major shifts from week 8+.</p>
+
+        <h3>Do you guarantee results?</h3>
+        <p>First session satisfaction is 100% guaranteed. Beyond that, I coach — you execute. If you show up and commit, the results <em>will</em> come.</p>
+      </div>
+    </div>
+  </section>
+</body>
+</html>
