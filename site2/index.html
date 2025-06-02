@@ -1,1 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Coach Pete Ryan - Home | Building Better People</title>
+	<link href="output.css" rel="stylesheet" />
+	<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+	<script src="https://cdn.tailwindcss.com"></script>
+	<script>
+		tailwind.config = {
+			theme: {
+				extend: {
+					colors: {
+						primary: '#ff6b35',
+						primaryDark: '#ff8c42',
+						secondary: '#ff8c42', 
+						accent: '#00d4ff',    
+						graybg1: '#1a1a1a', 
+						graybg2: '#2d2d2d', 
+						graybg3: '#3d3d3d', 
+						textlight: '#e0e0e0',
+						textmedium: '#b0b0b0',
+						textdark: '#808080'  
+					},
+					fontFamily: {
+						'headings': ['Oswald', 'sans-serif'],
+						'body': ['Open Sans', 'sans-serif']
+					}
+				}
+			}
+		}
+	</script>
+	<style>
+		.hero-bg {
+			/* Consider adding a subtle noise/texture overlay image here for a 'grittier' feel */
+			/* background-image: url('path/to/texture.png'), linear-gradient(...) */
+			background:
+				linear-gradient(135deg, rgba(10, 10, 10, 0.95), rgba(20, 20, 20, 0.85)); /* Darker, more contrast */
+			background-size: cover;
+			background-position: center;
+		}
+		.nav-link { transition: all 0.3s ease; color: #b0b0b0; /* textmedium */ }
+		.nav-link:hover { color: #ff8c42; /* primaryDark */ }
+		.nav-link.active { color: #ff6b35; font-weight: 600; /* primary */ }
+		.counter { font-variant-numeric: tabular-nums; }
+		@keyframes fadeInUp {
+			from { opacity: 0; transform: translateY(40px); } /* Slightly increased distance */
+			to { opacity: 1; transform: translateY(0); }
+		}
+		.fade-in-up { animation: fadeInUp 0.7s ease-out forwards; } /* 'forwards' keeps the end state */
+		.sticky-nav { backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+
+		body { font-family: 'Open Sans', sans-serif; background-color: #1a1a1a; /* graybg1 */ color: #b0b0b0; /* textmedium */ }
+		h1, h2, h3, h4, h5, h6 { font-family: 'Oswald', sans-serif; color: #e0e0e0; /* textlight */ }
+
+        /* Styling for buttons to make them more 'bold' and 'industrial' */
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.25rem; /* Sharper edges */
+            font-weight: 700; /* Bolder */
+            text-transform: uppercase; /* Industrial feel */
+            letter-spacing: 0.05em;
+            transition: all 0.2s ease-in-out;
+            border: 2px solid transparent; /* Base for outline buttons */
+        }
+        .btn-primary {
+            background-color: #ff6b35; /* primary */
+            color: #1a1a1a; /* graybg1 or textlight depending on contrast preference */
+            border-color: #ff6b35;
+        }
+        .btn-primary:hover {
+            background-color: #ff8c42; /* primaryDark */
+            border-color: #ff8c42;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+        .btn-secondary-outline {
+            border: 2px solid #e0e0e0; /* textlight for border */
+            color: #e0e0e0; /* textlight */
+            background-color: transparent;
+        }
+        .btn-secondary-outline:hover {
+            background-color: #e0e0e0;
+            color: #1a1a1a; /* graybg1 */
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(255,255,255,0.1);
+        }
+        /* Suggestion: Implement AOS - Animate On Scroll library for sections */
+        /* e.g. [data-aos="fade-up"] on stat items */
+	</style>
+</head>
+<body class="font-body">
+
+<script>
+	// Ensures dark theme is applied consistently with Tailwind config
+	document.documentElement.classList.add('dark');
+</script>
+
+<nav class="fixed top-0 left-0 right-0 bg-graybg2/90 sticky-nav z-50 border-b border-graybg3">
+	<div class="container mx-auto px-4">
+		<div class="flex justify-between items-center py-4">
+			<a href="index.html" class="flex items-center space-x-2">
+				<div class="w-10 h-10 bg-primary rounded-md flex items-center justify-center shadow-md"> <span class="text-graybg1 font-bold text-lg">P</span> </div>
+				<div>
+					<div class="font-bold text-textlight text-lg font-headings">Coach Pete Ryan</div>
+					<div class="text-xs text-textdark">Building Better People</div>
+				</div>
+			</a>
+			<div class="hidden md:flex space-x-6 items-center"> 
+				<a href="index.html" class="nav-link">Home</a>
+				<a href="about.html" class="nav-link">About</a>
+				<a href="services.html" class="nav-link">Services</a>
+				<a href="tools.html" class="nav-link">Assessment Tools</a>
+				<a href="onboarding.html" class="nav-link">Client Registration</a>
+				<a href="testimonials.html" class="nav-link">Testimonials</a>
+				<a href="login.html" class="nav-link btn btn-primary !py-2 !px-4 !text-sm"><i class="fas fa-sign-in-alt mr-1"></i>Login / Register</a>				
+				<a href="contact.html" class="nav-link btn btn-primary !py-2 !px-4 !text-sm">Contact</a> 
+			</div>
+			<button onclick="toggleMobileMenu()" class="md:hidden p-2 text-textlight">
+                <i class="fas fa-bars fa-lg"></i>
+			</button>
+		</div>
+		<div id="mobileMenu" class="hidden md:hidden pb-4 border-t border-graybg3 mt-2">
+			<div class="flex flex-col space-y-2 pt-2">
+				<a href="index.html" onclick="toggleMobileMenu()" class="nav-link block py-2">Home</a>
+				<a href="about.html" onclick="toggleMobileMenu()" class="nav-link block py-2">About</a>
+				<a href="services.html" onclick="toggleMobileMenu()" class="nav-link block py-2">Services</a>
+				<a href="tools.html" onclick="toggleMobileMenu()" class="nav-link block py-2">Assessment Tools</a>
+				<a href="onboarding.html" onclick="toggleMobileMenu()" class="nav-link block py-2">Client Registration</a>
+				<a href="testimonials.html" onclick="toggleMobileMenu()" class="nav-link block py-2">Testimonials</a>
+                <a href="client_zone.html" onclick="toggleMobileMenu()" class="nav-link block py-2"><i class="fas fa-user-shield mr-1"></i>Client Zone</a>
+				<a href="contact.html" onclick="toggleMobileMenu()" class="nav-link block py-2 bg-primary text-center text-graybg1 rounded-md mt-2 hover:bg-primaryDark">Contact Us</a>
+			</div>
+		</div>
+	</div>
+</nav>
+
+<main id="home-section" class="pt-20">
+	<div class="hero-bg min-h-screen flex items-center justify-center"> 
+		<div class="container mx-auto px-4 text-center text-textlight">
+			<div class="max-w-4xl mx-auto fade-in-up" style="animation-delay: 0.2s;">
+                <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 font-headings !leading-tight"
+                    style="text-shadow: 2px 2px 8px rgba(0,0,0,0.7);">
+                    COACH PETE RYAN
+                </h1>
+				<div class="text-xl md:text-2xl mb-8 font-light font-headings fade-in-up" style="animation-delay: 0.5s;">
+					<span class="text-primary">MOBILITY</span> •
+					<span class="text-secondary">STRENGTH</span> • 
+					<span class="text-accent">MINDSET</span>   
+				</div>
+				<p class="text-xl md:text-2xl mb-10 font-light fade-in-up" style="animation-delay: 0.8s;">
+                    FIGHTER – ADVENTURER – ATHLETE – COACH </p>
+				<div class="space-y-4 md:space-y-0 md:space-x-6 md:flex md:justify-center fade-in-up" style="animation-delay: 1.1s;">
+					<button onclick="window.location.href='onboarding.html'" class="w-full md:w-auto btn btn-primary text-lg">
+						Start Your Journey
+					</button>
+					<button onclick="window.location.href='tools.html'" class="w-full md:w-auto btn btn-secondary-outline text-lg">
+						Free Assessment Tools
+					</button>
+				</div>
+			</div>
+		</div>
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-textdark animate-bounce">
+            <i class="fas fa-chevron-down fa-2x"></i>
+        </div>
+	</div>
+
+	<div class="bg-graybg2 py-16 md:py-24">
+		<div class="container mx-auto px-4">
+			<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 text-center">
+				<div class="p-6 border border-graybg3 rounded-md hover:bg-graybg3 transition-all duration-300 transform hover:scale-105">
+					<div class="text-5xl md:text-6xl font-bold text-primary mb-3 counter font-headings">30000+</div>
+					<div class="text-textmedium text-lg">PT Coaching Hours</div>
+				</div>
+				<div class="p-6 border border-graybg3 rounded-md hover:bg-graybg3 transition-all duration-300 transform hover:scale-105">
+					<div class="text-5xl md:text-6xl font-bold text-primary mb-3 counter font-headings">18+</div>
+					<div class="text-textmedium text-lg">Years Experience</div>
+				</div>
+				<div class="p-6 border border-graybg3 rounded-md hover:bg-graybg3 transition-all duration-300 transform hover:scale-105">
+					<div class="text-5xl md:text-6xl font-bold text-primary mb-3 counter font-headings">4500+</div>
+					<div class="text-textmedium text-lg">Lives Transformed</div>
+				</div>
+				<div class="p-6 border border-graybg3 rounded-md hover:bg-graybg3 transition-all duration-300 transform hover:scale-105">
+                    <i class="fas fa-headset text-accent text-4xl mb-3"></i>
+					<div class="text-5xl md:text-6xl font-bold text-primary mb-3 counter font-headings">24/7</div>
+					<div class="text-textmedium text-lg">Online Support</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</main>
+
+<footer class="bg-graybg1 text-textlight py-12 border-t-4 border-primary"> 
+	<div class="container mx-auto px-4">
+		<div class="grid md:grid-cols-4 gap-8 mb-8">
+			<div>
+				<div class="flex items-center space-x-2 mb-4">
+					<div class="w-10 h-10 bg-primary rounded-md flex items-center justify-center">
+						<span class="text-graybg1 font-bold text-lg">P</span>
+					</div>
+					<div>
+						<a href="index.html" class="font-bold text-lg font-headings">Coach Pete Ryan</a>
+						<div class="text-xs text-textdark">Building Better People</div>
+					</div>
+				</div>
+				<p class="text-textdark text-sm mb-4">Transforming lives through the perfect blend of fitness training and mindset coaching.</p>
+                <div class="flex space-x-3">
+                    <a href="#" class="text-textmedium hover:text-primary text-xl"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="text-textmedium hover:text-primary text-xl"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-textmedium hover:text-primary text-xl"><i class="fab fa-youtube"></i></a>
+                </div>
+			</div>
+			<div>
+				<h4 class="font-semibold mb-4 font-headings text-textlight">Quick Links</h4>
+				<ul class="text-sm text-textdark space-y-2">
+					<li><a href="about.html" class="hover:text-primary transition-colors">About Pete</a></li>
+					<li><a href="services.html" class="hover:text-primary transition-colors">Services</a></li>
+					<li><a href="testimonials.html" class="hover:text-primary transition-colors">Testimonials</a></li>
+					<li><a href="contact.html" class="hover:text-primary transition-colors">Contact Us</a></li>
+				</ul>
+			</div>
+			<div>
+				<h4 class="font-semibold mb-4 font-headings text-textlight">Resources</h4>
+				<ul class="text-sm text-textdark space-y-2">
+					<li><a href="tools.html" class="hover:text-primary transition-colors">Assessment Tools</a></li>
+					<li><a href="onboarding.html" class="hover:text-primary transition-colors">Client Registration</a></li>
+                    <li><a href="client_zone.html" class="hover:text-primary transition-colors">Client Zone Login</a></li>
+					<li><a href="#" class="hover:text-primary transition-colors">Blog/Articles (New)</a></li>
+				</ul>
+			</div>
+			<div>
+				<h4 class="font-semibold mb-4 font-headings text-textlight">Get In Touch</h4>
+				<ul class="text-sm text-textdark space-y-2">
+					<li><i class="fas fa-phone fa-fw mr-2 text-primary"></i>+44 7308518428</li>
+					<li><i class="fas fa-envelope fa-fw mr-2 text-primary"></i>pete@coachpeteryan.com</li>
+					<li><i class="fas fa-map-marker-alt fa-fw mr-2 text-primary"></i>Puregym West Byfleet, Surrey, UK</li>
+					<li><i class="fas fa-clock fa-fw mr-2 text-primary"></i>Mon–Fri: 6AM–8PM</li>
+				</ul>
+			</div>
+		</div>
+		<div class="border-t border-graybg3 mt-8 pt-8 text-center">
+			<p class="text-textdark text-sm">© <span id="currentYear"></span> Coach Pete Ryan. All rights reserved. Site by You.</p>
+		</div>
+	</div>
+</footer>
+
+<script>
+	document.getElementById('currentYear').textContent = new Date().getFullYear();
+	function toggleMobileMenu() {
+		const mobileMenu = document.getElementById('mobileMenu');
+        const burgerIcon = document.querySelector('.md\\:hidden i');
+		mobileMenu.classList.toggle('hidden');
+        if (mobileMenu.classList.contains('hidden')) {
+            burgerIcon.classList.remove('fa-times');
+            burgerIcon.classList.add('fa-bars');
+        } else {
+            burgerIcon.classList.remove('fa-bars');
+            burgerIcon.classList.add('fa-times');
+        }
+	}
+	function setActiveNavLink() {
+		const path = window.location.pathname.split('/').pop() || 'index.html';
+		document.querySelectorAll('.nav-link').forEach(link => {
+            const linkPath = link.getAttribute('href');
+			link.classList.toggle('active', linkPath === path || (path === 'index.html' && linkPath === '/'));
+            // Special handling for Client Zone if needed, e.g. if it's part of a sub-route later
+		});
+	}
+
+    // Simple counter animation
+    function animateCounters() {
+        const counters = document.querySelectorAll('.counter');
+        const speed = 200; // Adjust for faster/slower count
+
+        counters.forEach(counter => {
+            const updateCount = () => {
+                const target = +counter.textContent.replace('+', ''); // Get target number
+                const count = +counter.dataset.count || 0; // Current displayed count
+
+                const increment = Math.ceil(target / speed);
+
+                if (count < target) {
+                    counter.dataset.count = count + increment;
+                    counter.innerText = (count + increment).toLocaleString() + (counter.textContent.includes('+') ? '+' : '');
+                    setTimeout(updateCount, 15);
+                } else {
+                    counter.innerText = target.toLocaleString() + (counter.textContent.includes('+') ? '+' : '');
+                }
+            };
+            // Reset for re-animation if needed, or use Intersection Observer to trigger once
+            counter.dataset.count = 0; 
+            updateCount();
+        });
+    }
+
+	document.addEventListener('DOMContentLoaded', () => {
+        setActiveNavLink();
+        // Delay counter animation slightly for effect or use Intersection Observer
+        // setTimeout(animateCounters, 1000); 
+        // For world-class, use Intersection Observer to trigger animations when elements are in view
+        const statsSection = document.querySelector('.bg-graybg2.py-16'); // Assuming this is the stats section
+        if (statsSection) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateCounters();
+                        observer.unobserve(entry.target); // Animate only once
+                    }
+                });
+            }, { threshold: 0.5 }); // Trigger when 50% visible
+            observer.observe(statsSection);
+        }
+    });
+
+    // Smooth scroll for anchor links (if you add any)
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            if(targetElement){
+                targetElement.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+</script>
+</body>
+</html>
