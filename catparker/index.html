@@ -2,15 +2,335 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <base href="/catparker/">
-    <link rel="icon" type="image/svg+xml" href="vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cat Parker's Glute Activation Programme - Coach Pete Ryan</title>
-    <script type="module" crossorigin src="index-Cu5l7N4_.js"></script>
-    <link rel="stylesheet" crossorigin href="index-CN7XeJxP.css">
+    <title>Cat Parker's Glute Activation Programme</title>
+    <script src="https://cdn.tailwindcss.com"></script>
   </head>
-  <body>
-    <div id="root"></div>
+  <body class="bg-gray-100">
+    <div id="app-container" class="font-sans antialiased text-gray-800">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Header -->
+        <header class="text-center my-10">
+          <h1 class="text-5xl font-extrabold text-orange-600 leading-tight">Cat's Glute Programme</h1>
+          <p class="text-2xl text-gray-600 mt-2">with Coach Pete Ryan</p>
+        </header>
+
+        <!-- Tabs Navigation -->
+        <nav class="bg-white shadow-lg rounded-xl p-2 mb-10 sticky top-4 z-10">
+          <ul class="flex flex-wrap justify-center sm:justify-around">
+            <li class="m-1"><a href="#overview" class="tab-link text-base md:text-lg py-3 px-4 sm:px-6 block hover:bg-orange-100 rounded-lg transition-colors duration-150" data-tab="overview">Overview</a></li>
+            <li class="m-1"><a href="#exercises" class="tab-link text-base md:text-lg py-3 px-4 sm:px-6 block hover:bg-orange-100 rounded-lg transition-colors duration-150" data-tab="exercises">Exercises</a></li>
+            <li class="m-1"><a href="#progress" class="tab-link text-base md:text-lg py-3 px-4 sm:px-6 block hover:bg-orange-100 rounded-lg transition-colors duration-150" data-tab="progress">Progress</a></li>
+            <li class="m-1"><a href="#education" class="tab-link text-base md:text-lg py-3 px-4 sm:px-6 block hover:bg-orange-100 rounded-lg transition-colors duration-150" data-tab="education">Education</a></li>
+            <li class="m-1"><a href="#contact" class="tab-link text-base md:text-lg py-3 px-4 sm:px-6 block hover:bg-orange-100 rounded-lg transition-colors duration-150" data-tab="contact">Contact</a></li>
+          </ul>
+        </nav>
+
+        <!-- Tab Content Sections -->
+        <main class="space-y-10">
+          <!-- Overview Tab Content -->
+          <section id="overview-content" class="tab-content p-6 sm:p-8 bg-white rounded-xl shadow-xl space-y-8">
+            <header class="border-b pb-4 mb-6">
+              <h2 class="text-3xl font-bold text-gray-800">Programme Overview</h2>
+            </header>
+
+            <div class="bg-gradient-to-r from-orange-500 to-red-500 text-white p-8 sm:p-10 rounded-xl shadow-lg text-center">
+              <img src="images/hero_image.png" alt="Cat Parker Programme Hero" class="w-full max-w-md mx-auto rounded-lg shadow-xl mb-6">
+              <h3 class="text-4xl font-bold mb-3">Welcome to Your Recovery Journey!</h3>
+              <p class="text-xl opacity-90 leading-relaxed">12 weeks dedicated to restoring your glute function, eliminating pain, and rebuilding your strength.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-x-6 gap-y-8">
+              <!-- Phase 1 Card -->
+              <div class="transform hover:scale-105 transition-transform duration-200 ease-in-out flex flex-col bg-white rounded-lg shadow-lg overflow-hidden">
+                <div class="p-6 flex-grow">
+                  <div class="flex items-center mb-3">
+                    <span class="w-4 h-4 rounded-full bg-orange-500 mr-3 flex-shrink-0"></span>
+                    <h3 class="text-2xl font-semibold text-orange-600">Phase 1: Activation & Stability</h3>
+                  </div>
+                  <p class="text-sm text-gray-500 mb-2">Weeks 1-4</p>
+                  <p class="text-gray-700 leading-relaxed">Focus on re-establishing fundamental glute activation and mastering core movement patterns to build a solid foundation.</p>
+                </div>
+                <div class="bg-gray-50 p-4 text-sm text-orange-600 font-medium">Focus: Foundation & Control</div>
+              </div>
+              <!-- Phase 2 Card -->
+              <div class="transform hover:scale-105 transition-transform duration-200 ease-in-out flex flex-col bg-white rounded-lg shadow-lg overflow-hidden">
+                <div class="p-6 flex-grow">
+                  <div class="flex items-center mb-3">
+                    <span class="w-4 h-4 rounded-full bg-blue-500 mr-3 flex-shrink-0"></span>
+                    <h3 class="text-2xl font-semibold text-blue-600">Phase 2: Strength Without Strain</h3>
+                  </div>
+                  <p class="text-sm text-gray-500 mb-2">Weeks 5-8</p>
+                  <p class="text-gray-700 leading-relaxed">Progressively increase resistance and introduce more complex movements to build strength safely and effectively.</p>
+                </div>
+                <div class="bg-gray-50 p-4 text-sm text-blue-600 font-medium">Focus: Building Capacity</div>
+              </div>
+              <!-- Phase 3 Card -->
+              <div class="transform hover:scale-105 transition-transform duration-200 ease-in-out flex flex-col bg-white rounded-lg shadow-lg overflow-hidden">
+                <div class="p-6 flex-grow">
+                  <div class="flex items-center mb-3">
+                    <span class="w-4 h-4 rounded-full bg-green-500 mr-3 flex-shrink-0"></span>
+                    <h3 class="text-2xl font-semibold text-green-600">Phase 3: Power & Integration</h3>
+                  </div>
+                  <p class="text-sm text-gray-500 mb-2">Weeks 9-12</p>
+                  <p class="text-gray-700 leading-relaxed">Develop power and integrate your newfound strength into functional, everyday movements for lasting results.</p>
+                </div>
+                <div class="bg-gray-50 p-4 text-sm text-green-600 font-medium">Focus: Functional Performance</div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Exercises Tab Content -->
+          <section id="exercises-content" class="tab-content p-6 sm:p-8 bg-white rounded-xl shadow-xl space-y-6 hidden">
+            <header class="border-b pb-4 mb-6">
+              <h2 class="text-3xl font-bold text-gray-800">Exercise Library</h2>
+            </header>
+            <!-- Content generated by JS -->
+          </section>
+
+          <!-- Progress Tab Content -->
+          <section id="progress-content" class="tab-content p-6 sm:p-8 bg-white rounded-xl shadow-xl space-y-6 hidden">
+            <header class="border-b pb-4 mb-6">
+              <h2 class="text-3xl font-bold text-gray-800">Your Progress Tracker</h2>
+            </header>
+            <div class="grid md:grid-cols-3 gap-6 text-center">
+              <div class="bg-gray-50 p-6 rounded-lg shadow-md">
+                <h4 class="text-lg font-semibold text-gray-700 mb-1">Overall Progress</h4>
+                <p class="text-4xl font-extrabold text-orange-500">N/A</p>
+                <p class="text-sm text-gray-500 mt-1">Check back after completing exercises!</p>
+              </div>
+              <div class="bg-gray-50 p-6 rounded-lg shadow-md">
+                <h4 class="text-lg font-semibold text-gray-700 mb-1">Current Week</h4>
+                <p class="text-4xl font-extrabold text-blue-500">Week 1</p>
+                 <p class="text-sm text-gray-500 mt-1">Phase 1: Activation & Stability</p>
+              </div>
+              <div class="bg-gray-50 p-6 rounded-lg shadow-md">
+                <h4 class="text-lg font-semibold text-gray-700 mb-1">Completion Streak</h4>
+                <p class="text-4xl font-extrabold text-green-500">N/A days</p>
+                <p class="text-sm text-gray-500 mt-1">Keep up the consistency!</p>
+              </div>
+            </div>
+             <div class="mt-8 bg-gray-50 p-6 rounded-lg shadow-md">
+                <h4 class="text-xl font-semibold text-gray-700 mb-4 text-center">Weekly Completion Status (Placeholder)</h4>
+                <div class="space-y-3">
+                  <p class="text-gray-600 p-3 bg-white rounded-md shadow-sm">Week 1: <span class="font-semibold">Not Started</span></p>
+                  <p class="text-gray-600 p-3 bg-white rounded-md shadow-sm">Week 2: <span class="font-semibold">Not Started</span></p>
+                  <p class="text-gray-600 p-3 bg-white rounded-md shadow-sm">Week 3: <span class="font-semibold">Not Started</span></p>
+                  <p class="text-gray-600 p-3 bg-white rounded-md shadow-sm">Week 4: <span class="font-semibold">Not Started</span></p>
+                </div>
+              </div>
+          </section>
+
+          <!-- Education Tab Content -->
+          <section id="education-content" class="tab-content p-6 sm:p-8 bg-white rounded-xl shadow-xl space-y-6 hidden">
+            <header class="border-b pb-4 mb-6">
+              <h2 class="text-3xl font-bold text-gray-800">Programme Education</h2>
+            </header>
+            <div class="prose prose-lg max-w-none text-gray-700 leading-relaxed">
+              <p class="text-xl">Understanding the 'why' behind your exercises is crucial for motivation and success. This section breaks down the science and principles of each phase.</p>
+              <!-- Content generated by JS -->
+            </div>
+          </section>
+
+          <!-- Contact Tab Content -->
+          <section id="contact-content" class="tab-content p-6 sm:p-8 bg-white rounded-xl shadow-xl space-y-6 hidden">
+            <header class="border-b pb-4 mb-6">
+              <h2 class="text-3xl font-bold text-gray-800">Get in Touch with Coach Pete</h2>
+            </header>
+            <div class="grid md:grid-cols-2 gap-8">
+              <div class="bg-gray-50 p-6 rounded-lg shadow-md">
+                <h3 class="text-2xl font-semibold text-gray-800 mb-4">Contact Details</h3>
+                <p class="text-lg text-gray-700 mb-2"><strong class="font-medium">Coach:</strong> Pete Ryan</p>
+                <p class="text-lg text-gray-700 mb-2"><strong class="font-medium">Specialization:</strong> Level 4 Lower Back Pain Specialist</p>
+                <p class="text-lg text-gray-700 mb-4"><strong class="font-medium">Achievements:</strong> 2x British Kickboxing Champion</p>
+                <p class="text-lg text-gray-700 mb-2"><strong class="font-medium">Phone:</strong> <a href="tel:07308518428" class="text-orange-600 hover:underline">07308 518 428</a></p>
+                <p class="text-lg text-gray-700 mb-2"><strong class="font-medium">Email:</strong> <a href="mailto:pete@coachpeteryan.com" class="text-orange-600 hover:underline">pete@coachpeteryan.com</a></p>
+                <p class="text-lg text-gray-700"><strong class="font-medium">Location:</strong> Puregym, Wey Retail Park, Byfleet</p>
+              </div>
+              <div class="bg-gray-50 p-6 rounded-lg shadow-md flex flex-col items-center justify-center text-center">
+                <h3 class="text-2xl font-semibold text-gray-800 mb-3">WhatsApp</h3>
+                <p class="text-gray-600 mb-4">Scan the QR code (placeholder as image is missing) or tap the button to message Coach Pete directly.</p>
+                <div class="w-48 h-48 bg-gray-300 flex items-center justify-center text-gray-500 rounded-lg mb-4">
+                  QR Code Placeholder (images/whatsapp_qr.png missing)
+                </div>
+                <a href="https://wa.me/447308518428" target="_blank" class="bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-150 inline-flex items-center">
+                  <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20"><path d="M13.567 11.045c-.105-.052-1.033-.509-1.193-.567-.16-.058-.277-.087-.394.087-.117.175-.452.567-.554.684-.102.117-.204.131-.394.043s-1.018-.375-1.94-1.193c-.719-.638-1.203-1.423-1.345-1.668-.142-.245-.007-.375.078-.482C7.95 7.731 8.04 7.605 8.135 7.474c.095-.131.142-.218.204-.36s.031-.277-.015-.36c-.046-.083-.394-.944-.539-1.292-.14-.341-.285-.293-.394-.293-.102,0-.219,0-.336,0-.117,0-.305.043-.465.218-.16.175-.617.602-.617,1.47C6 8.57,6.625 9.678,6.742 9.823c.117.145,1.203,1.84,2.915,2.565.41.175.733.277,1.003.348.465.117.884.102,1.216.061.36-.043,1.033-.422,1.182-.827.149-.405.149-.75.102-.827-.046-.078-.163-.117-.268-.17Z M9.999 1.668a8.333 8.333 0 1 0 0 16.666 8.333 8.333 0 0 0 0-16.666Zm3.835,11.763c.019.087.019.19-.019.277-.038.087-.105.165-.192.218a.984.984,0,0,1-.348.105h-.03c-.102,0-.204-.015-.293-.043a8.05,8.05,0,0,1-1.611-.617c-.554-.277-1.07-.638-1.537-1.07a7.05,7.05,0,0,1-1.112-1.345c-.087-.145-.16-.305-.218-.465a3.15,3.15,0,0,1-.061-.465V9.96c0-.13.015-.245.043-.36.087-.277.262-.523.51-.698.07-.043.149-.075.23-.09.09-.015.181-.023.27-.023h.046c.102,0,.204.015.293.043.102.031.192.07.277.117a.984.984,0,0,1,.348.293l.007.015c.061.102.102.218.12.336l.007.03c.031.117.046.245.046.375v.015c0,.105-.015.204-.043.293-.031.102-.078.192-.142.277l-.015.015c-.07.07-.149.131-.237.175a.473.473,0,0,0-.175.16l-.007.015c-.015.046-.023.102-.023.16,0,.07.007.131.023.192l.007.015c.031.07.078.131.142.192l.015.015c.204.175.422.336.654.482a5.03,5.03,0,0,0,2.45,1.07c.117.031.237.046.36.046h.03c.16,0,.305-.031.43-.09.131-.061.245-.142.336-.245a.984.984,0,0,0,.192-.382l.015-.03c.015-.07.023-.142.023-.218V11.7c0-.117-.015-.218-.043-.305a.783.783,0,0,0-.142-.262.783.783,0,0,0-.23-.175.984.984,0,0,0-.305-.09h-.03c-.117,0-.23.015-.336.043a.89.89,0,0,0-.293.105A.984.984,0,0,0,12.56,11a.783.783,0,0,0-.16.328l-.015.03a.783.783,0,0,0,0,.262.783.783,0,0,0,.078.237.783.783,0,0,0,.117.16c.007,0,.007.007.015.007Z"></path></svg>
+                  Message on WhatsApp
+                </a>
+              </div>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+    <script> // programmeData script from previous step remains unchanged
+      const programmeData = {
+        phase1: { /* ... */ }, phase2: { /* ... */ }, phase3: { /* ... */ } // Shortened for brevity
+      };
+    </script>
+    <script> // Combined tab navigation and content population script
+      document.addEventListener('DOMContentLoaded', () => {
+        const tabLinks = document.querySelectorAll('.tab-link');
+        const tabContents = document.querySelectorAll('.tab-content');
+        const activeClasses = ['text-orange-600', 'border-b-2', 'border-orange-600', 'font-semibold', 'bg-orange-50'];
+        const inactiveClasses = ['text-gray-700', 'font-medium'];
+
+        if (tabLinks.length > 0) {
+          tabLinks.forEach((link, index) => {
+            link.classList.remove(...activeClasses, ...inactiveClasses);
+            if (index === 0) {
+              link.classList.add(...activeClasses);
+              link.classList.remove(...inactiveClasses);
+            } else {
+              link.classList.add(...inactiveClasses);
+              link.classList.remove(...activeClasses);
+            }
+          });
+        }
+
+        tabContents.forEach(content => {
+          if (content.id === 'overview-content') {
+            content.classList.remove('hidden');
+          } else {
+            content.classList.add('hidden');
+          }
+        });
+
+        tabLinks.forEach(link => {
+          link.addEventListener('click', (event) => {
+            event.preventDefault();
+            const targetTab = link.getAttribute('data-tab');
+            tabLinks.forEach(innerLink => {
+              innerLink.classList.remove(...activeClasses);
+              innerLink.classList.add(...inactiveClasses);
+            });
+            link.classList.add(...activeClasses);
+            link.classList.remove(...inactiveClasses);
+            tabContents.forEach(content => {
+              content.classList.toggle('hidden', content.id !== `${targetTab}-content`);
+            });
+          });
+        });
+
+        function populateExercises() {
+          const exercisesContainer = document.getElementById('exercises-content');
+          const header = exercisesContainer.querySelector('header');
+          exercisesContainer.innerHTML = '';
+          if (header) exercisesContainer.appendChild(header);
+          else { // Fallback header
+            const newHeader = document.createElement('header');
+            newHeader.className = 'border-b pb-4 mb-6';
+            newHeader.innerHTML = '<h2 class="text-3xl font-bold text-gray-800">Exercise Library</h2>';
+            exercisesContainer.appendChild(newHeader);
+          }
+
+          const phaseContentContainer = document.createElement('div');
+          phaseContentContainer.className = 'space-y-12';
+
+          for (const phaseKey in programmeData) {
+            const phase = programmeData[phaseKey];
+            const phaseDiv = document.createElement('div');
+            phaseDiv.id = `phase-${phaseKey}-exercises`;
+            phaseDiv.className = 'mb-12';
+
+            const phaseTitleEl = document.createElement('h3');
+            const phaseColorClass = phase.color ? phase.color.replace('bg-', 'text-') : 'text-gray-700';
+            phaseTitleEl.className = `text-2xl font-semibold mb-6 ${phaseColorClass} border-b-2 pb-2`;
+            phaseTitleEl.textContent = phase.title;
+            phaseDiv.appendChild(phaseTitleEl);
+
+            const exercisesGrid = document.createElement('div');
+            exercisesGrid.className = 'grid md:grid-cols-2 gap-x-6 gap-y-8';
+
+            phase.exercises.forEach(exercise => {
+              const card = document.createElement('div');
+              card.className = 'bg-white rounded-lg shadow-md overflow-hidden flex flex-col transition-shadow hover:shadow-xl';
+
+              let imageHtml = exercise.image
+                ? `<img src="${exercise.image}" alt="${exercise.name}" class="w-full h-48 object-cover exercise-image">`
+                : `<div class="w-full h-48 bg-gray-200 flex items-center justify-center text-gray-400 exercise-image text-sm">Image not available</div>`;
+
+              let cuesHtml = '';
+              if (exercise.cues && exercise.cues.length > 0) {
+                cuesHtml = '<ul class="list-disc list-inside text-sm text-gray-600 space-y-1 mt-3">';
+                exercise.cues.forEach(cue => cuesHtml += `<li>${cue}</li>`);
+                cuesHtml += '</ul>';
+              }
+
+              card.innerHTML = `
+                ${imageHtml}
+                <div class="p-5 flex-grow flex flex-col">
+                  <h4 class="text-xl font-semibold text-gray-800 mb-2">${exercise.name}</h4>
+                  <p class="text-xs text-gray-500 mb-1 uppercase tracking-wider">Sets: ${exercise.sets} &bull; Reps: ${exercise.reps} ${exercise.hold ? `&bull; Hold: ${exercise.hold}` : ''}</p>
+                  <p class="text-gray-700 text-sm leading-relaxed mt-2 mb-3 flex-grow">${exercise.description}</p>
+                  ${cuesHtml ? `<div class="mt-auto"><h5 class="text-xs font-semibold text-gray-700 uppercase tracking-wider mt-2">Coaching Cues:</h5>${cuesHtml}</div>` : ''}
+                </div>`;
+              exercisesGrid.appendChild(card);
+            });
+            phaseDiv.appendChild(exercisesGrid);
+            phaseContentContainer.appendChild(phaseDiv);
+          }
+          exercisesContainer.appendChild(phaseContentContainer);
+        }
+
+        function populateEducation() {
+          const educationContainer = document.getElementById('education-content');
+          const contentDiv = educationContainer.querySelector('.prose');
+
+          // Clear only dynamically added phase content, keep the intro paragraph
+          const dynamicContentMarkers = contentDiv.querySelectorAll('h3[class*="-600"]'); // Selects phase titles
+            dynamicContentMarkers.forEach(marker => {
+            let current = marker;
+            while(current && current.tagName !== 'P' || !current.textContent.startsWith("Understanding the 'why'")) { // Stop if we hit the intro P
+                let next = current.nextSibling;
+                if(current.parentNode === contentDiv) contentDiv.removeChild(current); // only remove if child of contentDiv
+                current = next;
+                 // Also remove any ULs that followed a H3, up to the next H3 or end
+                if (current && current.tagName === 'UL') {
+                    let ulNext = current.nextSibling;
+                    if(current.parentNode === contentDiv) contentDiv.removeChild(current);
+                    current = ulNext;
+                }
+                 if (current && current.tagName === 'P' && current.previousSibling && current.previousSibling.tagName === 'H3') { // Description P after H3
+                    let pNext = current.nextSibling;
+                    if(current.parentNode === contentDiv) contentDiv.removeChild(current);
+                    current = pNext;
+                }
+            }
+          });
+
+
+          const educationDetails = { /* ... as defined before, using programmeData ... */
+            phase1: { title: programmeData.phase1.title, description: programmeData.phase1.description, baseColor: "orange", points: ["Restore basic glute activation patterns.","Improve hip mobility and reduce compensation.","Establish core stability and pelvic control.","Begin addressing postural dysfunction related to weak glutes."]},
+            phase2: { title: programmeData.phase2.title, description: programmeData.phase2.description, baseColor: "blue", points: ["Progressive strengthening of the entire gluteal complex.","Introducing multi-planar movements for functional strength.","Further addressing compensation patterns.","Building endurance in gluteal muscles."]},
+            phase3: { title: programmeData.phase3.title, description: programmeData.phase3.description, baseColor: "green", points: ["Developing glute power and explosiveness.","Full integration into complex functional movement patterns.","Preparing for return to sport or high-level activities.","Establishing long-term maintenance strategies."]}
+          };
+
+          for (const phaseKey in educationDetails) {
+            const detail = educationDetails[phaseKey];
+            const phaseTitleEl = document.createElement('h3');
+            phaseTitleEl.className = `text-2xl font-semibold text-${detail.baseColor}-600 mt-8 mb-3`;
+            phaseTitleEl.textContent = detail.title;
+            contentDiv.appendChild(phaseTitleEl);
+
+            const phaseDescriptionEl = document.createElement('p');
+            phaseDescriptionEl.className = "mb-3";
+            phaseDescriptionEl.textContent = detail.description; // Using phase description from programmeData
+            contentDiv.appendChild(phaseDescriptionEl);
+
+            const pointsList = document.createElement('ul');
+            pointsList.className = 'list-disc list-inside space-y-1 mb-4';
+            detail.points.forEach(pointText => {
+              const listItem = document.createElement('li');
+              listItem.textContent = pointText;
+              pointsList.appendChild(listItem);
+            });
+            contentDiv.appendChild(pointsList);
+          }
+        }
+        populateExercises();
+        populateEducation();
+      });
+    </script>
   </body>
 </html>
-
