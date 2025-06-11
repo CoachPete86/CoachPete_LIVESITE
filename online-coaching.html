@@ -1,159 +1,77 @@
 <!DOCTYPE html>
-<html lang="en-GB">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Online Coaching - Coach Pete Ryan</title>
-  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --primary-orange: #ff6b35;
-      --secondary-orange: #ff8c42;
-      --dark-grey: #1a1a1a;
-      --medium-grey: #2d2d2d;
-      --light-grey: #3d3d3d;
-      --text-light: #e0e0e0;
-      --text-medium: #b0b0b0;
-      --text-dark: #808080;
-    }
-
-    body {
-      font-family: 'Open Sans', sans-serif;
-      margin: 0;
-      background: linear-gradient(135deg, var(--dark-grey) 0%, var(--medium-grey) 100%);
-      color: var(--text-light);
-    }
-
-    .service-hero {
-      background: linear-gradient(rgba(26, 26, 26, 0.7), rgba(45, 45, 45, 0.7)), url('https://raw.githubusercontent.com/CoachPete86/images/main/coach_hero_ext.png') center/cover;
-      height: 80vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 2rem;
-    }
-
-    .service-title {
-      font-family: 'Oswald', sans-serif;
-      font-size: 3rem;
-      color: var(--text-light);
-      text-transform: uppercase;
-      letter-spacing: 2px;
-    }
-
-    .service-subtitle {
-      font-size: 1.5rem;
-      color: var(--primary-orange);
-      margin-top: 1rem;
-    }
-
-    .service-content {
-      max-width: 1000px;
-      margin: 3rem auto;
-      padding: 0 2rem;
-    }
-
-    .section {
-      margin-bottom: 3rem;
-    }
-
-    .section-title {
-      font-family: 'Oswald', sans-serif;
-      font-size: 2rem;
-      margin-bottom: 1rem;
-      color: var(--primary-orange);
-    }
-
-    .section-description, p {
-      font-size: 1rem;
-      line-height: 1.7;
-      color: var(--text-medium);
-    }
-
-    ul.included-list {
-      list-style: none;
-      padding: 0;
-    }
-
-    ul.included-list li {
-      margin-bottom: 0.5rem;
-      position: relative;
-      padding-left: 1.5rem;
-    }
-
-    ul.included-list li::before {
-      content: "\2713";
-      color: var(--primary-orange);
-      position: absolute;
-      left: 0;
-    }
-
-    .testimonial-card {
-      background: rgba(255, 255, 255, 0.05);
-      border-left: 4px solid var(--primary-orange);
-      padding: 1.5rem;
-      margin-bottom: 2rem;
-    }
-
-    .testimonial-author {
-      color: var(--primary-orange);
-      font-weight: bold;
-      margin-top: 1rem;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Coaching - Coach Pete Ryan</title>
+    <meta name="description" content="World-class remote personal training and mindset coaching with Coach Pete Ryan. Get expert guidance from anywhere in the world.">
+    <!-- Google Fonts & Tailwind CSS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400&family=Oswald:wght@700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body { font-family: 'Open Sans', sans-serif; }
+        .font-oswald { font-family: 'Oswald', sans-serif; }
+    </style>
 </head>
-<body>
-  <section class="service-hero">
-    <div>
-      <h1 class="service-title">Online Coaching</h1>
-      <p class="service-subtitle">Train anywhere. Stay accountable. Never guess again.</p>
-      <p style="font-style: italic; color: #ccc; margin-top: 1rem;">"I get better results now remotely than I ever did in the gym on my own."</p>
-    </div>
-  </section>
+<body class="bg-gradient-to-br from-black via-[#1a1a1a] to-[#111] text-[#e0e0e0]">
 
-  <section class="service-content">
-    <div class="section">
-      <h2 class="section-title">What Is Online Coaching?</h2>
-      <p class="section-description">It’s personal training — without borders. I build your full fitness programme based on your goals, experience, equipment, and time available. You train when and where suits you best — I’ll be there with guidance, structure, and direct support.</p>
-    </div>
+    <div class="max-w-5xl mx-auto p-4 sm:p-8">
+        <!-- Header Section -->
+        <header class="text-center mb-12">
+            <h1 class="text-5xl sm:text-6xl font-bold uppercase bg-gradient-to-r from-[#ff6b35] via-[#ff8c42] to-[#ffd700] text-transparent bg-clip-text font-oswald mb-3">Online Coaching</h1>
+            <h2 class="text-xl sm:text-2xl font-semibold uppercase tracking-wider text-[#ff8c42] font-oswald">World-Class Coaching, Wherever You Are</h2>
+        </header>
 
-    <div class="section">
-      <h2 class="section-title">What You’ll Get</h2>
-      <ul class="included-list">
-        <li>Custom weekly training plan adjusted as you progress</li>
-        <li>App-based workout tracking with video demos + cues</li>
-        <li>Ongoing WhatsApp and email access for questions + check-ins</li>
-        <li>Monthly Zoom review call to analyse progress + challenges</li>
-        <li>Form checks — send your videos, get personal technique feedback</li>
-      </ul>
-    </div>
+        <main class="space-y-16">
+            <!-- Main Content Section -->
+            <section class="bg-[#1a1a1a] p-8 rounded-3xl border border-[#ff8c42]/60 shadow-lg">
+                <div class="grid md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <h3 class="text-4xl font-oswald font-bold text-white mb-4">No Gym? No Problem.</h3>
+                        <p class="text-[#b0b0b0] mb-4 text-lg">My online coaching program delivers the same high-level expertise and accountability as my in-person training, tailored for you to perform at home, in your local gym, or on the road. Location is no longer a barrier to achieving elite results.</p>
+                        <p class="text-[#b0b0b0] mb-6 text-lg">You get a comprehensive, evolving program delivered through an easy-to-use app, complete with video demonstrations, progress tracking, and direct access to me for support and feedback.</p>
+                    </div>
+                    <div class="text-center">
+                         <i class="fas fa-globe-europe text-9xl text-[#ff6b35] opacity-50"></i>
+                    </div>
+                </div>
+            </section>
+            
+             <!-- How It Works Section -->
+            <section>
+                <h3 class="text-4xl font-oswald font-bold text-white mb-6 text-center">How Online Coaching Works</h3>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="bg-[#2d2d2d] rounded-xl p-6 border border-gray-700/50">
+                        <h4 class="text-xl font-oswald font-bold text-white mb-2">1. Strategy Call</h4>
+                        <p class="text-[#b0b0b0]">We start with a video consultation to define your goals, discuss your access to equipment, and lay out the initial plan.</p>
+                    </div>
+                    <div class="bg-[#2d2d2d] rounded-xl p-6 border border-gray-700/50">
+                        <h4 class="text-xl font-oswald font-bold text-white mb-2">2. Custom Programming</h4>
+                        <p class="text-[#b0b0b0]">I design your personalised training blocks, delivered weekly via my coaching app with detailed instructions.</p>
+                    </div>
+                     <div class="bg-[#2d2d2d] rounded-xl p-6 border border-gray-700/50">
+                        <h4 class="text-xl font-oswald font-bold text-white mb-2">3. Weekly Check-Ins</h4>
+                        <p class="text-[#b0b0b0]">We review your progress, analyze your technique from videos you submit, and make adjustments to keep you moving forward.</p>
+                    </div>
+                </div>
+            </section>
 
-    <div class="section">
-      <h2 class="section-title">Who It’s For</h2>
-      <p class="section-description">Busy professionals. Parents. Gym introverts. Athletes. Anyone tired of winging it or plateauing. You’ll never waste another session wondering what to do. You’ll train with clarity and strategy — from anywhere in the world.</p>
-    </div>
+             <!-- CTA Section -->
+            <section class="text-center pt-8">
+                 <h3 class="text-3xl font-oswald font-bold text-white mb-4">Ready To Train, Anywhere?</h3>
+                 <p class="text-[#b0b0b0] mb-6 max-w-2xl mx-auto">If you're self-motivated and ready for a structured plan with expert oversight, online coaching is for you.</p>
+                 <a href="/index.html#contact" class="inline-block bg-gradient-to-r from-[#ff6b35] to-[#ff8c42] text-white font-bold uppercase tracking-wider py-4 px-8 rounded-lg shadow-lg hover:scale-105 hover:shadow-orange-400/50 transition-transform duration-300 text-lg font-oswald">
+                    Apply for Online Coaching
+                </a>
+            </section>
+        </main>
 
-    <div class="section">
-      <h2 class="section-title">Pricing</h2>
-      <ul class="included-list">
-        <li>£129/month</li>
-        <li>No contract — cancel anytime</li>
-        <li>Discount for 3+ month prepay</li>
-      </ul>
+        <footer class="text-center mt-16 py-6 border-t border-gray-800">
+             <a href="/index.html" class="text-[#b0b0b0] hover:text-[#ff6b35] transition">🏠 Back to Main Site</a>
+        </footer>
     </div>
-
-    <div class="section">
-      <h2 class="section-title">What Clients Say</h2>
-      <div class="testimonial-card">
-        <p>"I travel for work constantly. Pete’s online coaching gave me consistency, a plan, and actual progress — even from hotel gyms."</p>
-        <p class="testimonial-author">– Marcus J.</p>
-      </div>
-      <div class="testimonial-card">
-        <p>"Every week feels tailored. I never feel like I’m guessing or doing ‘filler’ workouts. Best investment I’ve made for my health."</p>
-        <p class="testimonial-author">– Jess K.</p>
-      </div>
-    </div>
-  </section>
 </body>
 </html>
