@@ -1,163 +1,77 @@
 <!DOCTYPE html>
-<html lang="en-GB">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Group Training - Coach Pete Ryan</title>
-  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --primary-orange: #ff6b35;
-      --secondary-orange: #ff8c42;
-      --dark-grey: #1a1a1a;
-      --medium-grey: #2d2d2d;
-      --light-grey: #3d3d3d;
-      --text-light: #e0e0e0;
-      --text-medium: #b0b0b0;
-      --text-dark: #808080;
-    }
-
-    body {
-      font-family: 'Open Sans', sans-serif;
-      margin: 0;
-      background: linear-gradient(135deg, var(--dark-grey) 0%, var(--medium-grey) 100%);
-      color: var(--text-light);
-    }
-
-    .service-hero {
-      background: linear-gradient(rgba(26, 26, 26, 0.7), rgba(45, 45, 45, 0.7)), url('https://raw.githubusercontent.com/CoachPete86/images/main/coach_hero_ext.png') center/cover;
-      height: 80vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 2rem;
-    }
-
-    .service-title {
-      font-family: 'Oswald', sans-serif;
-      font-size: 3rem;
-      color: var(--text-light);
-      text-transform: uppercase;
-      letter-spacing: 2px;
-    }
-
-    .service-subtitle {
-      font-size: 1.5rem;
-      color: var(--primary-orange);
-      margin-top: 1rem;
-    }
-
-    .service-content {
-      max-width: 1000px;
-      margin: 3rem auto;
-      padding: 0 2rem;
-    }
-
-    .section {
-      margin-bottom: 3rem;
-    }
-
-    .section-title {
-      font-family: 'Oswald', sans-serif;
-      font-size: 2rem;
-      margin-bottom: 1rem;
-      color: var(--primary-orange);
-    }
-
-    .section-description, p {
-      font-size: 1rem;
-      line-height: 1.7;
-      color: var(--text-medium);
-    }
-
-    ul.included-list {
-      list-style: none;
-      padding: 0;
-    }
-
-    ul.included-list li {
-      margin-bottom: 0.5rem;
-      position: relative;
-      padding-left: 1.5rem;
-    }
-
-    ul.included-list li::before {
-      content: "\2713";
-      color: var(--primary-orange);
-      position: absolute;
-      left: 0;
-    }
-
-    .testimonial-card {
-      background: rgba(255, 255, 255, 0.05);
-      border-left: 4px solid var(--primary-orange);
-      padding: 1.5rem;
-      margin-bottom: 2rem;
-    }
-
-    .testimonial-author {
-      color: var(--primary-orange);
-      font-weight: bold;
-      margin-top: 1rem;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Group Training - Coach Pete Ryan</title>
+    <meta name="description" content="Join high-energy group training sessions with Coach Pete Ryan. Options for private group PT and classes at PureGym West Byfleet.">
+    <!-- Google Fonts & Tailwind CSS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400&family=Oswald:wght@700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body { font-family: 'Open Sans', sans-serif; }
+        .font-oswald { font-family: 'Oswald', sans-serif; }
+    </style>
 </head>
-<body>
-  <section class="service-hero">
-    <div>
-      <h1 class="service-title">Group Training</h1>
-      <p class="service-subtitle">Push harder. Laugh louder. Level up together.</p>
-      <p style="font-style: italic; color: #ccc; margin-top: 1rem;">"The energy in Pete’s classes is next level. It’s the highlight of my week."</p>
-    </div>
-  </section>
+<body class="bg-gradient-to-br from-black via-[#1a1a1a] to-[#111] text-[#e0e0e0]">
 
-  <section class="service-content">
-    <div class="section">
-      <h2 class="section-title">Why Group Training?</h2>
-      <p class="section-description">There’s something powerful about shared effort. Group training delivers the coaching quality of personal sessions with the energy, motivation, and community of a team. You’ll train smarter, sweat harder, and leave every session buzzing.</p>
-    </div>
+    <div class="max-w-5xl mx-auto p-4 sm:p-8">
+        <!-- Header Section -->
+        <header class="text-center mb-12">
+            <h1 class="text-5xl sm:text-6xl font-bold uppercase bg-gradient-to-r from-[#ff6b35] via-[#ff8c42] to-[#ffd700] text-transparent bg-clip-text font-oswald mb-3">Group Training</h1>
+            <h2 class="text-xl sm:text-2xl font-semibold uppercase tracking-wider text-[#ff8c42] font-oswald">Shared Energy, Unstoppable Results</h2>
+        </header>
 
-    <div class="section">
-      <h2 class="section-title">What Makes These Different</h2>
-      <ul class="included-list">
-        <li>Coach-led from start to finish — no guessing, no winging it.</li>
-        <li>Planned progressive structure — each week builds on the last.</li>
-        <li>Training blocks that mix strength, conditioning, and mobility.</li>
-        <li>Focus on proper technique and form — not just keeping up.</li>
-        <li>Personal modifications to suit all levels, injuries, and needs.</li>
-      </ul>
-    </div>
+        <main class="space-y-16">
+            <!-- Private Group PT Section -->
+            <section class="bg-[#1a1a1a] p-8 rounded-3xl border border-[#ff8c42]/60 shadow-lg">
+                <div class="grid md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <h3 class="text-4xl font-oswald font-bold text-white mb-4">Private Group PT</h3>
+                        <p class="text-[#b0b0b0] mb-4 text-lg">Want the energy of a group with the focus of personal training? Assemble your own squad (2-4 people) and train together in private sessions. This is the perfect option for friends, couples, or colleagues who want to split the cost, push each other, and get expert coaching in a small-group setting.</p>
+                        <ul class="text-[#b0b0b0] space-y-2 mb-6 list-inside">
+                            <li class="flex items-start"><i class="fas fa-check-circle text-[#ff6b35] mt-1 mr-2"></i><span>A dedicated program for your group's specific goals.</span></li>
+                            <li class="flex items-start"><i class="fas fa-check-circle text-[#ff6b35] mt-1 mr-2"></i><span>Share the cost while maximizing results.</span></li>
+                            <li class="flex items-start"><i class="fas fa-check-circle text-[#ff6b35] mt-1 mr-2"></i><span>Flexible scheduling to fit your group's availability.</span></li>
+                        </ul>
+                        <p class="text-2xl font-oswald font-bold text-[#ffd700]">Starting from £25 per person, per session.</p>
+                    </div>
+                    <div class="text-center">
+                        <i class="fas fa-users text-9xl text-[#ff6b35] opacity-50"></i>
+                    </div>
+                </div>
+            </section>
 
-    <div class="section">
-      <h2 class="section-title">Session Types</h2>
-      <p><strong>SWEAT 45:</strong> High-intensity, no-nonsense fat-burning circuits using a mix of dumbbells, kettlebells, sleds, rowers, and bodyweight drills.</p>
-      <p><strong>ENGINE:</strong> Cardio-focused workouts to improve heart health, VO2 max, and endurance with ski ergs, rowers, and bikes.</p>
-      <p><strong>TEAM TRAIN:</strong> Partner or small-group drills designed to challenge teamwork and motivation. You’ll go further with others in your corner.</p>
-    </div>
+            <!-- PureGym Classes Section -->
+            <section class="bg-[#1a1a1a] p-8 rounded-3xl border border-gray-700">
+                 <div class="grid md:grid-cols-2 gap-8 items-center">
+                    <div class="text-center md:order-2">
+                        <img src="https://www.puregym.com/images/logos/pure-gym-logo-300.png" alt="PureGym Logo" class="mx-auto h-24 invert">
+                    </div>
+                    <div class="md:order-1">
+                        <h3 class="text-4xl font-oswald font-bold text-white mb-4">PureGym Classes</h3>
+                        <p class="text-[#b0b0b0] mb-4 text-lg">As part of your PureGym membership, you have access to my scheduled group classes at **PureGym West Byfleet**. These sessions are a fantastic way to experience my coaching style in a high-energy environment. They are designed to be challenging, fun, and accessible for all fitness levels.</p>
+                        <p class="text-[#b0b0b0] mb-6 text-lg"><strong class="text-white">These classes are included with your standard PureGym membership at no extra cost.</strong> Simply book your spot through the PureGym app and show up ready to work.</p>
+                    </div>
+                </div>
+            </section>
 
-    <div class="section">
-      <h2 class="section-title">Schedule + Pricing</h2>
-      <ul class="included-list">
-        <li>Group sessions held at PureGym West Byfleet</li>
-        <li>Class sizes capped for quality coaching</li>
-        <li>Drop-in: £12 per session</li>
-        <li>Monthly unlimited pass: £85</li>
-        <li>Free trial for first-timers — message to book</li>
-      </ul>
-    </div>
+             <!-- CTA Section -->
+            <section class="text-center pt-8">
+                 <h3 class="text-3xl font-oswald font-bold text-white mb-4">Ready to Join the Team?</h3>
+                 <p class="text-[#b0b0b0] mb-6 max-w-2xl mx-auto">Whether you're building a private squad or joining a class at the gym, the first step is reaching out. Let's find the right fit for you.</p>
+                 <a href="/index.html#contact" class="inline-block bg-gradient-to-r from-[#ff6b35] to-[#ff8c42] text-white font-bold uppercase tracking-wider py-4 px-8 rounded-lg shadow-lg hover:scale-105 hover:shadow-orange-400/50 transition-transform duration-300 text-lg font-oswald">
+                    Contact Me To Get Started
+                </a>
+            </section>
+        </main>
 
-    <div class="section">
-      <h2 class="section-title">What Clients Say</h2>
-      <div class="testimonial-card">
-        <p>"It feels like PT but with your mates cheering you on. Pete’s attention to form and energy is unmatched."</p>
-        <p class="testimonial-author">– Ash D.</p>
-      </div>
-      <div class="testimonial-card">
-        <p>"I hated the gym. These sessions flipped that on its head. I'm the fittest and most confident I've ever been."</p>
-        <p class="testimonial-author">– Louisa P.</p>
-      </div>
+        <footer class="text-center mt-16 py-6 border-t border-gray-800">
+             <a href="/index.html" class="text-[#b0b0b0] hover:text-[#ff6b35] transition">🏠 Back to Main Site</a>
+        </footer>
     </div>
-  </section>
 </body>
 </html>
