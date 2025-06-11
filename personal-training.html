@@ -1,213 +1,88 @@
 <!DOCTYPE html>
-<html lang="en-GB">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Personal Training - Coach Pete Ryan</title>
-  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --primary-orange: #ff6b35;
-      --secondary-orange: #ff8c42;
-      --dark-grey: #1a1a1a;
-      --medium-grey: #2d2d2d;
-      --light-grey: #3d3d3d;
-      --text-light: #e0e0e0;
-      --text-medium: #b0b0b0;
-      --text-dark: #808080;
-    }
-
-    body {
-      font-family: 'Open Sans', sans-serif;
-      margin: 0;
-      background: linear-gradient(135deg, var(--dark-grey) 0%, var(--medium-grey) 100%);
-      color: var(--text-light);
-    }
-
-    .service-hero {
-      background: linear-gradient(rgba(26, 26, 26, 0.7), rgba(45, 45, 45, 0.7)), url('https://raw.githubusercontent.com/CoachPete86/images/main/coach_hero_ext.png') center/cover;
-      height: 80vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 2rem;
-    }
-
-    .service-title {
-      font-family: 'Oswald', sans-serif;
-      font-size: 3rem;
-      color: var(--text-light);
-      text-transform: uppercase;
-      letter-spacing: 2px;
-    }
-
-    .service-subtitle {
-      font-size: 1.5rem;
-      color: var(--primary-orange);
-      margin-top: 1rem;
-    }
-
-    .service-content {
-      max-width: 1000px;
-      margin: 3rem auto;
-      padding: 0 2rem;
-    }
-
-    .section {
-      margin-bottom: 3rem;
-    }
-
-    .section-title {
-      font-family: 'Oswald', sans-serif;
-      font-size: 2rem;
-      margin-bottom: 1rem;
-      color: var(--primary-orange);
-    }
-
-    .section-description, p {
-      font-size: 1rem;
-      line-height: 1.7;
-      color: var(--text-medium);
-    }
-
-    ul.included-list {
-      list-style: none;
-      padding: 0;
-    }
-
-    ul.included-list li {
-      margin-bottom: 0.5rem;
-      position: relative;
-      padding-left: 1.5rem;
-    }
-
-    ul.included-list li::before {
-      content: "\2713";
-      color: var(--primary-orange);
-      position: absolute;
-      left: 0;
-    }
-
-    .pricing-table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-
-    .pricing-table th,
-    .pricing-table td {
-      border: 1px solid var(--light-grey);
-      padding: 1rem;
-      text-align: left;
-    }
-
-    .pricing-table th {
-      background: var(--medium-grey);
-    }
-
-    .pricing-table td {
-      background: rgba(255,255,255,0.05);
-    }
-
-    .testimonial-card {
-      background: rgba(255, 255, 255, 0.05);
-      border-left: 4px solid var(--primary-orange);
-      padding: 1.5rem;
-      margin-bottom: 2rem;
-    }
-
-    .testimonial-author {
-      color: var(--primary-orange);
-      font-weight: bold;
-      margin-top: 1rem;
-    }
-
-    .faq h3 {
-      color: var(--primary-orange);
-      margin-top: 1.5rem;
-    }
-
-    .faq p {
-      margin-bottom: 1rem;
-      color: var(--text-medium);
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Training - Coach Pete Ryan</title>
+    <meta name="description" content="One-on-one personal training with Coach Pete Ryan. Customised fitness and mindset coaching designed for your unique goals.">
+    <!-- Google Fonts & Tailwind CSS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400&family=Oswald:wght@700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body { font-family: 'Open Sans', sans-serif; }
+        .font-oswald { font-family: 'Oswald', sans-serif; }
+    </style>
 </head>
-<body>
-  <section class="service-hero">
-    <div>
-      <h1 class="service-title">Personal Training</h1>
-      <p class="service-subtitle">Training Tailored for Real Transformation</p>
-      <p style="font-style: italic; color: #ccc; margin-top: 1rem;">"I never thought I'd enjoy working out — now I can't imagine my week without it."</p>
+<body class="bg-gradient-to-br from-black via-[#1a1a1a] to-[#111] text-[#e0e0e0]">
+
+    <div class="max-w-5xl mx-auto p-4 sm:p-8">
+        <!-- Header Section -->
+        <header class="text-center mb-12">
+            <h1 class="text-5xl sm:text-6xl font-bold uppercase bg-gradient-to-r from-[#ff6b35] via-[#ff8c42] to-[#ffd700] text-transparent bg-clip-text font-oswald mb-3">Personal Training</h1>
+            <h2 class="text-xl sm:text-2xl font-semibold uppercase tracking-wider text-[#ff8c42] font-oswald">Your Goals, My Mission</h2>
+        </header>
+
+        <main class="space-y-16">
+            <!-- Main Content Section -->
+            <section class="bg-[#1a1a1a] p-8 rounded-3xl border border-[#ff8c42]/60 shadow-lg">
+                <div class="grid md:grid-cols-2 gap-8 items-center">
+                    <!-- Image Section -->
+                    <div class="text-center">
+                         <img src="https://raw.githubusercontent.com/coachpete86/CoachPete_LIVESITE/main/Photoshoot_Coach_2.png" alt="Coach Pete Ryan in a coaching stance" class="rounded-xl shadow-lg border-2 border-gray-700">
+                    </div>
+                    <!-- Text Content Section -->
+                    <div>
+                        <h3 class="text-4xl font-oswald font-bold text-white mb-4">One-to-One Coaching</h3>
+                        <p class="text-[#b0b0b0] mb-4 text-lg">This is my most focused and intensive service. Personal training with me is a partnership. It's 100% tailored to your body, your mindset, and your life. Whether you're a complete beginner looking to build foundational strength or a seasoned athlete aiming to break a performance plateau, I will create the roadmap and walk the path with you.</p>
+                        <p class="text-[#b0b0b0] mb-6 text-lg">We go beyond the reps and sets. We dive into the 'why' behind your goals, build sustainable habits, and develop the mental resilience to ensure the results you earn are results you keep.</p>
+                        <ul class="text-[#b0b0b0] space-y-3 list-inside text-lg">
+                            <li class="flex items-start"><i class="fas fa-bullseye text-[#ff6b35] mt-1 mr-3"></i><span>Completely bespoke training plan, updated as you progress.</span></li>
+                            <li class="flex items-start"><i class="fas fa-brain text-[#ff6b35] mt-1 mr-3"></i><span>Integrated mindset coaching to overcome mental barriers.</span></li>
+                            <li class="flex items-start"><i class="fas fa-utensils text-[#ff6b35] mt-1 mr-3"></i><span>Actionable nutrition guidance to fuel your body.</span></li>
+                            <li class="flex items-start"><i class="fas fa-mobile-alt text-[#ff6b35] mt-1 mr-3"></i><span>24/7 support and accountability via WhatsApp.</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            
+             <!-- What to Expect Section -->
+            <section>
+                <h3 class="text-4xl font-oswald font-bold text-white mb-6 text-center">What to Expect</h3>
+                <div class="grid md:grid-cols-3 gap-6 text-center">
+                    <div class="bg-[#2d2d2d] rounded-xl p-6 border border-gray-700/50">
+                        <div class="text-4xl text-[#ff6b35] mb-3"><i class="fas fa-clipboard-list"></i></div>
+                        <h4 class="text-xl font-oswald font-bold text-white mb-2">In-Depth Assessment</h4>
+                        <p class="text-[#b0b0b0]">We start with a deep dive into your goals, movement patterns, and lifestyle to build the perfect foundation.</p>
+                    </div>
+                    <div class="bg-[#2d2d2d] rounded-xl p-6 border border-gray-700/50">
+                        <div class="text-4xl text-[#ff6b35] mb-3"><i class="fas fa-dumbbell"></i></div>
+                        <h4 class="text-xl font-oswald font-bold text-white mb-2">Challenging Sessions</h4>
+                        <p class="text-[#b0b0b0]">Every session is designed to be tough but achievable, pushing you just beyond your comfort zone where real growth happens.</p>
+                    </div>
+                     <div class="bg-[#2d2d2d] rounded-xl p-6 border border-gray-700/50">
+                        <div class="text-4xl text-[#ff6b35] mb-3"><i class="fas fa-chart-line"></i></div>
+                        <h4 class="text-xl font-oswald font-bold text-white mb-2">Trackable Progress</h4>
+                        <p class="text-[#b0b0b0]">We track every metric that matters – from strength and endurance to mindset shifts – so you can see your transformation.</p>
+                    </div>
+                </div>
+            </section>
+
+             <!-- CTA Section -->
+            <section class="text-center pt-8">
+                 <h3 class="text-3xl font-oswald font-bold text-white mb-4">Ready for a True Transformation?</h3>
+                 <p class="text-[#b0b0b0] mb-6 max-w-2xl mx-auto">One-on-one coaching is the fastest way to your goals. If you're ready to commit, I'm ready to build your success story.</p>
+                 <a href="/index.html#contact" class="inline-block bg-gradient-to-r from-[#ff6b35] to-[#ff8c42] text-white font-bold uppercase tracking-wider py-4 px-8 rounded-lg shadow-lg hover:scale-105 hover:shadow-orange-400/50 transition-transform duration-300 text-lg font-oswald">
+                    Book a Free Consultation
+                </a>
+            </section>
+        </main>
+
+        <footer class="text-center mt-16 py-6 border-t border-gray-800">
+             <a href="/index.html" class="text-[#b0b0b0] hover:text-[#ff6b35] transition">🏠 Back to Main Site</a>
+        </footer>
     </div>
-  </section>
-
-  <section class="service-content">
-    <div class="section">
-      <h2 class="section-title">What Personal Training Means Here</h2>
-      <p class="section-description">Forget one-size-fits-all. My personal training approach is about building <strong>your</strong> results around <strong>your</strong> life. Whether you're chasing strength, fat loss, pain-free movement, or just confidence in your body again — I make sure every session counts.</p>
-      <p class="section-description">You won’t just “turn up and sweat”. You'll learn the right movement for your body, with precision coaching and a plan that adapts with you. You'll be held accountable, challenged, and supported every step of the way.</p>
-    </div>
-
-    <div class="section">
-      <h2 class="section-title">What’s Included</h2>
-      <ul class="included-list">
-        <li><strong>Initial Consultation & Movement Screen</strong> – Assess your mobility, past injuries, training history, and lifestyle habits to form your game plan.</li>
-        <li><strong>Tailored Weekly Training</strong> – Bespoke programming built around your exact goal, schedule, recovery, and equipment access.</li>
-        <li><strong>1-to-1 In-Person Coaching</strong> – Form checks, performance tweaks, and intensity you just can’t replicate solo.</li>
-        <li><strong>Ongoing Feedback</strong> – Direct messaging, habit tracking, and video feedback between sessions.</li>
-        <li><strong>Nutritional Guidance</strong> – Goal-aligned strategies you can actually stick to (full nutrition coaching available separately).</li>
-      </ul>
-    </div>
-
-    <div class="section">
-      <h2 class="section-title">Pricing Options</h2>
-      <table class="pricing-table">
-        <thead>
-          <tr><th>Package</th><th>Details</th><th>Price</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Single Session</td><td>One-off 60-minute session</td><td>£60</td></tr>
-          <tr><td>Starter Pack</td><td>5 x 60-min sessions + initial consult</td><td>£275 (£55/session)</td></tr>
-          <tr><td>Commitment Pack</td><td>10 x 60-min sessions + full support</td><td>£500 (£50/session)</td></tr>
-          <tr><td>Transformation Pack</td><td>20 x 60-min sessions + tailored progression and support</td><td>£900 (£45/session)</td></tr>
-          <tr><td>Elite Coaching</td><td>Up to 3 sessions/week, unlimited support</td><td>£799/month</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="section">
-      <h2 class="section-title">Client Transformations</h2>
-      <div class="testimonial-card">
-        <p>"Working with Pete has completely transformed my mindset and my body. I’ve lost 15kg in 4 months and for the first time I actually <em>enjoy</em> exercise."</p>
-        <p class="testimonial-author">– James T., lost 15kg</p>
-      </div>
-      <div class="testimonial-card">
-        <p>"I started training at 58, worried I was too late. Pete proved otherwise. I’m now moving better, stronger, and I feel younger than I have in years."</p>
-        <p class="testimonial-author">– Margaret L., age 58</p>
-      </div>
-      <div class="testimonial-card">
-        <p>"As a CEO, time is precious. Pete built a programme that gave maximum return for minimal time. The results speak for themselves — stronger, leaner, more energy than ever."</p>
-        <p class="testimonial-author">– Richard K., Executive Coaching Client</p>
-      </div>
-    </div>
-
-    <div class="section">
-      <h2 class="section-title">Still Wondering if This is For You?</h2>
-      <div class="faq">
-        <h3>Is personal training right for beginners?</h3>
-        <p>Absolutely. Beginners benefit the most from smart programming and expert form coaching. I'll meet you where you're at — not where you think you 'should' be.</p>
-
-        <h3>Where do sessions take place?</h3>
-<p>All sessions are based at <strong>PureGym West Byfleet</strong> by default — this is Coach Pete Ryan’s home base. If you prefer outdoor locations or have a private setup in mind, I can accommodate with advance notice. We'll always choose what works best for your goals and schedule.</p>
-
-        <h3>How quickly will I see results?</h3>
-        <p>Most feel changes in week one. You’ll move better, sleep better, and feel more energised. Body changes follow fast when you stay consistent — expect noticeable change in 4–6 weeks and major shifts from week 8+.</p>
-
-        <h3>Do you guarantee results?</h3>
-        <p>First session satisfaction is 100% guaranteed. Beyond that, I coach — you execute. If you show up and commit, the results <em>will</em> come.</p>
-      </div>
-    </div>
-  </section>
 </body>
 </html>
