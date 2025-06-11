@@ -1,305 +1,77 @@
 <!DOCTYPE html>
-<html lang="en-GB">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nutrition Guidance - Coach Pete Ryan</title>
-  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --primary-orange: #ff6b35;
-      --secondary-orange: #ff8c42;
-      --dark-grey: #1a1a1a;
-      --medium-grey: #2d2d2d;
-      --light-grey: #3d3d3d;
-      --text-light: #e0e0e0;
-      --text-medium: #b0b0b0;
-      --text-dark: #808080;
-    }
-
-    body {
-      font-family: 'Open Sans', sans-serif;
-      margin: 0;
-      background: linear-gradient(135deg, var(--dark-grey), var(--medium-grey));
-      color: var(--text-light);
-    }
-
-    .service-hero {
-      background: linear-gradient(rgba(26, 26, 26, 0.7), rgba(45, 45, 45, 0.7)), url('https://raw.githubusercontent.com/CoachPete86/images/main/coach_hero_ext.png') center/cover;
-      height: 80vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 2rem;
-    }
-
-    .service-title {
-      font-family: 'Oswald', sans-serif;
-      font-size: 3rem;
-      color: var(--text-light);
-      text-transform: uppercase;
-      letter-spacing: 2px;
-    }
-
-    .service-subtitle {
-      font-size: 1.5rem;
-      color: var(--primary-orange);
-      margin-top: 1rem;
-    }
-
-    .service-content {
-      max-width: 1000px;
-      margin: 3rem auto;
-      padding: 0 2rem;
-    }
-
-    .section {
-      margin-bottom: 3rem;
-    }
-
-    .section-title {
-      font-family: 'Oswald', sans-serif;
-      font-size: 2rem;
-      margin-bottom: 1rem;
-      color: var(--primary-orange);
-    }
-
-    .section-description, p {
-      font-size: 1rem;
-      line-height: 1.7;
-      color: var(--text-medium);
-    }
-
-    .benefits-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2rem;
-    }
-
-    .benefit-card {
-      flex: 1;
-      min-width: 280px;
-      background: rgba(255, 255, 255, 0.05);
-      border-left: 4px solid var(--primary-orange);
-      padding: 1.5rem;
-      border-radius: 10px;
-    }
-
-    .benefit-icon {
-      font-size: 2rem;
-      color: var(--primary-orange);
-      margin-bottom: 0.75rem;
-    }
-
-    .benefit-title {
-      font-family: 'Oswald', sans-serif;
-      font-size: 1.3rem;
-      margin-bottom: 0.5rem;
-      color: var(--text-light);
-    }
-
-    .benefit-description {
-      font-size: 1rem;
-      color: var(--text-medium);
-      margin-bottom: 0.75rem;
-    }
-
-    .pricing-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 2rem;
-    }
-
-    .pricing-table th,
-    .pricing-table td {
-      border: 1px solid #444;
-      padding: 1rem;
-      text-align: left;
-    }
-
-    .pricing-table th {
-      background: #2d2d2d;
-      color: var(--text-light);
-    }
-
-    .pricing-table td ul {
-      padding-left: 1.5rem;
-    }
-
-    .highlight-badge {
-      background: var(--primary-orange);
-      color: #fff;
-      padding: 0.25em 0.75em;
-      border-radius: 999px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      margin-left: 1rem;
-    }
-
-    .testimonial {
-      background: rgba(255, 255, 255, 0.05);
-      padding: 2rem;
-      border-radius: 10px;
-      margin-top: 2rem;
-    }
-
-    .faq-container {
-      margin-top: 2rem;
-    }
-
-    .faq-item {
-      margin-bottom: 1.5rem;
-    }
-
-    .faq-question {
-      font-weight: bold;
-      color: var(--primary-orange);
-    }
-
-    .cta-sticky {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: linear-gradient(45deg, #ff6b35, #ff8c42);
-      color: #fff;
-      padding: 0.75rem 1.5rem;
-      border-radius: 50px;
-      font-weight: 600;
-      z-index: 999;
-      text-decoration: none;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.3);
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nutrition Guidance - Coach Pete Ryan</title>
+    <meta name="description" content="Fuel your performance with science-based nutrition guidance from Coach Pete Ryan. No fads, just sustainable strategies for lasting results.">
+    <!-- Google Fonts & Tailwind CSS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400&family=Oswald:wght@700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body { font-family: 'Open Sans', sans-serif; }
+        .font-oswald { font-family: 'Oswald', sans-serif; }
+    </style>
 </head>
-<body>
-  <section class="service-hero">
-    <div>
-      <h1 class="service-title">Nutrition Guidance</h1>
-      <p class="service-subtitle">Eat better. Feel stronger. Live fully.</p>
-      <p style="margin-top: 1rem; font-style: italic; color: #ccc">"I thought I had to give up my favourite foods. Pete taught me balance — I lost 10kg and kept it off."</p>
-    </div>
-  </section>
+<body class="bg-gradient-to-br from-black via-[#1a1a1a] to-[#111] text-[#e0e0e0]">
 
-  <section class="service-content">
-    <div class="section">
-      <h2 class="section-title">Why Nutrition Matters</h2>
-      <p class="section-description">Nutrition isn’t just about calories – it’s your daily decision to either thrive or survive. Whether you're shedding fat, building strength or reclaiming your energy, your nutrition plan makes or breaks your progress. This is where we take the guesswork out and bring in real strategy.</p>
-    </div>
+    <div class="max-w-5xl mx-auto p-4 sm:p-8">
+        <!-- Header Section -->
+        <header class="text-center mb-12">
+            <h1 class="text-5xl sm:text-6xl font-bold uppercase bg-gradient-to-r from-[#ff6b35] via-[#ff8c42] to-[#ffd700] text-transparent bg-clip-text font-oswald mb-3">Nutrition Guidance</h1>
+            <h2 class="text-xl sm:text-2xl font-semibold uppercase tracking-wider text-[#ff8c42] font-oswald">Fuel Your Fire, Don't Fight Your Food</h2>
+        </header>
 
-    <div class="section">
-      <h2 class="section-title">What You’ll Gain from Coaching</h2>
-      <div class="benefits-grid">
-        <div class="benefit-card">
-          <div class="benefit-icon"><i class="fas fa-apple-alt"></i></div>
-          <h3 class="benefit-title">Sustainable Strategies</h3>
-          <p class="benefit-description">No more crash diets or food guilt. You’ll learn how to build meals that support your goals, without restriction.</p>
-          <ul>
-            <li>✅ Build-your-plate frameworks</li>
-            <li>✅ Understand hunger vs. cravings</li>
-            <li>✅ Balance meals while eating out</li>
-          </ul>
-        </div>
-        <div class="benefit-card">
-          <div class="benefit-icon"><i class="fas fa-balance-scale"></i></div>
-          <h3 class="benefit-title">Balanced Eating</h3>
-          <p class="benefit-description">We cover macros, micros and how to structure food around training and life — minus the spreadsheet stress.</p>
-          <ul>
-            <li>✅ How to optimise meals around workouts</li>
-            <li>✅ Smart swaps that boost nutrition</li>
-            <li>✅ Portioning without counting every gram</li>
-          </ul>
-        </div>
-        <div class="benefit-card">
-          <div class="benefit-icon"><i class="fas fa-seedling"></i></div>
-          <h3 class="benefit-title">Mindful Nutrition</h3>
-          <p class="benefit-description">We’ll dig into why you eat the way you do – and create strategies to interrupt negative habits at their root.</p>
-          <ul>
-            <li>✅ Identify triggers for emotional eating</li>
-            <li>✅ Build sustainable routines around food</li>
-            <li>✅ Stop the "start again Monday" cycle</li>
-          </ul>
-        </div>
-      </div>
-      <p style="margin-top: 2rem; font-size: 1.05rem; line-height: 1.8;">
-        As part of your onboarding, I’ll ask you to keep a full 7-day food diary — recording <strong>everything</strong> you consume. This includes the times, amounts, reasons for eating, and how you felt afterwards. This isn’t for me to judge you. In fact, it’s often the act of writing it all down — being fully honest — that already begins the transformation.
-        <br><br>
-        I’m not interested in perfection. I’m interested in <em>your</em> real habits. Because only when I understand what’s happening behind the meals, can I help guide you forward with clarity. This gives me powerful insight into your routines, triggers and potential pitfalls — all things we can address <em>before</em> they become problems. So do this for yourself — with honesty and without shame. This is how change really starts.
-      </p>
-    </div>
+        <main class="space-y-16">
+            <!-- Main Content Section -->
+            <section class="bg-[#1a1a1a] p-8 rounded-3xl border border-[#ff8c42]/60 shadow-lg">
+                <div class="grid md:grid-cols-2 gap-8 items-center">
+                    <div class="text-center">
+                         <i class="fas fa-apple-alt text-9xl text-[#ff6b35] opacity-50"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-4xl font-oswald font-bold text-white mb-4">Performance-Based Nutrition</h3>
+                        <p class="text-[#b0b0b0] mb-4 text-lg">You can't out-train a bad diet. Proper nutrition is the cornerstone of any successful transformation. My approach is simple and science-based: we focus on building sustainable habits, not restrictive diets. I don't sell meal plans or push fad diets. I teach you the principles of nutrition so you can make informed choices that align with your goals for the rest of your life.</p>
+                        <p class="text-[#b0b0b0] mb-6 text-lg">This guidance is an integral part of my personal training and transformation packages, designed to complement your training and accelerate your results.</p>
+                    </div>
+                </div>
+            </section>
+            
+             <!-- Core Principles Section -->
+            <section>
+                <h3 class="text-4xl font-oswald font-bold text-white mb-6 text-center">Our Core Principles</h3>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="bg-[#2d2d2d] rounded-xl p-6 border border-gray-700/50">
+                        <h4 class="text-xl font-oswald font-bold text-white mb-2">Macros for Your Goals</h4>
+                        <p class="text-[#b0b0b0]">Learn how to balance proteins, carbs, and fats to build muscle, lose fat, and optimize energy levels.</p>
+                    </div>
+                    <div class="bg-[#2d2d2d] rounded-xl p-6 border border-gray-700/50">
+                        <h4 class="text-xl font-oswald font-bold text-white mb-2">Nutrient Timing</h4>
+                        <p class="text-[#b0b0b0]">Understand what to eat and when to maximize recovery, fuel workouts, and support metabolic health.</p>
+                    </div>
+                     <div class="bg-[#2d2d2d] rounded-xl p-6 border border-gray-700/50">
+                        <h4 class="text-xl font-oswald font-bold text-white mb-2">Sustainable Habits</h4>
+                        <p class="text-[#b0b0b0]">We focus on creating a healthy relationship with food, so your results last long after our coaching ends.</p>
+                    </div>
+                </div>
+            </section>
 
-    <div class="section">
-      <h2 class="section-title">Package Options</h2>
-      <table class="pricing-table">
-        <thead>
-          <tr>
-            <th>Package</th>
-            <th>What’s Included</th>
-            <th>Price</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="package-name">Quick Start</td>
-            <td>
-              <ul>
-                <li>One 60-minute coaching call</li>
-                <li>Custom Nutrition Snapshot (PDF)</li>
-              </ul>
-            </td>
-            <td>£49</td>
-          </tr>
-          <tr>
-            <td class="package-name">Coaching Bundle <span class="highlight-badge">Best Value</span></td>
-            <td>
-              <ul>
-                <li>Four weekly email or video check-ins</li>
-                <li>Habit tracking + meal framework guides</li>
-              </ul>
-              <p style="color: #aaa; font-size: 0.9rem;">Avg. result: 4–6kg lost in 5 weeks</p>
-            </td>
-            <td>£129</td>
-          </tr>
-          <tr>
-            <td class="package-name">Full Nutrition Coaching</td>
-            <td>
-              <ul>
-                <li>Initial consultation + weekly 1:1 calls</li>
-                <li>Unlimited messaging support</li>
-                <li>Recipe packs + ongoing resources</li>
-                <li>Submit food diary image uploads for full macro breakdown</li>
-              </ul>
-            </td>
-            <td>£249</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+             <!-- CTA Section -->
+            <section class="text-center pt-8">
+                 <h3 class="text-3xl font-oswald font-bold text-white mb-4">Ready to Fuel Your Transformation?</h3>
+                 <p class="text-[#b0b0b0] mb-6 max-w-2xl mx-auto">Nutrition guidance is included in all my comprehensive coaching packages. Let's build a plan that covers every aspect of your success.</p>
+                 <a href="/index.html#contact" class="inline-block bg-gradient-to-r from-[#ff6b35] to-[#ff8c42] text-white font-bold uppercase tracking-wider py-4 px-8 rounded-lg shadow-lg hover:scale-105 hover:shadow-orange-400/50 transition-transform duration-300 text-lg font-oswald">
+                    Discuss Your Goals
+                </a>
+            </section>
+        </main>
 
-    <div class="section">
-      <h2 class="section-title">Real Client Feedback</h2>
-      <div class="testimonial">
-        <p><em>“Before I worked with Pete, I’d tried every diet out there. In just six weeks, I felt in control for the first time in years — and it wasn’t even hard.”</em></p>
-        <p><strong>– Claire, busy mum of 3</strong></p>
-      </div>
+        <footer class="text-center mt-16 py-6 border-t border-gray-800">
+             <a href="/index.html" class="text-[#b0b0b0] hover:text-[#ff6b35] transition">🏠 Back to Main Site</a>
+        </footer>
     </div>
-
-    <div class="section">
-      <h2 class="section-title">FAQs</h2>
-      <div class="faq-container">
-        <div class="faq-item">
-          <h3 class="faq-question">Is this suitable for vegetarians or vegans?</h3>
-          <p>Absolutely. All coaching is fully adaptable to plant-based diets and any dietary needs.</p>
-        </div>
-        <div class="faq-item">
-          <h3 class="faq-question">Will I receive a meal plan?</h3>
-          <p>No fixed plans. Instead, I’ll teach you how to build meals using flexible frameworks you can sustain long-term.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <a href="#contact" class="cta-sticky">Start Nutrition Coaching</a>
 </body>
 </html>
