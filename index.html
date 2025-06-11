@@ -685,7 +685,7 @@
                 flex-direction: column;
                 background: rgba(26,26,26,0.98);
                 position: absolute;
-                top: 70px; /* Adjust if navbar height changes */
+                top: 70px;
                 right: 0;
                 width: 100%;
                 padding: 2rem 0;
@@ -732,14 +732,16 @@
             .service-card {
                 padding: 2rem;
             }
-        }
+         }
     </style>
 </head>
 <body>
+    <!-- Loading Screen -->
     <div class="loader" id="loader">
         <div class="loader-text">Building Better People</div>
     </div>
 
+    <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
             <a href="#home" class="logo">Coach Pete Ryan</a>
@@ -760,17 +762,19 @@
         </div>
     </nav>
 
+    <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="hero-content">
             <h1 class="hero-title" data-aos="fade-up">Coach Pete Ryan</h1>
             <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="200">Mindset • Fitness • Health</p>
             <p class="hero-description" data-aos="fade-up" data-aos-delay="400">
-                Show up – Learn – Try – Fail – Try Again – Succeed
+                FIGHTER – MENTOR – ATHLETE – COACH
             </p>
             <a href="#contact" class="cta-button" data-aos="fade-up" data-aos-delay="600">Start Your Journey</a>
         </div>
     </section>
 
+    <!-- Stats Section -->
     <section class="stats">
         <div class="stats-container">
             <div class="stat-item" data-aos="fade-up" data-aos-delay="100">
@@ -792,6 +796,7 @@
         </div>
     </section>
 
+    <!-- About Section -->
     <section class="section" id="about">
         <div class="section-container about-container">
             <div class="about-content" data-aos="fade-right">
@@ -813,6 +818,7 @@
         </div>
     </section>
 
+    <!-- Services Section -->
     <section class="section services" id="services">
         <div class="section-container services-container">
             <h2 class="section-title" data-aos="fade-up">My Services</h2>
@@ -851,6 +857,7 @@
         </div>
     </section>
 
+    <!-- Process Section -->
     <section class="section process" id="process">
         <div class="section-container process-container">
             <h2 class="section-title" data-aos="fade-up">My 4-Step Process</h2>
@@ -879,6 +886,7 @@
         </div>
     </section>
 
+    <!-- Testimonials Section -->
     <section class="section testimonials" id="testimonials">
         <div class="section-container testimonials-container">
             <h2 class="section-title" data-aos="fade-up">What My Clients Say</h2>
@@ -893,6 +901,7 @@
         </div>
     </section>
 
+    <!-- Contact Section -->
     <section class="section" id="contact">
         <div class="section-container contact-container">
             <div class="contact-info" data-aos="fade-right">
@@ -903,7 +912,8 @@
                 </p>
                 <div class="contact-item">
                     <i class="fas fa-phone" aria-hidden="true"></i>
-                    <a href="tel:+447123456789">+44 7123 456789</a>
+                    <!-- ACTION REQUIRED: Replace with your real phone number -->
+                    <a href="tel:+447308518428">+44 7308 518428</a>
                 </div>
                 <div class="contact-item">
                     <i class="fas fa-envelope" aria-hidden="true"></i>
@@ -911,7 +921,7 @@
                 </div>
                 <div class="contact-item">
                     <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
-                    <span>Thorpe, Surrey, UK</span>
+                    <span>Puregym West Byfleet, Surrey, UK</span>
                 </div>
                 <div class="contact-item">
                     <i class="fas fa-clock" aria-hidden="true"></i>
@@ -945,9 +955,11 @@
         </div>
     </section>
 
+    <!-- Footer -->
     <footer class="footer">
         <div class="footer-content">
             <div class="social-links">
+                <!-- ACTION REQUIRED: Replace # with your actual social media links -->
                 <a href="#" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram" aria-hidden="true"></i></a>
                 <a href="#" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook" aria-hidden="true"></i></a>
                 <a href="#" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
@@ -959,6 +971,7 @@
         </div>
     </footer>
 
+    <!-- Scripts -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
