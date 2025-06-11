@@ -24,7 +24,6 @@
     <main class="max-w-5xl mx-auto rounded-3xl overflow-hidden border border-[#ff8c42]/60 shadow-[0_0_60px_rgba(255,140,66,0.2)] bg-[#1a1a1a]">
         <div class="p-8 sm:p-12">
             <header class="text-center mb-10">
-                <!-- FIXED: Replaced GitHub page URL with the correct raw image URL -->
                 <img src="https://raw.githubusercontent.com/CoachPete86/images/b097969684b01c3c988c196936e5dc14b93df56f/coach-pete-hero.png" alt="Coach Pete Ryan leading a class" class="mx-auto rounded-xl border-4 border-[#ff8c42] shadow-xl max-h-[400px] object-contain">
                 <p class="italic text-[#b0b0b0] text-lg mt-4">Over 17 Years Experience • 30,000+ Hours Coached • Authentic Results</p>
             </header>
@@ -56,7 +55,8 @@
             <section class="bg-[#2b2b2b] rounded-xl p-6 text-center border border-[#ff8c42] shadow-md">
                 <p class="text-xl font-bold text-[#ffd700] mb-2 animate-pulse font-oswald uppercase tracking-wider">⚡ July Intake Live Now • 10 Spots Max ⚡</p>
                 <p class="text-[#b0b0b0] mb-6">This is your personal reset. Let's build your comeback story. Click below to register your interest.</p>
-                <a href="mailto:pete@coachpeteryan.com?subject=6-Week%20Challenge%20Interest&body=Hi%20Pete%2C%0A%0AI'm%20interested%20in%20the%206-Week%20Challenge%20and%20would%20like%20more%20information.%0A%0AThanks%2C%0A(Your%20Name)" 
+                <!-- This link will now be dynamically changed by the script below -->
+                <a id="register-link" href="#" 
                    class="inline-block bg-gradient-to-r from-[#ff6b35] to-[#ff8c42] text-white font-bold uppercase tracking-wider py-4 px-8 rounded-lg shadow-lg hover:scale-105 hover:shadow-orange-400/50 transition-transform duration-300 text-lg font-oswald">
                    Register Interest Now
                 </a>
@@ -70,5 +70,40 @@
             </footer>
         </div>
     </main>
+
+    <!-- NEW: Script to handle dynamic link -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const registerLink = document.getElementById('register-link');
+
+            // --- Configuration ---
+            const phoneNumber = '447308518428'; // Your phone number in international format without '+'
+            const emailAddress = 'pete@coachpeteryan.com';
+            const subject = '6-Week Challenge Interest';
+            const message = "Hi Pete,\n\nI'm interested in the 6-Week Challenge and would like more information.\n\nThanks,\n(Your Name)";
+            // ---------------------
+
+            // Encode the text for URL usage
+            const encodedMessage = encodeURIComponent(message);
+            const encodedSubject = encodeURIComponent(subject);
+
+            // Construct the links
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+            const mailtoUrl = `mailto:${emailAddress}?subject=${encodedSubject}&body=${encodedMessage}`;
+
+            // Function to detect mobile devices
+            function isMobileDevice() {
+                return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            }
+
+            // Set the link based on the device
+            if (isMobileDevice()) {
+                registerLink.href = whatsappUrl;
+                registerLink.target = '_blank'; // Open WhatsApp in a new tab
+            } else {
+                registerLink.href = mailtoUrl;
+            }
+        });
+    </script>
 </body>
 </html>
