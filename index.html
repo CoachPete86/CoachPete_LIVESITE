@@ -33,6 +33,10 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Open Sans', sans-serif;
             background: linear-gradient(135deg, var(--dark-grey) 0%, var(--medium-grey) 100%);
@@ -50,36 +54,22 @@
             height: 100%;
             background: var(--dark-grey);
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
             z-index: 10000;
-            transition: opacity 0.5s ease;
+            transition: opacity 0.75s ease;
         }
-
+        .loader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
         .loader-text {
             font-family: 'Oswald', sans-serif;
             font-size: 2rem;
             font-weight: 600;
             color: var(--primary-orange);
-            margin-bottom: 2rem;
             text-transform: uppercase;
             letter-spacing: 3px;
-        }
-
-        .progress-bar {
-            width: 300px;
-            height: 4px;
-            background: var(--light-grey);
-            border-radius: 2px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary-orange), var(--secondary-orange));
-            width: 0%;
-            transition: width 0.3s ease;
         }
 
         /* Navigation */
@@ -159,30 +149,41 @@
             display: none;
             flex-direction: column;
             cursor: pointer;
+            gap: 4px;
         }
 
         .mobile-menu span {
             width: 25px;
             height: 3px;
             background: var(--text-light);
-            margin: 3px 0;
-            transition: 0.3s;
+            transition: all 0.3s ease-in-out;
+            border-radius: 2px;
+        }
+        
+        .mobile-menu.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        .mobile-menu.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .mobile-menu.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
         }
 
-       /* Hero Section */
+        /* Hero Section */
         .hero {
-          height: 100vh;
-          background: linear-gradient(rgba(26, 26, 26, 0.7), rgba(45, 45, 45, 0.7)), 
-                      url('https://raw.githubusercontent.com/CoachPete86/images/3749c527ecaa3e8a8d6b597d4604fa57023f18b1/coach_hero_ext.png') top center no-repeat;
-          background-size: contain;
-          background-color: #000;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          text-align: center;
-          padding: 2rem;
+            height: 100vh;
+            background: linear-gradient(rgba(26, 26, 26, 0.7), rgba(45, 45, 45, 0.7)),
+                        url('https://raw.githubusercontent.com/CoachPete86/images/3749c527ecaa3e8a8d6b597d4604fa57023f18b1/coach_hero_ext.png') top center no-repeat;
+            background-size: cover;
+            background-color: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
         }
-
 
         .hero::before {
             content: '';
@@ -297,20 +298,33 @@
             font-weight: 500;
         }
 
-        /* About Section */
-        .about {
+        /* Generic Section Styles */
+        .section {
             padding: 6rem 0;
-            background: linear-gradient(135deg, var(--dark-grey) 0%, var(--medium-grey) 100%);
         }
 
-        .about-container {
+        .section-container {
             max-width: 1200px;
             margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .section-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 3rem;
+            text-align: center;
+            color: var(--text-light);
+            margin-bottom: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* About Section */
+        .about-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 4rem;
             align-items: center;
-            padding: 0 2rem;
         }
 
         .about-content h2 {
@@ -320,6 +334,7 @@
             margin-bottom: 1rem;
             text-transform: uppercase;
             letter-spacing: 2px;
+            text-align: left;
         }
 
         .about-content .highlight {
@@ -350,29 +365,12 @@
         .about-image:hover img {
             transform: scale(1.05);
         }
-
+        
         /* Services Section */
         .services {
-            padding: 6rem 0;
-            background: var(--medium-grey);
+             background: var(--medium-grey);
         }
-
-        .services-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .section-title {
-            font-family: 'Oswald', sans-serif;
-            font-size: 3rem;
-            text-align: center;
-            color: var(--text-light);
-            margin-bottom: 3rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
+        
         .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -389,6 +387,7 @@
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            text-decoration: none;
         }
 
         .service-card::before {
@@ -433,17 +432,6 @@
         }
 
         /* Process Section */
-        .process {
-            padding: 6rem 0;
-            background: linear-gradient(135deg, var(--dark-grey) 0%, var(--medium-grey) 100%);
-        }
-
-        .process-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
         .process-steps {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -488,21 +476,16 @@
 
         /* Testimonials */
         .testimonials {
-            padding: 6rem 0;
             background: var(--medium-grey);
         }
-
+        
         .testimonials-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            text-align: center;
+             text-align: center;
         }
 
         .testimonial-slider {
-            position: relative;
-            overflow: hidden;
-            margin-top: 3rem;
+            max-width: 800px;
+            margin: 3rem auto 0;
         }
 
         .testimonial {
@@ -511,7 +494,6 @@
             border-radius: 15px;
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 107, 53, 0.1);
-            margin: 0 1rem;
         }
 
         .testimonial-text {
@@ -531,18 +513,10 @@
         }
 
         /* Contact Section */
-        .contact {
-            padding: 6rem 0;
-            background: linear-gradient(135deg, var(--dark-grey) 0%, var(--medium-grey) 100%);
-        }
-
         .contact-container {
-            max-width: 1200px;
-            margin: 0 auto;
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 4rem;
-            padding: 0 2rem;
         }
 
         .contact-info h3 {
@@ -559,6 +533,16 @@
             align-items: center;
             margin-bottom: 1.5rem;
             color: var(--text-medium);
+        }
+        
+        .contact-item a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .contact-item a:hover {
+            color: var(--primary-orange);
         }
 
         .contact-item i {
@@ -609,6 +593,29 @@
             height: 120px;
             resize: vertical;
         }
+        
+        .error-message {
+            display: none;
+            color: var(--primary-orange);
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+        }
+        
+        .form-status {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 5px;
+            text-align: center;
+            display: none;
+        }
+        .form-status.success {
+            background-color: rgba(46, 204, 113, 0.2);
+            color: #2ecc71;
+        }
+        .form-status.error {
+            background-color: rgba(231, 76, 60, 0.2);
+            color: #e74c3c;
+        }
 
         .submit-btn {
             width: 100%;
@@ -627,6 +634,11 @@
         .submit-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+        }
+        
+        .submit-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
         }
 
         /* Footer */
@@ -670,6 +682,19 @@
         @media (max-width: 768px) {
             .nav-menu {
                 display: none;
+                flex-direction: column;
+                background: rgba(26,26,26,0.98);
+                position: absolute;
+                top: 70px; /* Adjust if navbar height changes */
+                right: 0;
+                width: 100%;
+                padding: 2rem 0;
+                z-index: 999;
+                gap: 1.5rem;
+                align-items: center;
+            }
+            .nav-menu.active {
+                display: flex;
             }
 
             .mobile-menu {
@@ -686,8 +711,8 @@
                 font-size: 3rem;
             }
 
-            .section-title {
-                font-size: 2rem;
+            .section-title, .about-content h2 {
+                font-size: 2.5rem;
             }
 
             .services-grid {
@@ -697,93 +722,24 @@
             .process-steps {
                 grid-template-columns: 1fr;
             }
-
-            /* Show nav-menu when active on mobile */
-            .nav-menu.active {
-                display: flex;
-                flex-direction: column;
-                background: rgba(26,26,26,0.98);
-                position: absolute;
-                top: 70px;
-                right: 0;
-                width: 100%;
-                padding: 2rem 0;
-                z-index: 999;
+        }
+        
+         @media (max-width: 480px) {
+            .services-grid {
+                grid-template-columns: 1fr;
                 gap: 1.5rem;
-                align-items: center;
             }
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
+            .service-card {
+                padding: 2rem;
             }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes pulse {
-            0%, 100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.05);
-            }
-        }
-
-        .animate-pulse {
-            animation: pulse 2s infinite;
-        }
-
-        /* Scroll animations */
-        [data-aos] {
-            opacity: 0;
-            transition-property: opacity, transform;
-        }
-
-        [data-aos].aos-animate {
-            opacity: 1;
-        }
-
-        [data-aos="fade-up"] {
-            transform: translateY(30px);
-        }
-
-        [data-aos="fade-up"].aos-animate {
-            transform: translateY(0);
-        }
-
-        [data-aos="fade-left"] {
-            transform: translateX(-30px);
-        }
-
-        [data-aos="fade-left"].aos-animate {
-            transform: translateX(0);
-        }
-
-        [data-aos="fade-right"] {
-            transform: translateX(30px);
-        }
-
-        [data-aos="fade-right"].aos-animate {
-            transform: translateX(0);
         }
     </style>
 </head>
 <body>
-    <!-- Loading Screen -->
     <div class="loader" id="loader">
         <div class="loader-text">Building Better People</div>
-        <div class="progress-bar">
-            <div class="progress-fill" id="progressFill"></div>
-        </div>
     </div>
 
-    <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
             <a href="#home" class="logo">Coach Pete Ryan</a>
@@ -794,9 +750,9 @@
                 <li><a href="#process" class="nav-link">Process</a></li>
                 <li><a href="#testimonials" class="nav-link">Testimonials</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
-                <li><a href="Challenge.html" class="nav-link">6 Week Challenge</a></li>
+                <li><a href="/Challenge.html" class="nav-link">6 Week Challenge</a></li>
             </ul>
-            <div class="mobile-menu" id="mobileMenu">
+            <div class="mobile-menu" id="mobileMenu" role="button" aria-label="Open navigation menu" tabindex="0">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -804,7 +760,6 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="hero-content">
             <h1 class="hero-title" data-aos="fade-up">Coach Pete Ryan</h1>
@@ -816,7 +771,6 @@
         </div>
     </section>
 
-    <!-- Stats Section -->
     <section class="stats">
         <div class="stats-container">
             <div class="stat-item" data-aos="fade-up" data-aos-delay="100">
@@ -838,9 +792,8 @@
         </div>
     </section>
 
-    <!-- About Section -->
-    <section class="about" id="about">
-        <div class="about-container">
+    <section class="section" id="about">
+        <div class="section-container about-container">
             <div class="about-content" data-aos="fade-right">
                 <h2>The <span class="highlight">Code</span> I Live By</h2>
                 <p>
@@ -855,66 +808,51 @@
                 <a href="#services" class="cta-button">Discover My Methods</a>
             </div>
             <div class="about-image" data-aos="fade-left">
-                <img src="https://raw.githubusercontent.com/coachpete86/CoachPete_LIVESITE/main/Photoshoot_Coach_2.png" alt="Coach Pete Ryan">
+                <img src="https://raw.githubusercontent.com/coachpete86/CoachPete_LIVESITE/main/Photoshoot_Coach_2.png" alt="Coach Pete Ryan in a coaching stance">
             </div>
         </div>
     </section>
 
-       <!-- Services Section -->
-     <!-- Services Section -->
-  <section class="services" id="services">
-    <div class="services-container">
-      <h2 class="section-title" data-aos="fade-up">My Services</h2>
-      <div class="services-grid">
-        <a href="https://coachpete86.github.io/CoachPete_LIVESITE/personal-training.html" class="service-card" data-aos="fade-up" data-aos-delay="100">
-          <div class="service-icon">
-            <i class="fas fa-dumbbell"></i>
-          </div>
-          <h3>Personal Training</h3>
-          <p>Customised fitness programmes designed to push your limits and achieve results you never thought possible. Every session is tailored to your goals and capabilities.</p>
-        </a>
-        <a href="https://coachpete86.github.io/CoachPete_LIVESITE/mindset-coaching.html" class="service-card" data-aos="fade-up" data-aos-delay="200">
-          <div class="service-icon">
-            <i class="fas fa-brain"></i>
-          </div>
-          <h3>Mindset Coaching</h3>
-          <p>Transform your mental game with proven psychological techniques. Break through limiting beliefs and develop the mindset of a champion.</p>
-        </a>
-        <a href="https://coachpete86.github.io/CoachPete_LIVESITE/group-training.html" class="service-card" data-aos="fade-up" data-aos-delay="300">
-          <div class="service-icon">
-            <i class="fas fa-users"></i>
-          </div>
-          <h3>Group Training</h3>
-          <p>High-energy group sessions that combine the motivation of training with others and the expertise of professional coaching.</p>
-        </a>
-        <a href="https://coachpete86.github.io/CoachPete_LIVESITE/online-coaching.html" class="service-card" data-aos="fade-up" data-aos-delay="400">
-          <div class="service-icon">
-            <i class="fas fa-mobile-alt"></i>
-          </div>
-          <h3>Online Coaching</h3>
-          <p>Get world-class coaching from anywhere. Comprehensive online programmes with regular check-ins and constant support.</p>
-        </a>
-        <a href="https://coachpete86.github.io/CoachPete_LIVESITE/nutrition-guidance.html" class="service-card" data-aos="fade-up" data-aos-delay="500">
-          <div class="service-icon">
-            <i class="fas fa-apple-alt"></i>
-          </div>
-          <h3>Nutrition Guidance</h3>
-          <p>Sustainable nutrition strategies that fuel your performance and support your lifestyle. No fad diets, just proven science.</p>
-        </a>
-        <a href="https://coachpete86.github.io/CoachPete_LIVESITE/lifestyle-transformation.html" class="service-card" data-aos="fade-up" data-aos-delay="600">
-          <div class="service-icon">
-            <i class="fas fa-chart-line"></i>
-          </div>
-          <h3>Lifestyle Transformation</h3>
-          <p>Complete life overhaul programmes that address fitness, mindset, nutrition, and habits for total transformation.</p>
-        </a>
-      </div>
-    </div>
-  </section>
+    <section class="section services" id="services">
+        <div class="section-container services-container">
+            <h2 class="section-title" data-aos="fade-up">My Services</h2>
+            <div class="services-grid">
+                <a href="/personal-training.html" class="service-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="service-icon"><i class="fas fa-dumbbell"></i></div>
+                    <h3>Personal Training</h3>
+                    <p>Customised fitness programmes designed to push your limits and achieve results you never thought possible.</p>
+                </a>
+                <a href="/mindset-coaching.html" class="service-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="service-icon"><i class="fas fa-brain"></i></div>
+                    <h3>Mindset Coaching</h3>
+                    <p>Transform your mental game with proven psychological techniques to break through limiting beliefs.</p>
+                </a>
+                <a href="/group-training.html" class="service-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="service-icon"><i class="fas fa-users"></i></div>
+                    <h3>Group Training</h3>
+                    <p>High-energy group sessions that combine the motivation of a team with the expertise of pro coaching.</p>
+                </a>
+                <a href="/online-coaching.html" class="service-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="service-icon"><i class="fas fa-mobile-alt"></i></div>
+                    <h3>Online Coaching</h3>
+                    <p>Get world-class coaching from anywhere with comprehensive online programmes and constant support.</p>
+                </a>
+                <a href="/nutrition-guidance.html" class="service-card" data-aos="fade-up" data-aos-delay="500">
+                    <div class="service-icon"><i class="fas fa-apple-alt"></i></div>
+                    <h3>Nutrition Guidance</h3>
+                    <p>Sustainable nutrition strategies that fuel your performance and support your lifestyle. No fad diets.</p>
+                </a>
+                <a href="/lifestyle-transformation.html" class="service-card" data-aos="fade-up" data-aos-delay="600">
+                    <div class="service-icon"><i class="fas fa-chart-line"></i></div>
+                    <h3>Lifestyle Transformation</h3>
+                    <p>Complete life overhaul programmes that address fitness, mindset, nutrition, and habits for total change.</p>
+                </a>
+            </div>
+        </div>
+    </section>
 
-    <!-- Process Section -->
-    <section class="process" id="process">
-        <div class="process-container">
+    <section class="section process" id="process">
+        <div class="section-container process-container">
             <h2 class="section-title" data-aos="fade-up">My 4-Step Process</h2>
             <div class="process-steps">
                 <div class="process-step" data-aos="fade-up" data-aos-delay="100">
@@ -941,9 +879,8 @@
         </div>
     </section>
 
-    <!-- Testimonials Section -->
-    <section class="testimonials" id="testimonials">
-        <div class="testimonials-container">
+    <section class="section testimonials" id="testimonials">
+        <div class="section-container testimonials-container">
             <h2 class="section-title" data-aos="fade-up">What My Clients Say</h2>
             <div class="testimonial-slider" data-aos="fade-up" data-aos-delay="200">
                 <div class="testimonial active">
@@ -956,9 +893,8 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section class="contact" id="contact">
-        <div class="contact-container">
+    <section class="section" id="contact">
+        <div class="section-container contact-container">
             <div class="contact-info" data-aos="fade-right">
                 <h2 class="section-title" style="text-align: left; margin-bottom: 2rem;">Get In Touch</h2>
                 <h3>Ready to Transform Your Life?</h3>
@@ -967,11 +903,11 @@
                 </p>
                 <div class="contact-item">
                     <i class="fas fa-phone" aria-hidden="true"></i>
-                    <span>+44 7123 456789</span>
+                    <a href="tel:+447123456789">+44 7123 456789</a>
                 </div>
                 <div class="contact-item">
                     <i class="fas fa-envelope" aria-hidden="true"></i>
-                    <span>pete@coachpeteryan.com</span>
+                    <a href="mailto:pete@coachpeteryan.com">pete@coachpeteryan.com</a>
                 </div>
                 <div class="contact-item">
                     <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
@@ -982,222 +918,180 @@
                     <span>Mon-Fri: 6AM-8PM | Sat-Sun: 8AM-6PM</span>
                 </div>
             </div>
-            <form class="contact-form" data-aos="fade-left" novalidate>
+            
+            <form id="contact-form" class="contact-form" action="https://formspree.io/f/xgvyagkq" method="POST" data-aos="fade-left">
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input type="text" id="name" name="name" required aria-required="true" aria-label="Name">
-                    <span class="error-message" style="display:none;color:#ff6b35;font-size:0.9rem;"></span>
+                    <span class="error-message"></span>
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
                     <input type="email" id="email" name="email" required aria-required="true" aria-label="Email">
-                    <span class="error-message" style="display:none;color:#ff6b35;font-size:0.9rem;"></span>
+                    <span class="error-message"></span>
                 </div>
                 <div class="form-group">
-                    <label for="phone">Phone</label>
+                    <label for="phone">Phone (Optional)</label>
                     <input type="tel" id="phone" name="phone" aria-label="Phone">
                 </div>
                 <div class="form-group">
                     <label for="message">Message</label>
-                    <textarea id="message" name="message" placeholder="Tell me about your goals and how I can help you achieve them..." required aria-required="true" aria-label="Message"></textarea>
-                    <span class="error-message" style="display:none;color:#ff6b35;font-size:0.9rem;"></span>
+                    <textarea id="message" name="message" placeholder="Tell me about your goals..." required aria-required="true" aria-label="Message"></textarea>
+                    <span class="error-message"></span>
                 </div>
                 <button type="submit" class="submit-btn">Send Message</button>
+                <div id="form-status" class="form-status"></div>
             </form>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="footer-content">
             <div class="social-links">
-                <a href="#" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
-                <a href="#" aria-label="Facebook"><i class="fab fa-facebook" aria-hidden="true"></i></a>
-                <a href="#" aria-label="Twitter"><i class="fab fa-twitter" aria-hidden="true"></i></a>
-                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
-                <a href="#" aria-label="YouTube"><i class="fab fa-youtube" aria-hidden="true"></i></a>
+                <a href="#" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+                <a href="#" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook" aria-hidden="true"></i></a>
+                <a href="#" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
+                <a href="#" aria-label="YouTube" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube" aria-hidden="true"></i></a>
             </div>
             <p class="footer-text">
-                &copy; 2024 Coach Pete Ryan. All rights reserved. | Building Better People, One Life at a Time.
+                &copy; <span id="copyright-year"></span> Coach Pete Ryan. All rights reserved. | Building Better People
             </p>
         </div>
     </footer>
 
-    <!-- Scripts -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // Loading Screen
-        window.addEventListener('load', function() {
-            const loader = document.getElementById('loader');
-            const progressFill = document.getElementById('progressFill');
+        document.addEventListener('DOMContentLoaded', function() {
             
-            let progress = 0;
-            const interval = setInterval(() => {
-                progress += 8 + Math.random() * 7; // smoother increment
-                if (progress >= 100) {
-                    progress = 100;
-                    clearInterval(interval);
-                    setTimeout(() => {
-                        loader.style.opacity = '0';
-                        setTimeout(() => {
-                            loader.style.display = 'none';
-                        }, 500);
-                    }, 500);
-                }
-                progressFill.style.width = progress + '%';
-            }, 80);
-        });
+            const loader = document.getElementById('loader');
+            loader.classList.add('hidden');
 
-        // Initialize AOS
-        AOS.init({
-            duration: 1000,
-            once: true,
-            offset: 100
-        });
-
-        // Navbar scroll effect
-        window.addEventListener('scroll', function() {
-            const navbar = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
-
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
+            AOS.init({
+                duration: 1000,
+                once: true,
+                offset: 100
             });
-        });
 
-        // Active navigation link
-        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (navbar) {
+                window.addEventListener('scroll', function() {
+                    if (window.scrollY > 50) {
+                        navbar.classList.add('scrolled');
+                    } else {
+                        navbar.classList.remove('scrolled');
+                    }
+                });
+            }
+
             const sections = document.querySelectorAll('section[id]');
             const navLinks = document.querySelectorAll('.nav-link');
             
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (scrollY >= (sectionTop - 200)) {
-                    current = section.getAttribute('id');
-                }
-            });
+            function updateActiveLink() {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (scrollY >= (sectionTop - 150)) {
+                        current = section.getAttribute('id');
+                    }
+                });
 
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === '#' + current) {
-                    link.classList.add('active');
-                }
-            });
-        });
-
-        // Counter animation (improved)
-        function animateCounter(counter) {
-            const target = parseInt(counter.getAttribute('data-count'));
-            let count = 0;
-            const increment = Math.max(1, Math.ceil(target / 100));
-            function update() {
-                count += increment;
-                if (count >= target) {
-                    counter.innerText = target;
-                } else {
-                    counter.innerText = count;
-                    requestAnimationFrame(update);
-                }
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === '#' + current) {
+                        link.classList.add('active');
+                    }
+                });
             }
-            update();
-        }
+            window.addEventListener('scroll', updateActiveLink);
+            updateActiveLink();
 
-        // Trigger counter animation when stats section is visible
-        const statsSection = document.querySelector('.stats');
-        let countersAnimated = false;
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting && !countersAnimated) {
-                    document.querySelectorAll('.stat-number').forEach(animateCounter);
-                    countersAnimated = true;
-                    observer.unobserve(entry.target);
+            function animateCounter(counter) {
+                const target = parseInt(counter.getAttribute('data-count'));
+                const duration = 2000;
+                let start = null;
+
+                function step(timestamp) {
+                    if (!start) start = timestamp;
+                    const progress = Math.min((timestamp - start) / duration, 1);
+                    counter.innerText = Math.floor(progress * target).toLocaleString();
+                    if (progress < 1) {
+                        requestAnimationFrame(step);
+                    }
                 }
-            });
-        });
-        observer.observe(statsSection);
-
-        // Form validation and submission
-        document.querySelector('.contact-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            let valid = true;
-            const name = this.querySelector('#name');
-            const email = this.querySelector('#email');
-            const message = this.querySelector('#message');
-            const errorMessages = this.querySelectorAll('.error-message');
-
-            // Reset error messages
-            errorMessages.forEach(msg => { msg.style.display = 'none'; msg.textContent = ''; });
-
-            // Name validation
-            if (!name.value.trim()) {
-                name.nextElementSibling.textContent = 'Please enter your name.';
-                name.nextElementSibling.style.display = 'block';
-                valid = false;
-            }
-            // Email validation
-            if (!email.value.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
-                email.nextElementSibling.textContent = 'Please enter a valid email address.';
-                email.nextElementSibling.style.display = 'block';
-                valid = false;
-            }
-            // Message validation
-            if (!message.value.trim()) {
-                message.nextElementSibling.textContent = 'Please enter your message.';
-                message.nextElementSibling.style.display = 'block';
-                valid = false;
+                requestAnimationFrame(step);
             }
 
-            if (!valid) return;
+            const statsSection = document.querySelector('.stats');
+            if (statsSection) {
+                const observer = new IntersectionObserver((entries) => {
+                    if (entries[0].isIntersecting) {
+                        document.querySelectorAll('.stat-number').forEach(animateCounter);
+                        observer.disconnect();
+                    }
+                }, { threshold: 0.1 });
+                observer.observe(statsSection);
+            }
 
-            const submitBtn = this.querySelector('.submit-btn');
-            const originalText = submitBtn.textContent;
+            const mobileMenu = document.getElementById('mobileMenu');
+            const navMenu = document.getElementById('navMenu');
+            if (mobileMenu && navMenu) {
+                mobileMenu.addEventListener('click', function() {
+                    navMenu.classList.toggle('active');
+                    this.classList.toggle('active');
+                });
+                
+                navMenu.addEventListener('click', function(e) {
+                    if (e.target.classList.contains('nav-link')) {
+                        navMenu.classList.remove('active');
+                        mobileMenu.classList.remove('active');
+                    }
+                });
+            }
             
-            submitBtn.textContent = 'Sending...';
-            submitBtn.disabled = true;
-            
-            // Simulate form submission
-            setTimeout(() => {
-                submitBtn.textContent = 'Message Sent!';
-                setTimeout(() => {
-                    submitBtn.textContent = originalText;
-                    submitBtn.disabled = false;
-                    this.reset();
-                }, 2000);
-            }, 1500);
-        });
-
-        // Mobile menu toggle
-        const mobileMenu = document.getElementById('mobileMenu');
-        const navMenu = document.getElementById('navMenu');
-        
-        mobileMenu.setAttribute('aria-label', 'Open navigation menu');
-        mobileMenu.setAttribute('role', 'button');
-        mobileMenu.setAttribute('tabindex', '0');
-        mobileMenu.addEventListener('click', function() {
-            navMenu.classList.toggle('active');
-            this.classList.toggle('active');
-        });
-        mobileMenu.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter' || e.key === ' ') {
-                navMenu.classList.toggle('active');
-                this.classList.toggle('active');
+            const form = document.getElementById('contact-form');
+            if(form) {
+                async function handleSubmit(event) {
+                    event.preventDefault();
+                    const status = document.getElementById('form-status');
+                    const data = new FormData(event.target);
+                    
+                    fetch(event.target.action, {
+                        method: form.method,
+                        body: data,
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    }).then(response => {
+                        if (response.ok) {
+                            status.innerHTML = "Thanks for your message! I'll be in touch soon.";
+                            status.className = 'form-status success';
+                            status.style.display = 'block';
+                            form.reset()
+                        } else {
+                            response.json().then(data => {
+                                if (Object.hasOwn(data, 'errors')) {
+                                    status.innerHTML = data["errors"].map(error => error["message"]).join(", ")
+                                } else {
+                                    status.innerHTML = "Oops! There was a problem submitting your form."
+                                }
+                                status.className = 'form-status error';
+                                status.style.display = 'block';
+                            })
+                        }
+                    }).catch(error => {
+                        status.innerHTML = "Oops! There was a problem submitting your form."
+                        status.className = 'form-status error';
+                        status.style.display = 'block';
+                    });
+                }
+                form.addEventListener("submit", handleSubmit)
             }
+            
+            const copyrightYear = document.getElementById('copyright-year');
+            if(copyrightYear) {
+                copyrightYear.textContent = new Date().getFullYear();
+            }
+
         });
     </script>
 </body>
