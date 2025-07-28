@@ -48,8 +48,6 @@ Have questions about your programme? Want to discuss your progress? I'm here to 
 **Or contact me directly:**
 - **Phone**: 07308 518 428
 - **Email**: pete@coachpeteryan.com
-- **Location**: Puregym, Wey Retail Park, Royston Rd, Byfleet, West Byfleet KT14 7NP
-
 ---
 
 
