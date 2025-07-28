@@ -28,7 +28,7 @@
 ### Contact Information
 - **Phone**: 07308 518 428
 - **Email**: pete@coachpeteryan.com
-- **Location**: Puregym, Wey Retail Park, Royston Rd, Byfleet, West Byfleet KT14 7NP
+- **Location**: , Wey Retail Park, Royston Rd, Byfleet, West Byfleet KT14 7NP
 
 ### Brand Identity
 - **Tagline**: 🧭 Explorer • 🥊 Fighter • 🧠 Mentor
