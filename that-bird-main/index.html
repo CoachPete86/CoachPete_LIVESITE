@@ -1,0 +1,504 @@
+```html
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cybersecurity Blueprints – Splash → App</title>
+
+  <!-- Fonts & Tailwind -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=Architects+Daughter&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Preload splash image (HTTPS) -->
+  <link rel="preload" as="image" href="https://coachpete86.github.io/that-bird/image/bird.png" />
+
+  <style>
+    :root{
+      --splash-duration: 5s;    /* total time */
+      --edge-glow: 8px;         /* perceived edge thickness of the glow */
+    }
+
+    html,body{height:100%;margin:0}
+    body{ background:#000; font-family:'Kalam', cursive; overflow:hidden; }
+
+    /* ========= SPLASH ========= */
+    .splash{
+      position:fixed; inset:0; z-index:9999; background:#000;
+      display:grid; place-items:center;
+      animation: splashFadeOut 1s ease forwards; animation-delay: var(--splash-duration);
+    }
+    @keyframes splashFadeOut{ to{ opacity:0; visibility:hidden } }
+
+    .logo-wrap{ position:relative; width:min(78vmin,520px); }
+
+    /* Base logo (static image) */
+    .logo{
+      width:100%; height:auto; display:block; position:relative; z-index:2;
+      filter: drop-shadow(0 0 10px #000);
+      /* 2 inhale–exhale cycles in 5s total */
+      animation: pulse 2.5s ease-in-out 2;
+    }
+    @keyframes pulse{
+      0%,100%{ transform:scale(1) }
+      50%{ transform:scale(1.08) }
+    }
+
+    /* EDGE-ONLY NEON SHIMMER (simulated clockwise sweep without spinning the logo) */
+    .neon {
+      position:absolute; inset:0; pointer-events:none; z-index:3;
+      /* use the PNG as the visible layer to drive edge shadows */
+      background: url('https://coachpete86.github.io/that-bird/image/bird.png') center / contain no-repeat;
+      /* multi-directional drop-shadows that shift clockwise across time */
+      filter:
+        drop-shadow(0 calc(-1 * var(--edge-glow)) var(--edge-glow) #ff004c)
+        drop-shadow(var(--edge-glow) 0 var(--edge-glow) #ff4df3)
+        drop-shadow(0 var(--edge-glow) var(--edge-glow) #3f5bff)
+        drop-shadow(calc(-1 * var(--edge-glow)) 0 var(--edge-glow) #00ff8a);
+      animation: glowSweep 2.5s linear 2; /* 2 sweeps total */
+    }
+    /* The sequence brightens each side in turn → top → right → bottom → left (clockwise) */
+    @keyframes glowSweep {
+      0% {
+        filter:
+          drop-shadow(0 calc(-1 * var(--edge-glow)) var(--edge-glow) #ff004c)
+          drop-shadow(var(--edge-glow) 0 var(--edge-glow) #ff4df3)
+          drop-shadow(0 var(--edge-glow) var(--edge-glow) #3f5bff)
+          drop-shadow(calc(-1 * var(--edge-glow)) 0 var(--edge-glow) #00ff8a);
+      }
+      25% {
+        filter:
+          drop-shadow(0 calc(-1 * var(--edge-glow)) var(--edge-glow) #ff4df3)
+          drop-shadow(var(--edge-glow) 0 var(--edge-glow) #3f5bff)
+          drop-shadow(0 var(--edge-glow) var(--edge-glow) #00ff8a)
+          drop-shadow(calc(-1 * var(--edge-glow)) 0 var(--edge-glow) #ffee00);
+      }
+      50% {
+        filter:
+          drop-shadow(0 calc(-1 * var(--edge-glow)) var(--edge-glow) #3f5bff)
+          drop-shadow(var(--edge-glow) 0 var(--edge-glow) #00ff8a)
+          drop-shadow(0 var(--edge-glow) var(--edge-glow) #ffee00)
+          drop-shadow(calc(-1 * var(--edge-glow)) 0 var(--edge-glow) #ff004c);
+      }
+      75% {
+        filter:
+          drop-shadow(0 calc(-1 * var(--edge-glow)) var(--edge-glow) #00ff8a)
+          drop-shadow(var(--edge-glow) 0 var(--edge-glow) #ffee00)
+          drop-shadow(0 var(--edge-glow) var(--edge-glow) #ff004c)
+          drop-shadow(calc(-1 * var(--edge-glow)) 0 var(--edge-glow) #ff4df3);
+      }
+      100% {
+        filter:
+          drop-shadow(0 calc(-1 * var(--edge-glow)) var(--edge-glow) #ff004c)
+          drop-shadow(var(--edge-glow) 0 var(--edge-glow) #ff4df3)
+          drop-shadow(0 var(--edge-glow) var(--edge-glow) #3f5bff)
+          drop-shadow(calc(-1 * var(--edge-glow)) 0 var(--edge-glow) #00ff8a);
+      }
+    }
+
+    /* Loading bar */
+    .load{ margin-top:22px; width:min(60vmin,360px); height:8px; background:#111; border-radius:999px; overflow:hidden; box-shadow:0 0 0 1px #ffffff22 inset; }
+    .fill{
+      width:0%; height:100%;
+      background:linear-gradient(90deg, #ff004c, #ff7b00, #ffee00, #00ff9e, #00e4ff, #3f5bff, #ff4df3, #ff004c);
+      animation: fill var(--splash-duration) linear forwards;
+      box-shadow: 0 0 12px #18ffff;
+    }
+    @keyframes fill{ to{ width:100% } }
+
+    /* ========= APP (BLUEPRINT) ========= */
+    body.blueprint{ overflow:auto; background-color:#1a3a6a; color:#fff;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px);
+      background-size:2rem 2rem;
+    }
+    .content{ opacity:0; transform:translateY(8px); transition: opacity .6s ease .2s, transform .6s ease .2s; }
+    .content.is-live{ opacity:1; transform:none; }
+
+    /* UI styles scoped to .blueprint */
+    body.blueprint .sketch-border{ border:2px solid rgba(255,255,255,.8); box-shadow:2px 2px 0 rgba(255,255,255,.5); transition:all .2s ease-in-out; }
+    body.blueprint .sketch-border:hover{ transform:translate(-2px,-2px); box-shadow:4px 4px 0 rgba(255,255,255,.5); }
+    body.blueprint .sketch-font{ font-family:'Architects Daughter', cursive; }
+    body.blueprint .modal{ transition:opacity .25s ease; }
+    body.blueprint .modal-content{ transition:transform .25s ease; }
+    body.blueprint ::-webkit-scrollbar{ width:8px; }
+    body.blueprint ::-webkit-scrollbar-track{ background:#1a3a6a; }
+    body.blueprint ::-webkit-scrollbar-thumb{ background:#ffffff; border-radius:4px; }
+    body.blueprint .diagram-text{ font-family:'Architects Daughter', cursive; font-size:10px; fill:white; text-anchor:middle; }
+    body.blueprint .category-title{ font-family:'Architects Daughter', cursive; border-bottom:2px solid rgba(255,255,255,.5); padding-bottom:.5rem; }
+    body.blueprint .section-title{ font-family:'Architects Daughter', cursive; font-weight:700; color:#a7f3d0; }
+
+    /* Reduced motion: skip animations but still show app */
+    @media (prefers-reduced-motion: reduce){
+      .logo{ animation:none }
+      .neon{ animation:none }
+      .splash{ animation-delay:.01s }
+      .fill{ animation-duration:.01s }
+    }
+  </style>
+</head>
+<body>
+  <!-- ===== SPLASH ===== -->
+  <div class="splash" aria-hidden="true">
+    <div class="logo-wrap">
+      <img class="logo" alt="App emblem" src="https://coachpete86.github.io/that-bird/image/bird.png" />
+      <div class="neon"></div>
+    </div>
+    <div class="load" role="progressbar" aria-label="Loading" aria-valuemin="0" aria-valuemax="100"><div class="fill"></div></div>
+  </div>
+
+  <!-- ===== APP ===== -->
+  <main class="content" id="app" role="main">
+    <div class="container mx-auto p-4 md:p-8">
+
+      <!-- Header -->
+      <header class="text-center mb-8 md:mb-12">
+        <h1 class="text-4xl md:text-6xl font-bold text-white sketch-font">Cybersecurity Blueprints</h1>
+        <p class="text-lg md:text-xl text-gray-300 mt-2">Simple explanations for complex tech.</p>
+      </header>
+
+      <!-- Search -->
+      <div class="mb-8 md:mb-12 max-w-2xl mx-auto">
+        <input type="text" id="searchInput" class="w-full bg-transparent text-white placeholder-gray-400 p-4 rounded-lg sketch-border text-xl focus:outline-none focus:ring-2 focus:ring-white" placeholder="Search all blueprints...">
+      </div>
+
+      <!-- Glossary -->
+      <div id="glossaryContainer"></div>
+    </div>
+
+    <!-- Modal -->
+    <div id="termModal" class="modal fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70 p-4 opacity-0 pointer-events-none">
+      <div id="modalContent" class="modal-content bg-[#1a3a6a] border-4 border-white rounded-lg p-6 md:p-8 max-w-3xl w-full relative transform scale-95 overflow-y-auto max-h-full">
+        <button id="closeModal" class="absolute top-4 right-4 text-white text-4xl hover:text-gray-300 z-10" aria-label="Close">&times;</button>
+        <h2 id="modalTitle" class="text-3xl md:text-4xl font-bold mb-4 sketch-font"></h2>
+        <div id="modalDiagram" class="mb-6 text-center text-white"></div>
+        <p id="modalExplanation" class="text-lg md:text-xl"></p>
+        <div id="modalImportance" class="mt-6"></div>
+        <div id="modalDamage" class="mt-6"></div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Reveal app after splash (hard cutoff)
+    setTimeout(() => {
+      document.body.classList.add('blueprint');
+      document.getElementById('app').classList.add('is-live');
+      document.body.style.overflow = 'auto';
+    }, 5000);
+
+    // Progressbar ARIA
+    (function(){
+      const bar = document.querySelector('.load'); const fill = document.querySelector('.fill');
+      if(!bar) return; const started = performance.now(); const total = 5000;
+      const tick = now => {
+        const pct = Math.min(100, ((now - started)/total)*100);
+        bar.setAttribute('aria-valuenow', pct.toFixed(0));
+        if(pct<100) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    })();
+  </script>
+
+  <script>
+    /* ===================== DATASET ===================== */
+    const glossaryData = {
+      "Core Defenses": [
+        {
+          term: "Firewall",
+          title: "Firewall",
+          explanation: "Think of a firewall as a security guard for your computer. It stands at the main gate and checks everything trying to get in or out. It only lets the good, safe things pass and blocks anything that looks suspicious or dangerous.",
+          importance: "Without a firewall, your computer is like a house with all its doors and windows wide open on a busy street. It's your first line of defense against uninvited digital guests.",
+          damageExample: "An SME without a properly configured firewall could have a hacker slip past their defenses, gain access to their internal network, and steal sensitive customer payment information, leading to huge fines and loss of trust.",
+          diagram: `<svg class="w-full h-48" viewBox="0 0 250 80" preserveAspectRatio="xMidYMid meet"><text x="35" y="15" class="diagram-text">INCOMING TRAFFIC</text><text x="35" y="40" font-size="12" fill="#ff6b6b">😈</text><text x="20" y="50" class="diagram-text">Threat</text><text x="35" y="65" font-size="12" fill="#4ade80">✅</text><text x="55" y="75" class="diagram-text">Safe Data</text><rect x="100" y="20" width="20" height="50" fill="none" stroke="white" stroke-width="1.5"/><path d="M100,20 v50 M105,20 v50 M110,20 v50 M115,20 v50 M120,20 v50" stroke="white" stroke-width="0.5"/><text x="110" y="15" class="diagram-text">FIREWALL</text><line x1="50" y1="40" x2="100" y2="40" stroke="#ff6b6b" stroke-width="1.5"/><text x="90" y="35" font-size="12" fill="#ff6b6b">❌</text><line x1="50" y1="65" x2="180" y2="65" stroke="#4ade80" stroke-width="1.5"/><polyline points="175,60 180,65 175,70" stroke="#4ade80" stroke-width="1.5" fill="none" /><text x="215" y="55" class="diagram-text">YOUR COMPUTER</text><path d="M200,60 h20 v20 h-20 z M200,80 l20,10 v-30 l-20,10" stroke="white" fill="none" stroke-width="1"/></svg>`
+        },
+        {
+          term: "Antivirus",
+          title: "Antivirus Software",
+          explanation: "Antivirus is like a doctor for your computer. It regularly scans for known sicknesses (viruses and malware) and removes them to keep your computer healthy. It also tries to stop new sicknesses from getting in.",
+          importance: "It's your digital immune system. It cleans up infections you might pick up from browsing the web or opening a bad email, preventing them from causing real damage.",
+          damageExample: "An employee downloads a seemingly harmless file that contains a virus. Without antivirus to detect it, the virus spreads across the company's network, slowing all computers to a crawl and making work impossible.",
+          diagram: `<svg class="w-full h-48" viewBox="0 0 250 80" preserveAspectRatio="xMidYMid meet"><text x="125" y="15" class="diagram-text">ANTIVIRUS SHIELD</text><path d="M 125, 20 C 60,20 60,70 125,70 C 190,70 190,20 125,20" stroke="white" stroke-width="2" fill="none"/><text x="125" y="50" font-size="20">🛡️</text><text x="50" y="35" class="diagram-text">File</text><text x="50" y="50" font-size="12">📄</text><text x="200" y="35" class="diagram-text">Virus</text><text x="200" y="50" font-size="12">🦠</text><line x1="190" y1="50" x2="140" y2="50" stroke="#ff6b6b" stroke-width="1.5"/><text x="145" y="45" font-size="12" fill="#ff6b6b">❌</text><line x1="60" y1="50" x2="110" y2="50" stroke="#4ade80" stroke-width="1.5"/></svg>`
+        },
+        {
+          term: "Sandbox",
+          title: "Sandbox",
+          explanation: "A sandbox is like a secure playpen for computer programs. If you have a new or untrusted program, you can run it in the sandbox first. If it's malicious, it can't escape the playpen to harm your actual computer.",
+          importance: "It lets you be curious without being careless. You can test out that cool-looking free program without risking your personal photos, documents, and passwords if it turns out to be malicious.",
+          damageExample: "A small design firm runs a new, free photo editing tool in a sandbox and discovers it's ransomware. Because it was sandboxed, their actual client files were never touched. Without it, their entire portfolio would have been locked.",
+          diagram: `<svg class="w-full h-48" viewBox="0 0 250 80" preserveAspectRatio="xMidYMid meet"><text x="50" y="15" class="diagram-text">MAIN COMPUTER</text><rect x="10" y="20" width="80" height="50" rx="5" stroke="white" fill="none" stroke-width="1.5"/><text x="175" y="15" class="diagram-text">SANDBOX (Safe Area)</text><rect x="125" y="20" width="100" height="50" rx="5" stroke="white" fill="none" stroke-width="1.5" stroke-dasharray="4 2"/><text x="175" y="45" font-size="16">😈</text><text x="175" y="60" class="diagram-text">Untrusted App</text><path d="M 175,40 Q 140 30, 110 40" stroke="#ff6b6b" stroke-width="1" fill="none"/><text x="120" y="35" font-size="12" fill="#ff6b6b">❌</text><text x="125" y="45" class="diagram-text" fill="#ff6b6b">CAN'T ESCAPE</text></svg>`
+        },
+        {
+          term: "Patch",
+          title: "Patch Management",
+          explanation: "Software can have weaknesses, like small cracks in a wall. A 'patch' is a fix that covers up the crack. Patch management is the process of making sure you always have the latest fixes to keep attackers from getting through.",
+          importance: "Just like you'd fix a leaky pipe to prevent a flood, patching software fixes security holes before hackers can use them to flood your system with malware or steal your data.",
+          damageExample: "A small online shop fails to apply a critical security patch. A hacker exploits this known vulnerability, steals the entire customer database, and posts it online, destroying the business's reputation.",
+          diagram: `<svg class="w-full h-48" viewBox="0 0 250 80" preserveAspectRatio="xMidYMid meet"><text x="75" y="15" class="diagram-text">SOFTWARE WALL</text><rect x="25" y="20" width="100" height="50" fill="none" stroke="white" stroke-width="1.5"/><path d="M 70 30 L 80 50" stroke="#ff6b6b" stroke-width="1.5"/><text x="75" y="65" class="diagram-text">Vulnerability</text><text x="175" y="15" class="diagram-text">APPLYING PATCH</text><text x="175" y="45" font-size="20">🩹</text><line x1="125" y1="45" x2="160" y2="45" stroke="#4ade80" stroke-width="1.5"/><polyline points="155,40 160,45 155,50" stroke="#4ade80" stroke-width="1.5" fill="none" /></svg>`
+        }
+      ],
+      "Types of Attacks": [
+        {
+          term: "Malware",
+          title: "Malware (Malicious Software)",
+          explanation: "Malware is like a tiny gremlin you accidentally let into your house (computer). It can do all sorts of bad things without you knowing, like breaking your toys (files), spying on you, or leaving the back door open for other gremlins.",
+          importance: "This is the 'what' that all other defenses are trying to stop. Getting malware on your machine can lead to identity theft, financial loss, or simply losing access to your precious memories and files.",
+          damageExample: "You receive malware that includes a keylogger. For weeks, it secretly records everything you type, including your online banking password. The attacker then logs in and drains your bank account.",
+          diagram: `<svg class="w-full h-48" viewBox="0 0 250 80" preserveAspectRatio="xMidYMid meet"><text x="125" y="15" class="diagram-text">YOUR COMPUTER</text><rect x="50" y="20" width="150" height="50" rx="5" stroke="white" fill="none" stroke-width="1.5"/><text x="125" y="45" font-size="24" fill="#ff6b6b">😈</text><text x="125" y="60" class="diagram-text">MALWARE</text><text x="80" y="35" class="diagram-text">Shreds Files</text><text x="80" y="50" font-size="12">📄✂️</text><text x="170" y="35" class="diagram-text">Steals Keys</text><text x="170" y="50" font-size="12">🔑➡️</text></svg>`
+        },
+        {
+          term: "Phishing",
+          title: "Phishing",
+          explanation: "Phishing is like a trickster sending you a fake invitation to a party. The invitation looks real and asks for your secret password to get in. But it's a trap to steal your password. They're 'fishing' for your private information.",
+          importance: "It tricks you into giving away the keys to your digital life. A successful phishing attack can give a criminal access to your email, social media, or bank account by making you hand over the password yourself.",
+          damageExample: "An SME's accountant receives a phishing email that looks like it's from the CEO, asking for an urgent wire transfer. The accountant, tricked by the convincing email, sends thousands of pounds to the attacker's account.",
+          diagram: `<svg class="w-full h-48" viewBox="0 0 250 80" preserveAspectRatio="xMidYMid meet"><text x="210" y="15" class="diagram-text">HACKER</text><text x="210" y="30" font-size="16">🎣</text><path d="M200,30 C 120 0, 80 20, 50 50" stroke="white" stroke-width="1" fill="none"/><text x="50" y="40" class="diagram-text">Fake Email/Site</text><text x="50" y="60" font-size="12">✉️</text><text x="15" y="60" class="diagram-text">YOU</text><text x="15" y="75" font-size="16">🧑</text><text x="100" y="70" class="diagram-text">Stealing Password</text><text x="80" y="60" font-size="12">🔑</text><path d="M30,70 C 40 65, 70 65, 80 60" stroke="#ff6b6b" stroke-width="1" fill="none" stroke-dasharray="2 2"/></svg>`
+        },
+        {
+          term: "Ransomware",
+          title: "Ransomware",
+          explanation: "This is a type of malware that locks up all your files and holds them hostage. The attacker then demands money (a ransom) to give you the key to unlock your files. It's like a digital kidnapping of your data.",
+          importance: "This can be devastating. Imagine every single one of your documents and photos being locked away, with a criminal demanding money to get them back. For many, this means losing irreplaceable files forever.",
+          damageExample: "A small medical practice gets hit by ransomware. All their patient records are encrypted. They can't access schedules or histories, forcing them to shut down and face a choice: pay a huge ransom or risk going out of business.",
+          diagram: `<svg class="w-full h-48" viewBox="0 0 250 80" preserveAspectRatio="xMidYMid meet"><text x="50" y="25" class="diagram-text">Your Files</text><text x="50" y="45" font-size="12">📄</text><text x="50" y="60" font-size="12">🔐</text><text x="50" y="70" class="diagram-text">(Locked)</text><text x="175" y="15" class="diagram-text">ATTACKER DEMANDS RANSOM</text><text x="175" y="45" font-size="20">💰</text><line x1="70" y1="50" x2="160" y2="45" stroke="#ff6b6b" stroke-width="1.5"/><text x="175" y="65" class="diagram-text">For The Key 🔑</text></svg>`
+        },
+        {
+          term: "Spyware",
+          title: "Spyware",
+          explanation: "Spyware is sneaky malware that hides on your computer and secretly watches everything you do. It can record your keystrokes, see your screen, and steal your personal information, then send it all to a hacker.",
+          importance: "It's a total invasion of your privacy. Spyware can watch you through your webcam, listen through your microphone, and read your private messages, turning your personal device into a spy tool against you.",
+          damageExample: "A competitor installs spyware on an employee's laptop at an SME. They steal confidential product designs and client lists, giving the competitor an unfair advantage and costing the SME future business.",
+          diagram: `<svg class="w-full h-48" viewBox="0 0 250 80" preserveAspectRatio="xMidYMid meet"><text x="75" y="15" class="diagram-text">YOUR COMPUTER</text><rect x="25" y="20" width="100" height="50" rx="5" stroke="white" fill="none" stroke-width="1.5"/><text x="75" y="50" font-size="20">👁️</text><text x="75" y="65" class="diagram-text">Spyware</text><text x="200" y="15" class="diagram-text">HACKER</text><text x="200" y="30" font-size="16">😈</text><line x1="125" y1="45" x2="185" y2="30" stroke="#ff6b6b" stroke-width="1" stroke-dasharray="2 2"/><text x="155" y="45" font-size="10">🔑...abc</text></svg>`
+        },
+        {
+          term: "Trojan",
+          title: "Trojan Horse",
+          explanation: "A Trojan is malware disguised as a legitimate program. Like the mythical Trojan Horse, you willingly bring it into your computer thinking it's a gift (like a free game), but it secretly contains malicious code that attacks from the inside.",
+          importance: "It exploits your trust. You think you're getting something useful or fun, but you're actually inviting a thief into your home. It's dangerous because the initial infection is something you do willingly.",
+          damageExample: "An employee at a small firm downloads a 'free PDF converter' that is actually a Trojan. Once installed, the Trojan opens a 'backdoor', allowing an attacker to access the company's server and steal all their financial records.",
+          diagram: `<svg class="w-full h-48" viewBox="0 0 250 80" preserveAspectRatio="xMidYMid meet"><text x="50" y="25" class="diagram-text">"Free Game"</text><text x="50" y="50" font-size="24">🎁</text><text x="55" y="50" font-size="12" fill="#ff6b6b">😈</text><line x1="80" y1="45" x2="150" y2="45" stroke="white" stroke-width="1.5"/><polyline points="145,40 150,45 145,50" stroke="white" stroke-width="1.5" fill="none" /><text x="190" y="30" class="diagram-text">YOUR COMPUTER</text><rect x="165" y="35" width="50" height="30" rx="5" stroke="white" fill="none" stroke-width="1.5"/></svg>`
+        },
+        {
+          term: "DDoS",
+          title: "DDoS Attack",
+          explanation: "Imagine a hundred people all trying to rush through a single doorway at the same time. The doorway gets completely jammed. A DDoS attack is similar: it floods a website with so much fake traffic that real users can't get through.",
+          importance: "While it doesn't usually steal your data, it can completely block you from accessing essential online services. If your bank or work portal is hit, it's effectively 'off' for you and everyone else.",
+          damageExample: "An e-commerce SME is about to launch a huge Black Friday sale. A rival launches a DDoS attack against their website. The site goes down, and they lose out on tens of thousands of pounds in sales.",
+          diagram: `<svg class="w-full h-48" viewBox="0 0 250 80" preserveAspectRatio="xMidYMid meet"><text x="30" y="15" class="diagram-text">ATTACKERS</text><text x="20" y="30" font-size="12">💻</text><text x="40" y="40" font-size="12">💻</text><text x="20" y="50" font-size="12">💻</text><text x="40" y="60" font-size="12">💻</text><path d="M55,30 L180,50 M55,40 L180,50 M55,50 L180,50 M55,60 L180,50" stroke="#ff6b6b" stroke-width="1" fill="none"/><text x="200" y="35" class="diagram-text">YOUR WEBSITE</text><text x="200" y="55" font-size="24">💥</text><text x="200" y="70" class="diagram-text">(Offline)</text></svg>`
+        },
+        {
+          term: "Zero-Day",
+          title: "Zero-Day Exploit",
+          explanation: "A 'zero-day' is a security flaw that developers don't know about yet. An attack that uses this flaw is a 'zero-day exploit' because the developers have had zero days to create a patch to fix it. It's an attack on an unknown weakness.",
+          importance: "This is scary because it's an attack no one is prepared for. Even if you are fully up-to-date, a zero-day can still get through because not even the good guys know the weakness exists yet.",
+          damageExample: "A hacker discovers a zero-day flaw in popular accounting software. They use it to silently steal financial data from hundreds of SMEs before the software company even knows there's a problem.",
+          diagram: `<svg class="w-full h-48" viewBox="0 0 250 80" preserveAspectRatio="xMidYMid meet"><text x="75" y="15" class="diagram-text">SOFTWARE WALL</text><rect x="25" y="20" width="100" height="50" fill="none" stroke="white" stroke-width="1.5"/><path d="M 70 35 L 80 45" stroke="#ff6b6b" stroke-width="1.5" /><text x="75" y="45" font-size="12" fill="#ff6b6b">?</text><text x="75" y="65" class="diagram-text">Unknown Flaw</text><text x="175" y="15" class="diagram-text">ATTACKER</text><text x="175" y="30" font-size="16">😈</text><line x1="160" y1="35" x2="80" y2="40" stroke="#ff6b6b" stroke-width="1.5"/><text x="125" y="50" class="diagram-text">No Patch Yet!</text></svg>`
+        },
+        {
+          term: "MitM",
+          title: "Man-in-the-Middle Attack",
+          explanation: "This is like a spy secretly sitting between you and the person you're talking to. The spy intercepts, reads, and can even change the messages being sent back and forth, and neither of you knows they are there.",
+          importance: "This undermines the trust you have in your internet connection. Using public Wi-Fi at a café could expose your passwords and private messages to a snooper without you ever knowing.",
+          damageExample: "An employee working at a coffee shop connects to a fake Wi-Fi hotspot set up by an attacker. The attacker captures the login credentials for the company's private server, gaining full access to corporate data.",
+          diagram: `<svg class="w-full h-48" viewBox="0 0 250 80" preserveAspectRatio="xMidYMid meet"><text x="30" y="25" class="diagram-text">YOU</text><text x="30" y="45" font-size="16">🧑</text><text x="220" y="25" class="diagram-text">WEBSITE</text><text x="220" y="45" font-size="16">🌐</text><path d="M 50 45 C 125 20, 200 45, 200 45" stroke="white" stroke-width="1" fill="none" stroke-dasharray="3 3"/><text x="125" y="55" class="diagram-text">HACKER IN MIDDLE</text><text x="125" y="40" font-size="16">😈</text><text x="125" y="25" font-size="12">👁️</text></svg>`
+        }
+      ],
+      "Web & Network Security": [
+        {
+          term: "VPN",
+          title: "VPN (Virtual Private Network)",
+          explanation: "Imagine the internet is a busy public road. A VPN is like building your own private, secret tunnel underneath that road. Only you can use this tunnel, so no one on the main road can see where you're going. It keeps your internet travel private.",
+          importance: "It gives you privacy and security, especially on public Wi-Fi. It stops the network owner (and any hackers on it) from seeing which websites you visit or what data you're sending.",
+          damageExample: "Without a VPN, an employee sends a confidential business proposal over a hotel's public Wi-Fi. A competitor on the same network intercepts the unencrypted data and steals the proposal, causing the SME to lose a major contract.",
+          diagram: `<svg class="w-full h-48" viewBox="0 0 250 80" preserveAspectRatio="xMidYMid meet"><text x="30" y="15" class="diagram-text">YOU</text><path d="M20,20 h20 v20 h-20 z M20,40 l20,10 v-30 l-20,10" stroke="white" fill="none" stroke-width="1"/><text x="220" y="15" class="diagram-text">WEBSITE</text><rect x="200" y="20" width="40" height="20" rx="5" stroke="white" fill="none" stroke-width="1"/><line x1="210" y1="25" x2="230" y2="25" stroke="white" stroke-width="1"/><line x1="210" y1="30" x2="230" y2="30" stroke="white" stroke-width="1"/><text x="125" y="10" class="diagram-text">PUBLIC INTERNET (Visible)</text><path d="M 45 30 Q 125 0, 200 30" stroke="white" stroke-width="1" fill="none" stroke-dasharray="3 3"/><text x="125" y="30" font-size="12" fill="white">👁️</text><text x="125" y="75" class="diagram-text">VPN TUNNEL (Private)</text><path d="M 45 40 Q 125 80, 200 40" stroke="#4ade80" stroke-width="3" fill="none"/></svg>`
+        },
+        {
+          term: "Cookies",
+          title: "Cookies (HTTP)",
+          explanation: "Cookies are like little name tags that websites give you. When you visit a site, it gives you a cookie. The next time you come back, the website reads your 'name tag' to remember who you are, what you like, or what you had in your shopping cart.",
+          importance: "While mostly harmless, they are a record of your browsing activity. 'Tracking cookies' can be used to build a very detailed profile of your habits and interests, which can feel like an invasion of privacy.",
+          damageExample: "An employee's browser is hijacked, allowing an attacker to steal their session cookies for the company's internal portal. The attacker uses these cookies to bypass the login screen and gain access as the employee, without needing a password.",
+          diagram: `<svg class="w-full h-48" viewBox="0 0 250 80" preserveAspectRatio="xMidYMid meet"><text x="50" y="15" class="diagram-text">1. First Visit</text><text x="20" y="40" font-size="16">🧑</text><text x="80" y="40" font-size="16">🌐</text><text x="50" y="43" font-size="12" fill="#4ade80">➡️🍪</text><text x="50" y="60" class="diagram-text">Site gives you a cookie</text><text x="180" y="15" class="diagram-text">2. Return Visit</text><text x="150" y="40" font-size="16">🧑🍪</text><text x="210" y="40" font-size="16">🌐</text><text x="180" y="43" font-size="12" fill="#4ade80">⬅️</text><text x="180" y="60" class="diagram-text">Site remembers you!</text></svg>`
+        },
+        {
+          term: "DNS",
+          title: "DNS (Domain Name System)",
+          explanation: "DNS is the phonebook of the internet. When you type a website name (like google.com), your computer asks DNS to look up its real address (an IP address like 172.217.169.46), just like looking up a friend's number to call them.",
+          importance: "If an attacker can control your DNS, they can redirect you to fake websites. You might type in your bank's correct address, but end up on a perfect copy designed to steal your login details.",
+          damageExample: "An attacker uses DNS poisoning to redirect an SME's website traffic to a malicious server. Customers trying to visit the shop are instead met with a ransomware download, damaging the company's reputation.",
+          diagram: `<svg class="w-full h-48" viewBox="0 0 250 80" preserveAspectRatio="xMidYMid meet"><text x="30" y="25" class="diagram-text">You ask for:</text><text x="30" y="45" font-size="10">google.com</text><line x1="60" y1="42" x2="90" y2="42" stroke="white" stroke-width="1.5"/><polyline points="85,37 90,42 85,47" stroke="white" stroke-width="1.5" fill="none" /><text x="125" y="15" class="diagram-text">DNS PHONEBOOK</text><text x="125" y="45" font-size="20">📖</text><line x1="160" y1="42" x2="190" y2="42" stroke="white" stroke-width="1.5"/><polyline points="185,37 190,42 185,47" stroke="white" stroke-width="1.5" fill="none" /><text x="220" y="25" class="diagram-text">It gives back:</text><text x="220" y="45" font-size="10">172.217.x.x</text></svg>`
+        },
+        {
+          term: "HTTPS",
+          title: "HTTPS",
+          explanation: "HTTPS is the secure version of the standard web protocol (HTTP). The 'S' stands for 'Secure' and means the connection between your browser and the website is encrypted and safe. Look for the padlock icon!",
+          importance: "It's the difference between sending a postcard and sending a sealed letter. Without the 'S', anyone who intercepts your data can read it. HTTPS ensures that only you and the website can understand the conversation.",
+          damageExample: "An SME's online store doesn't use HTTPS on its checkout page. A customer enters their credit card details, which are transmitted in plain text. A hacker intercepts this data and uses the card for fraudulent purchases.",
+          diagram: `<svg class="w-full h-48" viewBox="0 0 250 80" preserveAspectRatio="xMidYMid meet"><text x="30" y="25" class="diagram-text">YOU</text><text x="30" y="45" font-size="16">🧑</text><text x="220" y="25" class="diagram-text">WEBSITE</text><text x="220" y="45" font-size="16">🌐</text><text x="125" y="15" class="diagram-text">SECURE CONNECTION</text><path d="M 50 45 C 125 80, 200 45, 200 45" stroke="#4ade80" stroke-width="3" fill="none"/><text x="125" y="40" font-size="12">🔒</text></svg>`
+        },
+        {
+          term: "Proxy",
+          title: "Proxy Server",
+          explanation: "A proxy server acts as a middleman between you and the internet. Instead of connecting directly to a website, you connect to the proxy, and the proxy connects to the website for you. This can hide your location.",
+          importance: "It can help protect your identity online by masking your real location (IP address). This makes it harder for websites and advertisers to track you across the internet.",
+          damageExample: "An SME uses a malicious proxy server to manage their web traffic. The proxy owner logs all data passing through it, including employee logins and client communications, resulting in a massive data breach.",
+          diagram: `<svg class="w-full h-48" viewBox="0 0 250 80" preserveAspectRatio="xMidYMid meet"><text x="30" y="25" class="diagram-text">YOU</text><text x="30" y="45" font-size="16">🧑</text><line x1="45" y1="45" x2="100" y2="45" stroke="white" stroke-width="1.5"/><polyline points="95,40 100,45 95,50" stroke="white" stroke-width="1.5" fill="none" /><text x="125" y="15" class="diagram-text">PROXY SERVER</text><rect x="110" y="30" width="30" height="30" rx="5" stroke="white" fill="none" stroke-width="1.5"/><line x1="140" y1="45" x2="195" y2="45" stroke="white" stroke-width="1.5"/><polyline points="190,40 195,45 190,50" stroke="white" stroke-width="1.5" fill="none" /><text x="220" y="25" class="diagram-text">WEBSITE</text><text x="220" y="45" font-size="16">🌐</text></svg>`
+        }
+      ],
+      "Data Security": [
+        {
+          term: "Encryption",
+          title: "Encryption",
+          explanation: "Encryption is like writing a message in a secret code. Even if someone intercepts your message, they can't read it because it just looks like gibberish. Only the person with the secret key can decode it.",
+          importance: "It's the ultimate safety net for your data. If your laptop is stolen, encryption ensures the thief gets a useless brick of scrambled data instead of your tax returns, family photos, and private documents.",
+          damageExample: "A consultant loses a company laptop containing an unencrypted copy of an SME's entire client database. The thief sells the data—names, addresses, and purchase histories—to a competitor.",
+          diagram: `<svg class="w-full h-48" viewBox="0 0 250 80" preserveAspectRatio="xMidYMid meet"><text x="30" y="25" class="diagram-text">Readable Data</text><text x="30" y="45" font-size="12">📄</text><text x="30" y="48" font-size="8" fill="black">ABC</text><text x="80" y="48" font-size="12">🔒</text><line x1="45" y1="45" x2="70" y2="45" stroke="white" stroke-width="1.5"/><polyline points="65,40 70,45 65,50" stroke="white" stroke-width="1.5" fill="none" /><text x="125" y="25" class="diagram-text">Encrypted (Gibberish)</text><text x="125" y="45" font-size="12">📄</text><text x="125" y="48" font-size="8" fill="#ff6b6b">#@$</text><text x="180" y="48" font-size="12">🔑</text><line x1="140" y1="45" x2="170" y2="45" stroke="white" stroke-width="1.5"/><polyline points="165,40 170,45 165,50" stroke="white" stroke-width="1.5" fill="none" /><text x="220" y="25" class="diagram-text">Readable Again</text><text x="220" y="45" font-size="12">📄</text><text x="220" y="48" font-size="8" fill="black">ABC</text></svg>`
+        },
+        {
+          term: "Hashing",
+          title: "Hashing",
+          explanation: "Hashing turns a piece of data, like a password, into a unique, jumbled-up string of characters. It's a one-way trip; you can't turn the hash back into the original password. It's used to store passwords securely.",
+          importance: "It protects your passwords even if a company gets hacked. If the company stored your password as a hash, the hackers get a useless string of text, not your actual password, so they can't use it on your other accounts.",
+          damageExample: "A small forum website stores user passwords in plain text instead of hashing them. They suffer a data breach. An attacker now has the email and password for a user who reuses that same password for their online banking.",
+          diagram: `<svg class="w-full h-48" viewBox="0 0 250 80" preserveAspectRatio="xMidYMid meet"><text x="50" y="25" class="diagram-text">Password</text><text x="50" y="45" font-size="10">P@ssword1</text><text x="125" y="15" class="diagram-text">HASH FUNCTION</text><text x="125" y="45" font-size="20">⚙️</text><line x1="80" y1="45" x2="110" y2="45" stroke="white" stroke-width="1.5"/><polyline points="105,40 110,45 105,50" stroke="white" stroke-width="1.5" fill="none" /><text x="200" y="25" class="diagram-text">Secure Hash</text><text x="200" y="45" font-size="8">5e884898...</text><text x="125" y="65" class="diagram-text">(One-Way Only)</text></svg>`
+        },
+        {
+          term: "Data Breach",
+          title: "Data Breach",
+          explanation: "A data breach is when sensitive, private information is stolen from a system without the owner's permission. This happens when a hacker breaks through security defenses to access and copy the data.",
+          importance: "This is the end result of a failed defense. A breach of your data can lead to identity theft, financial fraud, and strangers getting access to your most personal information.",
+          damageExample: "An SME's cloud storage is poorly secured. A hacker gains access and downloads all their internal documents, including employee contracts with salary information. The leak causes internal chaos and tips off competitors.",
+          diagram: `<svg class="w-full h-48" viewBox="0 0 250 80" preserveAspectRatio="xMidYMid meet"><text x="75" y="15" class="diagram-text">SECURE DATABASE</text><rect x="25" y="20" width="100" height="50" rx="5" stroke="white" fill="none" stroke-width="1.5"/><path d="M 70 30 L 80 50" stroke="#ff6b6b" stroke-width="3"/><text x="75" y="65" class="diagram-text">(CRACKED)</text><text x="175" y="15" class="diagram-text">HACKER</text><text x="175" y="30" font-size="16">😈</text><line x1="160" y1="35" x2="80" y2="40" stroke="#ff6b6b" stroke-width="1.5"/><text x="125" y="50" font-size="12">📄➡️</text></svg>`
+        }
+      ],
+      "Identity & Access": [
+        {
+          term: "2FA",
+          title: "Two-Factor Authentication",
+          explanation: "This is like having two different locks on your front door. A thief might pick the first lock (your password), but they can't get in without the key to the second lock (a code from your phone).",
+          importance: "It's one of the single most effective things you can do to protect your accounts. Even if a hacker steals your password, they can't get in without that second piece of proof from your phone.",
+          damageExample: "An attacker gets the CEO's password from a phishing scam. However, because the company enforces 2FA on their email, the attacker can't log in without the code from the CEO's phone. The attack fails.",
+          diagram: `<svg class="w-full h-48" viewBox="0 0 250 80" preserveAspectRatio="xMidYMid meet"><text x="50" y="25" class="diagram-text">STEP 1: PASSWORD</text><text x="50" y="45" font-size="12">🔑</text><line x1="75" y1="42" x2="100" y2="42" stroke="white" stroke-width="1.5"/><polyline points="95,37 100,42 95,47" stroke="white" stroke-width="1.5" fill="none" /><text x="140" y="25" class="diagram-text">STEP 2: PHONE CODE</text><text x="140" y="45" font-size="12">📱</text><text x="140" y="48" font-size="8" fill="black">123456</text><line x1="165" y1="42" x2="190" y2="42" stroke="white" stroke-width="1.5"/><polyline points="185,37 190,42 185,47" stroke="white" stroke-width="1.5" fill="none" /><text x="220" y="25" class="diagram-text">SECURE!</text><text x="220" y="50" font-size="20" fill="#4ade80">✅</text></svg>`
+        },
+        {
+          term: "Authentication",
+          title: "Authentication",
+          explanation: "Authentication is the process of proving you are who you say you are. When you enter a password or use your fingerprint to unlock your phone, you are 'authenticating' yourself.",
+          importance: "This is the front door to every digital service you use. Weak authentication (like a simple, easy-to-guess password) is like leaving your front door unlocked.",
+          damageExample: "An employee uses the password 'Password123' for their account on the SME's server. An attacker easily guesses it (a 'brute force' attack) and gains access, deleting critical files before anyone notices.",
+          diagram: `<svg class="w-full h-48" viewBox="0 0 250 80" preserveAspectRatio="xMidYMid meet"><text x="75" y="15" class="diagram-text">"Who are you?"</text><text x="40" y="45" font-size="16">🧑</text><text x="110" y="45" font-size="16">🚪</text><text x="75" y="48" font-size="12">🔑➡️</text><text x="75" y="65" class="diagram-text">Proving Identity</text><text x="180" y="45" font-size="20" fill="#4ade80">✅</text><text x="180" y="65" class="diagram-text">Welcome!</text></svg>`
+        },
+        {
+          term: "Authorization",
+          title: "Authorization",
+          explanation: "After you've proven who you are (authentication), authorization determines what you're allowed to do. Are you a regular user who can only read files, or an admin who can also delete them?",
+          importance: "This prevents people from poking around where they don't belong. It ensures that even legitimate users can only access the information and tools they absolutely need to do their job, and nothing more.",
+          damageExample: "An SME gives a junior marketing intern full 'admin' access to their website. The intern accidentally deletes the entire product database while trying to make a small text change, taking the online store offline for hours.",
+          diagram: `<svg class="w-full h-48" viewBox="0 0 250 80" preserveAspectRatio="xMidYMid meet"><text x="75" y="15" class="diagram-text">"What can you do?"</text><text x="40" y="45" font-size="16">🧑</text><text x="75" y="45" class="diagram-text">User</text><text x="150" y="35" class="diagram-text">Read File 📄</text><text x="180" y="35" font-size="12" fill="#4ade80">✅</text><text x="150" y="60" class="diagram-text">Delete File 🗑️</text><text x="180" y="60" font-size="12" fill="#ff6b6b">❌</text></svg>`
+        },
+        {
+          term: "Biometrics",
+          title: "Biometrics",
+          explanation: "Biometrics use your unique physical characteristics to prove who you are. This includes things that are unique to you, like your fingerprint, your face, or the iris pattern in your eye.",
+          importance: "It offers a convenient and often more secure way to unlock your devices. It's harder for someone to steal your fingerprint than it is to steal a password written on a sticky note.",
+          damageExample: "An SME relies solely on a biometric lock for a server room. A sophisticated attacker creates a high-resolution copy of an employee's fingerprint from a photo, gaining physical access to the company's most critical hardware.",
+          diagram: `<svg class="w-full h-48" viewBox="0 0 250 80" preserveAspectRatio="xMidYMid meet"><text x="125" y="15" class="diagram-text">Things That Are YOU</text><text x="50" y="45" font-size="20">👆</text><text x="50" y="65" class="diagram-text">Fingerprint</text><text x="125" y="45" font-size="20">😊</text><text x="125" y="65" class="diagram-text">Face</text><text x="200" y="45" font-size="20">👁️</text><text x="200" y="65" class="diagram-text">Iris</text></svg>`
+        }
+      ]
+    };
+
+    /* ===================== APP LOGIC ===================== */
+    const container = document.getElementById('glossaryContainer');
+    const searchInput = document.getElementById('searchInput');
+    const modal = document.getElementById('termModal');
+    const modalContent = document.getElementById('modalContent');
+    const closeModalBtn = document.getElementById('closeModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalDiagram = document.getElementById('modalDiagram');
+    const modalExplanation = document.getElementById('modalExplanation');
+    const modalImportance = document.getElementById('modalImportance');
+    const modalDamage = document.getElementById('modalDamage');
+
+    function renderGlossary(filter = '') {
+      container.innerHTML = '';
+      const lowerCaseFilter = filter.toLowerCase();
+      let foundResults = false;
+
+      for (const category in glossaryData) {
+        const terms = glossaryData[category];
+        const filteredTerms = terms.filter(item =>
+          item.title.toLowerCase().includes(lowerCaseFilter) || item.term.toLowerCase().includes(lowerCaseFilter)
+        );
+
+        if (filteredTerms.length > 0) {
+          foundResults = true;
+          const categoryTitle = document.createElement('h2');
+          categoryTitle.className = 'text-3xl md:text-4xl font-bold text-white mb-6 mt-8 category-title';
+          categoryTitle.textContent = category;
+          container.appendChild(categoryTitle);
+
+          const grid = document.createElement('div');
+          grid.className = 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8';
+
+          filteredTerms.forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'bg-transparent p-6 rounded-lg cursor-pointer sketch-border';
+            card.innerHTML = `<h3 class="text-2xl font-bold text-white sketch-font">${item.title}</h3>`;
+            card.addEventListener('click', () => openModal(item));
+            grid.appendChild(card);
+          });
+
+          container.appendChild(grid);
+        }
+      }
+      if (!foundResults) {
+        container.innerHTML = `<p class="text-white text-center col-span-full text-xl mt-8">No blueprints found for "${filter}".</p>`;
+      }
+    }
+
+    function openModal(item) {
+      modalTitle.textContent = item.title;
+      modalDiagram.innerHTML = item.diagram || '';
+      modalExplanation.textContent = item.explanation;
+
+      modalImportance.innerHTML = `<h3 class="text-2xl section-title mb-2">How This Affects You</h3><p class="text-lg md:text-xl">${item.importance}</p>`;
+      modalDamage.innerHTML = `<h3 class="text-2xl section-title mb-2 mt-4">Damage Example</h3><p class="text-lg md:text-xl">${item.damageExample}</p>`;
+
+      modal.classList.remove('opacity-0', 'pointer-events-none');
+      modalContent.classList.remove('scale-95');
+    }
+
+    function closeModal() {
+      modal.classList.add('opacity-0', 'pointer-events-none');
+      modalContent.classList.add('scale-95');
+    }
+
+    searchInput.addEventListener('input', (e) => {
+      renderGlossary(e.target.value);
+    });
+
+    closeModalBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+
+    // Render after splash reveal
+    const boot = () => {
+      if (document.body.classList.contains('blueprint')) {
+        renderGlossary();
+      } else {
+        setTimeout(boot, 120);
+      }
+    };
+    boot();
+  </script>
+
+  <noscript>
+    <style>.splash{display:none}.content{opacity:1;transform:none}</style>
+  </noscript>
+</body>
+</html>
+```
