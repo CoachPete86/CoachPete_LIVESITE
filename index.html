@@ -3,28 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coach Pete Ryan - Personal Trainer & Mindset Coach</title>
-    <meta name="description" content="Transform your life with Coach Pete Ryan. Mindset, fitness, and health coaching for real, lasting change.">
-    <meta property="og:title" content="Coach Pete Ryan - Personal Trainer & Mindset Coach">
-    <meta property="og:description" content="Transform your life with Coach Pete Ryan. Mindset, fitness, and health coaching for real, lasting change.">
+    <title>Coach Pete Ryan - Elite Performance & Mindset Architect</title>
+    <meta name="description" content="Forge an unbreakable mind and a powerful physique with Coach Pete Ryan. This is where potential ends and mastery begins.">
+    <meta property="og:title" content="Coach Pete Ryan - Elite Performance & Mindset Architect">
+    <meta property="og:description" content="Forge an unbreakable mind and a powerful physique with Coach Pete Ryan. This is where potential ends and mastery begins.">
     <meta property="og:image" content="https://raw.githubusercontent.com/CoachPete86/images/3749c527ecaa3e8a8d6b597d4604fa57023f18b1/coach_hero_ext.png">
     <meta property="og:type" content="website">
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <style>
         :root {
-            --primary-orange: #ff6b35;
-            --secondary-orange: #ff8c42;
-            --dark-grey: #1a1a1a;
-            --medium-grey: #2d2d2d;
-            --light-grey: #3d3d3d;
+            --primary-gold: #D4AF37; /* A more authoritative, premium accent */
+            --dark-charcoal: #121212;
+            --off-white: #F5F5F5;
+            --medium-grey: #1A1A1A;
+            --light-grey: #2d2d2d;
             --text-light: #e0e0e0;
             --text-medium: #b0b0b0;
-            --text-dark: #808080;
-            --concrete: #4a4a4a;
-            --metal: #6a6a6a;
-            --accent-blue: #00d4ff;
         }
 
         * {
@@ -38,10 +34,10 @@
         }
 
         body {
-            font-family: 'Open Sans', sans-serif;
-            background: linear-gradient(135deg, var(--dark-grey) 0%, var(--medium-grey) 100%);
+            font-family: 'Roboto', sans-serif;
+            background: var(--dark-charcoal);
             color: var(--text-light);
-            line-height: 1.6;
+            line-height: 1.7;
             overflow-x: hidden;
         }
 
@@ -52,7 +48,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: var(--dark-grey);
+            background: var(--dark-charcoal);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -65,11 +61,11 @@
         }
         .loader-text {
             font-family: 'Oswald', sans-serif;
-            font-size: 2rem;
-            font-weight: 600;
-            color: var(--primary-orange);
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-gold);
             text-transform: uppercase;
-            letter-spacing: 3px;
+            letter-spacing: 4px;
         }
 
         /* Navigation */
@@ -77,20 +73,21 @@
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(26, 26, 26, 0.95);
-            backdrop-filter: blur(10px);
+            background: rgba(18, 18, 18, 0.85);
+            backdrop-filter: blur(12px);
             z-index: 1000;
-            padding: 1rem 0;
+            padding: 1.2rem 0;
             transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
         }
 
         .navbar.scrolled {
-            background: rgba(26, 26, 26, 0.98);
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+            background: rgba(18, 18, 18, 0.95);
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.5);
         }
 
         .nav-container {
-            max-width: 1200px;
+            max-width: 1300px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
@@ -100,164 +97,160 @@
 
         .logo {
             font-family: 'Oswald', sans-serif;
-            font-size: 1.8rem;
+            font-size: 2rem;
             font-weight: 700;
-            color: var(--primary-orange);
+            color: var(--off-white);
             text-decoration: none;
             text-transform: uppercase;
             letter-spacing: 2px;
+        }
+        .logo span {
+            color: var(--primary-gold);
         }
 
         .nav-menu {
             display: flex;
             list-style: none;
-            gap: 2rem;
+            gap: 2.5rem;
         }
 
         .nav-link {
-            color: var(--text-light);
+            color: var(--text-medium);
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 700;
+            font-family: 'Oswald', sans-serif;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             transition: all 0.3s ease;
             position: relative;
         }
 
         .nav-link:hover,
         .nav-link.active {
-            color: var(--primary-orange);
+            color: var(--primary-gold);
         }
-
+        
         .nav-link::after {
             content: '';
             position: absolute;
-            bottom: -5px;
-            left: 0;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
             width: 0;
-            height: 2px;
-            background: var(--primary-orange);
+            height: 3px;
+            background: var(--primary-gold);
             transition: width 0.3s ease;
         }
 
         .nav-link:hover::after,
         .nav-link.active::after {
-            width: 100%;
+            width: 60%;
         }
 
         .mobile-menu {
             display: none;
             flex-direction: column;
             cursor: pointer;
-            gap: 4px;
+            gap: 5px;
         }
 
         .mobile-menu span {
-            width: 25px;
+            width: 28px;
             height: 3px;
-            background: var(--text-light);
+            background: var(--off-white);
             transition: all 0.3s ease-in-out;
-            border-radius: 2px;
+            border-radius: 3px;
         }
         
         .mobile-menu.active span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
+            transform: rotate(45deg) translate(6px, 6px);
         }
         .mobile-menu.active span:nth-child(2) {
             opacity: 0;
         }
         .mobile-menu.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(5px, -5px);
+            transform: rotate(-45deg) translate(7px, -7px);
         }
 
         /* Hero Section */
         .hero {
             height: 100vh;
-            background: linear-gradient(rgba(26, 26, 26, 0.7), rgba(45, 45, 45, 0.7)),
-                        url('https://raw.githubusercontent.com/CoachPete86/images/3749c527ecaa3e8a8d6b597d4604fa57023f18b1/coach_hero_ext.png') top center no-repeat;
+            background: linear-gradient(rgba(18, 18, 18, 0.8), rgba(18, 18, 18, 0.8)),
+                        url('https://raw.githubusercontent.com/CoachPete86/images/3749c527ecaa3e8a8d6b597d4604fa57023f18b1/coach_hero_ext.png') center center no-repeat;
             background-size: cover;
-            background-color: #000;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
             padding: 2rem;
-            position: relative;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at center, transparent 0%, rgba(26, 26, 26, 0.3) 100%);
         }
 
         .hero-content {
-            max-width: 800px;
-            z-index: 2;
-            position: relative;
+            max-width: 900px;
         }
 
         .hero-title {
             font-family: 'Oswald', sans-serif;
-            font-size: clamp(3rem, 8vw, 6rem);
+            font-size: clamp(4rem, 10vw, 8rem);
             font-weight: 700;
-            color: var(--text-light);
+            color: var(--off-white);
             text-transform: uppercase;
-            letter-spacing: 3px;
+            letter-spacing: 4px;
             margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            text-shadow: 3px 3px 15px rgba(0, 0, 0, 0.7);
         }
 
         .hero-subtitle {
-            font-size: clamp(1.2rem, 3vw, 1.8rem);
-            color: var(--primary-orange);
+            font-size: clamp(1.5rem, 4vw, 2.2rem);
+            color: var(--primary-gold);
             font-weight: 600;
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .hero-description {
-            font-size: 1.2rem;
-            color: var(--text-medium);
             margin-bottom: 2rem;
-            max-width: 600px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-family: 'Oswald', sans-serif;
+        }
+        
+        .hero-description {
+            font-size: 1.3rem;
+            color: var(--text-medium);
+            margin-bottom: 2.5rem;
+            max-width: 650px;
             margin-left: auto;
             margin-right: auto;
         }
 
         .cta-button {
             display: inline-block;
-            background: linear-gradient(45deg, var(--primary-orange), var(--secondary-orange));
-            color: white;
-            padding: 1rem 2.5rem;
+            background: var(--primary-gold);
+            color: var(--dark-charcoal);
+            padding: 1.2rem 3rem;
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
             border-radius: 5px;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.3);
+            border: 2px solid var(--primary-gold);
         }
 
         .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+            background: transparent;
+            color: var(--primary-gold);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
         }
 
         /* Stats Section */
         .stats {
             background: var(--medium-grey);
-            padding: 4rem 0;
-            border-top: 3px solid var(--primary-orange);
+            padding: 5rem 0;
+            border-top: 4px solid var(--primary-gold);
+            border-bottom: 4px solid var(--primary-gold);
         }
 
         .stats-container {
-            max-width: 1200px;
+            max-width: 1300px;
             margin: 0 auto;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -268,77 +261,72 @@
         .stat-item {
             text-align: center;
             padding: 2rem;
-            background: rgba(61, 61, 61, 0.3);
-            border-radius: 10px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 107, 53, 0.1);
-            transition: all 0.3s ease;
         }
-
-        .stat-item:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary-orange);
-            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.2);
-        }
-
+        
         .stat-number {
             font-family: 'Oswald', sans-serif;
-            font-size: 3rem;
+            font-size: 4rem;
             font-weight: 700;
-            color: var(--primary-orange);
+            color: var(--primary-gold);
             display: block;
             margin-bottom: 0.5rem;
         }
 
         .stat-label {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             color: var(--text-light);
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             font-weight: 500;
         }
 
         /* Generic Section Styles */
         .section {
-            padding: 6rem 0;
+            padding: 7rem 0;
         }
 
         .section-container {
-            max-width: 1200px;
+            max-width: 1300px;
             margin: 0 auto;
             padding: 0 2rem;
         }
         
         .section-title {
             font-family: 'Oswald', sans-serif;
-            font-size: 3rem;
+            font-size: 3.5rem;
             text-align: center;
-            color: var(--text-light);
-            margin-bottom: 3rem;
+            color: var(--off-white);
+            margin-bottom: 4rem;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
+        }
+        .section-title span {
+            color: var(--primary-gold);
         }
 
         /* About Section */
+        #about {
+            background: var(--dark-charcoal);
+        }
         .about-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 4rem;
+            gap: 5rem;
             align-items: center;
         }
-
+        
         .about-content h2 {
             font-family: 'Oswald', sans-serif;
-            font-size: 3rem;
-            color: var(--text-light);
-            margin-bottom: 1rem;
+            font-size: 3.5rem;
+            color: var(--off-white);
+            margin-bottom: 2rem;
             text-transform: uppercase;
             letter-spacing: 2px;
             text-align: left;
         }
 
         .about-content .highlight {
-            color: var(--primary-orange);
+            color: var(--primary-gold);
         }
 
         .about-content p {
@@ -349,21 +337,21 @@
         }
 
         .about-image {
-            position: relative;
             border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+            border: 3px solid var(--primary-gold);
         }
 
         .about-image img {
             width: 100%;
-            height: 500px;
+            height: 100%;
             object-fit: cover;
-            transition: transform 0.3s ease;
+            transition: transform 0.4s ease;
         }
-
+        
         .about-image:hover img {
-            transform: scale(1.05);
+            transform: scale(1.1);
         }
         
         /* Services Section */
@@ -374,96 +362,92 @@
         .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
+            gap: 2.5rem;
         }
 
         .service-card {
-            background: rgba(61, 61, 61, 0.3);
-            padding: 2.5rem;
-            border-radius: 15px;
+            background: var(--light-grey);
+            padding: 3rem;
+            border-radius: 10px;
             text-align: center;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 107, 53, 0.1);
+            border: 2px solid transparent;
             transition: all 0.3s ease;
+            text-decoration: none;
             position: relative;
             overflow: hidden;
-            text-decoration: none;
-        }
-
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 107, 53, 0.1), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .service-card:hover::before {
-            left: 100%;
         }
 
         .service-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--primary-orange);
-            box-shadow: 0 15px 40px rgba(255, 107, 53, 0.2);
+            transform: translateY(-15px);
+            border-color: var(--primary-gold);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
         }
 
         .service-icon {
-            font-size: 3rem;
-            color: var(--primary-orange);
-            margin-bottom: 1.5rem;
+            font-size: 3.5rem;
+            color: var(--primary-gold);
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .service-card:hover .service-icon {
+            transform: scale(1.1);
         }
 
         .service-card h3 {
             font-family: 'Oswald', sans-serif;
-            font-size: 1.5rem;
-            color: var(--text-light);
+            font-size: 1.8rem;
+            color: var(--off-white);
             margin-bottom: 1rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
         }
 
         .service-card p {
             color: var(--text-medium);
-            line-height: 1.6;
+            line-height: 1.7;
         }
 
         /* Process Section */
         .process-steps {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(4, 1fr);
             gap: 2rem;
-            margin-top: 3rem;
+            margin-top: 4rem;
+            position: relative;
         }
 
         .process-step {
             text-align: center;
-            position: relative;
         }
 
         .step-number {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(45deg, var(--primary-orange), var(--secondary-orange));
+            width: 90px;
+            height: 90px;
+            background: var(--dark-charcoal);
+            border: 3px solid var(--primary-gold);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-family: 'Oswald', sans-serif;
-            font-size: 2rem;
+            font-size: 2.5rem;
             font-weight: 700;
-            color: white;
-            margin: 0 auto 1.5rem;
-            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+            color: var(--primary-gold);
+            margin: 0 auto 2rem;
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .process-step:hover .step-number {
+            background: var(--primary-gold);
+            color: var(--dark-charcoal);
         }
 
         .process-step h3 {
             font-family: 'Oswald', sans-serif;
-            font-size: 1.3rem;
-            color: var(--text-light);
+            font-size: 1.5rem;
+            color: var(--off-white);
             margin-bottom: 1rem;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -471,7 +455,7 @@
 
         .process-step p {
             color: var(--text-medium);
-            line-height: 1.6;
+            line-height: 1.7;
         }
 
         /* Testimonials */
@@ -479,28 +463,23 @@
             background: var(--medium-grey);
         }
         
-        .testimonials-container {
-             text-align: center;
-        }
-
         .testimonial-slider {
-            max-width: 800px;
-            margin: 3rem auto 0;
+            max-width: 900px;
+            margin: 4rem auto 0;
             display: grid;
-            gap: 2rem;
+            gap: 3rem;
         }
 
         .testimonial {
-            background: rgba(61, 61, 61, 0.3);
-            padding: 3rem;
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 107, 53, 0.1);
+            background: var(--light-grey);
+            padding: 3.5rem;
+            border-radius: 10px;
+            border-left: 5px solid var(--primary-gold);
         }
 
         .testimonial-text {
-            font-size: 1.2rem;
-            color: var(--text-light);
+            font-size: 1.3rem;
+            color: var(--off-white);
             font-style: italic;
             margin-bottom: 2rem;
             line-height: 1.8;
@@ -508,33 +487,40 @@
 
         .testimonial-author {
             font-family: 'Oswald', sans-serif;
-            font-size: 1.1rem;
-            color: var(--primary-orange);
+            font-size: 1.2rem;
+            color: var(--primary-gold);
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
+            font-weight: 600;
         }
 
         /* Contact Section */
         .contact-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 4rem;
+            gap: 5rem;
         }
-
+        
+        .contact-info .section-title {
+            text-align: left;
+            margin-bottom: 2rem;
+        }
+        
         .contact-info h3 {
             font-family: 'Oswald', sans-serif;
-            font-size: 1.5rem;
-            color: var(--text-light);
+            font-size: 1.8rem;
+            color: var(--primary-gold);
             margin-bottom: 1rem;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
-
+        
         .contact-item {
             display: flex;
             align-items: center;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
             color: var(--text-medium);
+            font-size: 1.1rem;
         }
         
         .contact-item a {
@@ -544,115 +530,88 @@
         }
         
         .contact-item a:hover {
-            color: var(--primary-orange);
+            color: var(--primary-gold);
         }
 
         .contact-item i {
-            color: var(--primary-orange);
-            margin-right: 1rem;
-            font-size: 1.2rem;
-            width: 20px;
+            color: var(--primary-gold);
+            margin-right: 1.5rem;
+            font-size: 1.5rem;
+            width: 25px;
         }
 
         .contact-form {
-            background: rgba(61, 61, 61, 0.3);
-            padding: 2.5rem;
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 107, 53, 0.1);
+            background: var(--light-grey);
+            padding: 3rem;
+            border-radius: 10px;
         }
 
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.8rem;
         }
 
         .form-group label {
             display: block;
-            color: var(--text-light);
-            margin-bottom: 0.5rem;
+            color: var(--off-white);
+            margin-bottom: 0.8rem;
             font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .form-group input,
         .form-group textarea {
             width: 100%;
-            padding: 1rem;
-            background: rgba(26, 26, 26, 0.5);
-            border: 1px solid var(--light-grey);
+            padding: 1.2rem;
+            background: var(--dark-charcoal);
+            border: 2px solid var(--medium-grey);
             border-radius: 5px;
-            color: var(--text-light);
+            color: var(--off-white);
             font-family: inherit;
+            font-size: 1rem;
             transition: border-color 0.3s ease;
         }
 
         .form-group input:focus,
         .form-group textarea:focus {
             outline: none;
-            border-color: var(--primary-orange);
+            border-color: var(--primary-gold);
         }
 
         .form-group textarea {
-            height: 120px;
+            height: 140px;
             resize: vertical;
         }
         
-        .error-message {
-            display: none;
-            color: var(--primary-orange);
-            font-size: 0.9rem;
-            margin-top: 0.25rem;
-        }
-        
-        .form-status {
-            margin-top: 1rem;
-            padding: 1rem;
-            border-radius: 5px;
-            text-align: center;
-            display: none;
-        }
-        .form-status.success {
-            background-color: rgba(46, 204, 113, 0.2);
-            color: #2ecc71;
-        }
-        .form-status.error {
-            background-color: rgba(231, 76, 60, 0.2);
-            color: #e74c3c;
-        }
-
         .submit-btn {
             width: 100%;
-            background: linear-gradient(45deg, var(--primary-orange), var(--secondary-orange));
-            color: white;
-            padding: 1rem;
-            border: none;
+            background: var(--primary-gold);
+            color: var(--dark-charcoal);
+            padding: 1.2rem;
+            border: 2px solid var(--primary-gold);
             border-radius: 5px;
-            font-weight: 600;
+            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
             cursor: pointer;
             transition: all 0.3s ease;
         }
 
         .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
-        }
-        
-        .submit-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
+            background: transparent;
+            color: var(--primary-gold);
         }
 
         /* Footer */
         .footer {
-            background: var(--dark-grey);
-            padding: 3rem 0 1rem;
+            background: var(--dark-charcoal);
+            padding: 4rem 0 2rem;
             text-align: center;
-            border-top: 3px solid var(--primary-orange);
+            border-top: 2px solid var(--medium-grey);
         }
 
         .footer-content {
-            max-width: 1200px;
+            max-width: 1300px;
             margin: 0 auto;
             padding: 0 2rem;
         }
@@ -660,103 +619,88 @@
         .social-links {
             display: flex;
             justify-content: center;
-            gap: 2rem;
-            margin-bottom: 2rem;
+            gap: 2.5rem;
+            margin-bottom: 2.5rem;
         }
 
         .social-links a {
             color: var(--text-medium);
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             transition: all 0.3s ease;
         }
 
         .social-links a:hover {
-            color: var(--primary-orange);
-            transform: translateY(-3px);
+            color: var(--primary-gold);
+            transform: translateY(-5px);
         }
 
         .footer-text {
-            color: var(--text-dark);
-            font-size: 0.9rem;
+            color: #666;
+            font-size: 1rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .about-container,
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            .process-steps {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
-        /* Responsive Design */
         @media (max-width: 768px) {
             .nav-menu {
                 display: none;
                 flex-direction: column;
-                background: rgba(26,26,26,0.98);
+                background: var(--dark-charcoal);
                 position: absolute;
-                top: 70px;
+                top: 80px;
                 right: 0;
                 width: 100%;
                 padding: 2rem 0;
                 z-index: 999;
                 gap: 1.5rem;
                 align-items: center;
+                border-top: 1px solid var(--medium-grey);
             }
             .nav-menu.active {
                 display: flex;
             }
-
             .mobile-menu {
                 display: flex;
             }
-
-            .about-container,
-            .contact-container {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
             .hero-title {
-                font-size: 3rem;
+                font-size: 3.5rem;
             }
-
             .section-title, .about-content h2 {
-                font-size: 2.5rem;
+                font-size: 2.8rem;
             }
-
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .process-steps {
+            .services-grid, .process-steps {
                 grid-template-columns: 1fr;
             }
         }
-        
-         @media (max-width: 480px) {
-            .services-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-            .service-card {
-                padding: 2rem;
-            }
-         }
     </style>
 </head>
 <body>
-    <!-- Loading Screen -->
     <div class="loader" id="loader">
-        <div class="loader-text">Building Better People</div>
+        <div class="loader-text">Forge Your Legacy</div>
     </div>
 
-    <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
-            <a href="#home" class="logo">Coach Pete Ryan</a>
+            <a href="#home" class="logo">Pete Ryan <span>//</span></a>
             <ul class="nav-menu" id="navMenu">
                 <li><a href="#home" class="nav-link active">Home</a></li>
-                <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#services" class="nav-link">Services</a></li>
-                <li><a href="#process" class="nav-link">Process</a></li>
-                <li><a href="#testimonials" class="nav-link">Testimonials</a></li>
-                <li><a href="#contact" class="nav-link">Contact</a></li>
-                <li><a href="/Challenge.html" class="nav-link">6 Week Challenge</a></li>
+                <li><a href="#about" class="nav-link">The Code</a></li>
+                <li><a href="#services" class="nav-link">Arsenal</a></li>
+                <li><a href="#process" class="nav-link">The Method</a></li>
+                <li><a href="#testimonials" class="nav-link">Results</a></li>
+                <li><a href="#contact" class="nav-link">Enlist</a></li>
             </ul>
-            <div class="mobile-menu" id="mobileMenu" role="button" aria-label="Open navigation menu" tabindex="0">
+            <div class="mobile-menu" id="mobileMenu">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -764,227 +708,198 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="hero-content">
-            <h1 class="hero-title" data-aos="fade-up">Coach Pete Ryan</h1>
-            <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="200">FIGHTER – MENTOR – ATHLETE – COACH</p>
-            <!-- REVISED: More inclusive hero description -->
+            <h1 class="hero-title" data-aos="fade-down">UNBREAKABLE</h1>
+            <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="200">MINDSET & PHYSIQUE ARCHITECT</p>
             <p class="hero-description" data-aos="fade-up" data-aos-delay="400">
-                Your partner in building a stronger body and an unbreakable mind, no matter where you start.
+                I don't build better bodies. I forge elite performers. This is not a fitness program—it's the operating system for a life without limits.
             </p>
-            <a href="#contact" class="cta-button" data-aos="fade-up" data-aos-delay="600">Start Your Journey</a>
+            <a href="#contact" class="cta-button" data-aos="fade-up" data-aos-delay="600">Become The Standard</a>
         </div>
     </section>
 
-    <!-- Stats Section -->
     <section class="stats">
         <div class="stats-container">
             <div class="stat-item" data-aos="fade-up" data-aos-delay="100">
                 <span class="stat-number" data-count="30000">0</span>
-                <span class="stat-label">PT Coaching Hours</span>
+                <span class="stat-label">Hours in The Trenches</span>
             </div>
             <div class="stat-item" data-aos="fade-up" data-aos-delay="200">
                 <span class="stat-number" data-count="18">0</span>
-                <span class="stat-label">Years Experience</span>
+                <span class="stat-label">Years of Mastery</span>
             </div>
             <div class="stat-item" data-aos="fade-up" data-aos-delay="300">
                 <span class="stat-number" data-count="4500">0</span>
-                <span class="stat-label">Lives Transformed</span>
+                <span class="stat-label">Legacies Forged</span>
             </div>
             <div class="stat-item" data-aos="fade-up" data-aos-delay="400">
                 <span class="stat-number" data-count="24">0</span>
-                <span class="stat-label">24/7 Support</span>
+                <span class="stat-label">24/7 War-Room Access</span>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
     <section class="section" id="about">
         <div class="section-container about-container">
             <div class="about-content" data-aos="fade-right">
-                <h2>The <span class="highlight">Code</span> I Live By</h2>
-                <!-- REVISED: Rephrased "failing" to be more inclusive -->
+                <h2>THE <span class="highlight">CODE</span> OF A CHAMPION</h2>
                 <p>
-                    My philosophy is simple: Show up. Give your best effort. Learn from every step. And never, ever quit. This is the code we live by, and it's how we build lasting results.
+                    There are no shortcuts. No magic pills. There is only the code: <strong>Show up. Dominate the work. Own the result. Never quit.</strong> This isn't just a philosophy; it's the law of transformation.
                 </p>
                 <p>
-                    With over a decade of experience in personal training and mindset coaching, I've dedicated my life to helping people break through their limitations and achieve extraordinary results.
+                   I've spent nearly two decades decoding the DNA of peak performance. My arena is where mental fortitude collides with physical supremacy. I don't offer workouts; I engineer weapons.
                 </p>
                 <p>
-                    My approach combines cutting-edge fitness methodologies with powerful mindset transformation techniques. I don't just train bodies - I build unbreakable minds and unstoppable people.
+                    My method is a synthesis of elite fitness protocols and battlefield-tested mindset architecture. We will dismantle your limitations and rebuild you into an unstoppable force. This is not for everyone. This is for the few who demand more.
                 </p>
-                <a href="#services" class="cta-button">Discover My Methods</a>
+                <a href="#services" class="cta-button">View My Arsenal</a>
             </div>
             <div class="about-image" data-aos="fade-left">
-                <img src="https://raw.githubusercontent.com/coachpete86/CoachPete_LIVESITE/main/Photoshoot_Coach_2.png" alt="Coach Pete Ryan in a coaching stance">
+                <img src="https://raw.githubusercontent.com/coachpete86/CoachPete_LIVESITE/main/Photoshoot_Coach_2.png" alt="Coach Pete Ryan">
             </div>
         </div>
     </section>
 
-    <!-- Services Section -->
     <section class="section services" id="services">
         <div class="section-container services-container">
-            <h2 class="section-title" data-aos="fade-up">My Services</h2>
+            <h2 class="section-title" data-aos="fade-up">MY <span>ARSENAL</span></h2>
             <div class="services-grid">
-                <a href="/personal-training.html" class="service-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="service-card" data-aos="fade-up" data-aos-delay="100">
                     <div class="service-icon"><i class="fas fa-dumbbell"></i></div>
-                    <h3>Personal Training</h3>
-                    <!-- REVISED: More welcoming description -->
-                    <p>Customised fitness programmes designed to meet you where you are, push your limits safely, and achieve results you never thought possible.</p>
-                </a>
-                <a href="/mindset-coaching.html" class="service-card" data-aos="fade-up" data-aos-delay="200">
+                    <h3>Physique Engineering</h3>
+                    <p>Bespoke physical programming designed to sculpt a body that performs as powerfully as it looks. This is precision-built dominance.</p>
+                </div>
+                <div class="service-card" data-aos="fade-up" data-aos-delay="200">
                     <div class="service-icon"><i class="fas fa-brain"></i></div>
-                    <h3>Mindset Coaching</h3>
-                    <!-- REVISED: Broadened the benefit -->
-                    <p>Transform your mental game with proven techniques. We'll work together to break limiting beliefs and develop the mindset of a champion, in the gym and in life.</p>
-                </a>
-                <a href="/group-training.html" class="service-card" data-aos="fade-up" data-aos-delay="300">
+                    <h3>Mindset Architecture</h3>
+                    <p>Deconstruct limiting beliefs and install the mental framework of a champion. Your mind is your primary weapon—we will sharpen it.</p>
+                </div>
+                <div class="service-card" data-aos="fade-up" data-aos-delay="300">
                     <div class="service-icon"><i class="fas fa-users"></i></div>
-                    <h3>Group Training</h3>
-                    <p>High-energy group sessions that combine the motivation of a team with the expertise of pro coaching.</p>
-                </a>
-                <a href="/online-coaching.html" class="service-card" data-aos="fade-up" data-aos-delay="400">
+                    <h3>Elite Group Training</h3>
+                    <p>Forge your strength in the fire of competition. High-intensity sessions engineered to push the collective beyond individual limits.</p>
+                </div>
+                <div class="service-card" data-aos="fade-up" data-aos-delay="400">
                     <div class="service-icon"><i class="fas fa-mobile-alt"></i></div>
-                    <h3>Online Coaching</h3>
-                    <p>Get world-class coaching from anywhere with comprehensive online programmes and constant support.</p>
-                </a>
-                <a href="/nutrition-guidance.html" class="service-card" data-aos="fade-up" data-aos-delay="500">
+                    <h3>Remote Dominance Coaching</h3>
+                    <p>My expertise, your location. The same world-class coaching and uncompromising standards, delivered digitally with absolute accountability.</p>
+                </div>
+                <div class="service-card" data-aos="fade-up" data-aos-delay="500">
                     <div class="service-icon"><i class="fas fa-apple-alt"></i></div>
-                    <h3>Nutrition Guidance</h3>
-                    <p>Sustainable nutrition strategies that fuel your performance and support your lifestyle. No fad diets.</p>
-                </a>
-                <a href="/lifestyle-transformation.html" class="service-card" data-aos="fade-up" data-aos-delay="600">
+                    <h3>Performance Fueling</h3>
+                    <p>Nutrition is not about dieting; it's about fueling for war. Strategic protocols that optimize performance, recovery, and body composition.</p>
+                </div>
+                <div class="service-card" data-aos="fade-up" data-aos-delay="600">
                     <div class="service-icon"><i class="fas fa-chart-line"></i></div>
-                    <h3>Lifestyle Transformation</h3>
-                     <!-- REVISED: Added benefit of longevity -->
-                    <p>Complete life overhaul programmes addressing fitness, mindset, and nutrition for a total transformation that lasts.</p>
-                </a>
+                    <h3>Total Life Supremacy</h3>
+                     <p>An all-encompassing overhaul of your physical, mental, and nutritional systems. This is not a change; it's a complete hostile takeover of your life.</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Process Section -->
     <section class="section process" id="process">
         <div class="section-container process-container">
-            <h2 class="section-title" data-aos="fade-up">My 4-Step Process</h2>
+            <h2 class="section-title" data-aos="fade-up">THE <span>METHOD</span> OF MASTERY</h2>
             <div class="process-steps">
                 <div class="process-step" data-aos="fade-up" data-aos-delay="100">
                     <div class="step-number">1</div>
-                    <h3>Assessment</h3>
-                    <p>Comprehensive evaluation of your current fitness level, mindset, and goals to create your personalised roadmap.</p>
+                    <h3>DIAGNOSE</h3>
+                    <p>A forensic analysis of your physical capabilities, mental blocks, and ultimate objectives. We identify the battlefield.</p>
                 </div>
                 <div class="process-step" data-aos="fade-up" data-aos-delay="200">
                     <div class="step-number">2</div>
-                    <h3>Strategy</h3>
-                    <p>Custom-designed programme combining fitness training, mindset work, and lifestyle modifications tailored to you.</p>
+                    <h3>STRATEGIZE</h3>
+                    <p>I design your bespoke blueprint for domination—a protocol integrating training, mindset, and lifestyle for maximum impact.</p>
                 </div>
                 <div class="process-step" data-aos="fade-up" data-aos-delay="300">
                     <div class="step-number">3</div>
-                    <h3>Implementation</h3>
-                    <p>Guided execution of your programme with constant support, adjustments, and motivation to keep you on track.</p>
+                    <h3>EXECUTE</h3>
+                    <p>Relentless, guided implementation of the plan. This is where strategy meets action, with my command and your commitment.</p>
                 </div>
                 <div class="process-step" data-aos="fade-up" data-aos-delay="400">
                     <div class="step-number">4</div>
-                    <h3>Transformation</h3>
-                    <p>Achieve your goals and maintain your results with the tools, habits, and mindset for lifelong success.</p>
+                    <h3>DOMINATE</h3>
+                    <p>You don't just reach your goals—you shatter them. You will be equipped with the tools to maintain this new standard for life.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Testimonials Section -->
     <section class="section testimonials" id="testimonials">
         <div class="section-container testimonials-container">
-            <h2 class="section-title" data-aos="fade-up">What My Clients Say</h2>
-            <!-- REVISED: Added a second testimonial for broader appeal -->
+            <h2 class="section-title" data-aos="fade-up">PROOF, NOT <span>PROMISES</span></h2>
             <div class="testimonial-slider" data-aos="fade-up" data-aos-delay="200">
                 <div class="testimonial">
                     <p class="testimonial-text">
-                        "Pete didn't just change my body, he changed my entire mindset. I'm now stronger mentally and physically than I've ever been. His approach is unlike anything I've experienced."
+                        "Pete rebuilt me from the inside out. I came to him for a better body and left with an entirely new mindset. I'm not just stronger; I'm a different person. He's not a coach; he's a game-changer."
                     </p>
-                    <p class="testimonial-author">- Sarah M., Business Executive</p>
+                    <p class="testimonial-author">- Sarah M., CEO</p>
                 </div>
                  <div class="testimonial">
                     <p class="testimonial-text">
-                        "I was terrified of the gym before I met Pete. He built a plan for me from the ground up, never made me feel foolish, and celebrated every small win. He didn't just give me a workout plan; he gave me back my self-belief."
+                        "I thought I knew my limits. Pete showed me they were just suggestions. He demanded a level of excellence I never thought I could reach. Working with him was the single most impactful decision of my life."
                     </p>
-                    <p class="testimonial-author">- John D., First-Time Gym-Goer</p>
+                    <p class="testimonial-author">- John D., Former Athlete</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
     <section class="section" id="contact">
         <div class="section-container contact-container">
             <div class="contact-info" data-aos="fade-right">
-                <h2 class="section-title" style="text-align: left; margin-bottom: 2rem;">Get In Touch</h2>
-                <h3>Ready to Transform Your Life?</h3>
-                <!-- REVISED: Added more inclusive sentence -->
+                <h2 class="section-title">ENLIST</h2>
+                <h3>Stop Talking. Start Doing.</h3>
                 <p style="color: var(--text-medium); margin-bottom: 2rem;">
-                    Take the first step towards becoming the best version of yourself. Let's discuss your goals and create a plan that works for you. Whether you're a seasoned athlete or just starting out, this conversation is the first step.
+                    If you are ready to commit to the highest standard and forge a new legacy, your first step is this message. Excuses end here. Results begin now.
                 </p>
                 <div class="contact-item">
-                    <i class="fas fa-phone" aria-hidden="true"></i>
+                    <i class="fas fa-phone"></i>
                     <a href="tel:+447308518428">+44 7308 518428</a>
                 </div>
                 <div class="contact-item">
-                    <i class="fas fa-envelope" aria-hidden="true"></i>
+                    <i class="fas fa-envelope"></i>
                     <a href="mailto:pete@coachpeteryan.com">pete@coachpeteryan.com</a>
                 </div>
                 <div class="contact-item">
-                    <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
-                    <span> Hertfordshire, UK</span>
-                </div>
-                <div class="contact-item">
-                    <i class="fas fa-clock" aria-hidden="true"></i>
-                    <span>Mon-Fri: 6AM-8PM | Sat-Sun: 8AM-6PM</span>
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Hertfordshire, UK - Global Remote</span>
                 </div>
             </div>
             
             <form id="contact-form" class="contact-form" action="https://formspree.io/f/xgvyagkq" method="POST" data-aos="fade-left">
                 <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" id="name" name="name" required aria-required="true" aria-label="Name">
-                    <span class="error-message"></span>
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" required>
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required aria-required="true" aria-label="Email">
-                    <span class="error-message"></span>
+                    <input type="email" id="email" name="email" required>
                 </div>
                 <div class="form-group">
-                    <label for="phone">Phone (Optional)</label>
-                    <input type="tel" id="phone" name="phone" aria-label="Phone">
+                    <label for="message">Your Objective</label>
+                    <textarea id="message" name="message" placeholder="State your primary goal. Be specific." required></textarea>
                 </div>
-                <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea id="message" name="message" placeholder="Tell me about your goals..." required aria-required="true" aria-label="Message"></textarea>
-                    <span class="error-message"></span>
-                </div>
-                <button type="submit" class="submit-btn">Send Message</button>
-                <div id="form-status" class="form-status"></div>
+                <button type="submit" class="submit-btn">Send Transmission</button>
             </form>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="footer-content">
             <div class="social-links">
-                <a href="#" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram" aria-hidden="true"></i></a>
-                <a href="#" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook" aria-hidden="true"></i></a>
-                <a href="#" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
-                <a href="#" aria-label="YouTube" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube" aria-hidden="true"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
             </div>
             <p class="footer-text">
-                &copy; <span id="copyright-year"></span> Coach Pete Ryan. All rights reserved. | Building Better People
+                &copy; <span id="copyright-year"></span> Coach Pete Ryan. The Standard is The Standard.
             </p>
         </div>
     </footer>
 
-    <!-- Scripts -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -993,9 +908,9 @@
             loader.classList.add('hidden');
 
             AOS.init({
-                duration: 1000,
+                duration: 800,
                 once: true,
-                offset: 100
+                offset: 50
             });
 
             const navbar = document.getElementById('navbar');
@@ -1074,49 +989,7 @@
                 });
             }
             
-            const form = document.getElementById('contact-form');
-            if(form) {
-                async function handleSubmit(event) {
-                    event.preventDefault();
-                    const status = document.getElementById('form-status');
-                    const data = new FormData(event.target);
-                    
-                    fetch(event.target.action, {
-                        method: form.method,
-                        body: data,
-                        headers: {
-                            'Accept': 'application/json'
-                        }
-                    }).then(response => {
-                        if (response.ok) {
-                            status.innerHTML = "Thanks for your message! I'll be in touch soon.";
-                            status.className = 'form-status success';
-                            status.style.display = 'block';
-                            form.reset()
-                        } else {
-                            response.json().then(data => {
-                                if (Object.hasOwn(data, 'errors')) {
-                                    status.innerHTML = data["errors"].map(error => error["message"]).join(", ")
-                                } else {
-                                    status.innerHTML = "Oops! There was a problem submitting your form."
-                                }
-                                status.className = 'form-status error';
-                                status.style.display = 'block';
-                            })
-                        }
-                    }).catch(error => {
-                        status.innerHTML = "Oops! There was a problem submitting your form."
-                        status.className = 'form-status error';
-                        status.style.display = 'block';
-                    });
-                }
-                form.addEventListener("submit", handleSubmit)
-            }
-            
-            const copyrightYear = document.getElementById('copyright-year');
-            if(copyrightYear) {
-                copyrightYear.textContent = new Date().getFullYear();
-            }
+            document.getElementById('copyright-year').textContent = new Date().getFullYear();
 
         });
     </script>
