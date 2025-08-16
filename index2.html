@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coach Pete Ryan - Master Coach & Mentor</title>
+    <meta name="description" content="Guidance from a master coach who has walked the path. Build enduring strength in body and mind with Pete Ryan.">
+    <meta property="og:title" content="Coach Pete Ryan - Master Coach & Mentor">
+    <meta property="og:description" content="Guidance from a master coach who has walked the path. Build enduring strength in body and mind with Pete Ryan.">
+    <meta property="og:image" content="https://raw.githubusercontent.com/CoachPete86/images/3749c527ecaa3e8a8d6b597d4604fa57023f18b1/coach_hero_ext.png">
+    <meta property="og:type" content="website">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-bronze: #CD7F32; /* A warmer, more sophisticated bronze */
+            --dark-charcoal: #121212;
+            --off-white: #F5F5F5;
+            --medium-grey: #1A1A1A;
+            --light-grey: #2d2d2d;
+            --text-light: #e0e0e0;
+            --text-medium: #b0b0b0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: var(--dark-charcoal);
+            color: var(--text-light);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Loading Screen */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--dark-charcoal);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            transition: opacity 0.75s ease;
+        }
+        .loader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        .loader-text {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-bronze);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(18, 18, 18, 0.85);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            padding: 1.2rem 0;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(205, 127, 50, 0.1);
+        }
+
+        .navbar.scrolled {
+            background: rgba(18, 18, 18, 0.95);
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--off-white);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .logo span {
+            color: var(--primary-bronze);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        .nav-link {
+            color: var(--text-medium);
+            text-decoration: none;
+            font-weight: 700;
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--primary-bronze);
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 3px;
+            background: var(--primary-bronze);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 60%;
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .mobile-menu span {
+            width: 28px;
+            height: 3px;
+            background: var(--off-white);
+            transition: all 0.3s ease-in-out;
+            border-radius: 3px;
+        }
+        
+        .mobile-menu.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+        .mobile-menu.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .mobile-menu.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(18, 18, 18, 0.8), rgba(18, 18, 18, 0.8)),
+                        url('https://raw.githubusercontent.com/CoachPete86/images/3749c527ecaa3e8a8d6b597d4604fa57023f18b1/coach_hero_ext.png') center top no-repeat;
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .hero-content {
+            max-width: 900px;
+        }
+
+        .hero-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: clamp(3.5rem, 10vw, 7rem);
+            font-weight: 700;
+            color: var(--off-white);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 1rem;
+            text-shadow: 3px 3px 15px rgba(0, 0, 0, 0.7);
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.5rem, 4vw, 2.2rem);
+            color: var(--primary-bronze);
+            font-weight: 600;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-family: 'Oswald', sans-serif;
+        }
+        
+        .hero-description {
+            font-size: 1.3rem;
+            color: var(--text-medium);
+            margin-bottom: 2.5rem;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--primary-bronze);
+            color: var(--dark-charcoal);
+            padding: 1.2rem 3rem;
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(205, 127, 50, 0.3);
+            border: 2px solid var(--primary-bronze);
+        }
+
+        .cta-button:hover {
+            background: transparent;
+            color: var(--primary-bronze);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(205, 127, 50, 0.4);
+        }
+
+        /* Stats Section */
+        .stats {
+            background: var(--medium-grey);
+            padding: 5rem 0;
+            border-top: 4px solid var(--primary-bronze);
+            border-bottom: 4px solid var(--primary-bronze);
+        }
+
+        .stats-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            padding: 0 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .stat-number {
+            font-family: 'Oswald', sans-serif;
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--primary-bronze);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 500;
+        }
+
+        /* Generic Section Styles */
+        .section {
+            padding: 7rem 0;
+        }
+
+        .section-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .section-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 3.5rem;
+            text-align: center;
+            color: var(--off-white);
+            margin-bottom: 4rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+        .section-title span {
+            color: var(--primary-bronze);
+        }
+
+        /* About Section */
+        #about {
+            background: var(--dark-charcoal);
+        }
+        .about-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+        
+        .about-content h2 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 3.5rem;
+            color: var(--off-white);
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-align: left;
+        }
+
+        .about-content .highlight {
+            color: var(--primary-bronze);
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            color: var(--text-medium);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .about-image {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+            border: 3px solid var(--primary-bronze);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+        
+        .about-image:hover img {
+            transform: scale(1.1);
+        }
+        
+        /* Services Section */
+        .services {
+             background: var(--medium-grey);
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .service-card {
+            background: var(--light-grey);
+            padding: 3rem;
+            border-radius: 10px;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card:hover {
+            transform: translateY(-15px);
+            border-color: var(--primary-bronze);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .service-icon {
+            font-size: 3.5rem;
+            color: var(--primary-bronze);
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .service-card:hover .service-icon {
+            transform: scale(1.1);
+        }
+
+        .service-card h3 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.8rem;
+            color: var(--off-white);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .service-card p {
+            color: var(--text-medium);
+            line-height: 1.7;
+        }
+
+        /* Process Section */
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-top: 4rem;
+            position: relative;
+        }
+
+        .process-step {
+            text-align: center;
+        }
+
+        .step-number {
+            width: 90px;
+            height: 90px;
+            background: var(--dark-charcoal);
+            border: 3px solid var(--primary-bronze);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Oswald', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-bronze);
+            margin: 0 auto 2rem;
+            box-shadow: 0 0 25px rgba(205, 127, 50, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .process-step:hover .step-number {
+            background: var(--primary-bronze);
+            color: var(--dark-charcoal);
+        }
+
+        .process-step h3 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.5rem;
+            color: var(--off-white);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .process-step p {
+            color: var(--text-medium);
+            line-height: 1.7;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            background: var(--medium-grey);
+        }
+        
+        .testimonial-slider {
+            max-width: 900px;
+            margin: 4rem auto 0;
+            display: grid;
+            gap: 3rem;
+        }
+
+        .testimonial {
+            background: var(--light-grey);
+            padding: 3.5rem;
+            border-radius: 10px;
+            border-left: 5px solid var(--primary-bronze);
+        }
+
+        .testimonial-text {
+            font-size: 1.3rem;
+            color: var(--off-white);
+            font-style: italic;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .testimonial-author {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.2rem;
+            color: var(--primary-bronze);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+        }
+
+        /* Contact Section */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+        }
+        
+        .contact-info .section-title {
+            text-align: left;
+            margin-bottom: 2rem;
+        }
+        
+        .contact-info h3 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.8rem;
+            color: var(--primary-bronze);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            color: var(--text-medium);
+            font-size: 1.1rem;
+        }
+        
+        .contact-item a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .contact-item a:hover {
+            color: var(--primary-bronze);
+        }
+
+        .contact-item i {
+            color: var(--primary-bronze);
+            margin-right: 1.5rem;
+            font-size: 1.5rem;
+            width: 25px;
+        }
+
+        .contact-form {
+            background: var(--light-grey);
+            padding: 3rem;
+            border-radius: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 1.8rem;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--off-white);
+            margin-bottom: 0.8rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1.2rem;
+            background: var(--dark-charcoal);
+            border: 2px solid var(--medium-grey);
+            border-radius: 5px;
+            color: var(--off-white);
+            font-family: inherit;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-bronze);
+        }
+
+        .form-group textarea {
+            height: 140px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            background: var(--primary-bronze);
+            color: var(--dark-charcoal);
+            padding: 1.2rem;
+            border: 2px solid var(--primary-bronze);
+            border-radius: 5px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background: transparent;
+            color: var(--primary-bronze);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark-charcoal);
+            padding: 4rem 0 2rem;
+            text-align: center;
+            border-top: 2px solid var(--medium-grey);
+        }
+
+        .footer-content {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .social-links a {
+            color: var(--text-medium);
+            font-size: 1.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--primary-bronze);
+            transform: translateY(-5px);
+        }
+
+        .footer-text {
+            color: #666;
+            font-size: 1rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .about-container,
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            .process-steps {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                background: var(--dark-charcoal);
+                position: absolute;
+                top: 80px;
+                right: 0;
+                width: 100%;
+                padding: 2rem 0;
+                z-index: 999;
+                gap: 1.5rem;
+                align-items: center;
+                border-top: 1px solid var(--medium-grey);
+            }
+            .nav-menu.active {
+                display: flex;
+            }
+            .mobile-menu {
+                display: flex;
+            }
+            .hero-title {
+                font-size: 3.5rem;
+            }
+            .section-title, .about-content h2 {
+                font-size: 2.8rem;
+            }
+            .services-grid, .process-steps {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="loader" id="loader">
+        <div class="loader-text">The Work Within</div>
+    </div>
+
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#home" class="logo">Pete Ryan <span>//</span></a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#about" class="nav-link">The Path</a></li>
+                <li><a href="#services" class="nav-link">Our Work</a></li>
+                <li><a href="#process" class="nav-link">The Process</a></li>
+                <li><a href="#testimonials" class="nav-link">Journeys</a></li>
+                <li><a href="#contact" class="nav-link">Begin</a></li>
+            </ul>
+            <div class="mobile-menu" id="mobileMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1 class="hero-title" data-aos="fade-down">MASTER YOUR STATE</h1>
+            <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="200">BUILDING RESILIENT BODIES & MINDS</p>
+            <p class="hero-description" data-aos="fade-up" data-aos-delay="400">
+                True strength isn't just physical. It's forged in the space between effort and surrender. As your guide, we will walk that path together to build something that lasts.
+            </p>
+            <a href="#contact" class="cta-button" data-aos="fade-up" data-aos-delay="600">Begin The Conversation</a>
+        </div>
+    </section>
+
+    <section class="stats">
+        <div class="stats-container">
+            <div class="stat-item" data-aos="fade-up" data-aos-delay="100">
+                <span class="stat-number" data-count="30000">0</span>
+                <span class="stat-label">Hours of Craft</span>
+            </div>
+            <div class="stat-item" data-aos="fade-up" data-aos-delay="200">
+                <span class="stat-number" data-count="18">0</span>
+                <span class="stat-label">Years of Mastery</span>
+            </div>
+            <div class="stat-item" data-aos="fade-up" data-aos-delay="300">
+                <span class="stat-number" data-count="4500">0</span>
+                <span class="stat-label">Journeys Guided</span>
+            </div>
+            <div class="stat-item" data-aos="fade-up" data-aos-delay="400">
+                <span class="stat-number" data-count="24">0</span>
+                <span class="stat-label">24/7 Dedicated Support</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="about">
+        <div class="section-container about-container">
+            <div class="about-content" data-aos="fade-right">
+                <h2>THE PATH ISN'T A <span class="highlight">STRAIGHT LINE</span></h2>
+                <p>
+                    As an athlete, I learned what it takes to reach the peak. But life taught me that real growth happens in the valleys. I’m no stranger to the darkness we all carry; I’ve fought my own wars within and have the scars to prove it. I lost most of them.
+                </p>
+                <p>
+                   Those losses became the foundation of my craft. They taught me that enduring strength isn't about avoiding the fall—it's about how you get back up, stronger and wiser. It's this hard-won experience that I bring to every client.
+                </p>
+                <p>
+                    I'm not here to just train your body. I'm here to guide you through the entire process of becoming—helping you build not just a powerful physique, but a resilient, centred, and unbreakable spirit.
+                </p>
+                <a href="#services" class="cta-button">See My Approach</a>
+            </div>
+            <div class="about-image" data-aos="fade-left">
+                <img src="https://raw.githubusercontent.com/coachpete86/CoachPete_LIVESITE/main/Photoshoot_Coach_2.png" alt="Coach Pete Ryan">
+            </div>
+        </div>
+    </section>
+
+    <section class="section services" id="services">
+        <div class="section-container services-container">
+            <h2 class="section-title" data-aos="fade-up">OUR <span>WORK</span></h2>
+            <div class="services-grid">
+                <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="service-icon"><i class="fas fa-dumbbell"></i></div>
+                    <h3>Physical Mastery</h3>
+                    <p>Intelligent, bespoke training programmes designed to build a capable and resilient body that serves you for a lifetime.</p>
+                </div>
+                <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="service-icon"><i class="fas fa-brain"></i></div>
+                    <h3>Mental Fortitude</h3>
+                    <p>Develop the mental tools to navigate stress, overcome obstacles, and cultivate the calm confidence of a true master.</p>
+                </div>
+                <div class="service-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="service-icon"><i class="fas fa-users"></i></div>
+                    <h3>Supportive Group Training</h3>
+                    <p>Train within a community of like-minded individuals, where shared energy and expert guidance elevates everyone.</p>
+                </div>
+                <div class="service-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="service-icon"><i class="fas fa-mobile-alt"></i></div>
+                    <h3>Remote Mentorship</h3>
+                    <p>Receive dedicated, world-class coaching and guidance from anywhere in the world, with unwavering support.</p>
+                </div>
+                <div class="service-card" data-aos="fade-up" data-aos-delay="500">
+                    <div class="service-icon"><i class="fas fa-apple-alt"></i></div>
+                    <h3>Performance Nutrition</h3>
+                    <p>Learn to fuel your body for optimal performance and well-being with sustainable strategies, not restrictive diets.</p>
+                </div>
+                <div class="service-card" data-aos="fade-up" data-aos-delay="600">
+                    <div class="service-icon"><i class="fas fa-chart-line"></i></div>
+                    <h3>Holistic Integration</h3>
+                     <p>A complete approach that aligns your physical training, mental well-being, and lifestyle for profound, lasting change.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section process" id="process">
+        <div class="section-container process-container">
+            <h2 class="section-title" data-aos="fade-up">THE JOURNEY TO <span>MASTERY</span></h2>
+            <div class="process-steps">
+                <div class="process-step" data-aos="fade-up" data-aos-delay="100">
+                    <div class="step-number">1</div>
+                    <h3>UNDERSTAND</h3>
+                    <p>We start with a deep dive into your goals, history, and current state to see the full picture of who you are.</p>
+                </div>
+                <div class="process-step" data-aos="fade-up" data-aos-delay="200">
+                    <div class="step-number">2</div>
+                    <h3>COLLABORATE</h3>
+                    <p>Together, we create a flexible, intelligent plan—a roadmap that aligns with your life and is built to evolve with you.</p>
+                </div>
+                <div class="process-step" data-aos="fade-up" data-aos-delay="300">
+                    <div class="step-number">3</div>
+                    <h3>INTEGRATE</h3>
+                    <p>We put the plan into practice with my dedicated guidance, making adjustments and turning intention into habit.</p>
+                </div>
+                <div class="process-step" data-aos="fade-up" data-aos-delay="400">
+                    <div class="step-number">4</div>
+                    <h3>EVOLVE</h3>
+                    <p>You not only achieve your goals but gain the wisdom to sustain your progress and continue growing for life.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section testimonials" id="testimonials">
+        <div class="section-container testimonials-container">
+            <h2 class="section-title" data-aos="fade-up">CLIENT <span>JOURNEYS</span></h2>
+            <div class="testimonial-slider" data-aos="fade-up" data-aos-delay="200">
+                <div class="testimonial">
+                    <p class="testimonial-text">
+                        "Pete sees the whole person, not just the body. He knew when to push and when to listen. He didn't just help me get stronger physically; he guided me in becoming a more resilient and centred person."
+                    </p>
+                    <p class="testimonial-author">- Sarah M., Executive</p>
+                </div>
+                 <div class="testimonial">
+                    <p class="testimonial-text">
+                        "I came to Pete after years of feeling stuck. He understood my struggles because he's been there himself. His guidance was the most honest and effective I've ever experienced. He's more than a coach; he's a true mentor."
+                    </p>
+                    <p class="testimonial-author">- John D., Business Owner</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="contact">
+        <div class="section-container contact-container">
+            <div class="contact-info" data-aos="fade-right">
+                <h2 class="section-title">BEGIN</h2>
+                <h3>The First Step is Reaching Out.</h3>
+                <p style="color: var(--text-medium); margin-bottom: 2rem;">
+                    Wherever you are on your path, I'm here to listen. Let's have an honest conversation about your goals and see if we're the right fit to walk this journey together.
+                </p>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <a href="tel:+447308518428">+44 7308 518428</a>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <a href="mailto:pete@coachpeteryan.com">pete@coachpeteryan.com</a>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Hertfordshire, UK & Global Remote</span>
+                </div>
+            </div>
+            
+            <form id="contact-form" class="contact-form" action="https://formspree.io/f/xgvyagkq" method="POST" data-aos="fade-left">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Your Goal</label>
+                    <textarea id="message" name="message" placeholder="Briefly tell me what you're hoping to achieve..." required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Start The Conversation</button>
+            </form>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+            <p class="footer-text">
+                &copy; <span id="copyright-year"></span> Coach Pete Ryan. All Rights Reserved.
+            </p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            const loader = document.getElementById('loader');
+            loader.classList.add('hidden');
+
+            AOS.init({
+                duration: 800,
+                once: true,
+                offset: 50
+            });
+
+            const navbar = document.getElementById('navbar');
+            if (navbar) {
+                window.addEventListener('scroll', function() {
+                    if (window.scrollY > 50) {
+                        navbar.classList.add('scrolled');
+                    } else {
+                        navbar.classList.remove('scrolled');
+                    }
+                });
+            }
+
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            function updateActiveLink() {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (scrollY >= (sectionTop - 150)) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === '#' + current) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+            window.addEventListener('scroll', updateActiveLink);
+            updateActiveLink();
+
+            function animateCounter(counter) {
+                const target = parseInt(counter.getAttribute('data-count'));
+                const duration = 2000;
+                let start = null;
+
+                function step(timestamp) {
+                    if (!start) start = timestamp;
+                    const progress = Math.min((timestamp - start) / duration, 1);
+                    counter.innerText = Math.floor(progress * target).toLocaleString();
+                    if (progress < 1) {
+                        requestAnimationFrame(step);
+                    }
+                }
+                requestAnimationFrame(step);
+            }
+
+            const statsSection = document.querySelector('.stats');
+            if (statsSection) {
+                const observer = new IntersectionObserver((entries) => {
+                    if (entries[0].isIntersecting) {
+                        document.querySelectorAll('.stat-number').forEach(animateCounter);
+                        observer.disconnect();
+                    }
+                }, { threshold: 0.1 });
+                observer.observe(statsSection);
+            }
+
+            const mobileMenu = document.getElementById('mobileMenu');
+            const navMenu = document.getElementById('navMenu');
+            if (mobileMenu && navMenu) {
+                mobileMenu.addEventListener('click', function() {
+                    navMenu.classList.toggle('active');
+                    this.classList.toggle('active');
+                });
+                
+                navMenu.addEventListener('click', function(e) {
+                    if (e.target.classList.contains('nav-link')) {
+                        navMenu.classList.remove('active');
+                        mobileMenu.classList.remove('active');
+                    }
+                });
+            }
+            
+            document.getElementById('copyright-year').textContent = new Date().getFullYear();
+
+        });
+    </script>
+</body>
+</html>
