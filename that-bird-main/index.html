@@ -5,119 +5,46 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Cybersecurity Blueprints – Splash → App</title>
 
-  <!-- Fonts & Tailwind -->
+  <!-- Fonts & Tailwind (exact as your site) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=Architects+Daughter&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Preload splash image (HTTPS) -->
-  <link rel="preload" as="image" href="https://coachpete86.github.io/that-bird/image/bird.png" />
+  <!-- Preload logo for splash -->
+  <link rel="preload" as="image" href="https://coachpete86.github.io/that-bird/image/bird.png">
 
   <style>
     :root{
-      --splash-duration: 5s;    /* total time */
-      --edge-glow: 8px;         /* perceived edge thickness of the glow */
+      --grid-blue:#0D47A1;           /* splash background base if needed */
+      --grid-line-strong:#ffffff1a;  /* 10% white */
+      --grid-line-fine:#ffffff0d;    /* 5% white  */
+      --pulse-glow: rgba(0,255,180,.35);
+      --fade-delay: 5s;              /* 2 pulses × 2.5s each = 5s total */
     }
 
     html,body{height:100%;margin:0}
-    body{ background:#000; font-family:'Kalam', cursive; overflow:hidden; }
 
-    /* ========= SPLASH ========= */
-    .splash{
-      position:fixed; inset:0; z-index:9999; background:#000;
+    /* Default: deep black stage while splash runs */
+    body{
+      background:#000;
       display:grid; place-items:center;
-      animation: splashFadeOut 1s ease forwards; animation-delay: var(--splash-duration);
-    }
-    @keyframes splashFadeOut{ to{ opacity:0; visibility:hidden } }
-
-    .logo-wrap{ position:relative; width:min(78vmin,520px); }
-
-    /* Base logo (static image) */
-    .logo{
-      width:100%; height:auto; display:block; position:relative; z-index:2;
-      filter: drop-shadow(0 0 10px #000);
-      /* 2 inhale–exhale cycles in 5s total */
-      animation: pulse 2.5s ease-in-out 2;
-    }
-    @keyframes pulse{
-      0%,100%{ transform:scale(1) }
-      50%{ transform:scale(1.08) }
+      overflow:hidden; /* prevent scroll during splash */
+      font-family:'Kalam', cursive;
+      color:#fff;
     }
 
-    /* EDGE-ONLY NEON SHIMMER (simulated clockwise sweep without spinning the logo) */
-    .neon {
-      position:absolute; inset:0; pointer-events:none; z-index:3;
-      /* use the PNG as the visible layer to drive edge shadows */
-      background: url('https://coachpete86.github.io/that-bird/image/bird.png') center / contain no-repeat;
-      /* multi-directional drop-shadows that shift clockwise across time */
-      filter:
-        drop-shadow(0 calc(-1 * var(--edge-glow)) var(--edge-glow) #ff004c)
-        drop-shadow(var(--edge-glow) 0 var(--edge-glow) #ff4df3)
-        drop-shadow(0 var(--edge-glow) var(--edge-glow) #3f5bff)
-        drop-shadow(calc(-1 * var(--edge-glow)) 0 var(--edge-glow) #00ff8a);
-      animation: glowSweep 2.5s linear 2; /* 2 sweeps total */
-    }
-    /* The sequence brightens each side in turn → top → right → bottom → left (clockwise) */
-    @keyframes glowSweep {
-      0% {
-        filter:
-          drop-shadow(0 calc(-1 * var(--edge-glow)) var(--edge-glow) #ff004c)
-          drop-shadow(var(--edge-glow) 0 var(--edge-glow) #ff4df3)
-          drop-shadow(0 var(--edge-glow) var(--edge-glow) #3f5bff)
-          drop-shadow(calc(-1 * var(--edge-glow)) 0 var(--edge-glow) #00ff8a);
-      }
-      25% {
-        filter:
-          drop-shadow(0 calc(-1 * var(--edge-glow)) var(--edge-glow) #ff4df3)
-          drop-shadow(var(--edge-glow) 0 var(--edge-glow) #3f5bff)
-          drop-shadow(0 var(--edge-glow) var(--edge-glow) #00ff8a)
-          drop-shadow(calc(-1 * var(--edge-glow)) 0 var(--edge-glow) #ffee00);
-      }
-      50% {
-        filter:
-          drop-shadow(0 calc(-1 * var(--edge-glow)) var(--edge-glow) #3f5bff)
-          drop-shadow(var(--edge-glow) 0 var(--edge-glow) #00ff8a)
-          drop-shadow(0 var(--edge-glow) var(--edge-glow) #ffee00)
-          drop-shadow(calc(-1 * var(--edge-glow)) 0 var(--edge-glow) #ff004c);
-      }
-      75% {
-        filter:
-          drop-shadow(0 calc(-1 * var(--edge-glow)) var(--edge-glow) #00ff8a)
-          drop-shadow(var(--edge-glow) 0 var(--edge-glow) #ffee00)
-          drop-shadow(0 var(--edge-glow) var(--edge-glow) #ff004c)
-          drop-shadow(calc(-1 * var(--edge-glow)) 0 var(--edge-glow) #ff4df3);
-      }
-      100% {
-        filter:
-          drop-shadow(0 calc(-1 * var(--edge-glow)) var(--edge-glow) #ff004c)
-          drop-shadow(var(--edge-glow) 0 var(--edge-glow) #ff4df3)
-          drop-shadow(0 var(--edge-glow) var(--edge-glow) #3f5bff)
-          drop-shadow(calc(-1 * var(--edge-glow)) 0 var(--edge-glow) #00ff8a);
-      }
-    }
-
-    /* Loading bar */
-    .load{ margin-top:22px; width:min(60vmin,360px); height:8px; background:#111; border-radius:999px; overflow:hidden; box-shadow:0 0 0 1px #ffffff22 inset; }
-    .fill{
-      width:0%; height:100%;
-      background:linear-gradient(90deg, #ff004c, #ff7b00, #ffee00, #00ff9e, #00e4ff, #3f5bff, #ff4df3, #ff004c);
-      animation: fill var(--splash-duration) linear forwards;
-      box-shadow: 0 0 12px #18ffff;
-    }
-    @keyframes fill{ to{ width:100% } }
-
-    /* ========= APP (BLUEPRINT) ========= */
-    body.blueprint{ overflow:auto; background-color:#1a3a6a; color:#fff;
+    /* After splash: switch to blueprint look (exact styles you use) */
+    body.blueprint{
+      background-color:#1a3a6a;
       background-image:
         linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px);
       background-size:2rem 2rem;
+      color:#ffffff;
+      overflow:auto; /* re-enable scroll */
     }
-    .content{ opacity:0; transform:translateY(8px); transition: opacity .6s ease .2s, transform .6s ease .2s; }
-    .content.is-live{ opacity:1; transform:none; }
-
-    /* UI styles scoped to .blueprint */
+    /* UI styles scoped to .blueprint (from your site) */
     body.blueprint .sketch-border{ border:2px solid rgba(255,255,255,.8); box-shadow:2px 2px 0 rgba(255,255,255,.5); transition:all .2s ease-in-out; }
     body.blueprint .sketch-border:hover{ transform:translate(-2px,-2px); box-shadow:4px 4px 0 rgba(255,255,255,.5); }
     body.blueprint .sketch-font{ font-family:'Architects Daughter', cursive; }
@@ -130,12 +57,36 @@
     body.blueprint .category-title{ font-family:'Architects Daughter', cursive; border-bottom:2px solid rgba(255,255,255,.5); padding-bottom:.5rem; }
     body.blueprint .section-title{ font-family:'Architects Daughter', cursive; font-weight:700; color:#a7f3d0; }
 
+    /* ===== Splash overlay ===== */
+    .splash{ position:fixed; inset:0; z-index:9999; display:grid; place-items:center; background:#000; transition:opacity .8s ease; }
+    .logo-wrap{ position:relative; display:grid; place-items:center; }
+    .logo{ width:min(70vmin,520px); height:auto; display:block; filter: drop-shadow(0 0 14px #000);
+      animation: pulse 2.5s ease-in-out 2 both, fadeOut .8s ease forwards var(--fade-delay);
+      will-change: transform, opacity, filter; }
+    /* Canvas sits over the logo to draw neon on the actual bird edges */
+    #neonCanvas{ position:absolute; inset:0; z-index:4; pointer-events:none; }
+
+    @keyframes pulse{
+      0%,100%{ transform:scale(1); filter: drop-shadow(0 0 14px #000); }
+      50%{    transform:scale(1.09); filter: drop-shadow(0 0 26px var(--pulse-glow)); }
+    }
+    @keyframes fadeOut{ to{ opacity:0; } }
+
+    /* Loading bar */
+    .load{ margin-top:20px; width:min(64vmin,460px); height:10px; border-radius:999px; overflow:hidden; background:#0b0b0b; box-shadow:0 0 0 1px #1affff55 inset, 0 0 18px #00fff280; }
+    .fill{ height:100%; width:0%; background: linear-gradient(90deg, #ff0066, #ff9900, #ffee00, #33ff66, #00e5ff, #3388ff, #cc33ff, #ff0066);
+           animation: fillbar var(--fade-delay) linear forwards; box-shadow: 0 0 12px #36f3ff; }
+    @keyframes fillbar{ to{ width:100%; } }
+
+    /* App container reveal after splash */
+    .content{ opacity:0; transform:translateY(8px); transition: opacity .6s ease .2s, transform .6s ease .2s; width:100%; }
+    .content.is-live{ opacity:1; transform:none; }
+
     /* Reduced motion: skip animations but still show app */
     @media (prefers-reduced-motion: reduce){
-      .logo{ animation:none }
-      .neon{ animation:none }
-      .splash{ animation-delay:.01s }
-      .fill{ animation-duration:.01s }
+      .logo{ animation:none !important }
+      .splash{ animation:none !important }
+      .fill{ animation-duration:.01s !important; width:100% !important }
     }
   </style>
 </head>
@@ -143,8 +94,8 @@
   <!-- ===== SPLASH ===== -->
   <div class="splash" aria-hidden="true">
     <div class="logo-wrap">
-      <img class="logo" alt="App emblem" src="https://coachpete86.github.io/that-bird/image/bird.png" />
-      <div class="neon"></div>
+      <img id="splashLogo" class="logo" alt="App emblem" src="https://coachpete86.github.io/that-bird/image/bird.png" />
+      <canvas id="neonCanvas"></canvas>
     </div>
     <div class="load" role="progressbar" aria-label="Loading" aria-valuemin="0" aria-valuemax="100"><div class="fill"></div></div>
   </div>
@@ -182,12 +133,168 @@
   </main>
 
   <script>
-    // Reveal app after splash (hard cutoff)
-    setTimeout(() => {
-      document.body.classList.add('blueprint');
-      document.getElementById('app').classList.add('is-live');
-      document.body.style.overflow = 'auto';
-    }, 5000);
+    // ===== Canvas neon outline (clockwise sweep, 2 pulses over 5s) =====
+    (function(){
+      const logoEl = document.getElementById('splashLogo');
+      const canvas = document.getElementById('neonCanvas');
+      if(!logoEl || !canvas) return;
+      const ctx = canvas.getContext('2d', { willReadFrequently: true });
+      const dpr = Math.max(1, window.devicePixelRatio || 1);
+      const parseCSSSeconds = (v) => (v && v.trim().endsWith('s')) ? parseFloat(v)*1000 : (parseFloat(v)||5000);
+      const totalMs = parseCSSSeconds(getComputedStyle(document.documentElement).getPropertyValue('--fade-delay')) || 5000;
+      const cycles = 2;                        // 2 inhale–exhale (sweeps)
+      const wedge = Math.PI/6;                 // narrow, intense wedge
+      let off, edgeCanvas;
+
+      function prepCanvases(img){
+        const rect = logoEl.getBoundingClientRect();
+        const w = Math.max(2, Math.floor(rect.width * dpr));
+        const h = Math.max(2, Math.floor(rect.height * dpr));
+        canvas.width = w; canvas.height = h;
+        canvas.style.width = rect.width+'px';
+        canvas.style.height = rect.height+'px';
+
+        // Offscreen: draw image
+        off = document.createElement('canvas');
+        off.width = w; off.height = h;
+        const o = off.getContext('2d');
+        o.clearRect(0,0,w,h);
+        o.drawImage(img,0,0,w,h);
+
+        // Build a 1px outline mask from alpha transitions (edge detection lite)
+        const id = o.getImageData(0,0,w,h), src = id.data;
+        const edge = new Uint8ClampedArray(src.length);
+        const idx=(x,y)=>((y*w+x)<<2);
+        for(let y=1;y<h-1;y++){
+          for(let x=1;x<w-1;x++){
+            const a=src[idx(x,y)+3];
+            if(a===0){
+              let outline=0;
+              for(let dy=-1;dy<=1;dy++){
+                for(let dx=-1;dx<=1;dx++){
+                  if(dx||dy){
+                    if(src[idx(x+dx,y+dy)+3]>0){ outline=255; break; }
+                  }
+                }
+                if(outline) break;
+              }
+              if(outline){
+                const ii=idx(x,y); edge[ii]=edge[ii+1]=edge[ii+2]=edge[ii+3]=255;
+              }
+            }
+          }
+        }
+        edgeCanvas = document.createElement('canvas');
+        edgeCanvas.width=w; edgeCanvas.height=h;
+        edgeCanvas.getContext('2d').putImageData(new ImageData(edge,w,h),0,0);
+      }
+
+      function run(){
+        const w=canvas.width, h=canvas.height, cx=w/2, cy=h/2;
+        const start=performance.now();
+        // Mask canvas for the rotating wedge
+        const mask=document.createElement('canvas'); mask.width=w; mask.height=h; const mctx=mask.getContext('2d');
+        const wedgeCanvas=document.createElement('canvas'); wedgeCanvas.width=w; wedgeCanvas.height=h; const wctx=wedgeCanvas.getContext('2d');
+
+        (function frame(now){
+          const t=now-start;
+          if(t>totalMs){ return; } // stop at 5s
+          const p=t/totalMs;
+          const theta=p*cycles*Math.PI*2; // clockwise angle
+
+          ctx.clearRect(0,0,w,h);
+
+          // Dim base image to make the neon pop
+          ctx.save();
+          ctx.globalAlpha=.10;
+          ctx.drawImage(off,0,0);
+          ctx.restore();
+
+          // Constant low-intensity glow around all edges
+          ctx.save();
+          ctx.globalAlpha=.25;
+          ctx.shadowBlur=18;
+          ctx.shadowColor='rgba(0,255,255,.65)';
+          ctx.globalCompositeOperation='lighter';
+          ctx.drawImage(edgeCanvas,0,0);
+          ctx.restore();
+
+          // Build the current wedge mask (clockwise sweep)
+          mctx.clearRect(0,0,w,h);
+          mctx.fillStyle='#fff';
+          mctx.beginPath();
+          const r=Math.hypot(w,h);
+          mctx.moveTo(cx,cy);
+          mctx.arc(cx,cy,r, theta - wedge/2, theta + wedge/2);
+          mctx.closePath();
+          mctx.fill();
+
+          // Apply mask to edge-only image
+          wctx.clearRect(0,0,w,h);
+          wctx.drawImage(edgeCanvas,0,0);
+          wctx.globalCompositeOperation='destination-in';
+          wctx.drawImage(mask,0,0);
+          wctx.globalCompositeOperation='source-over';
+
+          // Bright color based on angle (super intense)
+          const hue=(theta/(Math.PI*2))*360;
+          ctx.save();
+          ctx.shadowBlur=42;
+          ctx.shadowColor=`hsl(${hue}, 100%, 60%)`;
+          ctx.globalCompositeOperation='lighter';
+          ctx.drawImage(wedgeCanvas,0,0);
+          ctx.globalCompositeOperation='source-in';
+          ctx.fillStyle=`hsl(${hue}, 100%, 60%)`;
+          ctx.fillRect(0,0,w,h);
+          ctx.restore();
+
+          requestAnimationFrame(frame);
+        })();
+      }
+
+      // Load image with CORS-safe URL to avoid tainting the canvas
+      const source=new Image();
+      source.crossOrigin='anonymous';
+      // force https (your GitHub pages supports https)
+      const srcURL=(logoEl?.src||'').replace(/^http:/,'https:');
+      source.src=srcURL;
+
+      function startIfReady(){
+        if(source.complete && logoEl.complete){
+          prepCanvases(source); run();
+        }
+      }
+      source.onload=startIfReady;
+      if(logoEl.complete) startIfReady(); else logoEl.addEventListener('load', startIfReady);
+
+      // Recompute sizes if user resizes before splash ends
+      window.addEventListener('resize', ()=>{
+        if(!document.body.classList.contains('blueprint')){
+          if(source.complete){ prepCanvases(source); }
+        }
+      }, {passive:true});
+    })();
+
+    // Reveal app after splash (hard cutoff + class swap)
+    (function(){
+      const splash = document.querySelector('.splash');
+      const logo = document.getElementById('splashLogo');
+      const app = document.getElementById('app');
+      const goLive = () => {
+        splash.style.opacity='0';
+        setTimeout(()=>{
+          splash.remove();
+          document.body.classList.add('blueprint');
+          app.classList.add('is-live');
+          document.body.style.overflow='auto';
+        }, 800);
+      };
+      // safety: if animation event is missed, still go live at 5s
+      const timer = setTimeout(goLive, 5000 + 50);
+      logo.addEventListener('animationend', (e)=>{
+        if(e.animationName==='fadeOut'){ clearTimeout(timer); goLive(); }
+      });
+    })();
 
     // Progressbar ARIA
     (function(){
@@ -449,7 +556,6 @@
             card.addEventListener('click', () => openModal(item));
             grid.appendChild(card);
           });
-
           container.appendChild(grid);
         }
       }
@@ -481,18 +587,20 @@
 
     closeModalBtn.addEventListener('click', closeModal);
     modal.addEventListener('click', (e) => {
-      if (e.target === modal) closeModal();
+      if (e.target === modal) {
+        closeModal();
+      }
     });
 
-    // Render after splash reveal
-    const boot = () => {
+    // Initial render once blueprint class is applied (to avoid painting under splash)
+    const waitBlueprint = () => {
       if (document.body.classList.contains('blueprint')) {
         renderGlossary();
       } else {
-        setTimeout(boot, 120);
+        setTimeout(waitBlueprint, 150);
       }
     };
-    boot();
+    waitBlueprint();
   </script>
 
   <noscript>
