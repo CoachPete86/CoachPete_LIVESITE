@@ -1,0 +1,25 @@
+{
+  "categories": [
+    {
+      "id": "core-defenses",
+      "label": "Core Defenses",
+      "color": "electric-blue",
+      "children": [
+        {
+          "id": "firewall",
+          "label": "Firewall",
+          "definition": "A network security system that monitors and controls incoming and outgoing traffic.",
+          "example": "Blocking unauthorised access to internal networks.",
+          "diagram": "https://example.com/diagrams/firewall.png"
+        },
+        {
+          "id": "antivirus",
+          "label": "Antivirus",
+          "definition": "Software designed to detect and remove malicious software.",
+          "example": "Scanning files for malware before execution.",
+          "diagram": "https://example.com/diagrams/antivirus.png"
+        }
+      ]
+    }
+  ]
+}
