@@ -1,880 +1,1036 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Cybersecurity Blueprints — Splash → App</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cybersecurity Blueprints — Splash to App</title>
 
-  <!-- Fonts & Tailwind (matches your site) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=Architects+Daughter&display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter for clean text, Architects Daughter for the sketch feel -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
 
-  <style>
-    :root{
-      --splash-total: 5s;        /* total splash time */
-      --breaths: 2;              /* inhale/exhale cycles */
-      --grid-blue:#0D47A1;
-      --grid-line-strong:#ffffff1a;
-      --grid-line-fine:#ffffff0d;
-    }
+    <style>
+        :root {
+            --splash-total: 4.5s; /* Total splash time */
+            --trace-duration: 2.2s; /* Duration of one full neon trace */
+            --delay-fade: 0.5s;
+        }
 
-    html,body{height:100%;margin:0}
+        html, body {
+            height: 100%;
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+        }
 
-    /* App background (revealed after splash) */
-    body{
-      background:
-        linear-gradient(var(--grid-line-strong) 1px, transparent 1px) 0 0 / 40px 40px,
-        linear-gradient(90deg, var(--grid-line-strong) 1px, transparent 1px) 0 0 / 40px 40px,
-        linear-gradient(var(--grid-line-fine) 1px, transparent 1px) 0 0 / 8px 8px,
-        linear-gradient(90deg, var(--grid-line-fine) 1px, transparent 1px) 0 0 / 8px 8px;
-      background-color: var(--grid-blue);
-      display:block;
-      overflow:hidden; /* locked during splash */
-    }
+        /* Initial state of the body (behind splash) */
+        body {
+            background-color: #0d1222;
+            overflow: hidden; /* Lock scroll during splash */
+        }
 
-    /* ===== SPLASH ===== */
-    .splash{ position:fixed; inset:0; z-index:9999; display:grid; place-items:center; background:#000; }
-    .logo-wrap{ position:relative; width:min(72vmin, 540px); aspect-ratio:1/1; display:grid; place-items:center; }
-    .logo{ width:100%; height:100%; object-fit:contain; filter: drop-shadow(0 0 14px #000);
-      animation: breathe calc(var(--splash-total)/var(--breaths)) ease-in-out var(--breaths) both; }
+        /* Main App UI background after splash ends */
+        body.is-live-app {
+            background: radial-gradient(circle at 120% 120%, rgba(13, 18, 34, 0.4) 0%, rgba(13, 18, 34, 1) 50%),
+                        linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px) 0 0 / 40px 40px,
+                        linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px) 0 0 / 40px 40px;
+            background-color: #0d1222;
+            overflow: auto; /* Unlock scroll */
+        }
 
-    /* Neon sweep is masked by the bird silhouette — only the bird glows.
-       Bright, intense colours; clockwise sweep; rest stays dark. */
-    .neon{
-      position:absolute; inset:0; pointer-events:none;
-      background:
-        conic-gradient(
-          from 0deg,
-          #00fff2 0deg, #36f3ff 30deg, #7ef6ff 60deg, #aafc5a 120deg,
-          #ffd37e 180deg, #ff8b7e 210deg, #ff7ef6 260deg, #b07eff 300deg, #00e5ff 340deg, #00fff2 360deg
-        );
-      /* Mask to the logo silhouette so the glow traces the actual bird/shield. */
-      -webkit-mask-image: url("https://coachpete86.github.io/that-bird/image/bird.png");
-              mask-image: url("https://coachpete86.github.io/that-bird/image/bird.png");
-      -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat;
-      -webkit-mask-position:center;  mask-position:center;
-      -webkit-mask-size:contain;      mask-size:contain;
+        /* ===== SPLASH SCREEN ===== */
+        .splash-container {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            display: grid;
+            place-items: center;
+            background: #000;
+        }
 
-      /* Make it read like a hot edge: soften + screen blend over black */
-      filter: blur(12px) brightness(1.5) saturate(1.4);
-      mix-blend-mode: screen;
-      opacity:.95;
+        .logo-wrap {
+            position: relative;
+            width: min(72vmin, 540px);
+            aspect-ratio: 1/1;
+            display: grid;
+            place-items: center;
+        }
 
-      /* Clockwise sweep runs twice over total 5s (2.5s per pass) */
-      animation: neonSweep calc(var(--splash-total)/var(--breaths)) linear var(--breaths) both;
-    }
+        .logo {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 0 14px #000);
+            transform: scale(0.9);
+            animation: breathe 2s ease-in-out infinite alternate;
+        }
 
-    /* slim progress bar */
-    .load{ position:absolute; bottom:clamp(18px,6vh,64px); width:min(64vmin, 460px); height:10px;
-      border-radius:999px; overflow:hidden; background:#0b0b0b; box-shadow:0 0 0 1px #1affff55 inset, 0 0 18px #00fff280; }
-    .fill{ height:100%; width:0%; background: linear-gradient(90deg, #00fff2, #36f3ff, #8a9eff);
-      box-shadow: 0 0 12px #36f3ff;
-      animation: loadbar var(--splash-total) linear forwards; }
+        /* The div that will create the tracing neon glow effect */
+        .neon-trace {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            /* Using a combination of radial and linear gradients for the color */
+            background: radial-gradient(circle at 50% 50%, transparent 60%, rgba(255,255,255,0.2) 100%);
+            /* Using box-shadows to create the glowing, colored lines */
+            box-shadow:
+                0 0 10px #ff6666, /* red glow */
+                0 0 20px #ff6666,
+                0 0 10px #ffcc66, /* orange glow */
+                0 0 20px #ffcc66,
+                0 0 10px #ffff66, /* yellow glow */
+                0 0 20px #ffff66,
+                0 0 10px #66ff66, /* green glow */
+                0 0 20px #66ff66,
+                0 0 10px #6666ff, /* blue glow */
+                0 0 20px #6666ff,
+                0 0 10px #cc66ff, /* purple glow */
+                0 0 20px #cc66ff;
+            
+            animation: 
+                neonTrace var(--trace-duration) linear var(--splash-total) forwards,
+                colorCycle var(--trace-duration) linear infinite;
 
-    /* Reveal app after splash ends */
-    .content{ opacity:0; transform:translateY(8px); transition: opacity .6s ease .2s, transform .6s ease .2s; }
-    .content.is-live{ opacity:1; transform:none; }
-    body.blueprint{ font-family:'Kalam', cursive;
-      background-color:#1a3a6a;
-      background-image:
-        linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
-      background-size:2rem 2rem;
-      color:#ffffff;
-      overflow:auto; /* unlock scroll */
-    }
+            /* Start hidden, fade in with animation */
+            opacity: 0;
+            transform: scale(0) rotate(0deg);
+            animation: 
+                revealNeon 0.5s ease-out 0.5s forwards, 
+                neonTrace var(--trace-duration) linear calc(var(--splash-total) - 1.5s) forwards;
+        }
+        
+        /* The thin, glowing progress bar */
+        .load-bar {
+            position: absolute;
+            bottom: clamp(18px, 6vh, 64px);
+            width: min(64vmin, 460px);
+            height: 8px;
+            border-radius: 999px;
+            overflow: hidden;
+            background: #0b0b0b;
+            box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1) inset, 0 0 12px rgba(0, 255, 255, 0.5);
+        }
 
-    @keyframes breathe{
-      0%,100%{ transform:scale(1) }
-      50%{ transform:scale(1.085) }
-    }
-    @keyframes neonSweep{
-      from{ transform: rotate(0deg) scale(1.01); }
-      to  { transform: rotate(360deg) scale(1.01); }
-    }
-    @keyframes loadbar{ to{ width:100%; } }
+        .load-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #00fff2, #36f3ff, #8a9eff);
+            box-shadow: 0 0 12px #36f3ff;
+            animation: loadBar var(--splash-total) linear forwards;
+        }
 
-    @media (prefers-reduced-motion: reduce){
-      .logo{ animation: none }
-      .neon{ animation: none; opacity:.75 }
-      .fill{ animation-duration:.01s }
-    }
+        /* Main app content, initially hidden */
+        .app-content {
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity 0.6s ease 0.2s, transform 0.6s ease 0.2s;
+        }
 
-    /* ===== APP UI (same look as your site) ===== */
-    .sketch-border{ border:2px solid rgba(255,255,255,.8); box-shadow:2px 2px 0 rgba(255,255,255,.5); transition:.2s }
-    .sketch-border:hover{ transform:translate(-2px,-2px); box-shadow:4px 4px 0 rgba(255,255,255,.5) }
-    .sketch-font{ font-family:'Architects Daughter', cursive }
-    .diagram-text{ font-family:'Architects Daughter', cursive; font-size:10px; fill:#fff; text-anchor:middle }
-    .section-title{ font-family:'Architects Daughter', cursive; font-weight:700; color:#a7f3d0 }
+        .app-content.is-live {
+            opacity: 1;
+            transform: none;
+        }
 
-    /* Layout */
-    .grid-app{ display:grid; grid-template-columns: 380px 1fr; gap:1.25rem }
-    @media (max-width:1024px){ .grid-app{ grid-template-columns: 1fr } }
-    .left-col{ max-height:calc(100vh - 6rem); overflow:hidden }
-    .right-col{ max-height:calc(100vh - 6rem); overflow:auto }
+        /* ===== UTILITY & UI STYLES ===== */
+        .sketch-font { font-family: 'Architects Daughter', cursive }
+        .grid-app {
+            display: grid;
+            grid-template-columns: 380px 1fr;
+            gap: 2rem;
+        }
+        @media (max-width: 1024px) {
+            .grid-app { grid-template-columns: 1fr }
+        }
 
-    /* Chips & A–Z */
-    .chip{ padding:.25rem .6rem; border:1px solid #ffffff66; border-radius:999px; cursor:pointer; user-select:none }
-    .chip[data-active="true"]{ background:#ffffff22 }
-    .az button{ width:1.8rem; text-align:center; opacity:.85; border:1px solid #ffffff22; border-radius:.25rem; padding:.15rem 0 }
-    .az button:hover{ opacity:1; background:#ffffff10 }
+        /* Custom scrollbar for webkit browsers */
+        .custom-scrollbar::-webkit-scrollbar { width: 8px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.2); }
 
-    /* Virtual list */
-    #results{ height: calc(100vh - 22rem); overflow:auto }
-    .vr-inner{ position:relative; width:100%; height:0 }
-    .vr-row{ position:absolute; left:0; right:0; padding:.65rem .75rem; border-radius:.5rem; cursor:pointer }
-    .vr-row:hover{ background:#ffffff12 }
-    .vr-row[aria-selected="true"]{ background:#ffffff22 }
-    .vr-head{ position:absolute; left:0; right:0; padding:.35rem .75rem; font-weight:700; color:#a7f3d0; opacity:.9 }
-    mark{ background:#a7f3d0; color:#113; padding:0 .15em; border-radius:.15rem }
+        /* General element styles */
+        .bg-card { background: rgba(255, 255, 255, 0.05); }
+        .bg-card-hover:hover { background: rgba(255, 255, 255, 0.08); }
 
-    /* Switcher */
-    .switch button{ border:1px solid #ffffff44; padding:.35rem .65rem; border-radius:.5rem }
-    .switch button[data-active="true"]{ background:#ffffff1f }
+        .btn-base {
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: background-color 0.2s, transform 0.2s;
+            cursor: pointer;
+        }
+        .btn-primary {
+            @apply bg-blue-600 hover:bg-blue-500 text-white font-semibold;
+        }
+        .btn-secondary {
+            @apply border border-white/20 text-white/80 hover:bg-white/10;
+        }
+        .btn-active {
+            @apply bg-white/20;
+        }
 
-    /* Command palette */
-    .cmd{ position:fixed; inset:0; display:none; align-items:flex-start; justify-content:center; background:#0008; z-index:50 }
-    .cmd.is-open{ display:flex }
-    .cmd-panel{ margin-top:8vh; width:min(820px,95vw); border:2px solid #fff; background:#103b73; border-radius:.75rem; overflow:hidden }
-    .cmd-panel input{ width:100%; padding:14px 16px; background:#0c2e5a; color:#fff; outline:none }
-    .cmd-list{ max-height:60vh; overflow:auto }
-    .cmd-item{ padding:.6rem .9rem; border-top:1px solid #ffffff22; cursor:pointer }
-    .cmd-item:hover{ background:#ffffff14 }
+        /* Animations */
+        @keyframes breathe {
+            0%, 100% { transform: scale(0.9); }
+            50% { transform: scale(1.0); }
+        }
 
-    /* Compare tray */
-    .tray{ position:fixed; left:50%; transform:translateX(-50%); bottom:16px; background:#0c2e5a; border:1px solid #ffffff55; border-radius:.75rem; padding:.4rem .6rem; display:flex; gap:.5rem; align-items:center; z-index:20 }
-    .pill{ border:1px solid #ffffff66; padding:.1rem .4rem; border-radius:.5rem; font-size:.85rem }
+        @keyframes loadBar { to { width: 100%; } }
 
-    /* Map canvas */
-    #mapWrap{ display:none }
-    #mapWrap[data-active="true"]{ display:block }
-    #mapCanvas{ width:100%; height:70vh; background:#001733; border:2px solid #fff; border-radius:.75rem }
-    .legend{ display:flex; flex-wrap:wrap; gap:.4rem; margin-top:.5rem }
-    .legend .lg{ display:flex; align-items:center; gap:.4rem; font-size:.9rem }
-    .legend .sw{ width:12px; height:12px; border-radius:2px; border:1px solid #fff }
+        /* New splash screen animation keyframes */
+        @keyframes revealNeon {
+            0% { opacity: 0; transform: scale(0) rotate(0deg); }
+            100% { opacity: 1; transform: scale(1) rotate(720deg); }
+        }
 
-    /* Cards */
-    #cardsWrap{ display:none }
-    #cardsWrap[data-active="true"]{ display:block }
-    .card{ width:min(900px,95vw); min-height:360px; margin:0 auto; background:#0e2b57; border:2px solid #fff; border-radius:1rem; padding:1.25rem }
-    .face{ font-size:2rem; text-align:center; padding:1rem }
-    .controls{ display:flex; gap:.5rem; justify-content:center; margin-top:.75rem }
-    .rbtn{ border:1px solid #fff; padding:.4rem .6rem; border-radius:.5rem }
+        @keyframes neonTrace {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes colorCycle {
+            0% { box-shadow: 0 0 10px #ff6666, 0 0 20px #ff6666; }
+            16% { box-shadow: 0 0 10px #ffcc66, 0 0 20px #ffcc66; }
+            32% { box-shadow: 0 0 10px #ffff66, 0 0 20px #ffff66; }
+            48% { box-shadow: 0 0 10px #66ff66, 0 0 20px #66ff66; }
+            64% { box-shadow: 0 0 10px #6666ff, 0 0 20px #6666ff; }
+            80% { box-shadow: 0 0 10px #cc66ff, 0 0 20px #cc66ff; }
+            100% { box-shadow: 0 0 10px #ff6666, 0 0 20px #ff6666; }
+        }
 
-    /* Bottom mobile switcher */
-    .mobile-switch{ position:fixed; bottom:0; left:0; right:0; background:#0c2e5a; border-top:1px solid #ffffff44; display:none; z-index:30 }
-    .mobile-switch button{ flex:1; padding:.7rem 0; border-right:1px solid #ffffff22 }
-    @media (max-width:1024px){ .mobile-switch{ display:flex } }
-  </style>
+        @media (prefers-reduced-motion: reduce) {
+            .logo, .neon-trace, .load-fill { animation: none !important; }
+        }
+
+    </style>
 </head>
-<body class="antialiased">
-  <!-- ===== SPLASH ===== -->
-  <div class="splash" aria-hidden="true">
-    <div class="logo-wrap">
-      <img class="logo" alt="App emblem"
-           src="https://coachpete86.github.io/that-bird/image/bird.png" />
-      <div class="neon"></div>
-    </div>
-    <div class="load" role="progressbar" aria-label="Loading" aria-valuemin="0" aria-valuemax="100">
-      <div class="fill"></div>
-    </div>
-  </div>
+<body class="antialiased text-white">
 
-  <!-- ===== APP ===== -->
-  <main class="content" id="app" role="main">
-    <div class="container mx-auto p-4 md:p-8">
-      <!-- Header -->
-      <header class="mb-4 flex flex-wrap items-center justify-between gap-3">
-        <div>
-          <h1 class="text-4xl md:text-6xl font-bold sketch-font">Cybersecurity Blueprints</h1>
-          <p class="text-lg text-gray-200">List · Map · Cards — fast and readable at scale.</p>
+    <!-- ===== SPLASH SCREEN ===== -->
+    <div class="splash-container" aria-hidden="true">
+        <div class="logo-wrap">
+            <!-- The inner div for the tracing effect -->
+            <div class="neon-trace"></div>
+            <!-- The main image that the neon effect traces around -->
+            <img class="logo" alt="App emblem"
+                 src="https://coachpete86.github.io/that-bird/image/bird.png" />
         </div>
-        <nav class="switch flex gap-2" aria-label="Display mode">
-          <button id="modeList" data-active="true" title="List (L)">List</button>
-          <button id="modeMap" title="Map (M)">Map</button>
-          <button id="modeCards" title="Cards (C)">Cards</button>
-        </nav>
-      </header>
+        <div class="load-bar" role="progressbar" aria-label="Loading" aria-valuemin="0" aria-valuemax="100">
+            <div class="load-fill"></div>
+        </div>
+    </div>
 
-      <!-- Tools -->
-      <div class="mb-3 flex flex-wrap items-center gap-2">
-        <button id="saveView" class="border border-white/60 rounded px-2 py-1">Save view</button>
-        <select id="views" class="bg-transparent border border-white/40 rounded px-2 py-1">
-          <option value="">Load saved view…</option>
-        </select>
-        <span class="text-sm text-gray-200 opacity-80">Press <strong>Ctrl/⌘+K</strong> to jump anywhere</span>
-      </div>
+    <!-- ===== MAIN APPLICATION UI ===== -->
+    <main class="app-content min-h-screen py-8" id="app" role="main">
+        <div class="container mx-auto px-4 md:px-8">
+            <!-- Header & Mode Switcher -->
+            <header class="mb-8 flex flex-wrap items-center justify-between gap-4">
+                <div>
+                    <h1 class="text-4xl md:text-6xl font-bold sketch-font text-cyan-200">Cybersecurity Blueprints</h1>
+                    <p class="text-base md:text-lg text-gray-300">Fast and readable at scale.</p>
+                </div>
+                <nav class="flex gap-2" aria-label="Display mode">
+                    <button id="modeList" class="btn-secondary rounded-full btn-active" title="List (L)">List</button>
+                    <button id="modeMap" class="btn-secondary rounded-full" title="Map (M)">Map</button>
+                    <button id="modeCards" class="btn-secondary rounded-full" title="Cards (C)">Cards</button>
+                </nav>
+            </header>
 
-      <!-- LIST MODE -->
-      <section id="listMode" data-active="true">
-        <div class="grid-app">
-          <!-- Left: filters -->
-          <aside class="left-col space-y-4" aria-label="Blueprint index">
-            <div class="sketch-border rounded-lg p-3">
-              <div class="flex items-center gap-2">
-                <input id="q" placeholder="Search ( / )" class="w-full bg-transparent text-white placeholder-gray-300 text-xl focus:outline-none" autocomplete="off" spellcheck="false" />
-                <button id="clearBtn" title="Clear" class="text-sm px-2 py-1 border border-white/40 rounded hover:bg-white/10">Esc</button>
-              </div>
-              <div class="mt-2 text-sm text-gray-200 opacity-80 flex items-center justify-between">
-                <span id="metaCount">0 results</span>
-                <span>↑/↓ navigate • Enter open • Shift+Enter compare</span>
-              </div>
+            <!-- Main Content Area -->
+            <div class="grid-app">
+                <!-- Left Column: Filters & Results List -->
+                <aside class="space-y-4 lg:sticky lg:top-8 lg:self-start custom-scrollbar h-[calc(100vh-8rem)]">
+                    <div class="bg-card rounded-xl p-4 shadow-xl">
+                        <div class="flex items-center gap-2">
+                            <input id="q" placeholder="Search ( / )" class="w-full bg-transparent text-white placeholder-gray-400 text-lg focus:outline-none" autocomplete="off" spellcheck="false" />
+                            <button id="clearBtn" title="Clear" class="text-sm px-2 py-1 btn-secondary">Esc</button>
+                        </div>
+                        <div class="mt-2 text-sm text-gray-400 flex items-center justify-between">
+                            <span id="metaCount">0 results</span>
+                            <span class="hidden md:block">↑/↓ navigate • Enter open • Shift+Enter compare</span>
+                        </div>
+                    </div>
+
+                    <!-- Category Chips & Filters -->
+                    <div class="flex flex-wrap gap-2" id="chips"></div>
+                    <div class="flex flex-wrap gap-2">
+                        <select id="fRisk" class="bg-card btn-secondary rounded-lg">
+                            <option value="">Risk: Any</option>
+                            <option>Low</option><option>Medium</option><option>High</option>
+                        </select>
+                        <select id="fAudience" class="bg-card btn-secondary rounded-lg">
+                            <option value="">Audience: Any</option>
+                            <option>Owner</option><option>Staff</option><option>IT</option>
+                        </select>
+                        <select id="fStatus" class="bg-card btn-secondary rounded-lg">
+                            <option value="">Status: Any</option>
+                            <option>Core</option><option>Advanced</option>
+                        </select>
+                    </div>
+                    <div class="az flex flex-wrap gap-1 text-sm" id="azBar" aria-label="Alphabet jump"></div>
+
+                    <!-- Virtualized Results List -->
+                    <div id="results" class="bg-card rounded-xl shadow-xl overflow-auto p-2 relative custom-scrollbar" role="listbox" aria-label="Results">
+                        <div class="vr-inner" id="vrInner"></div>
+                    </div>
+                </aside>
+
+                <!-- Right Column: Detail View -->
+                <section id="detail" class="bg-card rounded-xl shadow-xl p-6 min-h-[60vh] custom-scrollbar" aria-live="polite">
+                    <h2 id="dTitle" class="text-3xl md:text-4xl font-bold mb-2 text-cyan-200"></h2>
+                    <div id="dMeta" class="text-sm text-gray-300 mb-4"></div>
+                    <div id="dDiagram" class="my-6"></div>
+                    <p id="dExpl" class="text-lg leading-relaxed text-gray-200"></p>
+                    <div id="dImp" class="mt-6"></div>
+                    <div id="dDmg" class="mt-6"></div>
+                </section>
             </div>
 
-            <div id="chips" class="flex flex-wrap gap-2"></div>
-            <div class="flex flex-wrap gap-2">
-              <select id="fRisk" class="bg-transparent border border-white/40 rounded px-2 py-1">
-                <option value="">Risk: Any</option>
-                <option>Low</option><option>Medium</option><option>High</option>
-              </select>
-              <select id="fAudience" class="bg-transparent border border-white/40 rounded px-2 py-1">
-                <option value="">Audience: Any</option>
-                <option>Owner</option><option>Staff</option><option>IT</option>
-              </select>
-              <select id="fStatus" class="bg-transparent border border-white/40 rounded px-2 py-1">
-                <option value="">Status: Any</option>
-                <option>Core</option><option>Advanced</option>
-              </select>
+            <!-- Compare Tray -->
+            <div class="tray fixed bottom-4 left-1/2 -translate-x-1/2 bg-slate-900 border border-slate-700 rounded-2xl py-3 px-6 flex gap-4 items-center z-20 shadow-lg hidden" id="tray">
+                <span class="text-sm opacity-80">Compare:</span>
+                <div id="trayItems" class="flex gap-2"></div>
+                <button id="openCompare" class="text-sm btn-secondary">Open</button>
+                <button id="clearCompare" class="text-sm btn-secondary">Clear</button>
             </div>
-            <div class="az flex flex-wrap gap-1 text-sm" id="azBar" aria-label="Alphabet jump"></div>
 
-            <div id="results" class="sketch-border rounded-lg overflow-auto p-1 relative" role="listbox" aria-label="Results">
-              <div class="vr-inner" id="vrInner"></div>
+            <!-- MAP MODE -->
+            <section id="mapWrap" class="hidden">
+                <canvas id="mapCanvas" class="rounded-xl shadow-xl border border-white/10"></canvas>
+                <div class="legend flex flex-wrap gap-4 mt-4" id="legend"></div>
+                <p class="text-sm text-gray-300 mt-2">Scroll to zoom • Drag to pan • Click a node to open</p>
+            </section>
+
+            <!-- CARDS MODE -->
+            <section id="cardsWrap" class="hidden">
+                <div class="card bg-card rounded-xl p-6 min-h-[30rem] shadow-xl w-full md:max-w-xl mx-auto">
+                    <div class="face min-h-[16rem] grid place-items-center text-center p-4" id="cardFace">Loading…</div>
+                    <div class="flex flex-wrap justify-center gap-2 mt-4">
+                        <button id="btnPrev" class="btn-secondary">⟵ Prev</button>
+                        <button id="btnFlip" class="btn-secondary">Flip (Space)</button>
+                        <button id="btnNext" class="btn-secondary">Next ⟶</button>
+                    </div>
+                    <div class="flex flex-wrap justify-center items-center gap-2 mt-4 text-sm opacity-80">
+                        <span>Rate recall:</span>
+                        <button class="btn-secondary rate" data-v="1">1</button>
+                        <button class="btn-secondary rate" data-v="2">2</button>
+                        <button class="btn-secondary rate" data-v="3">3</button>
+                        <button class="btn-secondary rate" data-v="4">4</button>
+                        <button class="btn-secondary rate" data-v="5">5</button>
+                    </div>
+                    <div class="text-center text-sm text-gray-300 mt-2" id="progressTxt"></div>
+                    <div class="mt-2 grid grid-cols-12 gap-1" id="heat"></div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Mobile Display Switcher -->
+        <div class="fixed bottom-0 left-0 right-0 bg-slate-900 border-t border-slate-700 md:hidden z-30">
+            <div class="flex">
+                <button id="mList" class="flex-1 py-4 text-sm btn-active">List</button>
+                <button id="mMap" class="flex-1 py-4 text-sm">Map</button>
+                <button id="mCards" class="flex-1 py-4 text-sm">Cards</button>
             </div>
-          </aside>
-
-          <!-- Right: detail -->
-          <section id="detail" class="right-col sketch-border rounded-lg p-6 min-h-[60vh]" aria-live="polite">
-            <h2 id="dTitle" class="text-3xl md:text-4xl font-bold mb-2 sketch-font"></h2>
-            <div id="dMeta" class="text-sm text-gray-200 mb-4"></div>
-            <div id="dDiagram" class="my-4"></div>
-            <p id="dExpl" class="text-lg leading-relaxed"></p>
-            <div id="dImp" class="mt-6"></div>
-            <div id="dDmg" class="mt-6"></div>
-          </section>
         </div>
 
-        <!-- Compare tray -->
-        <div class="tray hidden" id="tray">
-          <span class="text-sm opacity-80">Compare:</span>
-          <div id="trayItems" class="flex gap-1"></div>
-          <button id="openCompare" class="pill">Open</button>
-          <button id="clearCompare" class="pill">Clear</button>
+        <!-- Command Palette -->
+        <div class="cmd fixed inset-0 bg-black/75 z-50 grid place-items-start pt-24 hidden" id="cmd">
+            <div class="cmd-panel bg-slate-900 border border-slate-700 rounded-xl shadow-xl mx-auto w-11/12 md:max-w-2xl overflow-hidden">
+                <input id="cmdInput" placeholder="Type to search..." class="w-full p-4 bg-slate-800 text-white placeholder-gray-400 focus:outline-none" autocomplete="off" spellcheck="false" />
+                <div class="cmd-list max-h-[60vh] overflow-y-auto" id="cmdList"></div>
+            </div>
         </div>
-      </section>
+    </main>
 
-      <!-- MAP MODE -->
-      <section id="mapWrap">
-        <canvas id="mapCanvas"></canvas>
-        <div class="legend" id="legend"></div>
-        <p class="text-sm text-gray-200 mt-2">Scroll to zoom • Drag to pan • Click a node to open</p>
-      </section>
+    <!-- Fallback for browsers with JavaScript disabled -->
+    <noscript>
+        <style>.splash-container { display: none; } .app-content { opacity: 1; transform: none; } body { overflow: auto; }</style>
+    </noscript>
 
-      <!-- CARDS MODE -->
-      <section id="cardsWrap">
-        <div class="card sketch-border">
-          <div class="face" id="cardFace">Loading…</div>
-          <div class="controls">
-            <button id="btnPrev" class="rbtn">⟵ Prev</button>
-            <button id="btnFlip" class="rbtn">Flip (Space)</button>
-            <button id="btnNext" class="rbtn">Next ⟶</button>
-          </div>
-          <div class="controls">
-            <span class="text-sm opacity-80">Rate recall:</span>
-            <button class="rbtn rate" data-v="1">1</button>
-            <button class="rbtn rate" data-v="2">2</button>
-            <button class="rbtn rate" data-v="3">3</button>
-            <button class="rbtn rate" data-v="4">4</button>
-            <button class="rbtn rate" data-v="5">5</button>
-          </div>
-          <div class="text-center text-sm text-gray-200 mt-2" id="progressTxt"></div>
-          <div class="mt-2 grid grid-cols-12 gap-1" id="heat"></div>
-        </div>
-      </section>
-    </div>
+    <script>
+        /* ===================== SPLASH SCREEN LOGIC ===================== */
+        const splashContainer = document.querySelector('.splash-container');
+        const appContent = document.getElementById('app');
+        const totalSplashTime = 4500; // Match CSS variable
 
-    <!-- Mobile display switcher -->
-    <div class="mobile-switch">
-      <button id="mList">List</button>
-      <button id="mMap">Map</button>
-      <button id="mCards">Cards</button>
-    </div>
+        setTimeout(() => {
+            splashContainer.style.transition = 'opacity 0.6s ease';
+            splashContainer.style.opacity = '0';
+            setTimeout(() => {
+                splashContainer.remove();
+                document.body.classList.add('is-live-app');
+                appContent.classList.add('is-live');
+            }, 600);
+        }, totalSplashTime);
 
-    <!-- Command palette -->
-    <div class="cmd" id="cmd">
-      <div class="cmd-panel">
-        <input id="cmdInput" placeholder="Type to search…" />
-        <div class="cmd-list" id="cmdList"></div>
-      </div>
-    </div>
-  </main>
+        // Progress bar ARIA updates
+        (function() {
+            const loadBar = document.querySelector('.load-bar');
+            const startTime = performance.now();
+            
+            const updateProgress = (now) => {
+                const progress = Math.min(100, ((now - startTime) / totalSplashTime) * 100);
+                loadBar.setAttribute('aria-valuenow', Math.round(progress));
+                if (progress < 100) {
+                    requestAnimationFrame(updateProgress);
+                }
+            };
+            requestAnimationFrame(updateProgress);
+        })();
 
-  <script>
-    /* ===== Reveal app when splash completes ===== */
-    const splash = document.querySelector('.splash');
-    const app = document.getElementById('app');
 
-    setTimeout(() => {
-      // fade splash out smoothly
-      splash.style.transition = 'opacity .5s ease';
-      splash.style.opacity = '0';
-      setTimeout(() => {
-        splash.remove();
-        document.body.classList.add('blueprint');
-        app.classList.add('is-live');
-        document.body.style.overflow = 'auto';
-      }, 520);
-    }, 5000);
+        /* ===================== DATASET (sample; extend freely) ===================== */
+        // (This dataset remains the same as it was well-structured)
+        const glossaryData = {
+          "Core Defenses": [
+            { term:"Firewall", title:"Firewall", explanation:"Think of a firewall as a security guard for your computer. It stands at the main gate and checks everything trying to get in or out. It only lets the good, safe things pass and blocks anything that looks suspicious or dangerous.", importance:"Without a firewall, your computer is like a house with all its doors and windows wide open on a busy street. It's your first line of defense against uninvited digital guests.", damageExample:"An SME without a properly configured firewall could have a hacker slip past their defenses, gain access to their internal network, and steal sensitive customer payment information, leading to huge fines and loss of trust.", diagram:`<svg class="w-full h-48" viewBox="0 0 250 80" preserveAspectRatio="xMidYMid meet"><text x="35" y="15" class="diagram-text">INCOMING TRAFFIC</text><text x="35" y="40" font-size="12" fill="#ff6b6b">😈</text><text x="20" y="50" class="diagram-text">Threat</text><text x="35" y="65" font-size="12" fill="#4ade80">✅</text><text x="55" y="75" class="diagram-text">Safe Data</text><rect x="100" y="20" width="20" height="50" fill="none" stroke="white" stroke-width="1.5"/><path d="M100,20 v50 M105,20 v50 M110,20 v50 M115,20 v50 M120,20 v50" stroke="white" stroke-width="0.5"/><text x="110" y="15" class="diagram-text">FIREWALL</text><line x1="50" y1="40" x2="100" y2="40" stroke="#ff6b6b" stroke-width="1.5"/><text x="90" y="35" font-size="12" fill="#ff6b6b">❌</text><line x1="50" y1="65" x2="180" y2="65" stroke="#4ade80" stroke-width="1.5"/><polyline points="175,60 180,65 175,70" stroke="#4ade80" stroke-width="1.5" fill="none" /><text x="215" y="55" class="diagram-text">YOUR COMPUTER</text><path d="M200,60 h20 v20 h-20 z M200,80 l20,10 v-30 l-20,10" stroke="white" fill="none" stroke-width="1"/></svg>`, tags:["network","perimeter"], riskLevel:"Medium", audience:["IT","Owner"], status:"Core" },
+            { term:"Antivirus", title:"Antivirus Software", explanation:"Antivirus is like a doctor for your computer. It regularly scans for known sicknesses (viruses and malware) and removes them to keep your computer healthy. It also tries to stop new sicknesses from getting in.", importance:"It's your digital immune system. It cleans up infections you might pick up from browsing the web or opening a bad email, preventing them from causing real damage.", damageExample:"An employee downloads a seemingly harmless file that contains a virus. Without antivirus to detect it, the virus spreads across the company's network, slowing all computers to a crawl and making work impossible.", diagram:`<svg class="w-full h-48" viewBox="0 0 250 80" preserveAspectRatio="xMidYMid meet"><text x="125" y="15" class="diagram-text">ANTIVIRUS SHIELD</text><path d="M 125, 20 C 60,20 60,70 125,70 C 190,70 190,20 125,20" stroke="white" stroke-width="2" fill="none"/><text x="125" y="50" font-size="20">🛡️</text><text x="50" y="35" class="diagram-text">File</text><text x="50" y="50" font-size="12">📄</text><text x="200" y="35" class="diagram-text">Virus</text><text x="200" y="50" font-size="12">🦠</text><line x1="190" y1="50" x2="140" y2="50" stroke="#ff6b6b" stroke-width="1.5"/><text x="145" y="45" font-size="12" fill="#ff6b6b">❌</text><line x1="60" y1="50" x2="110" y2="50" stroke="#4ade80" stroke-width="1.5"/></svg>`, tags:["endpoint"], riskLevel:"Medium", audience:["Staff","IT"], status:"Core" },
+            { term:"Sandbox", title:"Sandbox", explanation:"A sandbox is like a secure playpen for computer programs. If you have a new or untrusted program, you can run it in the sandbox first. If it's malicious, it can't escape the playpen to harm your actual computer.", importance:"It lets you be curious without being careless. You can test out that cool-looking free program without risking your personal photos, documents, and passwords if it turns out to be malicious.", damageExample:"A small design firm runs a new, free photo editing tool in a sandbox and discovers it's ransomware. Because it was sandboxed, their actual client files were never touched. Without it, their entire portfolio would have been locked.", diagram:`<svg class="w-full h-48" viewBox="0 0 250 80" preserveAspectRatio="xMidYMid meet"><text x="50" y="15" class="diagram-text">MAIN COMPUTER</text><rect x="10" y="20" width="80" height="50" rx="5" stroke="white" fill="none" stroke-width="1.5"/><text x="175" y="15" class="diagram-text">SANDBOX (Safe Area)</text><rect x="125" y="20" width="100" height="50" rx="5" stroke="white" fill="none" stroke-width="1.5" stroke-dasharray="4 2"/><text x="175" y="45" font-size="16">😈</text><text x="175" y="60" class="diagram-text">Untrusted App</text><path d="M 175,40 Q 140 30, 110 40" stroke="#ff6b6b" stroke-width="1" fill="none"/><text x="120" y="35" font-size="12" fill="#ff6b6b">❌</text><text x="125" y="45" class="diagram-text" fill="#ff6b6b">CAN'T ESCAPE</text></svg>`, tags:["analysis"], riskLevel:"Low", audience:["IT"], status:"Advanced" },
+            { term:"Patch", title:"Patch Management", explanation:"Software can have weaknesses, like small cracks in a wall. A 'patch' is a fix that covers up the crack. Patch management is the process of making sure you always have the latest fixes to keep attackers from getting through.", importance:"Just like you'd fix a leaky pipe to prevent a flood, patching software fixes security holes before hackers can use them to flood your system with malware or steal your data.", damageExample:"A small online shop fails to apply a critical security patch. A hacker exploits this known vulnerability, steals the entire customer database, and posts it online, destroying the business's reputation.", diagram:`<svg class="w-full h-48" viewBox="0 0 250 80" preserveAspectRatio="xMidYMid meet"><text x="75" y="15" class="diagram-text">SOFTWARE WALL</text><rect x="25" y="20" width="100" height="50" fill="none" stroke="white" stroke-width="1.5"/><path d="M 70 30 L 80 50" stroke="#ff6b6b" stroke-width="1.5"/><text x="75" y="65" class="diagram-text">Vulnerability</text><text x="175" y="15" class="diagram-text">APPLYING PATCH</text><text x="175" y="45" font-size="20">🩹</text><line x1="125" y1="45" x2="160" y2="45" stroke="#4ade80" stroke-width="1.5"/><polyline points="155,40 160,45 155,50" stroke="#4ade80" stroke-width="1.5" fill="none" /></svg>`, tags:["updates"], riskLevel:"High", audience:["IT","Owner"], status:"Core" }
+          ],
+          "Types of Attacks": [
+            { term:"Malware", title:"Malware (Malicious Software)", explanation:"Malware is like a tiny gremlin you accidentally let into your house (computer). It can do all sorts of bad things without you knowing, like breaking your toys (files), spying on you, or leaving the back door open for other gremlins.", importance:"This is the 'what' that all other defenses are trying to stop. Getting malware on your machine can lead to identity theft, financial loss, or simply losing access to your precious memories and files.", damageExample:"You receive malware that includes a keylogger. For weeks, it secretly records everything you type, including your online banking password. The attacker then logs in and drains your bank account.", diagram:`<svg class="w-full h-48" viewBox="0 0 250 80" preserveAspectRatio="xMidYMid meet"><text x="125" y="15" class="diagram-text">YOUR COMPUTER</text><rect x="50" y="20" width="150" height="50" rx="5" stroke="white" fill="none" stroke-width="1.5"/><text x="125" y="45" font-size="24" fill="#ff6b6b">😈</text><text x="125" y="60" class="diagram-text">MALWARE</text><text x="80" y="35" class="diagram-text">Shreds Files</text><text x="80" y="50" font-size="12">📄✂️</text><text x="170" y="35" class="diagram-text">Steals Keys</text><text x="170" y="50" font-size="12">🔑➡️</text></svg>`, tags:["gremlin"], riskLevel:"High", audience:["Staff","Owner"], status:"Core" },
+            { term:"Phishing", title:"Phishing", explanation:"Phishing is like a trickster sending you a fake invitation to a party. The invitation looks real and asks for your secret password to get in. But it's a trap to steal your password. They're 'fishing' for your private information.", importance:"It tricks you into giving away the keys to your digital life. A successful phishing attack can give a criminal access to your email, social media, or bank account by making you hand over the password yourself.", damageExample:"An SME's accountant receives a phishing email that looks like it's from the CEO, asking for an urgent wire transfer. The accountant, tricked by the convincing email, sends thousands of pounds to the attacker's account.", diagram:`<svg class="w-full h-48" viewBox="0 0 250 80" preserveAspectRatio="xMidYMid meet"><text x="210" y="15" class="diagram-text">HACKER</text><text x="210" y="30" font-size="16">🎣</text><path d="M200,30 C 120 0, 80 20, 50 50" stroke="white" stroke-width="1" fill="none"/><text x="50" y="40" class="diagram-text">Fake Email/Site</text><text x="50" y="60" font-size="12">✉️</text><text x="15" y="60" class="diagram-text">YOU</text><text x="15" y="75" font-size="16">🧑</text><text x="100" y="70" class="diagram-text">Stealing Password</text><text x="80" y="60" font-size="12">🔑</text><path d="M30,70 C 40 65, 70 65, 80 60" stroke="#ff6b6b" stroke-width="1" fill="none" stroke-dasharray="2 2"/></svg>`, tags:["email"], riskLevel:"High", audience:["Staff","Owner"], status:"Core" },
+            { term:"Ransomware", title:"Ransomware", explanation:"This is a type of malware that locks up all your files and holds them hostage. The attacker then demands money (a ransom) to give you the key to unlock your files. It's like a digital kidnapping of your data.", importance:"This can be devastating. Imagine every single one of your documents and photos being locked away, with a criminal demanding money to get them back. For many, this means losing irreplaceable files forever.", damageExample:"A small medical practice gets hit by ransomware. All their patient records are encrypted. They can't access schedules or histories, forcing them to shut down and face a choice: pay a huge ransom or risk going out of business.", diagram:`<svg class="w-full h-48" viewBox="0 0 250 80" preserveAspectRatio="xMidYMid meet"><text x="50" y="25" class="diagram-text">Your Files</text><text x="50" y="45" font-size="12">📄</text><text x="50" y="60" font-size="12">🔐</text><text x="50" y="70" class="diagram-text">(Locked)</text><text x="175" y="15" class="diagram-text">ATTACKER DEMANDS RANSOM</text><text x="175" y="45" font-size="20">💰</text><line x1="70" y1="50" x2="160" y2="45" stroke="#ff6b6b" stroke-width="1.5"/><text x="175" y="65" class="diagram-text">For The Key 🔑</text></svg>`, tags:["crypto"], riskLevel:"High", audience:["IT","Owner"], status:"Core" },
+            { term:"Spyware", title:"Spyware", explanation:"Spyware is sneaky malware that hides on your computer and secretly watches everything you do. It can record your keystrokes, see your screen, and steal your personal information, then send it all to a hacker.", importance:"It's a total invasion of your privacy. Spyware can watch you through your webcam, listen through your microphone, and read your private messages, turning your personal device into a spy tool against you.", damageExample:"A competitor installs spyware on an employee's laptop at an SME. They steal confidential product designs and client lists, giving the competitor an unfair advantage and costing the SME future business.", diagram:`<svg class="w-full h-48" viewBox="0 0 250 80" preserveAspectRatio="xMidYMid meet"><text x="75" y="15" class="diagram-text">YOUR COMPUTER</text><rect x="25" y="20" width="100" height="50" rx="5" stroke="white" fill="none" stroke-width="1.5"/><text x="75" y="50" font-size="20">👁️</text><text x="75" y="65" class="diagram-text">Spyware</text><text x="200" y="15" class="diagram-text">HACKER</text><text x="200" y="30" font-size="16">😈</text><line x1="125" y1="45" x2="185" y2="30" stroke="#ff6b6b" stroke-width="1" stroke-dasharray="2 2"/><text x="155" y="45" font-size="10">🔑...abc</text></svg>`, tags:["surveillance"], riskLevel:"Medium", audience:["Staff"], status:"Advanced" },
+            { term:"Trojan", title:"Trojan Horse", explanation:"A Trojan is malware disguised as a legitimate program. Like the mythical Trojan Horse, you willingly bring it into your computer thinking it's a gift (like a free game), but it secretly contains malicious code that attacks from the inside.", importance:"It exploits your trust. You think you're getting something useful or fun, but you're actually inviting a thief into your home. It's dangerous because the initial infection is something you do willingly.", damageExample:"An employee at a small firm downloads a 'free PDF converter' that is actually a Trojan. Once installed, the Trojan opens a 'backdoor', allowing an attacker to access the company's server and steal all their financial records.", diagram:`<svg class="w-full h-48" viewBox="0 0 250 80" preserveAspectRatio="xMidYMid meet"><text x="50" y="25" class="diagram-text">"Free Game"</text><text x="50" y="50" font-size="24">🎁</text><text x="55" y="50" font-size="12" fill="#ff6b6b">😈</text><line x1="80" y1="45" x2="150" y2="45" stroke="white" stroke-width="1.5"/><polyline points="145,40 150,45 145,50" stroke="white" stroke-width="1.5" fill="none" /><text x="190" y="30" class="diagram-text">YOUR COMPUTER</text><rect x="165" y="35" width="50" height="30" rx="5" stroke="white" fill="none" stroke-width="1.5"/></svg>`, tags:["deception"], riskLevel:"Medium", audience:["Staff"], status:"Core" },
+            { term:"DDoS", title:"DDoS Attack", explanation:"Imagine a hundred people all trying to rush through a single doorway at the same time. The doorway gets completely jammed. A DDoS attack is similar: it floods a website with so much fake traffic that real users can't get through.", importance:"While it doesn't usually steal your data, it can completely block you from accessing essential online services. If your bank or work portal is hit, it's effectively 'off' for you and everyone else.", damageExample:"An e-commerce SME is about to launch a huge Black Friday sale. A rival launches a DDoS attack against their website. The site goes down, and they lose out on tens of thousands of pounds in sales.", diagram:`<svg class="w-full h-48" viewBox="0 0 250 80" preserveAspectRatio="xMidYMid meet"><text x="30" y="15" class="diagram-text">ATTACKERS</text><text x="20" y="30" font-size="12">💻</text><text x="40" y="40" font-size="12">💻</text><text x="20" y="50" font-size="12">💻</text><text x="40" y="60" font-size="12">💻</text><path d="M55,30 L180,50 M55,40 L180,50 M55,50 L180,50 M55,60 L180,50" stroke="#ff6b6b" stroke-width="1" fill="none"/><text x="200" y="35" class="diagram-text">YOUR WEBSITE</text><text x="200" y="55" font-size="24">💥</text><text x="200" y="70" class="diagram-text">(Offline)</text></svg>`, tags:["traffic"], riskLevel:"Medium", audience:["Owner","IT"], status:"Advanced" },
+            { term:"Zero-Day", title:"Zero-Day Exploit", explanation:"A 'zero-day' is a security flaw that developers don't know about yet. An attack that uses this flaw is a 'zero-day exploit' because the developers have had zero days to create a patch to fix it. It's an attack on an unknown weakness.", importance:"This is scary because it's an attack no one is prepared for. Even if you are fully up-to-date, a zero-day can still get through because not even the good guys know the weakness exists yet.", damageExample:"A hacker discovers a zero-day flaw in popular accounting software. They use it to silently steal financial data from hundreds of SMEs before the software company even knows there's a problem.", diagram:`<svg class="w-full h-48" viewBox="0 0 250 80" preserveAspectRatio="xMidYMid meet"><text x="75" y="15" class="diagram-text">SOFTWARE WALL</text><rect x="25" y="20" width="100" height="50" fill="none" stroke="white" stroke-width="1.5"/><path d="M 70 35 L 80 45" stroke="#ff6b6b" stroke-width="1.5" /><text x="75" y="45" font-size="12" fill="#ff6b6b">?</text><text x="75" y="65" class="diagram-text">Unknown Flaw</text><text x="175" y="15" class="diagram-text">ATTACKER</text><text x="175" y="30" font-size="16">😈</text><line x1="160" y1="35" x2="80" y2="40" stroke="#ff6b6b" stroke-width="1.5"/><text x="125" y="50" class="diagram-text">No Patch Yet!</text></svg>`, tags:["vuln"], riskLevel:"High", audience:["IT"], status:"Advanced" },
+            { term:"MitM", title:"Man-in-the-Middle Attack", explanation:"This is like a spy secretly sitting between you and the person you're talking to. The spy intercepts, reads, and can even change the messages being sent back and forth, and neither of you knows they are there.", importance:"This undermines the trust you have in your internet connection. Using public Wi-Fi at a café could expose your passwords and private messages to a snooper without you ever knowing.", damageExample:"An employee working at a coffee shop connects to a fake Wi-Fi hotspot set up by an attacker. The attacker captures the login credentials for the company's private server, gaining full access to corporate data.", diagram:`<svg class="w-full h-48" viewBox="0 0 250 80" preserveAspectRatio="xMidYMid meet"><text x="30" y="25" class="diagram-text">YOU</text><text x="30" y="45" font-size="16">🧑</text><text x="220" y="25" class="diagram-text">WEBSITE</text><text x="220" y="45" font-size="16">🌐</text><path d="M 50 45 C 125 20, 200 45, 200 45" stroke="white" stroke-width="1" fill="none" stroke-dasharray="3 3"/><text x="125" y="55" class="diagram-text">HACKER IN MIDDLE</text><text x="125" y="40" font-size="16">😈</text><text x="125" y="25" font-size="12">👁️</text></svg>`, tags:["wifi"], riskLevel:"Medium", audience:["Staff"], status:"Advanced" }
+          ],
+          "Web & Network Security": [
+            { term:"VPN", title:"VPN (Virtual Private Network)", explanation:"Imagine the internet is a busy public road. A VPN is like building your own private, secret tunnel underneath that road. Only you can use this tunnel, so no one on the main road can see where you're going. It keeps your internet travel private.", importance:"It gives you privacy and security, especially on public Wi-Fi. It stops the network owner (and any hackers on it) from seeing which websites you visit or what data you're sending.", damageExample:"Without a VPN, an employee sends a confidential business proposal over a hotel's public Wi-Fi. A competitor on the same network intercepts the unencrypted data and steals the proposal, causing the SME to lose a major contract.", diagram:`<svg class="w-full h-48" viewBox="0 0 250 80" preserveAspectRatio="xMidYMid meet"><text x="30" y="15" class="diagram-text">YOU</text><path d="M20,20 h20 v20 h-20 z M20,40 l20,10 v-30 l-20,10" stroke="white" fill="none" stroke-width="1"/><text x="220" y="15" class="diagram-text">WEBSITE</text><rect x="200" y="20" width="40" height="20" rx="5" stroke="white" fill="none" stroke-width="1"/><line x1="210" y1="25" x2="230" y2="25" stroke="white" stroke-width="1"/><line x1="210" y1="30" x2="230" y2="30" stroke="white" stroke-width="1"/><text x="125" y="10" class="diagram-text">PUBLIC INTERNET (Visible)</text><path d="M 45 30 Q 125 0, 200 30" stroke="white" stroke-width="1" fill="none" stroke-dasharray="3 3"/><text x="125" y="30" font-size="12" fill="white">👁️</text><text x="125" y="75" class="diagram-text">VPN TUNNEL (Private)</text><path d="M 45 40 Q 125 80, 200 40" stroke="#4ade80" stroke-width="3" fill="none"/></svg>`, tags:["privacy"], riskLevel:"Medium", audience:["Staff"], status:"Core" },
+            { term:"Cookies", title:"Cookies (HTTP)", explanation:"Cookies are like little name tags that websites give you. When you visit a site, it gives you a cookie. The next time you come back, the website reads your 'name tag' to remember who you are, what you like, or what you had in your shopping cart.", importance:"While mostly harmless, they are a record of your browsing activity. 'Tracking cookies' can be used to build a very detailed profile of your habits and interests, which can feel like an invasion of privacy.", damageExample:"An employee's browser is hijacked, allowing an attacker to steal their session cookies for the company's internal portal. The attacker uses these cookies to bypass the login screen and gain access as the employee, without needing a password.", diagram:`<svg class="w-full h-48" viewBox="0 0 250 80" preserveAspectRatio="xMidYMid meet"><text x="50" y="15" class="diagram-text">1. First Visit</text><text x="20" y="40" font-size="16">🧑</text><text x="80" y="40" font-size="16">🌐</text><text x="50" y="43" font-size="12" fill="#4ade80">➡️🍪</text><text x="50" y="60" class="diagram-text">Site gives you a cookie</text><text x="180" y="15" class="diagram-text">2. Return Visit</text><text x="150" y="40" font-size="16">🧑🍪</text><text x="210" y="40" font-size="16">🌐</text><text x="180" y="43" font-size="12" fill="#4ade80">⬅️</text><text x="180" y="60" class="diagram-text">Site remembers you!</text></svg>`, tags:["web"], riskLevel:"Low", audience:["Staff"], status:"Advanced" },
+            { term:"DNS", title:"DNS (Domain Name System)", explanation:"DNS is the phonebook of the internet. When you type a website name (like google.com), your computer asks DNS to look up its real address (an IP address like 172.217.169.46), just like looking up a friend's number to call them.", importance:"If an attacker can control your DNS, they can redirect you to fake websites. You might type in your bank's correct address, but end up on a perfect copy designed to steal your login details.", damageExample:"An attacker uses DNS poisoning to redirect an SME's website traffic to a malicious server. Customers trying to visit the shop are instead met with a ransomware download, damaging the company's reputation.", diagram:`<svg class="w-full h-48" viewBox="0 0 250 80" preserveAspectRatio="xMidYMid meet"><text x="30" y="25" class="diagram-text">You ask for:</text><text x="30" y="45" font-size="10">google.com</text><line x1="60" y1="42" x2="90" y2="42" stroke="white" stroke-width="1.5"/><polyline points="85,37 90,42 85,47" stroke="white" stroke-width="1.5" fill="none" /><text x="125" y="15" class="diagram-text">DNS PHONEBOOK</text><text x="125" y="45" font-size="20">📖</text><line x1="160" y1="42" x2="190" y2="42" stroke="white" stroke-width="1.5"/><polyline points="185,37 190,42 185,47" stroke="white" stroke-width="1.5" fill="none" /><text x="220" y="25" class="diagram-text">It gives back:</text><text x="220" y="45" font-size="10">172.217.x.x</text></svg>`, tags:["internet"], riskLevel:"Medium", audience:["IT"], status:"Core" },
+            { term:"HTTPS", title:"HTTPS", explanation:"HTTPS is the secure version of the standard web protocol (HTTP). The 'S' stands for 'Secure' and means the connection between your browser and the website is encrypted and safe. Look for the padlock icon!", importance:"It's the difference between sending a postcard and sending a sealed letter. Without the 'S', anyone who intercepts your data can read it. HTTPS ensures that only you and the website can understand the conversation.", damageExample:"An SME's online store doesn't use HTTPS on its checkout page. A customer enters their credit card details, which are transmitted in plain text. A hacker intercepts this data and uses the card for fraudulent purchases.", diagram:`<svg class="w-full h-48" viewBox="0 0 250 80" preserveAspectRatio="xMidYMid meet"><text x="30" y="25" class="diagram-text">YOU</text><text x="30" y="45" font-size="16">🧑</text><text x="220" y="25" class="diagram-text">WEBSITE</text><text x="220" y="45" font-size="16">🌐</text><text x="125" y="15" class="diagram-text">SECURE CONNECTION</text><path d="M 50 45 C 125 80, 200 45, 200 45" stroke="#4ade80" stroke-width="3" fill="none"/><text x="125" y="40" font-size="12">🔒</text></svg>`, tags:["tls"], riskLevel:"High", audience:["IT"], status:"Core" },
+            { term:"Proxy", title:"Proxy Server", explanation:"A proxy server acts as a middleman between you and the internet. Instead of connecting directly to a website, you connect to the proxy, and the proxy connects to the website for you. This can hide your location.", importance:"It can help protect your identity online by masking your real location (IP address). This makes it harder for websites and advertisers to track you across the internet.", damageExample:"An SME uses a malicious proxy server to manage their web traffic. The proxy owner logs all data passing through it, including employee logins and client communications, resulting in a massive data breach.", diagram:`<svg class="w-full h-48" viewBox="0 0 250 80" preserveAspectRatio="xMidYMid meet"><text x="30" y="25" class="diagram-text">YOU</text><text x="30" y="45" font-size="16">🧑</text><line x1="45" y1="45" x2="100" y2="45" stroke="white" stroke-width="1.5"/><polyline points="95,40 100,45 95,50" stroke="white" stroke-width="1.5" fill="none" /><text x="125" y="15" class="diagram-text">PROXY SERVER</text><rect x="110" y="30" width="30" height="30" rx="5" stroke="white" fill="none" stroke-width="1.5"/><line x1="140" y1="45" x2="195" y2="45" stroke="white" stroke-width="1.5"/><polyline points="190,40 195,45 190,50" stroke="white" stroke-width="1.5" fill="none" /><text x="220" y="25" class="diagram-text">WEBSITE</text><text x="220" y="45" font-size="16">🌐</text></svg>`, tags:["routing"], riskLevel:"Low", audience:["IT"], status:"Advanced" }
+          ],
+          "Data Security": [
+            { term:"Encryption", title:"Encryption", explanation:"Encryption is like writing a message in a secret code. Even if someone intercepts your message, they can't read it because it just looks like gibberish. Only the person with the secret key can decode it.", importance:"It's the ultimate safety net for your data. If your laptop is stolen, encryption ensures the thief gets a useless brick of scrambled data instead of your tax returns, family photos, and private documents.", damageExample:"A consultant loses a company laptop containing an unencrypted copy of an SME's entire client database. The thief sells the data—names, addresses, and purchase histories—to a competitor.", diagram:`<svg class="w-full h-48" viewBox="0 0 250 80" preserveAspectRatio="xMidYMid meet"><text x="30" y="25" class="diagram-text">Readable Data</text><text x="30" y="45" font-size="12">📄</text><text x="30" y="48" font-size="8" fill="black">ABC</text><text x="80" y="48" font-size="12">🔒</text><line x1="45" y1="45" x2="70" y2="45" stroke="white" stroke-width="1.5"/><polyline points="65,40 70,45 65,50" stroke="white" stroke-width="1.5" fill="none" /><text x="125" y="25" class="diagram-text">Encrypted (Gibberish)</text><text x="125" y="45" font-size="12">📄</text><text x="125" y="48" font-size="8" fill="#ff6b6b">#@$</text><text x="180" y="48" font-size="12">🔑</text><line x1="140" y1="45" x2="170" y2="45" stroke="white" stroke-width="1.5"/><polyline points="165,40 170,45 165,50" stroke="white" stroke-width="1.5" fill="none" /><text x="220" y="25" class="diagram-text">Readable Again</text><text x="220" y="45" font-size="12">📄</text><text x="220" y="48" font-size="8" fill="black">ABC</text></svg>`, tags:["crypto"], riskLevel:"High", audience:["Owner","IT"], status:"Core" },
+            { term:"Hashing", title:"Hashing", explanation:"Hashing turns a piece of data, like a password, into a unique, jumbled-up string of characters. It's a one-way trip; you can't turn the hash back into the original password. It's used to store passwords securely.", importance:"It protects your passwords even if a company gets hacked. If the company stored your password as a hash, the hackers get a useless string of text, not your actual password, so they can't use it on your other accounts.", damageExample:"A small forum website stores user passwords in plain text instead of hashing them. They suffer a data breach. An attacker now has the email and password for a user who reuses that same password for their online banking.", diagram:`<svg class="w-full h-48" viewBox="0 0 250 80" preserveAspectRatio="xMidYMid meet"><text x="50" y="25" class="diagram-text">Password</text><text x="50" y="45" font-size="10">P@ssword1</text><text x="125" y="15" class="diagram-text">HASH FUNCTION</text><text x="125" y="45" font-size="20">⚙️</text><line x1="80" y1="45" x2="110" y2="45" stroke="white" stroke-width="1.5"/><polyline points="105,40 110,45 105,50" stroke="white" stroke-width="1.5" fill="none" /><text x="200" y="25" class="diagram-text">Secure Hash</text><text x="200" y="45" font-size="8">5e884898...</text><text x="125" y="65" class="diagram-text">(One-Way Only)</text></svg>`, tags:["crypto"], riskLevel:"Medium", audience:["IT"], status:"Advanced" },
+            { term:"Data Breach", title:"Data Breach", explanation:"A data breach is when sensitive, private information is stolen from a system without the owner's permission. This happens when a hacker breaks through security defenses to access and copy the data.", importance:"This is the end result of a failed defense. A breach of your data can lead to identity theft, financial fraud, and strangers getting access to your most personal information.", damageExample:"An SME's cloud storage is poorly secured. A hacker gains access and downloads all their internal documents, including employee contracts with salary information. The leak causes internal chaos and tips off competitors.", diagram:`<svg class="w-full h-48" viewBox="0 0 250 80" preserveAspectRatio="xMidYMid meet"><text x="75" y="15" class="diagram-text">SECURE DATABASE</text><rect x="25" y="20" width="100" height="50" rx="5" stroke="white" fill="none" stroke-width="1.5"/><path d="M 70 30 L 80 50" stroke="#ff6b6b" stroke-width="3"/><text x="75" y="65" class="diagram-text">(CRACKED)</text><text x="175" y="15" class="diagram-text">HACKER</text><text x="175" y="30" font-size="16">😈</text><line x1="160" y1="35" x2="80" y2="40" stroke="#ff6b6b" stroke-width="1.5"/><text x="125" y="50" font-size="12">📄➡️</text></svg>`, tags:["incident"], riskLevel:"High", audience:["Owner","IT"], status:"Core" }
+          ]
+        };
+        
+        /* ===================== UTILITIES ===================== */
+        const letters = Array.from({length: 26}, (_, i) => String.fromCharCode(65 + i));
+        const categories = Object.keys(glossaryData);
+        const SYN = new Map(Object.entries({
+            "2fa": "Two-Factor Authentication", "mfa": "Two-Factor Authentication",
+            "mitm": "Man-in-the-Middle Attack",
+            "ssl": "HTTPS", "tls": "HTTPS",
+            "vpn tunnel": "VPN (Virtual Private Network)"
+        }));
 
-    // Progressbar ARIA
-    (function(){
-      const bar = document.querySelector('.load'); const started = performance.now(); const total = 5000;
-      const tick = now => {
-        const pct = Math.min(100, ((now - started)/total)*100);
-        bar.setAttribute('aria-valuenow', pct.toFixed(0));
-        if(pct<100) requestAnimationFrame(tick);
-      };
-      requestAnimationFrame(tick);
-    })();
-  </script>
+        const normalize = (s) => (s || '').toLowerCase().normalize('NFKD').replace(/[^a-z0-9\s]/g, ' ').replace(/\s+/g, ' ').trim();
+        const fuzzyScore = (text, query) => {
+            if (!query) return 1;
+            const t = normalize(text), q = normalize(query);
+            if (!t || !q) return 0;
+            if (t === q) return 1;
+            if (t.startsWith(q)) return 0.95;
+            if (t.includes(q)) return 0.85;
+            const textArr = t.split(' '), queryArr = q.split(' ');
+            let intersectionCount = 0;
+            queryArr.forEach(word => { if (textArr.includes(word)) intersectionCount++; });
+            return intersectionCount ? 0.7 + 0.05 * intersectionCount : 0;
+        };
 
-  <script>
-    /* ===================== DATASET (sample; extend freely) ===================== */
-    const glossaryData = {
-      "Core Defenses": [
-        {
-          term:"Firewall", title:"Firewall",
-          explanation:"Think of a firewall as a security guard for your computer. It stands at the main gate and checks everything trying to get in or out. It only lets the good, safe things pass and blocks anything that looks suspicious or dangerous.",
-          importance:"Without a firewall, your computer is like a house with all its doors and windows wide open on a busy street. It's your first line of defense against uninvited digital guests.",
-          damageExample:"An SME without a properly configured firewall could have a hacker slip past their defenses, gain access to their internal network, and steal sensitive customer payment information, leading to huge fines and loss of trust.",
-          diagram:`<svg class="w-full h-48" viewBox="0 0 250 80" preserveAspectRatio="xMidYMid meet"><text x="35" y="15" class="diagram-text">INCOMING TRAFFIC</text><text x="35" y="40" font-size="12" fill="#ff6b6b">😈</text><text x="20" y="50" class="diagram-text">Threat</text><text x="35" y="65" font-size="12" fill="#4ade80">✅</text><text x="55" y="75" class="diagram-text">Safe Data</text><rect x="100" y="20" width="20" height="50" fill="none" stroke="white" stroke-width="1.5"/><path d="M100,20 v50 M105,20 v50 M110,20 v50 M115,20 v50 M120,20 v50" stroke="white" stroke-width="0.5"/><text x="110" y="15" class="diagram-text">FIREWALL</text><line x1="50" y1="40" x2="100" y2="40" stroke="#ff6b6b" stroke-width="1.5"/><text x="90" y="35" font-size="12" fill="#ff6b6b">❌</text><line x1="50" y1="65" x2="180" y2="65" stroke="#4ade80" stroke-width="1.5"/><polyline points="175,60 180,65 175,70" stroke="#4ade80" stroke-width="1.5" fill="none" /><text x="215" y="55" class="diagram-text">YOUR COMPUTER</text><path d="M200,60 h20 v20 h-20 z M200,80 l20,10 v-30 l-20,10" stroke="white" fill="none" stroke-width="1"/></svg>`,
-          tags:["network","perimeter"], riskLevel:"Medium", audience:["IT","Owner"], status:"Core"
-        },
-        {
-          term:"Antivirus", title:"Antivirus Software",
-          explanation:"Antivirus is like a doctor for your computer. It regularly scans for known sicknesses (viruses and malware) and removes them to keep your computer healthy. It also tries to stop new sicknesses from getting in.",
-          importance:"It's your digital immune system. It cleans up infections you might pick up from browsing the web or opening a bad email, preventing them from causing real damage.",
-          damageExample:"An employee downloads a seemingly harmless file that contains a virus. Without antivirus to detect it, the virus spreads across the company's network, slowing all computers to a crawl and making work impossible.",
-          diagram:`<svg class="w-full h-48" viewBox="0 0 250 80" preserveAspectRatio="xMidYMid meet"><text x="125" y="15" class="diagram-text">ANTIVIRUS SHIELD</text><path d="M 125, 20 C 60,20 60,70 125,70 C 190,70 190,20 125,20" stroke="white" stroke-width="2" fill="none"/><text x="125" y="50" font-size="20">🛡️</text><text x="50" y="35" class="diagram-text">File</text><text x="50" y="50" font-size="12">📄</text><text x="200" y="35" class="diagram-text">Virus</text><text x="200" y="50" font-size="12">🦠</text><line x1="190" y1="50" x2="140" y2="50" stroke="#ff6b6b" stroke-width="1.5"/><text x="145" y="45" font-size="12" fill="#ff6b6b">❌</text><line x1="60" y1="50" x2="110" y2="50" stroke="#4ade80" stroke-width="1.5"/></svg>`,
-          tags:["endpoint"], riskLevel:"Medium", audience:["Staff","IT"], status:"Core"
-        },
-        {
-          term:"Sandbox", title:"Sandbox",
-          explanation:"A sandbox is like a secure playpen for computer programs. If you have a new or untrusted program, you can run it in the sandbox first. If it's malicious, it can't escape the playpen to harm your actual computer.",
-          importance:"It lets you be curious without being careless. You can test out that cool-looking free program without risking your personal photos, documents, and passwords if it turns out to be malicious.",
-          damageExample:"A small design firm runs a new, free photo editing tool in a sandbox and discovers it's ransomware. Because it was sandboxed, their actual client files were never touched. Without it, their entire portfolio would have been locked.",
-          diagram:`<svg class="w-full h-48" viewBox="0 0 250 80" preserveAspectRatio="xMidYMid meet"><text x="50" y="15" class="diagram-text">MAIN COMPUTER</text><rect x="10" y="20" width="80" height="50" rx="5" stroke="white" fill="none" stroke-width="1.5"/><text x="175" y="15" class="diagram-text">SANDBOX (Safe Area)</text><rect x="125" y="20" width="100" height="50" rx="5" stroke="white" fill="none" stroke-width="1.5" stroke-dasharray="4 2"/><text x="175" y="45" font-size="16">😈</text><text x="175" y="60" class="diagram-text">Untrusted App</text><path d="M 175,40 Q 140 30, 110 40" stroke="#ff6b6b" stroke-width="1" fill="none"/><text x="120" y="35" font-size="12" fill="#ff6b6b">❌</text><text x="125" y="45" class="diagram-text" fill="#ff6b6b">CAN'T ESCAPE</text></svg>`,
-          tags:["analysis"], riskLevel:"Low", audience:["IT"], status:"Advanced"
-        },
-        {
-          term:"Patch", title:"Patch Management",
-          explanation:"Software can have weaknesses, like small cracks in a wall. A 'patch' is a fix that covers up the crack. Patch management is the process of making sure you always have the latest fixes to keep attackers from getting through.",
-          importance:"Just like you'd fix a leaky pipe to prevent a flood, patching software fixes security holes before hackers can use them to flood your system with malware or steal your data.",
-          damageExample:"A small online shop fails to apply a critical security patch. A hacker exploits this known vulnerability, steals the entire customer database, and posts it online, destroying the business's reputation.",
-          diagram:`<svg class="w-full h-48" viewBox="0 0 250 80" preserveAspectRatio="xMidYMid meet"><text x="75" y="15" class="diagram-text">SOFTWARE WALL</text><rect x="25" y="20" width="100" height="50" fill="none" stroke="white" stroke-width="1.5"/><path d="M 70 30 L 80 50" stroke="#ff6b6b" stroke-width="1.5"/><text x="75" y="65" class="diagram-text">Vulnerability</text><text x="175" y="15" class="diagram-text">APPLYING PATCH</text><text x="175" y="45" font-size="20">🩹</text><line x1="125" y1="45" x2="160" y2="45" stroke="#4ade80" stroke-width="1.5"/><polyline points="155,40 160,45 155,50" stroke="#4ade80" stroke-width="1.5" fill="none" /></svg>`,
-          tags:["updates"], riskLevel:"High", audience:["IT","Owner"], status:"Core"
-        }
-      ],
-      "Types of Attacks": [
-        {
-          term:"Malware", title:"Malware (Malicious Software)",
-          explanation:"Malware is like a tiny gremlin you accidentally let into your house (computer). It can do all sorts of bad things without you knowing, like breaking your toys (files), spying on you, or leaving the back door open for other gremlins.",
-          importance:"This is the 'what' that all other defenses are trying to stop. Getting malware on your machine can lead to identity theft, financial loss, or simply losing access to your precious memories and files.",
-          damageExample:"You receive malware that includes a keylogger. For weeks, it secretly records everything you type, including your online banking password. The attacker then logs in and drains your bank account.",
-          diagram:`<svg class="w-full h-48" viewBox="0 0 250 80" preserveAspectRatio="xMidYMid meet"><text x="125" y="15" class="diagram-text">YOUR COMPUTER</text><rect x="50" y="20" width="150" height="50" rx="5" stroke="white" fill="none" stroke-width="1.5"/><text x="125" y="45" font-size="24" fill="#ff6b6b">😈</text><text x="125" y="60" class="diagram-text">MALWARE</text><text x="80" y="35" class="diagram-text">Shreds Files</text><text x="80" y="50" font-size="12">📄✂️</text><text x="170" y="35" class="diagram-text">Steals Keys</text><text x="170" y="50" font-size="12">🔑➡️</text></svg>`,
-          tags:["gremlin"], riskLevel:"High", audience:["Staff","Owner"], status:"Core"
-        },
-        {
-          term:"Phishing", title:"Phishing",
-          explanation:"Phishing is like a trickster sending you a fake invitation to a party. The invitation looks real and asks for your secret password to get in. But it's a trap to steal your password. They're 'fishing' for your private information.",
-          importance:"It tricks you into giving away the keys to your digital life. A successful phishing attack can give a criminal access to your email, social media, or bank account by making you hand over the password yourself.",
-          damageExample:"An SME's accountant receives a phishing email that looks like it's from the CEO, asking for an urgent wire transfer. The accountant, tricked by the convincing email, sends thousands of pounds to the attacker's account.",
-          diagram:`<svg class="w-full h-48" viewBox="0 0 250 80" preserveAspectRatio="xMidYMid meet"><text x="210" y="15" class="diagram-text">HACKER</text><text x="210" y="30" font-size="16">🎣</text><path d="M200,30 C 120 0, 80 20, 50 50" stroke="white" stroke-width="1" fill="none"/><text x="50" y="40" class="diagram-text">Fake Email/Site</text><text x="50" y="60" font-size="12">✉️</text><text x="15" y="60" class="diagram-text">YOU</text><text x="15" y="75" font-size="16">🧑</text><text x="100" y="70" class="diagram-text">Stealing Password</text><text x="80" y="60" font-size="12">🔑</text><path d="M30,70 C 40 65, 70 65, 80 60" stroke="#ff6b6b" stroke-width="1" fill="none" stroke-dasharray="2 2"/></svg>`,
-          tags:["email"], riskLevel:"High", audience:["Staff","Owner"], status:"Core"
-        },
-        {
-          term:"Ransomware", title:"Ransomware",
-          explanation:"This is a type of malware that locks up all your files and holds them hostage. The attacker then demands money (a ransom) to give you the key to unlock your files. It's like a digital kidnapping of your data.",
-          importance:"This can be devastating. Imagine every single one of your documents and photos being locked away, with a criminal demanding money to get them back. For many, this means losing irreplaceable files forever.",
-          damageExample:"A small medical practice gets hit by ransomware. All their patient records are encrypted. They can't access schedules or histories, forcing them to shut down and face a choice: pay a huge ransom or risk going out of business.",
-          diagram:`<svg class="w-full h-48" viewBox="0 0 250 80" preserveAspectRatio="xMidYMid meet"><text x="50" y="25" class="diagram-text">Your Files</text><text x="50" y="45" font-size="12">📄</text><text x="50" y="60" font-size="12">🔐</text><text x="50" y="70" class="diagram-text">(Locked)</text><text x="175" y="15" class="diagram-text">ATTACKER DEMANDS RANSOM</text><text x="175" y="45" font-size="20">💰</text><line x1="70" y1="50" x2="160" y2="45" stroke="#ff6b6b" stroke-width="1.5"/><text x="175" y="65" class="diagram-text">For The Key 🔑</text></svg>`,
-          tags:["crypto"], riskLevel:"High", audience:["IT","Owner"], status:"Core"
-        },
-        {
-          term:"Spyware", title:"Spyware",
-          explanation:"Spyware is sneaky malware that hides on your computer and secretly watches everything you do. It can record your keystrokes, see your screen, and steal your personal information, then send it all to a hacker.",
-          importance:"It's a total invasion of your privacy. Spyware can watch you through your webcam, listen through your microphone, and read your private messages, turning your personal device into a spy tool against you.",
-          damageExample:"A competitor installs spyware on an employee's laptop at an SME. They steal confidential product designs and client lists, giving the competitor an unfair advantage and costing the SME future business.",
-          diagram:`<svg class="w-full h-48" viewBox="0 0 250 80" preserveAspectRatio="xMidYMid meet"><text x="75" y="15" class="diagram-text">YOUR COMPUTER</text><rect x="25" y="20" width="100" height="50" rx="5" stroke="white" fill="none" stroke-width="1.5"/><text x="75" y="50" font-size="20">👁️</text><text x="75" y="65" class="diagram-text">Spyware</text><text x="200" y="15" class="diagram-text">HACKER</text><text x="200" y="30" font-size="16">😈</text><line x1="125" y1="45" x2="185" y2="30" stroke="#ff6b6b" stroke-width="1" stroke-dasharray="2 2"/><text x="155" y="45" font-size="10">🔑...abc</text></svg>`,
-          tags:["surveillance"], riskLevel:"Medium", audience:["Staff"], status:"Advanced"
-        },
-        {
-          term:"Trojan", title:"Trojan Horse",
-          explanation:"A Trojan is malware disguised as a legitimate program. Like the mythical Trojan Horse, you willingly bring it into your computer thinking it's a gift (like a free game), but it secretly contains malicious code that attacks from the inside.",
-          importance:"It exploits your trust. You think you're getting something useful or fun, but you're actually inviting a thief into your home. It's dangerous because the initial infection is something you do willingly.",
-          damageExample:"An employee at a small firm downloads a 'free PDF converter' that is actually a Trojan. Once installed, the Trojan opens a 'backdoor', allowing an attacker to access the company's server and steal all their financial records.",
-          diagram:`<svg class="w-full h-48" viewBox="0 0 250 80" preserveAspectRatio="xMidYMid meet"><text x="50" y="25" class="diagram-text">"Free Game"</text><text x="50" y="50" font-size="24">🎁</text><text x="55" y="50" font-size="12" fill="#ff6b6b">😈</text><line x1="80" y1="45" x2="150" y2="45" stroke="white" stroke-width="1.5"/><polyline points="145,40 150,45 145,50" stroke="white" stroke-width="1.5" fill="none" /><text x="190" y="30" class="diagram-text">YOUR COMPUTER</text><rect x="165" y="35" width="50" height="30" rx="5" stroke="white" fill="none" stroke-width="1.5"/></svg>`,
-          tags:["deception"], riskLevel:"Medium", audience:["Staff"], status:"Core"
-        },
-        {
-          term:"DDoS", title:"DDoS Attack",
-          explanation:"Imagine a hundred people all trying to rush through a single doorway at the same time. The doorway gets completely jammed. A DDoS attack is similar: it floods a website with so much fake traffic that real users can't get through.",
-          importance:"While it doesn't usually steal your data, it can completely block you from accessing essential online services. If your bank or work portal is hit, it's effectively 'off' for you and everyone else.",
-          damageExample:"An e-commerce SME is about to launch a huge Black Friday sale. A rival launches a DDoS attack against their website. The site goes down, and they lose out on tens of thousands of pounds in sales.",
-          diagram:`<svg class="w-full h-48" viewBox="0 0 250 80" preserveAspectRatio="xMidYMid meet"><text x="30" y="15" class="diagram-text">ATTACKERS</text><text x="20" y="30" font-size="12">💻</text><text x="40" y="40" font-size="12">💻</text><text x="20" y="50" font-size="12">💻</text><text x="40" y="60" font-size="12">💻</text><path d="M55,30 L180,50 M55,40 L180,50 M55,50 L180,50 M55,60 L180,50" stroke="#ff6b6b" stroke-width="1" fill="none"/><text x="200" y="35" class="diagram-text">YOUR WEBSITE</text><text x="200" y="55" font-size="24">💥</text><text x="200" y="70" class="diagram-text">(Offline)</text></svg>`,
-          tags:["traffic"], riskLevel:"Medium", audience:["Owner","IT"], status:"Advanced"
-        },
-        {
-          term:"Zero-Day", title:"Zero-Day Exploit",
-          explanation:"A 'zero-day' is a security flaw that developers don't know about yet. An attack that uses this flaw is a 'zero-day exploit' because the developers have had zero days to create a patch to fix it. It's an attack on an unknown weakness.",
-          importance:"This is scary because it's an attack no one is prepared for. Even if you are fully up-to-date, a zero-day can still get through because not even the good guys know the weakness exists yet.",
-          damageExample:"A hacker discovers a zero-day flaw in popular accounting software. They use it to silently steal financial data from hundreds of SMEs before the software company even knows there's a problem.",
-          diagram:`<svg class="w-full h-48" viewBox="0 0 250 80" preserveAspectRatio="xMidYMid meet"><text x="75" y="15" class="diagram-text">SOFTWARE WALL</text><rect x="25" y="20" width="100" height="50" fill="none" stroke="white" stroke-width="1.5"/><path d="M 70 35 L 80 45" stroke="#ff6b6b" stroke-width="1.5" /><text x="75" y="45" font-size="12" fill="#ff6b6b">?</text><text x="75" y="65" class="diagram-text">Unknown Flaw</text><text x="175" y="15" class="diagram-text">ATTACKER</text><text x="175" y="30" font-size="16">😈</text><line x1="160" y1="35" x2="80" y2="40" stroke="#ff6b6b" stroke-width="1.5"/><text x="125" y="50" class="diagram-text">No Patch Yet!</text></svg>`,
-          tags:["vuln"], riskLevel:"High", audience:["IT"], status:"Advanced"
-        },
-        {
-          term:"MitM", title:"Man-in-the-Middle Attack",
-          explanation:"This is like a spy secretly sitting between you and the person you're talking to. The spy intercepts, reads, and can even change the messages being sent back and forth, and neither of you knows they are there.",
-          importance:"This undermines the trust you have in your internet connection. Using public Wi-Fi at a café could expose your passwords and private messages to a snooper without you ever knowing.",
-          damageExample:"An employee working at a coffee shop connects to a fake Wi-Fi hotspot set up by an attacker. The attacker captures the login credentials for the company's private server, gaining full access to corporate data.",
-          diagram:`<svg class="w-full h-48" viewBox="0 0 250 80" preserveAspectRatio="xMidYMid meet"><text x="30" y="25" class="diagram-text">YOU</text><text x="30" y="45" font-size="16">🧑</text><text x="220" y="25" class="diagram-text">WEBSITE</text><text x="220" y="45" font-size="16">🌐</text><path d="M 50 45 C 125 20, 200 45, 200 45" stroke="white" stroke-width="1" fill="none" stroke-dasharray="3 3"/><text x="125" y="55" class="diagram-text">HACKER IN MIDDLE</text><text x="125" y="40" font-size="16">😈</text><text x="125" y="25" font-size="12">👁️</text></svg>`,
-          tags:["wifi"], riskLevel:"Medium", audience:["Staff"], status:"Advanced"
-        }
-      ],
-      "Web & Network Security": [
-        {
-          term:"VPN", title:"VPN (Virtual Private Network)",
-          explanation:"Imagine the internet is a busy public road. A VPN is like building your own private, secret tunnel underneath that road. Only you can use this tunnel, so no one on the main road can see where you're going. It keeps your internet travel private.",
-          importance:"It gives you privacy and security, especially on public Wi-Fi. It stops the network owner (and any hackers on it) from seeing which websites you visit or what data you're sending.",
-          damageExample:"Without a VPN, an employee sends a confidential business proposal over a hotel's public Wi-Fi. A competitor on the same network intercepts the unencrypted data and steals the proposal, causing the SME to lose a major contract.",
-          diagram:`<svg class="w-full h-48" viewBox="0 0 250 80" preserveAspectRatio="xMidYMid meet"><text x="30" y="15" class="diagram-text">YOU</text><path d="M20,20 h20 v20 h-20 z M20,40 l20,10 v-30 l-20,10" stroke="white" fill="none" stroke-width="1"/><text x="220" y="15" class="diagram-text">WEBSITE</text><rect x="200" y="20" width="40" height="20" rx="5" stroke="white" fill="none" stroke-width="1"/><line x1="210" y1="25" x2="230" y2="25" stroke="white" stroke-width="1"/><line x1="210" y1="30" x2="230" y2="30" stroke="white" stroke-width="1"/><text x="125" y="10" class="diagram-text">PUBLIC INTERNET (Visible)</text><path d="M 45 30 Q 125 0, 200 30" stroke="white" stroke-width="1" fill="none" stroke-dasharray="3 3"/><text x="125" y="30" font-size="12" fill="white">👁️</text><text x="125" y="75" class="diagram-text">VPN TUNNEL (Private)</text><path d="M 45 40 Q 125 80, 200 40" stroke="#4ade80" stroke-width="3" fill="none"/></svg>`,
-          tags:["privacy"], riskLevel:"Medium", audience:["Staff"], status:"Core"
-        },
-        {
-          term:"Cookies", title:"Cookies (HTTP)",
-          explanation:"Cookies are like little name tags that websites give you. When you visit a site, it gives you a cookie. The next time you come back, the website reads your 'name tag' to remember who you are, what you like, or what you had in your shopping cart.",
-          importance:"While mostly harmless, they are a record of your browsing activity. 'Tracking cookies' can be used to build a very detailed profile of your habits and interests, which can feel like an invasion of privacy.",
-          damageExample:"An employee's browser is hijacked, allowing an attacker to steal their session cookies for the company's internal portal. The attacker uses these cookies to bypass the login screen and gain access as the employee, without needing a password.",
-          diagram:`<svg class="w-full h-48" viewBox="0 0 250 80" preserveAspectRatio="xMidYMid meet"><text x="50" y="15" class="diagram-text">1. First Visit</text><text x="20" y="40" font-size="16">🧑</text><text x="80" y="40" font-size="16">🌐</text><text x="50" y="43" font-size="12" fill="#4ade80">➡️🍪</text><text x="50" y="60" class="diagram-text">Site gives you a cookie</text><text x="180" y="15" class="diagram-text">2. Return Visit</text><text x="150" y="40" font-size="16">🧑🍪</text><text x="210" y="40" font-size="16">🌐</text><text x="180" y="43" font-size="12" fill="#4ade80">⬅️</text><text x="180" y="60" class="diagram-text">Site remembers you!</text></svg>`,
-          tags:["web"], riskLevel:"Low", audience:["Staff"], status:"Advanced"
-        },
-        {
-          term:"DNS", title:"DNS (Domain Name System)",
-          explanation:"DNS is the phonebook of the internet. When you type a website name (like google.com), your computer asks DNS to look up its real address (an IP address like 172.217.169.46), just like looking up a friend's number to call them.",
-          importance:"If an attacker can control your DNS, they can redirect you to fake websites. You might type in your bank's correct address, but end up on a perfect copy designed to steal your login details.",
-          damageExample:"An attacker uses DNS poisoning to redirect an SME's website traffic to a malicious server. Customers trying to visit the shop are instead met with a ransomware download, damaging the company's reputation.",
-          diagram:`<svg class="w-full h-48" viewBox="0 0 250 80" preserveAspectRatio="xMidYMid meet"><text x="30" y="25" class="diagram-text">You ask for:</text><text x="30" y="45" font-size="10">google.com</text><line x1="60" y1="42" x2="90" y2="42" stroke="white" stroke-width="1.5"/><polyline points="85,37 90,42 85,47" stroke="white" stroke-width="1.5" fill="none" /><text x="125" y="15" class="diagram-text">DNS PHONEBOOK</text><text x="125" y="45" font-size="20">📖</text><line x1="160" y1="42" x2="190" y2="42" stroke="white" stroke-width="1.5"/><polyline points="185,37 190,42 185,47" stroke="white" stroke-width="1.5" fill="none" /><text x="220" y="25" class="diagram-text">It gives back:</text><text x="220" y="45" font-size="10">172.217.x.x</text></svg>`,
-          tags:["internet"], riskLevel:"Medium", audience:["IT"], status:"Core"
-        },
-        {
-          term:"HTTPS", title:"HTTPS",
-          explanation:"HTTPS is the secure version of the standard web protocol (HTTP). The 'S' stands for 'Secure' and means the connection between your browser and the website is encrypted and safe. Look for the padlock icon!",
-          importance:"It's the difference between sending a postcard and sending a sealed letter. Without the 'S', anyone who intercepts your data can read it. HTTPS ensures that only you and the website can understand the conversation.",
-          damageExample:"An SME's online store doesn't use HTTPS on its checkout page. A customer enters their credit card details, which are transmitted in plain text. A hacker intercepts this data and uses the card for fraudulent purchases.",
-          diagram:`<svg class="w-full h-48" viewBox="0 0 250 80" preserveAspectRatio="xMidYMid meet"><text x="30" y="25" class="diagram-text">YOU</text><text x="30" y="45" font-size="16">🧑</text><text x="220" y="25" class="diagram-text">WEBSITE</text><text x="220" y="45" font-size="16">🌐</text><text x="125" y="15" class="diagram-text">SECURE CONNECTION</text><path d="M 50 45 C 125 80, 200 45, 200 45" stroke="#4ade80" stroke-width="3" fill="none"/><text x="125" y="40" font-size="12">🔒</text></svg>`,
-          tags:["tls"], riskLevel:"High", audience:["IT"], status:"Core"
-        },
-        {
-          term:"Proxy", title:"Proxy Server",
-          explanation:"A proxy server acts as a middleman between you and the internet. Instead of connecting directly to a website, you connect to the proxy, and the proxy connects to the website for you. This can hide your location.",
-          importance:"It can help protect your identity online by masking your real location (IP address). This makes it harder for websites and advertisers to track you across the internet.",
-          damageExample:"An SME uses a malicious proxy server to manage their web traffic. The proxy owner logs all data passing through it, including employee logins and client communications, resulting in a massive data breach.",
-          diagram:`<svg class="w-full h-48" viewBox="0 0 250 80" preserveAspectRatio="xMidYMid meet"><text x="30" y="25" class="diagram-text">YOU</text><text x="30" y="45" font-size="16">🧑</text><line x1="45" y1="45" x2="100" y2="45" stroke="white" stroke-width="1.5"/><polyline points="95,40 100,45 95,50" stroke="white" stroke-width="1.5" fill="none" /><text x="125" y="15" class="diagram-text">PROXY SERVER</text><rect x="110" y="30" width="30" height="30" rx="5" stroke="white" fill="none" stroke-width="1.5"/><line x1="140" y1="45" x2="195" y2="45" stroke="white" stroke-width="1.5"/><polyline points="190,40 195,45 190,50" stroke="white" stroke-width="1.5" fill="none" /><text x="220" y="25" class="diagram-text">WEBSITE</text><text x="220" y="45" font-size="16">🌐</text></svg>`,
-          tags:["routing"], riskLevel:"Low", audience:["IT"], status:"Advanced"
-        }
-      ],
-      "Data Security": [
-        {
-          term:"Encryption", title:"Encryption",
-          explanation:"Encryption is like writing a message in a secret code. Even if someone intercepts your message, they can't read it because it just looks like gibberish. Only the person with the secret key can decode it.",
-          importance:"It's the ultimate safety net for your data. If your laptop is stolen, encryption ensures the thief gets a useless brick of scrambled data instead of your tax returns, family photos, and private documents.",
-          damageExample:"A consultant loses a company laptop containing an unencrypted copy of an SME's entire client database. The thief sells the data—names, addresses, and purchase histories—to a competitor.",
-          diagram:`<svg class="w-full h-48" viewBox="0 0 250 80" preserveAspectRatio="xMidYMid meet"><text x="30" y="25" class="diagram-text">Readable Data</text><text x="30" y="45" font-size="12">📄</text><text x="30" y="48" font-size="8" fill="black">ABC</text><text x="80" y="48" font-size="12">🔒</text><line x1="45" y1="45" x2="70" y2="45" stroke="white" stroke-width="1.5"/><polyline points="65,40 70,45 65,50" stroke="white" stroke-width="1.5" fill="none" /><text x="125" y="25" class="diagram-text">Encrypted (Gibberish)</text><text x="125" y="45" font-size="12">📄</text><text x="125" y="48" font-size="8" fill="#ff6b6b">#@$</text><text x="180" y="48" font-size="12">🔑</text><line x1="140" y1="45" x2="170" y2="45" stroke="white" stroke-width="1.5"/><polyline points="165,40 170,45 165,50" stroke="white" stroke-width="1.5" fill="none" /><text x="220" y="25" class="diagram-text">Readable Again</text><text x="220" y="45" font-size="12">📄</text><text x="220" y="48" font-size="8" fill="black">ABC</text></svg>`,
-          tags:["crypto"], riskLevel:"High", audience:["Owner","IT"], status:"Core"
-        },
-        {
-          term:"Hashing", title:"Hashing",
-          explanation:"Hashing turns a piece of data, like a password, into a unique, jumbled-up string of characters. It's a one-way trip; you can't turn the hash back into the original password. It's used to store passwords securely.",
-          importance:"It protects your passwords even if a company gets hacked. If the company stored your password as a hash, the hackers get a useless string of text, not your actual password, so they can't use it on your other accounts.",
-          damageExample:"A small forum website stores user passwords in plain text instead of hashing them. They suffer a data breach. An attacker now has the email and password for a user who reuses that same password for their online banking.",
-          diagram:`<svg class="w-full h-48" viewBox="0 0 250 80" preserveAspectRatio="xMidYMid meet"><text x="50" y="25" class="diagram-text">Password</text><text x="50" y="45" font-size="10">P@ssword1</text><text x="125" y="15" class="diagram-text">HASH FUNCTION</text><text x="125" y="45" font-size="20">⚙️</text><line x1="80" y1="45" x2="110" y2="45" stroke="white" stroke-width="1.5"/><polyline points="105,40 110,45 105,50" stroke="white" stroke-width="1.5" fill="none" /><text x="200" y="25" class="diagram-text">Secure Hash</text><text x="200" y="45" font-size="8">5e884898...</text><text x="125" y="65" class="diagram-text">(One-Way Only)</text></svg>`,
-          tags:["crypto"], riskLevel:"Medium", audience:["IT"], status:"Advanced"
-        },
-        {
-          term:"Data Breach", title:"Data Breach",
-          explanation:"A data breach is when sensitive, private information is stolen from a system without the owner's permission. This happens when a hacker breaks through security defenses to access and copy the data.",
-          importance:"This is the end result of a failed defense. A breach of your data can lead to identity theft, financial fraud, and strangers getting access to your most personal information.",
-          damageExample:"An SME's cloud storage is poorly secured. A hacker gains access and downloads all their internal documents, including employee contracts with salary information. The leak causes internal chaos and tips off competitors.",
-          diagram:`<svg class="w-full h-48" viewBox="0 0 250 80" preserveAspectRatio="xMidYMid meet"><text x="75" y="15" class="diagram-text">SECURE DATABASE</text><rect x="25" y="20" width="100" height="50" rx="5" stroke="white" fill="none" stroke-width="1.5"/><path d="M 70 30 L 80 50" stroke="#ff6b6b" stroke-width="3"/><text x="75" y="65" class="diagram-text">(CRACKED)</text><text x="175" y="15" class="diagram-text">HACKER</text><text x="175" y="30" font-size="16">😈</text><line x1="160" y1="35" x2="80" y2="40" stroke="#ff6b6b" stroke-width="1.5"/><text x="125" y="50" font-size="12">📄➡️</text></svg>`,
-          tags:["incident"], riskLevel:"High", audience:["Owner","IT"], status:"Core"
-        }
-      ]
-    };
+        const LS = {
+            get: (key, def) => { try { const value = localStorage.getItem(key); return value ? JSON.parse(value) : def; } catch { return def; } },
+            set: (key, value) => { try { localStorage.setItem(key, JSON.stringify(value)); } catch { } }
+        };
 
-    /* ===================== UTILITIES ===================== */
-    const letters = Array.from({length:26}, (_,i)=>String.fromCharCode(65+i));
-    const categories = Object.keys(glossaryData);
-    const SYN = new Map(Object.entries({
-      "2fa":"Two-Factor Authentication",
-      "mfa":"Two-Factor Authentication",
-      "mitm":"Man-in-the-Middle Attack",
-      "ssl":"HTTPS","tls":"HTTPS",
-      "vpn tunnel":"VPN (Virtual Private Network)"
-    }));
-    function normalize(s){ return (s||'').toLowerCase().normalize('NFKD').replace(/[^a-z0-9\s]/g,' ').replace(/\s+/g,' ').trim(); }
-    function fuzzyScore(text, query){
-      if(!query) return 1;
-      const t = normalize(text), q = normalize(query);
-      if(!t||!q) return 0;
-      if(t===q) return 1;
-      if(t.startsWith(q)) return .95;
-      if(t.includes(q)) return .85;
-      const ta=t.split(' '), qa=q.split(' '); let inter=0; qa.forEach(w=>{ if(ta.includes(w)) inter++; });
-      return inter? .7 + .05*inter : 0;
-    }
-    const LS = {
-      get(k,def){ try{ const v=localStorage.getItem(k); return v? JSON.parse(v): def; }catch{return def;} },
-      set(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); }catch{} }
-    };
+        /* ===================== BUILD MASTER LIST ===================== */
+        const master = [];
+        Object.entries(glossaryData).forEach(([category, items]) => {
+            items.forEach(item => master.push({ id: `${category}:${item.term}`, category, ...item }));
+        });
 
-    /* ===================== BUILD MASTER LIST ===================== */
-    const master = [];
-    Object.entries(glossaryData).forEach(([category, arr])=>{
-      arr.forEach(obj=> master.push({ id:`${category}:${obj.term}`, category, ...obj }));
-    });
+        /* ===================== LIST MODE (virtualized) ===================== */
+        const elements = {
+            q: document.getElementById('q'), clearBtn: document.getElementById('clearBtn'), chips: document.getElementById('chips'),
+            results: document.getElementById('results'), inner: document.getElementById('vrInner'), metaCount: document.getElementById('metaCount'),
+            azBar: document.getElementById('azBar'), dTitle: document.getElementById('dTitle'), dMeta: document.getElementById('dMeta'),
+            dDiagram: document.getElementById('dDiagram'), dExpl: document.getElementById('dExpl'), dImp: document.getElementById('dImp'),
+            dDmg: document.getElementById('dDmg'), fRisk: document.getElementById('fRisk'), fAudience: document.getElementById('fAudience'),
+            fStatus: document.getElementById('fStatus'), tray: document.getElementById('tray'), trayItems: document.getElementById('trayItems'),
+            listMode: document.getElementById('listMode'), mapWrap: document.getElementById('mapWrap'), cardsWrap: document.getElementById('cardsWrap'),
+            modeButtons: document.querySelectorAll('.switch button'), mobileButtons: document.querySelectorAll('.mobile-switch button'),
+            cmd: document.getElementById('cmd'), cmdInput: document.getElementById('cmdInput'), cmdList: document.getElementById('cmdList')
+        };
 
-    /* ===================== LIST MODE (virtualized) ===================== */
-    const q = document.getElementById('q');
-    const clearBtn = document.getElementById('clearBtn');
-    const chips = document.getElementById('chips');
-    const results = document.getElementById('results');
-    const inner = document.getElementById('vrInner');
-    const metaCount = document.getElementById('metaCount');
-    const azBar = document.getElementById('azBar');
+        const activeCategories = new Set(categories);
+        let filteredItems = [];
+        let flatList = [], offsets = [], totalHeight = 0, letterTops = new Map();
+        let selectedIndex = -1;
 
-    const dTitle = document.getElementById('dTitle');
-    const dMeta = document.getElementById('dMeta');
-    const dDiagram = document.getElementById('dDiagram');
-    const dExpl = document.getElementById('dExpl');
-    const dImp = document.getElementById('dImp');
-    const dDmg = document.getElementById('dDmg');
+        const ROW_HEIGHT = 80, HEADER_HEIGHT = 32, RENDER_BUFFER = 300;
 
-    const fRisk = document.getElementById('fRisk');
-    const fAudience = document.getElementById('fAudience');
-    const fStatus = document.getElementById('fStatus');
+        const escapeRegExp = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        const highlightText = (text, query) => {
+            if (!query) return text;
+            const regex = new RegExp(`(${escapeRegExp(query)})`, 'ig');
+            return text.replace(regex, '<mark class="bg-cyan-200 text-slate-900 rounded-sm px-1">$1</mark>');
+        };
 
-    const tray = document.getElementById('tray');
-    const trayItems = document.getElementById('trayItems');
+        const drawChips = () => {
+            elements.chips.innerHTML = '';
+            categories.forEach(cat => {
+                const btn = document.createElement('button');
+                btn.className = 'btn-secondary rounded-full text-xs transition-colors';
+                btn.textContent = cat;
+                btn.dataset.active = activeCategories.has(cat);
+                btn.onclick = () => {
+                    activeCategories.has(cat) ? activeCategories.delete(cat) : activeCategories.add(cat);
+                    btn.dataset.active = activeCategories.has(cat);
+                    applyFilters();
+                };
+                elements.chips.appendChild(btn);
+            });
+            const tools = document.createElement('div');
+            tools.className = 'flex gap-3 text-xs text-gray-400';
+            tools.innerHTML = `<button class="underline" id="allOn">All</button><button class="underline" id="allOff">None</button>`;
+            elements.chips.appendChild(tools);
+            document.getElementById('allOn').onclick = () => { categories.forEach(c => activeCategories.add(c)); drawChips(); applyFilters(); };
+            document.getElementById('allOff').onclick = () => { activeCategories.clear(); drawChips(); applyFilters(); };
+        };
 
-    const activeCats = new Set(categories);
-    let filtered = [];
-    let flat = []; let offsets=[]; let totalH=0; let letterTop=new Map(); let itemIndexToTop=[]; let selIndex=-1;
+        letters.forEach(ch => {
+            const btn = document.createElement('button');
+            btn.className = 'btn-secondary hover:bg-white/10 w-8 h-8 rounded-md';
+            btn.textContent = ch;
+            btn.onclick = () => jumpToLetter(ch);
+            elements.azBar.appendChild(btn);
+        });
 
-    const ROW_H = 68, HDR_H = 28, BUFFER_PX = 300;
+        const applyFilters = () => {
+            const text = elements.q.value.trim();
+            const queries = SYN.get(normalize(text)) ? [text, SYN.get(normalize(text))] : [text];
+            const risk = elements.fRisk.value;
+            const audience = elements.fAudience.value;
+            const status = elements.fStatus.value;
 
-    function escRE(s){ return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'); }
-    function hilite(text, query){ if(!query) return text; const rx=new RegExp(`(${escRE(query)})`,'ig'); return text.replace(rx,'<mark>$1</mark>'); }
+            filteredItems = master.filter(item => {
+                if (!activeCategories.has(item.category)) return false;
+                if (risk && item.riskLevel !== risk) return false;
+                if (status && item.status !== status) return false;
+                if (audience && !(item.audience || []).includes(audience)) return false;
+                if (!text) return true;
+                const searchableText = [item.title, item.term, (item.tags || []).join(' ')].join(' ');
+                return queries.some(q => fuzzyScore(searchableText, q) >= 0.75);
+            }).sort((a, b) => a.title.localeCompare(b.title));
 
-    function drawChips(){
-      chips.innerHTML='';
-      categories.forEach(cat=>{
-        const b=document.createElement('button'); b.className='chip'; b.textContent=cat; b.dataset.active=activeCats.has(cat);
-        b.onclick=()=>{ if(activeCats.has(cat)) activeCats.delete(cat); else activeCats.add(cat); b.dataset.active=activeCats.has(cat); applyFilter(); };
-        chips.appendChild(b);
-      });
-      const tools=document.createElement('div'); tools.className='text-sm text-gray-200 opacity-80 flex gap-3';
-      tools.innerHTML='<button class="underline" id="allOn">All</button><button class="underline" id="allOff">None</button>';
-      chips.appendChild(tools);
-      document.getElementById('allOn').onclick=()=>{ categories.forEach(c=>activeCats.add(c)); drawChips(); applyFilter(); };
-      document.getElementById('allOff').onclick=()=>{ activeCats.clear(); drawChips(); applyFilter(); };
-    }
+            elements.metaCount.textContent = `${filteredItems.length} result${filteredItems.length !== 1 ? 's' : ''}`;
+            buildFlatList();
+            selectedIndex = filteredItems.length > 0 ? 0 : -1;
+            showDetail(filteredItems[0]);
+            elements.results.scrollTop = 0;
+            renderVisibleList();
+            LS.set('lastFilters', { risk, audience, status, categories: [...activeCategories], text });
+        };
 
-    letters.forEach(ch=>{ const btn=document.createElement('button'); btn.textContent=ch; btn.onclick=()=>jumpToLetter(ch); azBar.appendChild(btn); });
+        const buildFlatList = () => {
+            flatList = []; offsets = []; letterTops.clear(); totalHeight = 0;
+            let currentLetter = '';
+            filteredItems.forEach((item, index) => {
+                const firstLetter = (item.title || item.term || '').charAt(0).toUpperCase();
+                if (firstLetter !== currentLetter) {
+                    currentLetter = firstLetter;
+                    flatList.push({ type: 'header', letter: firstLetter });
+                    offsets.push(totalHeight);
+                    letterTops.set(firstLetter, totalHeight);
+                    totalHeight += HEADER_HEIGHT;
+                }
+                flatList.push({ type: 'item', item, itemIndex: index });
+                offsets.push(totalHeight);
+                totalHeight += ROW_HEIGHT;
+            });
+            elements.inner.style.height = `${totalHeight}px`;
+        };
 
-    function synonymExpand(qv){ const hit=SYN.get(normalize(qv)); return hit? [qv, hit] : [qv]; }
+        const binarySearch = (arr, target) => {
+            let low = 0, high = arr.length;
+            while (low < high) {
+                const mid = (low + high) >> 1;
+                if (arr[mid] < target) {
+                    low = mid + 1;
+                } else {
+                    high = mid;
+                }
+            }
+            return low;
+        };
 
-    function applyFilter(){
-      const text = q.value.trim();
-      const queries = synonymExpand(text);
-      const risk = fRisk.value; const audience = fAudience.value; const status = fStatus.value;
+        const renderVisibleList = () => {
+            const scrollTop = elements.results.scrollTop;
+            const viewportHeight = elements.results.clientHeight;
+            const firstIndex = binarySearch(offsets, Math.max(0, scrollTop - RENDER_BUFFER));
+            const lastIndex = binarySearch(offsets, scrollTop + viewportHeight + RENDER_BUFFER);
+            
+            elements.inner.innerHTML = '';
+            for (let i = firstIndex; i < lastIndex; i++) {
+                const y = offsets[i];
+                const row = flatList[i];
+                if (row.type === 'header') {
+                    const headerEl = document.createElement('div');
+                    headerEl.className = 'absolute left-0 right-0 py-1 px-4 text-sm font-bold text-cyan-200';
+                    headerEl.style.transform = `translateY(${y}px)`;
+                    headerEl.textContent = row.letter;
+                    elements.inner.appendChild(headerEl);
+                } else {
+                    const item = row.item;
+                    const itemEl = document.createElement('div');
+                    itemEl.className = 'vr-row absolute left-0 right-0 p-4 rounded-xl cursor-pointer transition-colors hover:bg-white/10';
+                    itemEl.style.transform = `translateY(${y}px)`;
+                    itemEl.dataset.selected = row.itemIndex === selectedIndex;
+                    itemEl.innerHTML = `
+                        <div class="flex items-center justify-between gap-2">
+                            <div>
+                                <div class="text-xl font-medium">${highlightText(item.title, elements.q.value)}</div>
+                                <div class="text-xs text-gray-400 opacity-80">${item.category} • Risk: ${item.riskLevel} • ${item.status}</div>
+                            </div>
+                            <button class="add-to-compare text-xs btn-secondary">Compare</button>
+                        </div>
+                    `;
+                    itemEl.onclick = (e) => {
+                        if (e.target.classList.contains('add-to-compare')) {
+                            e.stopPropagation();
+                            toggleCompare(item);
+                        } else {
+                            selectedIndex = row.itemIndex;
+                            showDetail(item);
+                            ensureVisible(selectedIndex);
+                            renderVisibleList();
+                        }
+                    };
+                    elements.inner.appendChild(itemEl);
+                }
+            }
+        };
 
-      filtered = master.filter(x=>{
-        if(!activeCats.has(x.category)) return false;
-        if(risk && x.riskLevel!==risk) return false;
-        if(status && x.status!==status) return false;
-        if(audience && !(x.audience||[]).includes(audience)) return false;
-        if(!text) return true;
-        const hay = [x.title,x.term,(x.tags||[]).join(' ')].join(' ');
-        return queries.some(qr=> fuzzyScore(hay, qr) >= .75);
-      }).sort((a,b)=> a.title.localeCompare(b.title));
+        const showDetail = (item) => {
+            if (!item) {
+                elements.dTitle.textContent = '';
+                elements.dMeta.textContent = '';
+                elements.dDiagram.innerHTML = '';
+                elements.dExpl.textContent = 'Select a blueprint from the list to see details.';
+                elements.dImp.innerHTML = '';
+                elements.dDmg.innerHTML = '';
+                return;
+            }
+            elements.dTitle.textContent = item.title;
+            elements.dMeta.textContent = `${item.category} • Risk: ${item.riskLevel} • Audience: ${(item.audience || []).join(', ') || 'All'} • ${item.status}`;
+            elements.dDiagram.innerHTML = item.diagram || '';
+            elements.dExpl.textContent = item.explanation;
+            elements.dImp.innerHTML = `<h3 class="text-lg md:text-xl font-bold text-teal-300 mb-2">How This Affects You</h3><p class="text-gray-200">${item.importance}</p>`;
+            elements.dDmg.innerHTML = `<h3 class="text-lg md:text-xl font-bold text-teal-300 mb-2 mt-4">Damage Example</h3><p class="text-gray-200">${item.damageExample}</p>`;
+            history.replaceState(null, '', `#${encodeURIComponent(item.term)}`);
+        };
+        
+        const ensureVisible = (index) => {
+            if (index < 0) return;
+            const itemOffset = offsets[flatList.findIndex(row => row.type === 'item' && row.itemIndex === index)];
+            const itemBottom = itemOffset + ROW_HEIGHT;
+            const viewportTop = elements.results.scrollTop;
+            const viewportBottom = viewportTop + elements.results.clientHeight;
+            if (itemOffset < viewportTop) {
+                elements.results.scrollTop = itemOffset;
+            } else if (itemBottom > viewportBottom) {
+                elements.results.scrollTop = itemBottom - elements.results.clientHeight;
+            }
+        };
 
-      metaCount.textContent = `${filtered.length} result${filtered.length!==1?'s':''}`;
-      buildFlat(); selIndex = filtered.length? 0 : -1; if(filtered.length) showDetail(filtered[0]); else showDetail(null);
-      results.scrollTop=0; renderWindow();
-      LS.set('lastFilters',{risk,audience,status,cats:[...activeCats], text});
-    }
+        const jumpToLetter = (letter) => {
+            const top = letterTops.get(letter);
+            if (top != null) {
+                elements.results.scrollTop = top;
+            }
+        };
 
-    function buildFlat(){
-      flat=[]; offsets=[]; letterTop=new Map(); itemIndexToTop=[]; totalH=0; let current='';
-      filtered.forEach((it,idx)=>{
-        const L=(it.title||it.term||'').charAt(0).toUpperCase();
-        if(L!==current){ current=L; flat.push({type:'header',letter:L}); offsets.push(totalH); letterTop.set(L,totalH); totalH+=HDR_H; }
-        flat.push({type:'item', item:it, itemIndex:idx}); offsets.push(totalH); itemIndexToTop[idx]=totalH; totalH+=ROW_H;
-      });
-      inner.style.height=totalH+'px';
-    }
+        elements.q.addEventListener('input', applyFilters);
+        elements.clearBtn.onclick = () => { elements.q.value = ''; applyFilters(); };
+        elements.results.addEventListener('scroll', renderVisibleList);
+        window.addEventListener('resize', () => { if (currentMode === 'list') renderVisibleList(); });
 
-    function lowerBound(arr, target){ let lo=0, hi=arr.length; while(lo<hi){ const mid=(lo+hi)>>1; if(arr[mid]<target) lo=mid+1; else hi=mid; } return lo; }
+        /* ===================== KEYBOARD SHORTCUTS ===================== */
+        document.addEventListener('keydown', (e) => {
+            if (e.key === '/' && document.activeElement !== elements.q) { e.preventDefault(); elements.q.focus(); elements.q.select(); return; }
+            if (e.key === 'Escape') { if (elements.q.value) { elements.q.value = ''; applyFilters(); } else { elements.q.blur(); closeCmd(); } }
+            if (e.key === 'ArrowDown') { e.preventDefault(); if (!filteredItems.length) return; selectedIndex = Math.min(filteredItems.length - 1, (selectedIndex < 0 ? 0 : selectedIndex) + 1); showDetail(filteredItems[selectedIndex]); ensureVisible(selectedIndex); renderVisibleList(); }
+            if (e.key === 'ArrowUp') { e.preventDefault(); if (!filteredItems.length) return; selectedIndex = Math.max(0, (selectedIndex < 0 ? 0 : selectedIndex) - 1); showDetail(filteredItems[selectedIndex]); ensureVisible(selectedIndex); renderVisibleList(); }
+            if (e.key === 'Enter' && document.activeElement !== elements.q) { if (selectedIndex >= 0) showDetail(filteredItems[selectedIndex]); }
+            if (e.shiftKey && e.key === 'Enter' && selectedIndex >= 0) toggleCompare(filteredItems[selectedIndex]);
+            if (e.key.toLowerCase() === 'l') setMode('list');
+            if (e.key.toLowerCase() === 'm') setMode('map');
+            if (e.key.toLowerCase() === 'c') setMode('cards');
+            if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); openCmd(); }
+            if (e.key === ' ' && currentMode === 'cards') { e.preventDefault(); flipCard(); }
+        });
 
-    function renderWindow(){
-      const top=results.scrollTop - BUFFER_PX, bottom=results.scrollTop + results.clientHeight + BUFFER_PX;
-      const first=lowerBound(offsets, Math.max(0,top)); let last=first; while(last<flat.length && offsets[last] < bottom) last++;
-      inner.innerHTML='';
-      for(let i=first;i<last;i++){
-        const y=offsets[i], row=flat[i];
-        if(row.type==='header'){
-          const h=document.createElement('div'); h.className='vr-head'; h.style.transform=`translateY(${y}px)`; h.style.height='28px'; h.textContent=row.letter; inner.appendChild(h);
-        }else{
-          const it=row.item; const el=document.createElement('div'); el.className='vr-row'; el.style.transform=`translateY(${y}px)`; el.style.height='68px';
-          el.setAttribute('aria-selected', row.itemIndex===selIndex ? 'true' : 'false');
-          el.innerHTML = `<div class="flex items-center justify-between gap-2">
-              <div>
-                <div class="text-lg">${hilite(it.title, q.value)}</div>
-                <div class="text-xs text-gray-300 opacity-80">${it.category} • Risk: ${it.riskLevel} • ${it.status}</div>
-              </div>
-              <button class="text-xs border border-white/50 rounded px-2 py-1 addCmp">Compare</button>
-            </div>`;
-          el.onclick = (ev)=>{
-            if(ev.target.classList.contains('addCmp')){ toggleCompare(it); ev.stopPropagation(); return; }
-            selIndex=row.itemIndex; showDetail(it); ensureVisible(selIndex); renderWindow();
-          };
-          inner.appendChild(el);
-        }
-      }
-    }
+        /* ===================== COMMAND PALETTE ===================== */
+        const openCmd = () => { elements.cmd.classList.remove('hidden'); elements.cmdInput.value = ''; redrawCmd(); setTimeout(() => elements.cmdInput.focus(), 0); };
+        const closeCmd = () => { elements.cmd.classList.add('hidden'); };
+        elements.cmd.addEventListener('click', (e) => { if (e.target === elements.cmd) closeCmd(); });
+        elements.cmdInput.addEventListener('input', redrawCmd);
+        elements.cmdInput.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeCmd(); });
 
-    function showDetail(item){
-      if(!item){ dTitle.textContent=''; dMeta.textContent=''; dDiagram.innerHTML=''; dExpl.textContent=''; dImp.innerHTML=''; dDmg.innerHTML=''; return; }
-      dTitle.textContent=item.title; dMeta.textContent=`${item.category} • Risk: ${item.riskLevel} • Audience: ${(item.audience||[]).join(', ')||'All'} • ${item.status}`;
-      dDiagram.innerHTML=item.diagram||''; dExpl.textContent=item.explanation;
-      dImp.innerHTML = `<h3 class="text-2xl section-title mb-2">How This Affects You</h3><p class="text-lg md:text-xl">${item.importance}</p>`;
-      dDmg.innerHTML = `<h3 class="text-2xl section-title mb-2 mt-4">Damage Example</h3><p class="text-lg md:text-xl">${item.damageExample}</p>`;
-      history.replaceState(null,'',`#${encodeURIComponent(item.term)}`);
-    }
-    function ensureVisible(idx){ if(idx<0) return; const top=itemIndexToTop[idx], bot=top+68, vTop=results.scrollTop, vBot=vTop+results.clientHeight; if(top<vTop) results.scrollTop=top; else if(bot>vBot) results.scrollTop=bot-results.clientHeight; }
-    function jumpToLetter(L){ const t=letterTop.get(L); if(t!=null) results.scrollTop=t; }
+        const redrawCmd = () => {
+            const query = elements.cmdInput.value.trim();
+            const results = master.map(item => ({
+                item,
+                score: Math.max(fuzzyScore(item.title, query), fuzzyScore(item.term, query))
+            })).filter(res => res.score > 0.75 || !query).sort((a, b) => b.score - a.score).slice(0, 50);
 
-    // Keyboard nav + compare toggle
-    document.addEventListener('keydown', (e)=>{
-      if(e.key==='/' && document.activeElement!==q){ e.preventDefault(); q.focus(); q.select(); return; }
-      if(e.key==='Escape'){ if(q.value){ q.value=''; applyFilter(); } else { q.blur(); closeCmd(); } }
-      if(e.key==='ArrowDown'){ e.preventDefault(); if(!filtered.length) return; selIndex=Math.min(filtered.length-1, (selIndex<0?0:selIndex)+1); showDetail(filtered[selIndex]); ensureVisible(selIndex); renderWindow(); }
-      if(e.key==='ArrowUp'){ e.preventDefault(); if(!filtered.length) return; selIndex=Math.max(0, (selIndex<0?0:selIndex)-1); showDetail(filtered[selIndex]); ensureVisible(selIndex); renderWindow(); }
-      if(e.key==='Enter' && document.activeElement!==q){ if(selIndex>=0){ showDetail(filtered[selIndex]); ensureVisible(selIndex); }}
-      if(e.shiftKey && e.key==='Enter' && selIndex>=0){ toggleCompare(filtered[selIndex]); }
-      if(e.key.toLowerCase()==='l') setMode('list');
-      if(e.key.toLowerCase()==='m') setMode('map');
-      if(e.key.toLowerCase()==='c') setMode('cards');
-      if((e.ctrlKey||e.metaKey) && e.key.toLowerCase()==='k'){ e.preventDefault(); openCmd(); }
-      if(e.key===' ' && currentMode==='cards'){ e.preventDefault(); flipCard(); }
-    });
+            elements.cmdList.innerHTML = results.map(res => `
+                <div class="cmd-item p-4 border-t border-white/10 cursor-pointer hover:bg-white/5" data-id="${res.item.id}">
+                    <div class="text-base">${res.item.title}</div>
+                    <div class="text-xs text-gray-400">${res.item.category}</div>
+                </div>
+            `).join('');
 
-    q.addEventListener('input', applyFilter);
-    clearBtn.onclick = ()=>{ q.value=''; applyFilter(); };
-    results.addEventListener('scroll', renderWindow);
-    window.addEventListener('resize', renderWindow);
+            elements.cmdList.querySelectorAll('.cmd-item').forEach(el => {
+                el.onclick = () => {
+                    const id = el.getAttribute('data-id');
+                    const item = master.find(i => i.id === id);
+                    setMode('list');
+                    selectById(id, item);
+                    closeCmd();
+                };
+            });
+        };
 
-    (function(){ const s=LS.get('lastFilters',null); if(!s) return; fRisk.value=s.risk||''; fAudience.value=s.audience||''; fStatus.value=s.status||''; if(Array.isArray(s.cats)){ activeCats.clear(); s.cats.forEach(c=>activeCats.add(c)); } if(s.text) q.value=s.text; })();
+        const selectById = (id, item) => {
+            const index = filteredItems.findIndex(i => i.id === id);
+            if (index >= 0) {
+                selectedIndex = index;
+                showDetail(filteredItems[index]);
+                ensureVisible(selectedIndex);
+                renderVisibleList();
+            } else if (item) {
+                filteredItems.unshift(item); // Add the item to the top
+                buildFlatList();
+                selectedIndex = 0;
+                showDetail(item);
+                renderVisibleList();
+            }
+        };
 
-    drawChips(); applyFilter();
+        /* ===================== COMPARE TRAY ===================== */
+        const compareSet = new Map();
+        const toggleCompare = (item) => {
+            if (compareSet.has(item.id)) {
+                compareSet.delete(item.id);
+            } else if (compareSet.size < 3) {
+                compareSet.set(item.id, item);
+            }
+            redrawTray();
+        };
 
-    /* ===================== COMMAND PALETTE ===================== */
-    const cmd = document.getElementById('cmd');
-    const cmdInput = document.getElementById('cmdInput');
-    const cmdList = document.getElementById('cmdList');
-    function openCmd(){ cmd.classList.add('is-open'); cmdInput.value=''; redrawCmd(); setTimeout(()=>cmdInput.focus(), 0); }
-    function closeCmd(){ cmd.classList.remove('is-open'); }
-    cmd.addEventListener('click', (e)=>{ if(e.target===cmd) closeCmd(); });
-    cmdInput.addEventListener('input', redrawCmd);
-    cmdInput.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeCmd(); });
-    function redrawCmd(){
-      const qv=cmdInput.value.trim();
-      const arr = master
-        .map(x=>({x,score: Math.max(fuzzyScore(x.title,qv), fuzzyScore(x.term,qv))}))
-        .filter(o=> o.score>.75 || !qv)
-        .sort((a,b)=> b.score-a.score)
-        .slice(0,50);
-      cmdList.innerHTML = arr.map(o=>`<div class="cmd-item" data-id="${o.x.id}"><div class="text-base">${o.x.title}</div><div class="text-xs opacity-80">${o.x.category}</div></div>`).join('');
-      cmdList.querySelectorAll('.cmd-item').forEach(el=> el.onclick=()=>{ const id=el.getAttribute('data-id'); const item=master.find(i=>i.id===id); setMode('list'); selectById(id, item); closeCmd(); });
-    }
-    function selectById(id, item){ const idx = filtered.findIndex(i=>i.id===id); if(idx>=0){ selIndex=idx; showDetail(filtered[idx]); ensureVisible(idx); renderWindow(); } else if(item){ selIndex = 0; filtered = [item, ...filtered]; buildFlat(); renderWindow(); showDetail(item); } }
+        const redrawTray = () => {
+            elements.trayItems.innerHTML = '';
+            compareSet.forEach(item => {
+                const pill = document.createElement('span');
+                pill.className = 'bg-slate-700 text-white text-xs px-2 py-1 rounded-full';
+                pill.textContent = item.term;
+                elements.trayItems.appendChild(pill);
+            });
+            elements.tray.classList.toggle('hidden', compareSet.size === 0);
+        };
 
-    /* ===================== COMPARE ===================== */
-    const compareSet = new Map();
-    const openCompare = document.getElementById('openCompare');
-    const clearCompare = document.getElementById('clearCompare');
-    function toggleCompare(it){ if(compareSet.has(it.id)) compareSet.delete(it.id); else if(compareSet.size<3) compareSet.set(it.id, it); redrawTray(); }
-    function redrawTray(){
-      trayItems.innerHTML='';
-      compareSet.forEach(v=>{ const s=document.createElement('span'); s.className='pill'; s.textContent=v.term; trayItems.appendChild(s); });
-      tray.classList.toggle('hidden', compareSet.size===0);
-    }
-    openCompare.onclick = ()=>{
-      if(compareSet.size<2) return;
-      const arr=[...compareSet.values()];
-      const html = `<div class="fixed inset-0 bg-black/75 z-50 grid place-items-center p-4">
-        <div class="bg-[#103b73] border-2 border-white rounded-xl max-w-6xl w-full p-4 overflow-auto max-h-[90vh]">
-          <div class="flex justify-between items-center mb-2"><h3 class="text-2xl sketch-font">Compare</h3>
-            <button class="border border-white/60 rounded px-2 py-1" id="cmpClose">Close</button></div>
-          <div class="grid md:grid-cols-${arr.length} gap-4">${arr.map(x=>
-            `<div class="sketch-border rounded p-3">
-              <div class="text-xl font-bold mb-1">${x.title}</div>
-              <div class="text-sm opacity-80 mb-2">${x.category} • Risk: ${x.riskLevel} • ${x.status}</div>
-              <div class="mb-3">${x.diagram||''}</div>
-              <div class="mb-2"><span class="font-semibold">What:</span> ${x.explanation}</div>
-              <div class="mb-2"><span class="font-semibold">Why it matters:</span> ${x.importance}</div>
-              <div class="mb-2"><span class="font-semibold">Damage example:</span> ${x.damageExample}</div>
-            </div>`).join('')}</div>
-        </div></div>`;
-      const wrap=document.createElement('div'); wrap.innerHTML=html; document.body.appendChild(wrap);
-      wrap.querySelector('#cmpClose').onclick=()=>wrap.remove();
-    }
-    clearCompare.onclick = ()=>{ compareSet.clear(); redrawTray(); }
+        document.getElementById('openCompare').onclick = () => {
+            if (compareSet.size < 2) return;
+            const itemsToCompare = [...compareSet.values()];
+            const html = `
+                <div class="fixed inset-0 bg-black/75 z-50 overflow-y-auto grid place-items-center p-4">
+                    <div class="bg-slate-900 border border-slate-700 rounded-xl shadow-2xl max-w-7xl w-full p-6 text-white max-h-[90vh]">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-2xl sketch-font">Compare Blueprints</h3>
+                            <button id="cmpClose" class="btn-secondary">Close</button>
+                        </div>
+                        <div class="grid md:grid-cols-${itemsToCompare.length} gap-6">
+                            ${itemsToCompare.map(item => `
+                                <div class="bg-slate-800 rounded-lg p-4 shadow-inner">
+                                    <div class="text-xl font-bold mb-1 text-cyan-200">${item.title}</div>
+                                    <div class="text-xs opacity-80 mb-2 text-gray-400">${item.category} • Risk: ${item.riskLevel} • ${item.status}</div>
+                                    <div class="mb-4">${item.diagram || ''}</div>
+                                    <div class="mb-2"><span class="font-semibold text-teal-300">What:</span> ${item.explanation}</div>
+                                    <div class="mb-2"><span class="font-semibold text-teal-300">Why it matters:</span> ${item.importance}</div>
+                                    <div class="mb-2"><span class="font-semibold text-teal-300">Damage example:</span> ${item.damageExample}</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+            const wrapper = document.createElement('div');
+            wrapper.innerHTML = html;
+            document.body.appendChild(wrapper);
+            wrapper.querySelector('#cmpClose').onclick = () => wrapper.remove();
+        };
 
-    /* ===================== MODES ===================== */
-    let currentMode='list';
-    const listMode = document.getElementById('listMode');
-    const mapWrap = document.getElementById('mapWrap');
-    const cardsWrap = document.getElementById('cardsWrap');
-    const btnList = document.getElementById('modeList');
-    const btnMap = document.getElementById('modeMap');
-    const btnCards = document.getElementById('modeCards');
-    const mList = document.getElementById('mList');
-    const mMap = document.getElementById('mMap');
-    const mCards = document.getElementById('mCards');
+        document.getElementById('clearCompare').onclick = () => {
+            compareSet.clear();
+            redrawTray();
+        };
 
-    function setMode(m){
-      currentMode=m;
-      listMode.style.display = (m==='list')?'block':'none';
-      mapWrap.dataset.active = (m==='map');
-      cardsWrap.dataset.active = (m==='cards');
-      btnList.dataset.active = (m==='list'); btnMap.dataset.active=(m==='map'); btnCards.dataset.active=(m==='cards');
-      if(m==='map') drawMap(); if(m==='cards') initCards();
-    }
-    btnList.onclick=()=>setMode('list'); btnMap.onclick=()=>setMode('map'); btnCards.onclick=()=>setMode('cards');
-    mList.onclick=()=>setMode('list'); mMap.onclick=()=>setMode('map'); mCards.onclick=()=>setMode('cards');
+        /* ===================== MODES & SWITCHING ===================== */
+        let currentMode = 'list';
+        const setMode = (mode) => {
+            currentMode = mode;
+            document.querySelectorAll('section[id$="Wrap"], section[id$="Mode"]').forEach(el => {
+                el.style.display = 'none';
+            });
+            document.getElementById(`${mode}Wrap` || `${mode}Mode`).style.display = 'block';
 
-    /* ===================== MAP (Canvas) ===================== */
-    const mapCanvas = document.getElementById('mapCanvas');
-    const legend = document.getElementById('legend');
-    let view = {x:0,y:0, k:1};
-    const CAT_COL = {}; const pal = ['#7ef6ff','#c6ff7e','#ffd37e','#ff7ef6','#7effb3','#ff8b7e','#b07eff','#7ea5ff'];
-    categories.forEach((c,i)=> CAT_COL[c]=pal[i%pal.length]);
-    function resizeCanvas(){ const r=mapCanvas.getBoundingClientRect(); mapCanvas.width=Math.floor(r.width*devicePixelRatio); mapCanvas.height=Math.floor(r.height*devicePixelRatio); }
-    window.addEventListener('resize', ()=>{ if(currentMode==='map'){ resizeCanvas(); drawMap(true); }});
-    let nodePos = null;
-    function computePositions(){
-      const nodes = filtered.length? filtered: master;
-      const byCat = new Map(); nodes.forEach(n=>{ if(!byCat.has(n.category)) byCat.set(n.category,[]); byCat.get(n.category).push(n); });
-      const res=[]; const R0=150, Rstep=160; let ring=0;
-      [...byCat.entries()].forEach(([cat, arr])=>{
-        const R=R0 + ring*Rstep; const cx=0, cy=0; const N=arr.length; const jitter=10;
-        arr.forEach((n, j)=>{ const a = (j/N)*Math.PI*2; const x=cx+Math.cos(a)*R + (Math.random()*jitter-jitter/2); const y=cy+Math.sin(a)*R + (Math.random()*jitter-jitter/2); res.push({n, x, y, cat}); });
-        ring++;
-      });
-      nodePos = res;
-    }
-    function drawMap(reuse=false){
-      resizeCanvas(); const ctx=mapCanvas.getContext('2d'); ctx.setTransform(1,0,0,1,0,0); ctx.clearRect(0,0,mapCanvas.width,mapCanvas.height);
-      if(!nodePos || !reuse) computePositions();
-      const cx=mapCanvas.width/2, cy=mapCanvas.height/2; ctx.translate(cx+view.x, cy+view.y); ctx.scale(view.k, view.k);
-      ctx.lineWidth=1/devicePixelRatio;
-      const cats = new Set(nodePos.map(p=>p.cat));
-      cats.forEach(cat=>{
-        ctx.beginPath(); ctx.strokeStyle = CAT_COL[cat]+'55';
-        const pts = nodePos.filter(p=>p.cat===cat);
-        let R = 0; if(pts.length){ R = Math.hypot(pts[0].x, pts[0].y); }
-        ctx.arc(0,0,R,0,Math.PI*2); ctx.stroke();
-      });
-      nodePos.forEach(p=>{
-        const r = 6 + (p.n.riskLevel==='High'?2:0);
-        ctx.beginPath(); ctx.fillStyle = CAT_COL[p.cat]; ctx.strokeStyle = '#fff';
-        ctx.arc(p.x,p.y,r,0,Math.PI*2); ctx.fill(); ctx.stroke();
-      });
-      if(view.k>0.8){
-        ctx.font = `${12/view.k}px 'Architects Daughter'`; ctx.fillStyle = '#fff'; ctx.textAlign='left';
-        nodePos.forEach(p=>{ ctx.fillText(p.n.term, p.x+8, p.y+4); });
-      }
-      legend.innerHTML = categories.map(c=>`<span class="lg"><span class="sw" style="background:${CAT_COL[c]}"></span>${c}</span>`).join('');
-    }
-    (function(){
-      let dragging=false, lx=0, ly=0;
-      mapCanvas.addEventListener('mousedown', e=>{ dragging=true; lx=e.clientX; ly=e.clientY; });
-      window.addEventListener('mouseup', ()=> dragging=false);
-      window.addEventListener('mousemove', e=>{ if(!dragging) return; view.x += (e.clientX-lx); view.y += (e.clientY-ly); lx=e.clientX; ly=e.clientY; drawMap(true); });
-      mapCanvas.addEventListener('wheel', e=>{ e.preventDefault(); const k = Math.exp(-e.deltaY/400); view.k *= k; view.k=Math.max(.4, Math.min(3,view.k)); drawMap(true); }, {passive:false});
-      mapCanvas.addEventListener('click', e=>{
-        const rect=mapCanvas.getBoundingClientRect(); const x=(e.clientX-rect.left)*devicePixelRatio, y=(e.clientY-rect.top)*devicePixelRatio;
-        const cx=mapCanvas.width/2, cy=mapCanvas.height/2; const dx=(x-cx-view.x)/view.k, dy=(y-cy-view.y)/view.k;
-        const hit = nodePos.find(p=> (dx-p.x)**2 + (dy-p.y)**2 < (10)**2 );
-        if(hit){ setMode('list'); const id=hit.n.id; selectById(id, hit.n); }
-      });
-    })();
+            document.querySelectorAll('.btn-secondary').forEach(btn => btn.classList.remove('btn-active'));
+            document.getElementById(`mode${mode.charAt(0).toUpperCase() + mode.slice(1)}`).classList.add('btn-active');
+            document.getElementById(`m${mode.charAt(0).toUpperCase() + mode.slice(1)}`).classList.add('btn-active');
+            
+            if (mode === 'map') drawMap();
+            if (mode === 'cards') initCards();
+        };
 
-    /* ===================== CARDS ===================== */
-    const cardFace = document.getElementById('cardFace');
-    const btnPrev = document.getElementById('btnPrev');
-    const btnNext = document.getElementById('btnNext');
-    const btnFlip = document.getElementById('btnFlip');
-    const progressTxt = document.getElementById('progressTxt');
-    const heat = document.getElementById('heat');
+        document.getElementById('modeList').onclick = () => setMode('list');
+        document.getElementById('modeMap').onclick = () => setMode('map');
+        document.getElementById('modeCards').onclick = () => setMode('cards');
+        document.getElementById('mList').onclick = () => setMode('list');
+        document.getElementById('mMap').onclick = () => setMode('map');
+        document.getElementById('mCards').onclick = () => setMode('cards');
 
-    let deck=[], idx=0, flipped=false;
-    function initCards(){ deck = (filtered.length? filtered: master).slice();
-      deck.sort((a,b)=> a.title.localeCompare(b.title));
-      idx=0; flipped=false; renderCard(); renderHeat(); }
-    function renderCard(){ if(!deck.length){ cardFace.textContent='No cards'; return; }
-      const it=deck[idx]; const front = `<div class="sketch-font text-3xl mb-2">${it.title}</div><div class="text-base opacity-85">${it.category}</div>`;
-      const back = `<div class="text-left max-w-[70ch] mx-auto">
-        <div class="mb-2"><span class="font-semibold">What:</span> ${it.explanation}</div>
-        <div class="mb-2"><span class="font-semibold">Why it matters:</span> ${it.importance}</div>
-        <div class="mb-2"><span class="font-semibold">Damage example:</span> ${it.damageExample}</div>
-      </div>`;
-      cardFace.innerHTML = flipped? back : front; progressTxt.textContent = `${idx+1} / ${deck.length}`;
-    }
-    function flipCard(){ flipped=!flipped; renderCard(); }
-    btnFlip.onclick=flipCard; btnPrev.onclick=()=>{ if(idx>0){ idx--; flipped=false; renderCard(); }}; btnNext.onclick=()=>{ if(idx<deck.length-1){ idx++; flipped=false; renderCard(); }};
+        /* ===================== MAP (Canvas) ===================== */
+        const mapCanvas = document.getElementById('mapCanvas');
+        const legendContainer = document.getElementById('legend');
+        let view = { x: 0, y: 0, k: 1 };
+        const CATEGORY_COLORS = {};
+        const palette = ['#7ef6ff', '#c6ff7e', '#ffd37e', '#ff7ef6', '#7effb3', '#ff8b7e', '#b07eff', '#7ea5ff'];
+        categories.forEach((cat, i) => CATEGORY_COLORS[cat] = palette[i % palette.length]);
+        let nodePositions = null;
 
-    document.querySelectorAll('.rate').forEach(b=> b.onclick=()=>{ const v=+b.dataset.v||3; const key=`rate:${deck[idx].id}`; LS.set(key, {v, t:Date.now()}); renderHeat(); });
-    function renderHeat(){
-      const days=84; const today=new Date(); today.setHours(0,0,0,0);
-      heat.innerHTML='';
-      for(let i=days-1;i>=0;i--){ const d=new Date(today); d.setDate(today.getDate()-i); const k='review:'+d.toISOString().slice(0,10); const count=LS.get(k,0); const c=count? Math.min(4,count):0; const shades=['#0e2b57','#1b3f76','#2b5aa4','#3d77d2','#5a9bff'];
-        const cell=document.createElement('div'); cell.style.height='10px'; cell.title=d.toDateString()+` — ${count} reviews`; cell.style.background=shades[c]; heat.appendChild(cell);
-      }
-      const todayKey='review:'+today.toISOString().slice(0,10); const cur=LS.get(todayKey,0); LS.set(todayKey, cur);
-    }
+        const resizeCanvas = () => {
+            const rect = mapCanvas.getBoundingClientRect();
+            mapCanvas.width = Math.floor(rect.width * window.devicePixelRatio);
+            mapCanvas.height = Math.floor(rect.height * window.devicePixelRatio);
+        };
 
-    /* ===================== SAVED VIEWS ===================== */
-    const saveView = document.getElementById('saveView');
-    const views = document.getElementById('views');
-    function loadViews(){ const all=LS.get('views',{}); views.innerHTML='<option value="">Load saved view…</option>' + Object.keys(all).map(k=>`<option>${k}</option>`).join(''); }
-    saveView.onclick=()=>{
-      const name=prompt('Name this view:'); if(!name) return;
-      const state={ cats:[...activeCats], risk:fRisk.value, audience:fAudience.value, status:fStatus.value, q:q.value };
-      const all=LS.get('views',{}); all[name]=state; LS.set('views',all); loadViews(); alert('Saved.');
-    };
-    views.onchange=()=>{
-      const name=views.value; if(!name) return; const all=LS.get('views',{}); const s=all[name]; if(!s) return;
-      activeCats.clear(); s.cats.forEach(c=>activeCats.add(c)); fRisk.value=s.risk||''; fAudience.value=s.audience||''; fStatus.value=s.status||''; q.value=s.q||''; drawChips(); applyFilter();
-    };
-    loadViews();
-  </script>
+        const computePositions = () => {
+            const nodes = filteredItems.length ? filteredItems : master;
+            const itemsByCategory = new Map();
+            nodes.forEach(n => {
+                if (!itemsByCategory.has(n.category)) itemsByCategory.set(n.category, []);
+                itemsByCategory.get(n.category).push(n);
+            });
 
-  <noscript>
-    <style>.splash{display:none}.content{opacity:1;transform:none}</style>
-  </noscript>
+            const positions = [];
+            let currentRingRadius = 150, ringIncrement = 160;
+            [...itemsByCategory.entries()].forEach(([category, items]) => {
+                const numItems = items.length;
+                items.forEach((item, j) => {
+                    const angle = (j / numItems) * Math.PI * 2;
+                    const x = Math.cos(angle) * currentRingRadius + (Math.random() * 20 - 10);
+                    const y = Math.sin(angle) * currentRingRadius + (Math.random() * 20 - 10);
+                    positions.push({ item, x, y, category });
+                });
+                currentRingRadius += ringIncrement;
+            });
+            nodePositions = positions;
+        };
+
+        const drawMap = (reusePositions = false) => {
+            resizeCanvas();
+            const ctx = mapCanvas.getContext('2d');
+            ctx.setTransform(1, 0, 0, 1, 0, 0);
+            ctx.clearRect(0, 0, mapCanvas.width, mapCanvas.height);
+
+            if (!nodePositions || !reusePositions) computePositions();
+
+            const centerX = mapCanvas.width / 2, centerY = mapCanvas.height / 2;
+            ctx.translate(centerX + view.x, centerY + view.y);
+            ctx.scale(view.k, view.k);
+            ctx.lineWidth = 1 / window.devicePixelRatio;
+
+            // Draw concentric rings for categories
+            const categoriesOnMap = new Set(nodePositions.map(p => p.category));
+            let ringRadius = 150, ringIncrement = 160;
+            [...categoriesOnMap].forEach(() => {
+                ctx.beginPath();
+                ctx.strokeStyle = '#fff1';
+                ctx.arc(0, 0, ringRadius, 0, Math.PI * 2);
+                ctx.stroke();
+                ringRadius += ringIncrement;
+            });
+
+            // Draw nodes and labels
+            nodePositions.forEach(p => {
+                const nodeSize = 6 + (p.item.riskLevel === 'High' ? 4 : 0);
+                
+                // Node border
+                ctx.beginPath();
+                ctx.fillStyle = CATEGORY_COLORS[p.category];
+                ctx.strokeStyle = '#fff';
+                ctx.arc(p.x, p.y, nodeSize, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.stroke();
+
+                // Node label
+                if (view.k > 0.8) {
+                    ctx.font = `14px 'Inter', sans-serif`;
+                    ctx.fillStyle = '#fff';
+                    ctx.textAlign = 'left';
+                    ctx.fillText(p.item.term, p.x + nodeSize + 4, p.y + nodeSize / 2);
+                }
+            });
+
+            // Draw connections between related nodes (simplified example)
+            // (You can add logic here to draw lines between nodes that share a tag)
+
+            // Update legend
+            legendContainer.innerHTML = categories.map(cat => `
+                <span class="flex items-center gap-2 text-sm text-gray-300">
+                    <span class="w-3 h-3 rounded" style="background:${CATEGORY_COLORS[cat]}"></span>
+                    ${cat}
+                </span>
+            `).join('');
+        };
+
+        // Map Interaction Handlers
+        let isDragging = false, lastX = 0, lastY = 0;
+        mapCanvas.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            lastX = e.clientX;
+            lastY = e.clientY;
+        });
+        window.addEventListener('mouseup', () => isDragging = false);
+        window.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            view.x += (e.clientX - lastX);
+            view.y += (e.clientY - lastY);
+            lastX = e.clientX;
+            lastY = e.clientY;
+            drawMap(true);
+        });
+        mapCanvas.addEventListener('wheel', (e) => {
+            e.preventDefault();
+            const scaleFactor = Math.exp(-e.deltaY / 500);
+            view.k *= scaleFactor;
+            view.k = Math.max(0.4, Math.min(3, view.k));
+            drawMap(true);
+        }, { passive: false });
+        mapCanvas.addEventListener('click', (e) => {
+            const rect = mapCanvas.getBoundingClientRect();
+            const clickX = (e.clientX - rect.left) * window.devicePixelRatio;
+            const clickY = (e.clientY - rect.top) * window.devicePixelRatio;
+            const mapX = (clickX - mapCanvas.width / 2 - view.x) / view.k;
+            const mapY = (clickY - mapCanvas.height / 2 - view.y) / view.k;
+            const hitNode = nodePositions.find(p => (mapX - p.x) ** 2 + (mapY - p.y) ** 2 < (20) ** 2);
+            if (hitNode) {
+                setMode('list');
+                selectById(hitNode.item.id, hitNode.item);
+            }
+        });
+
+        /* ===================== CARDS MODE ===================== */
+        const cardFace = document.getElementById('cardFace');
+        const btnPrev = document.getElementById('btnPrev');
+        const btnNext = document.getElementById('btnNext');
+        const btnFlip = document.getElementById('btnFlip');
+        const progressTxt = document.getElementById('progressTxt');
+        const heatMapContainer = document.getElementById('heat');
+
+        let cardDeck = [], currentCardIndex = 0, isCardFlipped = false;
+        const initCards = () => {
+            cardDeck = (filteredItems.length ? filteredItems : master).slice();
+            cardDeck.sort((a, b) => a.title.localeCompare(b.title));
+            currentCardIndex = 0;
+            isCardFlipped = false;
+            renderCard();
+            renderHeatMap();
+        };
+
+        const renderCard = () => {
+            if (!cardDeck.length) {
+                cardFace.innerHTML = '<div class="text-xl text-gray-400">No cards to display.</div>';
+                return;
+            }
+            const currentItem = cardDeck[currentCardIndex];
+            const frontContent = `
+                <div class="sketch-font text-3xl mb-2 text-cyan-200">${currentItem.title}</div>
+                <div class="text-base opacity-85 text-gray-300">${currentItem.category}</div>
+            `;
+            const backContent = `
+                <div class="text-left max-w-[70ch] mx-auto space-y-4 text-gray-200">
+                    <div><span class="font-semibold text-teal-300">What:</span> ${currentItem.explanation}</div>
+                    <div><span class="font-semibold text-teal-300">Why it matters:</span> ${currentItem.importance}</div>
+                    <div><span class="font-semibold text-teal-300">Damage example:</span> ${currentItem.damageExample}</div>
+                </div>
+            `;
+            cardFace.innerHTML = isCardFlipped ? backContent : frontContent;
+            progressTxt.textContent = `${currentCardIndex + 1} / ${cardDeck.length}`;
+        };
+
+        const flipCard = () => {
+            isCardFlipped = !isCardFlipped;
+            renderCard();
+        };
+        btnFlip.onclick = flipCard;
+        btnPrev.onclick = () => { if (currentCardIndex > 0) { currentCardIndex--; isCardFlipped = false; renderCard(); } };
+        btnNext.onclick = () => { if (currentCardIndex < cardDeck.length - 1) { currentCardIndex++; isCardFlipped = false; renderCard(); } };
+
+        document.querySelectorAll('.rate').forEach(btn => {
+            btn.onclick = () => {
+                const ratingValue = +btn.dataset.v || 3;
+                const cardId = cardDeck[currentCardIndex].id;
+                const today = new Date().toISOString().slice(0, 10);
+                const reviewKey = `review:${today}:${cardId}`;
+                LS.set(reviewKey, { rating: ratingValue, timestamp: Date.now() });
+                renderHeatMap();
+            };
+        });
+
+        const renderHeatMap = () => {
+            const numDays = 84;
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            heatMapContainer.innerHTML = '';
+            const shades = ['#1a2a46', '#2b4474', '#3d6199', '#5a82c4', '#7aa4f6'];
+
+            for (let i = numDays - 1; i >= 0; i--) {
+                const date = new Date(today);
+                date.setDate(today.getDate() - i);
+                let totalReviews = 0;
+                cardDeck.forEach(item => {
+                    const reviewKey = `review:${date.toISOString().slice(0, 10)}:${item.id}`;
+                    if (LS.get(reviewKey)) {
+                        totalReviews++;
+                    }
+                });
+                const colorIndex = Math.min(shades.length - 1, totalReviews);
+                const cell = document.createElement('div');
+                cell.style.height = '10px';
+                cell.style.background = shades[colorIndex];
+                cell.title = `${date.toDateString()} - ${totalReviews} reviews`;
+                cell.className = 'rounded';
+                heatMapContainer.appendChild(cell);
+            }
+        };
+
+        /* ===================== INITIALIZATION ===================== */
+        (function () {
+            const savedFilters = LS.get('lastFilters', null);
+            if (savedFilters) {
+                elements.fRisk.value = savedFilters.risk || '';
+                elements.fAudience.value = savedFilters.audience || '';
+                elements.fStatus.value = savedFilters.status || '';
+                if (Array.isArray(savedFilters.categories)) {
+                    activeCategories.clear();
+                    savedFilters.categories.forEach(c => activeCategories.add(c));
+                }
+                elements.q.value = savedFilters.text || '';
+            }
+            drawChips();
+            applyFilters();
+        })();
+
+    </script>
 </body>
 </html>
