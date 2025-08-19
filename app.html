@@ -1,0 +1,1450 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coach Pete Ryan - Mobile App</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-orange: #FF6B35;
+            --primary-dark: #1A1A1A;
+            --primary-grey: #2D2D2D;
+            --accent-blue: #0066FF;
+            --accent-purple: #8B5CF6;
+            --accent-green: #10B981;
+            --accent-yellow: #F59E0B;
+            --accent-pink: #EC4899;
+            --light-grey: #F8F9FA;
+            --medium-grey: #6B7280;
+            --white: #FFFFFF;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --error: #EF4444;
+            --info: #3B82F6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--light-grey);
+            overflow-x: hidden;
+        }
+
+        /* Phone Mockup Container */
+        .phone-demo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-grey) 100%);
+        }
+
+        .phone-container {
+            position: relative;
+            width: 375px;
+            height: 812px;
+            background: #000;
+            border-radius: 40px;
+            padding: 8px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background: var(--white);
+            border-radius: 32px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Status Bar */
+        .status-bar {
+            height: 44px;
+            background: var(--white);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        /* App Navigation */
+        .app-header {
+            background: var(--primary-orange);
+            color: var(--white);
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .app-title {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .profile-btn {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            color: var(--white);
+        }
+
+        /* Content Area */
+        .app-content {
+            height: calc(100% - 44px - 64px - 80px);
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        /* Dashboard Cards */
+        .dashboard-cards {
+            display: grid;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .stat-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            border: 1px solid #E5E7EB;
+        }
+
+        .stat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .stat-title {
+            font-size: 14px;
+            color: var(--medium-grey);
+            font-weight: 500;
+        }
+
+        .stat-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 14px;
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--primary-dark);
+            margin-bottom: 4px;
+        }
+
+        .stat-change {
+            font-size: 12px;
+            color: var(--success);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* AI Insights */
+        .ai-insights {
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
+            border-radius: 16px;
+            padding: 20px;
+            color: var(--white);
+            margin-bottom: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ai-insights::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="30" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="2"/><circle cx="50" cy="50" r="20" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="2"/><circle cx="50" cy="50" r="10" fill="rgba(255,255,255,0.1)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .ai-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .ai-message {
+            font-size: 14px;
+            line-height: 1.4;
+            opacity: 0.9;
+        }
+
+        /* Quick Actions */
+        .quick-actions {
+            margin-bottom: 24px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 16px;
+        }
+
+        .action-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .action-btn {
+            background: var(--white);
+            border: 1px solid #E5E7EB;
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+            text-decoration: none;
+            color: var(--primary-dark);
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary-orange);
+        }
+
+        .action-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            margin: 0 auto 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 18px;
+        }
+
+        .action-label {
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* Recent Activity */
+        .activity-list {
+            background: var(--white);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .activity-item {
+            padding: 16px 20px;
+            border-bottom: 1px solid #F3F4F6;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .activity-content {
+            flex: 1;
+        }
+
+        .activity-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--primary-dark);
+            margin-bottom: 2px;
+        }
+
+        .activity-time {
+            font-size: 12px;
+            color: var(--medium-grey);
+        }
+
+        .activity-badge {
+            background: var(--success);
+            color: var(--white);
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: var(--white);
+            border-top: 1px solid #E5E7EB;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            padding-bottom: 20px;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            text-decoration: none;
+            color: var(--medium-grey);
+            transition: color 0.2s ease;
+        }
+
+        .nav-item.active {
+            color: var(--primary-orange);
+        }
+
+        .nav-icon {
+            font-size: 20px;
+        }
+
+        .nav-label {
+            font-size: 10px;
+            font-weight: 500;
+        }
+
+        .nav-badge {
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            background: var(--error);
+            color: var(--white);
+            font-size: 8px;
+            padding: 2px 4px;
+            border-radius: 6px;
+            min-width: 12px;
+            text-align: center;
+        }
+
+        /* AR Camera View */
+        .ar-camera {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(45deg, #000, #333);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+        }
+
+        .ar-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, transparent 30%, rgba(255, 107, 53, 0.1) 70%);
+        }
+
+        .ar-target {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            border: 2px solid var(--primary-orange);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+            50% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.7; }
+        }
+
+        .ar-info {
+            position: absolute;
+            bottom: 16px;
+            left: 16px;
+            background: rgba(0, 0, 0, 0.7);
+            color: var(--white);
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+        }
+
+        /* Voice Command */
+        .voice-button {
+            position: fixed;
+            bottom: 100px;
+            right: 20px;
+            width: 56px;
+            height: 56px;
+            background: var(--primary-orange);
+            border: none;
+            border-radius: 50%;
+            color: var(--white);
+            font-size: 20px;
+            box-shadow: 0 4px 16px rgba(255, 107, 53, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .voice-button:hover {
+            transform: scale(1.1);
+        }
+
+        .voice-button.listening {
+            animation: pulse-voice 1s infinite;
+            background: var(--error);
+        }
+
+        @keyframes pulse-voice {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        /* Wearable Integration */
+        .wearable-sync {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 16px;
+            border: 1px solid #E5E7EB;
+        }
+
+        .sync-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .sync-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--primary-dark);
+        }
+
+        .sync-status {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 12px;
+            color: var(--success);
+        }
+
+        .sync-devices {
+            display: flex;
+            gap: 12px;
+        }
+
+        .device-card {
+            flex: 1;
+            background: var(--light-grey);
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .device-icon {
+            font-size: 24px;
+            margin-bottom: 4px;
+            color: var(--medium-grey);
+        }
+
+        .device-name {
+            font-size: 10px;
+            color: var(--medium-grey);
+            font-weight: 500;
+        }
+
+        /* Gamification */
+        .achievement-banner {
+            background: linear-gradient(135deg, var(--accent-yellow), var(--primary-orange));
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 16px;
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .achievement-banner::before {
+            content: '🏆';
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            font-size: 60px;
+            opacity: 0.2;
+        }
+
+        .achievement-title {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .achievement-desc {
+            font-size: 12px;
+            opacity: 0.9;
+        }
+
+        /* Progress Rings */
+        .progress-rings {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+        }
+
+        .progress-ring {
+            position: relative;
+            width: 60px;
+            height: 60px;
+        }
+
+        .ring-background {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: conic-gradient(var(--primary-orange) 75%, #E5E7EB 0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .ring-background::before {
+            content: '';
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--white);
+            position: absolute;
+        }
+
+        .ring-value {
+            position: absolute;
+            z-index: 1;
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--primary-dark);
+        }
+
+        .ring-label {
+            text-align: center;
+            font-size: 10px;
+            color: var(--medium-grey);
+            margin-top: 4px;
+        }
+
+        /* Smart Features */
+        .smart-suggestions {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 20px;
+            border: 1px solid #E5E7EB;
+            margin-bottom: 16px;
+        }
+
+        .suggestion-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid #F3F4F6;
+        }
+
+        .suggestion-item:last-child {
+            border-bottom: none;
+        }
+
+        .suggestion-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            background: var(--accent-blue);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+
+        .suggestion-text {
+            flex: 1;
+            font-size: 13px;
+            color: var(--primary-dark);
+        }
+
+        .suggestion-action {
+            background: var(--primary-orange);
+            color: var(--white);
+            border: none;
+            border-radius: 6px;
+            padding: 6px 12px;
+            font-size: 10px;
+            font-weight: 600;
+        }
+
+        /* Multiple Phone Views */
+        .demo-container {
+            display: flex;
+            gap: 40px;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-grey) 100%);
+            flex-wrap: wrap;
+        }
+
+        .phone-demo-small {
+            width: 300px;
+            height: 650px;
+            transform: scale(0.8);
+        }
+
+        /* Animations */
+        .fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .slide-up {
+            animation: slideUp 0.3s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(100%); }
+            to { transform: translateY(0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .demo-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .phone-container {
+                width: 320px;
+                height: 680px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <!-- Main App View -->
+        <div class="phone-container">
+            <div class="phone-screen">
+                <!-- Status Bar -->
+                <div class="status-bar">
+                    <span>9:41</span>
+                    <span>🔋 100%</span>
+                </div>
+
+                <!-- App Header -->
+                <div class="app-header">
+                    <h1 class="app-title">Coach Pete Ryan</h1>
+                    <button class="profile-btn">
+                        <i class="fas fa-user"></i>
+                    </button>
+                </div>
+
+                <!-- Content -->
+                <div class="app-content">
+                    <!-- AI Insights -->
+                    <div class="ai-insights fade-in">
+                        <div class="ai-title">
+                            🧠 AI Coach Says
+                        </div>
+                        <div class="ai-message">
+                            "Great job, Sarah! Your consistency is improving. I recommend adding 5 more minutes to your cardio today for optimal fat burn."
+                        </div>
+                    </div>
+
+                    <!-- Achievement Banner -->
+                    <div class="achievement-banner slide-up">
+                        <div class="achievement-title">🔥 7-Day Streak!</div>
+                        <div class="achievement-desc">You've completed workouts 7 days in a row. Keep it up!</div>
+                    </div>
+
+                    <!-- Progress Rings -->
+                    <div class="progress-rings">
+                        <div class="progress-ring">
+                            <div class="ring-background">
+                                <div class="ring-value">75%</div>
+                            </div>
+                            <div class="ring-label">Calories</div>
+                        </div>
+                        <div class="progress-ring">
+                            <div class="ring-background" style="background: conic-gradient(var(--accent-green) 90%, #E5E7EB 0);">
+                                <div class="ring-value">90%</div>
+                            </div>
+                            <div class="ring-label">Workouts</div>
+                        </div>
+                        <div class="progress-ring">
+                            <div class="ring-background" style="background: conic-gradient(var(--accent-blue) 60%, #E5E7EB 0);">
+                                <div class="ring-value">60%</div>
+                            </div>
+                            <div class="ring-label">Nutrition</div>
+                        </div>
+                    </div>
+
+                    <!-- Dashboard Cards -->
+                    <div class="dashboard-cards">
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <div class="stat-title">Today's Workout</div>
+                                <div class="stat-icon" style="background: var(--primary-orange);">
+                                    <i class="fas fa-dumbbell"></i>
+                                </div>
+                            </div>
+                            <div class="stat-value">Upper Body</div>
+                            <div class="stat-change">
+                                <i class="fas fa-clock"></i>
+                                45 minutes remaining
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <div class="stat-title">Weight Progress</div>
+                                <div class="stat-icon" style="background: var(--accent-green);">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                            </div>
+                            <div class="stat-value">-8.2kg</div>
+                            <div class="stat-change">
+                                <i class="fas fa-arrow-down"></i>
+                                0.3kg this week
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AR Form Analysis -->
+                    <div class="ar-camera">
+                        <div class="ar-overlay"></div>
+                        <div class="ar-target"></div>
+                        <div class="ar-info">
+                            📱 Point camera at your squat form
+                        </div>
+                        <div style="text-align: center; z-index: 1;">
+                            <i class="fas fa-camera" style="font-size: 40px; margin-bottom: 8px;"></i>
+                            <div>AI Form Analysis</div>
+                            <div style="font-size: 12px; opacity: 0.7;">Tap to start recording</div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <div class="quick-actions">
+                        <h2 class="section-title">Quick Actions</h2>
+                        <div class="action-grid">
+                            <a href="#" class="action-btn">
+                                <div class="action-icon" style="background: var(--primary-orange);">
+                                    <i class="fas fa-play"></i>
+                                </div>
+                                <div class="action-label">Start Workout</div>
+                            </a>
+                            <a href="#" class="action-btn">
+                                <div class="action-icon" style="background: var(--accent-green);">
+                                    <i class="fas fa-apple-alt"></i>
+                                </div>
+                                <div class="action-label">Log Meal</div>
+                            </a>
+                            <a href="#" class="action-btn">
+                                <div class="action-icon" style="background: var(--accent-blue);">
+                                    <i class="fas fa-chart-bar"></i>
+                                </div>
+                                <div class="action-label">View Progress</div>
+                            </a>
+                            <a href="#" class="action-btn">
+                                <div class="action-icon" style="background: var(--accent-purple);">
+                                    <i class="fas fa-comments"></i>
+                                </div>
+                                <div class="action-label">Chat with Pete</div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Wearable Integration -->
+                    <div class="wearable-sync">
+                        <div class="sync-header">
+                            <div class="sync-title">Connected Devices</div>
+                            <div class="sync-status">
+                                <i class="fas fa-circle" style="color: var(--success);"></i>
+                                Synced
+                            </div>
+                        </div>
+                        <div class="sync-devices">
+                            <div class="device-card">
+                                <div class="device-icon">⌚</div>
+                                <div class="device-name">Apple Watch</div>
+                            </div>
+                            <div class="device-card">
+                                <div class="device-icon">🏃</div>
+                                <div class="device-name">Fitbit</div>
+                            </div>
+                            <div class="device-card">
+                                <div class="device-icon">⚖️</div>
+                                <div class="device-name">Smart Scale</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Smart Suggestions -->
+                    <div class="smart-suggestions">
+                        <h3 class="section-title">AI Recommendations</h3>
+                        <div class="suggestion-item">
+                            <div class="suggestion-icon">
+                                <i class="fas fa-fire"></i>
+                            </div>
+                            <div class="suggestion-text">Add 10 minutes HIIT for better fat burn</div>
+                            <button class="suggestion-action">Add</button>
+                        </div>
+                        <div class="suggestion-item">
+                            <div class="suggestion-icon" style="background: var(--accent-green);">
+                                <i class="fas fa-leaf"></i>
+                            </div>
+                            <div class="suggestion-text">Try quinoa salad for post-workout meal</div>
+                            <button class="suggestion-action">Recipe</button>
+                        </div>
+                        <div class="suggestion-item">
+                            <div class="suggestion-icon" style="background: var(--accent-purple);">
+                                <i class="fas fa-bed"></i>
+                            </div>
+                            <div class="suggestion-text">Sleep 30 mins earlier for better recovery</div>
+                            <button class="suggestion-action">Remind</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bottom Navigation -->
+                <div class="bottom-nav">
+                    <a href="#" class="nav-item active">
+                        <i class="nav-icon fas fa-home"></i>
+                        <span class="nav-label">Home</span>
+                    </a>
+                    <a href="#" class="nav-item">
+                        <i class="nav-icon fas fa-dumbbell"></i>
+                        <span class="nav-label">Workouts</span>
+                    </a>
+                    <a href="#" class="nav-item">
+                        <i class="nav-icon fas fa-apple-alt"></i>
+                        <span class="nav-label">Nutrition</span>
+                    </a>
+                    <a href="#" class="nav-item">
+                        <i class="nav-icon fas fa-chart-line"></i>
+                        <span class="nav-label">Progress</span>
+                    </a>
+                    <a href="#" class="nav-item">
+                        <div style="position: relative;">
+                            <i class="nav-icon fas fa-comments"></i>
+                            <div class="nav-badge">3</div>
+                        </div>
+                        <span class="nav-label">Chat</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Workout View -->
+        <div class="phone-container phone-demo-small">
+            <div class="phone-screen">
+                <div class="status-bar">
+                    <span>9:45</span>
+                    <span>⚡ Workout Mode</span>
+                </div>
+
+                <div class="app-header" style="background: var(--accent-blue);">
+                    <h1 class="app-title">Upper Body Blast</h1>
+                    <button class="profile-btn">
+                        <i class="fas fa-pause"></i>
+                    </button>
+                </div>
+
+                <div class="app-content" style="text-align: center; padding-top: 40px;">
+                    <!-- Current Exercise -->
+                    <div style="margin-bottom: 40px;">
+                        <div style="font-size: 48px; margin-bottom: 16px;">💪</div>
+                        <h2 style="font-size: 24px; margin-bottom: 8px; color: var(--primary-dark);">Push-ups</h2>
+                        <p style="color: var(--medium-grey); margin-bottom: 24px;">Exercise 2 of 6</p>
+                        
+                        <!-- Timer -->
+                        <div style="font-size: 64px; font-weight: 800; color: var(--accent-blue); margin-bottom: 16px;">
+                            00:45
+                        </div>
+                        <div style="color: var(--medium-grey);">Rest Time</div>
+                    </div>
+
+                    <!-- Progress Bar -->
+                    <div style="width: 100%; height: 8px; background: #E5E7EB; border-radius: 4px; margin-bottom: 32px;">
+                        <div style="width: 33%; height: 100%; background: var(--accent-blue); border-radius: 4px;"></div>
+                    </div>
+
+                    <!-- Sets Counter -->
+                    <div style="display: flex; justify-content: space-around; margin-bottom: 32px;">
+                        <div style="text-align: center;">
+                            <div style="font-size: 32px; font-weight: 800; color: var(--primary-dark);">3</div>
+                            <div style="font-size: 12px; color: var(--medium-grey);">Sets</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 32px; font-weight: 800; color: var(--primary-dark);">12</div>
+                            <div style="font-size: 12px; color: var(--medium-grey);">Reps</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 32px; font-weight: 800; color: var(--accent-green);">2</div>
+                            <div style="font-size: 12px; color: var(--medium-grey);">Completed</div>
+                        </div>
+                    </div>
+
+                    <!-- Voice Coaching -->
+                    <div style="background: var(--light-grey); border-radius: 16px; padding: 20px; margin-bottom: 24px;">
+                        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                            <div style="width: 40px; height: 40px; background: var(--primary-orange); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--white);">
+                                🎙️
+                            </div>
+                            <div style="text-align: left;">
+                                <div style="font-weight: 600; font-size: 14px;">Coach Pete</div>
+                                <div style="font-size: 12px; color: var(--medium-grey);">Live Coaching</div>
+                            </div>
+                        </div>
+                        <div style="text-align: left; font-size: 14px; color: var(--primary-dark);">
+                            "Great form! Keep your core tight and push through your chest. You've got this!"
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div style="display: flex; gap: 16px;">
+                        <button style="flex: 1; background: var(--accent-blue); color: var(--white); border: none; border-radius: 12px; padding: 16px; font-weight: 600;">
+                            Next Set
+                        </button>
+                        <button style="width: 56px; background: var(--light-grey); border: none; border-radius: 12px; padding: 16px; color: var(--medium-grey);">
+                            <i class="fas fa-skip-forward"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="bottom-nav">
+                    <a href="#" class="nav-item">
+                        <i class="nav-icon fas fa-home"></i>
+                        <span class="nav-label">Home</span>
+                    </a>
+                    <a href="#" class="nav-item active">
+                        <i class="nav-icon fas fa-dumbbell"></i>
+                        <span class="nav-label">Workouts</span>
+                    </a>
+                    <a href="#" class="nav-item">
+                        <i class="nav-icon fas fa-apple-alt"></i>
+                        <span class="nav-label">Nutrition</span>
+                    </a>
+                    <a href="#" class="nav-item">
+                        <i class="nav-icon fas fa-chart-line"></i>
+                        <span class="nav-label">Progress</span>
+                    </a>
+                    <a href="#" class="nav-item">
+                        <i class="nav-icon fas fa-comments"></i>
+                        <span class="nav-label">Chat</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI Chat View -->
+        <div class="phone-container phone-demo-small">
+            <div class="phone-screen">
+                <div class="status-bar">
+                    <span>9:47</span>
+                    <span>🤖 AI Active</span>
+                </div>
+
+                <div class="app-header" style="background: var(--accent-purple);">
+                    <h1 class="app-title">Coach AI Chat</h1>
+                    <button class="profile-btn">
+                        <i class="fas fa-cog"></i>
+                    </button>
+                </div>
+
+                <div class="app-content" style="padding: 16px;">
+                    <!-- Chat Messages -->
+                    <div style="display: flex; flex-direction: column; gap: 16px; margin-bottom: 80px;">
+                        <!-- AI Message -->
+                        <div style="display: flex; gap: 12px;">
+                            <div style="width: 32px; height: 32px; background: var(--accent-purple); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--white); font-size: 14px; flex-shrink: 0;">
+                                🤖
+                            </div>
+                            <div style="background: var(--light-grey); padding: 12px 16px; border-radius: 16px; border-top-left-radius: 4px; max-width: 80%; font-size: 14px;">
+                                Hi Sarah! I noticed you completed your workout 15 minutes faster today. Your endurance is really improving! 🎉
+                            </div>
+                        </div>
+
+                        <!-- User Message -->
+                        <div style="display: flex; gap: 12px; justify-content: flex-end;">
+                            <div style="background: var(--primary-orange); color: var(--white); padding: 12px 16px; border-radius: 16px; border-top-right-radius: 4px; max-width: 80%; font-size: 14px;">
+                                Thanks! I'm feeling much stronger. What should I focus on next?
+                            </div>
+                            <div style="width: 32px; height: 32px; background: var(--primary-orange); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--white); font-size: 12px; flex-shrink: 0;">
+                                SM
+                            </div>
+                        </div>
+
+                        <!-- AI Message with Suggestions -->
+                        <div style="display: flex; gap: 12px;">
+                            <div style="width: 32px; height: 32px; background: var(--accent-purple); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--white); font-size: 14px; flex-shrink: 0;">
+                                🤖
+                            </div>
+                            <div>
+                                <div style="background: var(--light-grey); padding: 12px 16px; border-radius: 16px; border-top-left-radius: 4px; max-width: 80%; font-size: 14px; margin-bottom: 8px;">
+                                    Based on your progress, I recommend focusing on these areas:
+                                </div>
+                                <div style="display: flex; flex-direction: column; gap: 8px;">
+                                    <button style="background: var(--white); border: 1px solid #E5E7EB; border-radius: 12px; padding: 12px; text-align: left; font-size: 13px; display: flex; align-items: center; gap: 8px;">
+                                        💪 Increase weights by 5%
+                                    </button>
+                                    <button style="background: var(--white); border: 1px solid #E5E7EB; border-radius: 12px; padding: 12px; text-align: left; font-size: 13px; display: flex; align-items: center; gap: 8px;">
+                                        🏃 Add cardio intervals
+                                    </button>
+                                    <button style="background: var(--white); border: 1px solid #E5E7EB; border-radius: 12px; padding: 12px; text-align: left; font-size: 13px; display: flex; align-items: center; gap: 8px;">
+                                        🧘 Try yoga for recovery
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Live Voice Note -->
+                        <div style="display: flex; gap: 12px;">
+                            <div style="width: 32px; height: 32px; background: var(--accent-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--white); font-size: 12px; flex-shrink: 0;">
+                                PR
+                            </div>
+                            <div style="background: var(--accent-blue); color: var(--white); padding: 12px 16px; border-radius: 16px; border-top-left-radius: 4px; max-width: 80%; font-size: 14px; display: flex; align-items: center; gap: 8px;">
+                                <i class="fas fa-play"></i>
+                                Voice message from Pete
+                                <span style="font-size: 12px; opacity: 0.8;">0:23</span>
+                            </div>
+                        </div>
+
+                        <!-- Real-time Form Analysis -->
+                        <div style="background: linear-gradient(135deg, var(--accent-green), var(--accent-blue)); border-radius: 16px; padding: 16px; color: var(--white);">
+                            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                                <i class="fas fa-eye"></i>
+                                <span style="font-weight: 600; font-size: 14px;">Live Form Analysis</span>
+                            </div>
+                            <div style="font-size: 13px; margin-bottom: 12px;">Your squat depth improved 15% this week! Keep knees aligned with toes.</div>
+                            <div style="display: flex; justify-content: space-between; font-size: 12px;">
+                                <span>Form Score: 92%</span>
+                                <span>📈 +8% improvement</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Input Area -->
+                    <div style="position: fixed; bottom: 80px; left: 8px; right: 8px; background: var(--white); border-radius: 24px; padding: 8px; border: 1px solid #E5E7EB; display: flex; align-items: center; gap: 8px;">
+                        <button style="width: 36px; height: 36px; background: var(--light-grey); border: none; border-radius: 50%; color: var(--medium-grey);">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                        <input type="text" placeholder="Ask AI anything..." style="flex: 1; border: none; outline: none; font-size: 14px; padding: 8px;">
+                        <button style="width: 36px; height: 36px; background: var(--primary-orange); border: none; border-radius: 50%; color: var(--white);">
+                            <i class="fas fa-microphone"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="bottom-nav">
+                    <a href="#" class="nav-item">
+                        <i class="nav-icon fas fa-home"></i>
+                        <span class="nav-label">Home</span>
+                    </a>
+                    <a href="#" class="nav-item">
+                        <i class="nav-icon fas fa-dumbbell"></i>
+                        <span class="nav-label">Workouts</span>
+                    </a>
+                    <a href="#" class="nav-item">
+                        <i class="nav-icon fas fa-apple-alt"></i>
+                        <span class="nav-label">Nutrition</span>
+                    </a>
+                    <a href="#" class="nav-item">
+                        <i class="nav-icon fas fa-chart-line"></i>
+                        <span class="nav-label">Progress</span>
+                    </a>
+                    <a href="#" class="nav-item active">
+                        <i class="nav-icon fas fa-comments"></i>
+                        <span class="nav-label">Chat</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Voice Command Button -->
+    <button class="voice-button" onclick="toggleVoice()">
+        <i class="fas fa-microphone"></i>
+    </button>
+
+    <script>
+        // Voice Command Functionality
+        let isListening = false;
+        let recognition;
+
+        function toggleVoice() {
+            const btn = document.querySelector('.voice-button');
+            
+            if (!isListening) {
+                startListening();
+                btn.classList.add('listening');
+                btn.innerHTML = '<i class="fas fa-stop"></i>';
+            } else {
+                stopListening();
+                btn.classList.remove('listening');
+                btn.innerHTML = '<i class="fas fa-microphone"></i>';
+            }
+            
+            isListening = !isListening;
+        }
+
+        function startListening() {
+            if ('webkitSpeechRecognition' in window) {
+                recognition = new webkitSpeechRecognition();
+                recognition.continuous = true;
+                recognition.interimResults = true;
+                recognition.lang = 'en-GB';
+
+                recognition.onresult = function(event) {
+                    const command = event.results[event.results.length - 1][0].transcript.toLowerCase();
+                    processVoiceCommand(command);
+                };
+
+                recognition.start();
+            } else {
+                alert('Voice recognition not supported in this browser');
+            }
+        }
+
+        function stopListening() {
+            if (recognition) {
+                recognition.stop();
+            }
+        }
+
+        function processVoiceCommand(command) {
+            console.log('Voice command:', command);
+            
+            if (command.includes('start workout')) {
+                simulateAction('Starting your workout...');
+            } else if (command.includes('log meal')) {
+                simulateAction('Opening meal logger...');
+            } else if (command.includes('show progress')) {
+                simulateAction('Displaying your progress...');
+            } else if (command.includes('call pete')) {
+                simulateAction('Connecting to Pete...');
+            }
+        }
+
+        function simulateAction(message) {
+            // Create temporary notification
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: var(--primary-orange);
+                color: white;
+                padding: 12px 24px;
+                border-radius: 24px;
+                font-size: 14px;
+                font-weight: 600;
+                z-index: 10000;
+                box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+            `;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        // App Interactions
+        document.addEventListener('DOMContentLoaded', function() {
+            // Simulate real-time updates
+            setInterval(() => {
+                updateProgressRings();
+                updateStats();
+            }, 5000);
+
+            // Add touch feedback to buttons
+            document.querySelectorAll('.action-btn, .suggestion-action, button').forEach(btn => {
+                btn.addEventListener('touchstart', function() {
+                    this.style.transform = 'scale(0.95)';
+                });
+                
+                btn.addEventListener('touchend', function() {
+                    this.style.transform = 'scale(1)';
+                });
+            });
+
+            // Simulate AI messages
+            setTimeout(() => {
+                addAIMessage("Your heart rate pattern suggests you're ready for a more intense workout. Want me to create one?");
+            }, 8000);
+
+            setTimeout(() => {
+                addAIMessage("I've noticed you prefer evening workouts. Your performance is 12% better after 5 PM.");
+            }, 15000);
+        });
+
+        function updateProgressRings() {
+            const rings = document.querySelectorAll('.ring-background');
+            rings.forEach(ring => {
+                const currentValue = parseInt(ring.querySelector('.ring-value').textContent);
+                const change = Math.random() > 0.5 ? 1 : -1;
+                const newValue = Math.max(0, Math.min(100, currentValue + change));
+                
+                ring.querySelector('.ring-value').textContent = newValue + '%';
+                ring.style.background = `conic-gradient(var(--primary-orange) ${newValue}%, #E5E7EB 0)`;
+            });
+        }
+
+        function updateStats() {
+            const statValues = document.querySelectorAll('.stat-value');
+            statValues.forEach(stat => {
+                if (stat.textContent.includes('kg')) {
+                    const current = parseFloat(stat.textContent.replace(/[^\d.-]/g, ''));
+                    const change = (Math.random() - 0.5) * 0.2;
+                    stat.textContent = (current + change).toFixed(1) + 'kg';
+                }
+            });
+        }
+
+        function addAIMessage(message) {
+            // This would add a new AI message to the chat view
+            console.log('AI Message:', message);
+            
+            // Show notification
+            simulateAction('🤖 ' + message.substring(0, 30) + '...');
+        }
+
+        // AR Form Analysis Simulation
+        function startARAnalysis() {
+            const arCamera = document.querySelector('.ar-camera');
+            const arInfo = arCamera.querySelector('.ar-info');
+            
+            arInfo.innerHTML = '🎥 Recording... Analysing form';
+            
+            setTimeout(() => {
+                arInfo.innerHTML = '✅ Great form! 92% accuracy';
+                arCamera.style.border = '2px solid var(--success)';
+            }, 3000);
+            
+            setTimeout(() => {
+                arInfo.innerHTML = '📱 Point camera at your squat form';
+                arCamera.style.border = 'none';
+            }, 6000);
+        }
+
+        // Smart Notifications
+        function showSmartNotification(type, message) {
+            const colors = {
+                workout: 'var(--primary-orange)',
+                nutrition: 'var(--accent-green)',
+                sleep: 'var(--accent-purple)',
+                motivation: 'var(--accent-blue)'
+            };
+
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 80px;
+                left: 20px;
+                right: 20px;
+                background: ${colors[type]};
+                color: white;
+                padding: 16px;
+                border-radius: 12px;
+                font-size: 14px;
+                z-index: 10000;
+                box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+                transform: translateY(-100%);
+                transition: transform 0.3s ease;
+            `;
+            notification.innerHTML = `
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>${message}</div>
+                    <button onclick="this.parentNode.parentNode.remove()" style="background: none; border: none; color: white; font-size: 18px;">×</button>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.transform = 'translateY(0)';
+            }, 100);
+            
+            setTimeout(() => {
+                notification.style.transform = 'translateY(-100%)';
+                setTimeout(() => notification.remove(), 300);
+            }, 5000);
+        }
+
+        // Simulate smart notifications
+        setTimeout(() => {
+            showSmartNotification('workout', '🔥 Perfect time for HIIT! Your energy levels are optimal.');
+        }, 10000);
+
+        setTimeout(() => {
+            showSmartNotification('nutrition', '🥗 Protein intake is low today. Consider a post-workout shake.');
+        }, 20000);
+
+        setTimeout(() => {
+            showSmartNotification('motivation', '🎯 You\'re only 2 workouts away from your weekly goal!');
+        }, 30000);
+
+        // Wearable Data Simulation
+        function simulateWearableSync() {
+            const syncStatus = document.querySelector('.sync-status');
+            syncStatus.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Syncing...';
+            
+            setTimeout(() => {
+                syncStatus.innerHTML = '<i class="fas fa-circle" style="color: var(--success);"></i> Synced';
+                updateStatsFromWearables();
+            }, 2000);
+        }
+
+        function updateStatsFromWearables() {
+            // Simulate new data from wearables
+            simulateAction('📱 New data from Apple Watch: 847 steps, 92 BPM avg');
+        }
+
+        // Auto-sync every 30 seconds
+        setInterval(simulateWearableSync, 30000);
+
+        // Gamification System
+        function checkAchievements() {
+            const achievements = [
+                { title: '🔥 Consistency King', desc: '10 days in a row!', trigger: Math.random() > 0.8 },
+                { title: '💪 Strength Beast', desc: 'Personal record broken!', trigger: Math.random() > 0.9 },
+                { title: '🎯 Goal Crusher', desc: 'Monthly target achieved!', trigger: Math.random() > 0.85 },
+                { title: '⚡ Speed Demon', desc: 'Fastest workout time!', trigger: Math.random() > 0.87 }
+            ];
+
+            achievements.forEach(achievement => {
+                if (achievement.trigger) {
+                    showAchievement(achievement.title, achievement.desc);
+                }
+            });
+        }
+
+        function showAchievement(title, desc) {
+            const achievement = document.createElement('div');
+            achievement.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: linear-gradient(135deg, var(--accent-yellow), var(--primary-orange));
+                color: white;
+                padding: 24px;
+                border-radius: 16px;
+                text-align: center;
+                z-index: 10001;
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+                animation: achievementPop 0.5s ease-out;
+            `;
+            achievement.innerHTML = `
+                <div style="font-size: 48px; margin-bottom: 12px;">🏆</div>
+                <div style="font-size: 18px; font-weight: 700; margin-bottom: 8px;">${title}</div>
+                <div style="font-size: 14px; opacity: 0.9;">${desc}</div>
+            `;
+            
+            document.body.appendChild(achievement);
+            
+            setTimeout(() => {
+                achievement.remove();
+            }, 4000);
+        }
+
+        // Check for achievements periodically
+        setInterval(checkAchievements, 15000);
+
+        // Progressive Web App features
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js').then(function(registration) {
+                console.log('ServiceWorker registration successful');
+            }).catch(function(err) {
+                console.log('ServiceWorker registration failed');
+            });
+        }
+
+        // Offline functionality
+        window.addEventListener('online', function() {
+            simulateAction('📶 Back online! Syncing data...');
+        });
+
+        window.addEventListener('offline', function() {
+            simulateAction('📱 Working offline. Data will sync when connected.');
+        });
+    </script>
+
+    <style>
+        @keyframes achievementPop {
+            0% { transform: translate(-50%, -50%) scale(0.3); opacity: 0; }
+            50% { transform: translate(-50%, -50%) scale(1.1); }
+            100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+        }
+    </style>
+</body>
+</html>
