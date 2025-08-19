@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Training History – Coach Pete Ryan</title>
+  <style>
+    body {
+      font-family: 'Helvetica Neue', sans-serif;
+      background-color: #ffffff;
+      color: #111;
+      margin: 0;
+      padding: 0;
+    }
+
+    .form-container {
+      max-width: 700px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: #f8f8f8;
+      border-radius: 8px;
+      border: 2px solid #111;
+    }
+
+    h1 {
+      text-transform: uppercase;
+      font-size: 1.8rem;
+      color: #d4af37;
+      margin-bottom: 0.5rem;
+    }
+
+    .form-intro {
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+      color: #444;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-top: 1.5rem;
+      color: #111;
+    }
+
+    textarea, input[type="text"], input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      margin-top: 0.3rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
+
+    button {
+      margin-top: 2rem;
+      width: 100%;
+      padding: 0.75rem;
+      background-color: #111;
+      color: #fff;
+      font-size: 1rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      text-transform: uppercase;
+    }
+
+    button:hover {
+      background-color: #d4af37;
+      color: #111;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h1>Training History</h1>
+    <p class="form-intro">The more I understand your training background, beliefs, and experiences — the better I can programme for you.</p>
+
+    <form method="POST" action="https://formspree.io/f/YOUR_ID_HERE">
+
+      <label>Have you ever trained consistently for 12+ weeks? What did it look like?</label>
+      <textarea name="training_consistency" rows="4"></textarea>
+
+      <label>What types of training have you tried before? (e.g. gym, sports, PT, home workouts)</label>
+      <textarea name="training_types" rows="3"></textarea>
+
+      <label>What did you enjoy most?</label>
+      <textarea name="training_enjoyment" rows="2"></textarea>
+
+      <label>What did you struggle with or dislike?</label>
+      <textarea name="training_dislikes" rows="2"></textarea>
+
+      <label>Why did you stop those routines?</label>
+      <textarea name="training_stopped" rows="2"></textarea>
+
+      <label>What are your strengths physically?</label>
+      <textarea name="strengths" rows="2"></textarea>
+
+      <label>What are your physical or mental weaknesses?</label>
+      <textarea name="weaknesses" rows="2"></textarea>
+
+      <label>Do you currently follow any type of training plan or activity each week?</label>
+      <textarea name="current_routine" rows="3"></textarea>
+
+      <label>How would you rate your current motivation (1–10)?</label>
+      <input type="number" name="motivation_rating" min="1" max="10">
+
+      <label>What are your main training goals right now?</label>
+      <textarea name="training_goals" rows="3"></textarea>
+
+      <label>What’s your biggest obstacle to progress?</label>
+      <textarea name="biggest_obstacle" rows="2"></textarea>
+
+      <label>Do you feel confident training in a gym environment?</label>
+      <textarea name="gym_confidence" rows="2"></textarea>
+
+      <label>Do you struggle with body image or comparison to others?</label>
+      <textarea name="body_image" rows="3"></textarea>
+
+      <label>Do you track food, calories, or macros currently?</label>
+      <textarea name="food_tracking" rows="2"></textarea>
+
+      <label>How would you describe your relationship with food and exercise?</label>
+      <textarea name="food_relationship" rows="3"></textarea>
+
+      <label>Do you consider yourself competitive or more relaxed?</label>
+      <textarea name="competitive" rows="2"></textarea>
+
+      <label>What’s one pattern or belief about training you want to break?</label>
+      <textarea name="training_belief_to_change" rows="2"></textarea>
+
+      <label>Preferred time of day to train?</label>
+      <input type="text" name="training_time">
+
+      <label>Anything else you feel I should know about your training history, mindset, or habits?</label>
+      <textarea name="training_extra_notes" rows="3"></textarea>
+
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</body>
+</html>
