@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Personal Details Form – Coach Pete Ryan</title>
+  <style>
+    body {
+      font-family: 'Helvetica Neue', sans-serif;
+      background-color: #ffffff;
+      color: #111;
+      margin: 0;
+      padding: 0;
+    }
+
+    .form-container {
+      max-width: 700px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: #f8f8f8;
+      border-radius: 8px;
+      border: 2px solid #111;
+    }
+
+    h1 {
+      text-transform: uppercase;
+      font-size: 1.8rem;
+      color: #d4af37;
+      margin-bottom: 0.5rem;
+    }
+
+    .form-intro {
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+      color: #444;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-top: 1.2rem;
+      color: #111;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 0.3rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
+
+    button {
+      margin-top: 2rem;
+      width: 100%;
+      padding: 0.75rem;
+      background-color: #111;
+      color: #fff;
+      font-size: 1rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      text-transform: uppercase;
+    }
+
+    button:hover {
+      background-color: #d4af37;
+      color: #111;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h1>Personal Details</h1>
+    <p class="form-intro">Please complete this form as thoroughly as possible. The more I know, the more precisely I can coach you.</p>
+    <form method="POST" action="https://formspree.io/f/YOUR_ID_HERE">
+      <label>Full Legal Name</label>
+      <input type="text" name="full_name" required>
+
+      <label>Preferred Name</label>
+      <input type="text" name="preferred_name">
+
+      <label>Email Address</label>
+      <input type="email" name="email" required>
+
+      <label>Phone Number</label>
+      <input type="tel" name="phone">
+
+      <label>Home Address</label>
+      <textarea name="address" rows="2"></textarea>
+
+      <label>Postcode</label>
+      <input type="text" name="postcode">
+
+      <label>Date of Birth</label>
+      <input type="date" name="dob">
+
+      <label>Gender Identity</label>
+      <input type="text" name="gender">
+
+      <label>Emergency Contact Name</label>
+      <input type="text" name="emergency_contact_name">
+
+      <label>Emergency Contact Number</label>
+      <input type="tel" name="emergency_contact_phone">
+
+      <label>Relationship to You</label>
+      <input type="text" name="emergency_relationship">
+
+      <label>Occupation</label>
+      <input type="text" name="occupation">
+
+      <label>How stressful is your job? (1–10)</label>
+      <input type="number" name="job_stress" min="1" max="10">
+
+      <label>Living Situation (e.g., alone, with partner, children, housemates)</label>
+      <input type="text" name="living_situation">
+
+      <label>Do you have a current GP? (Name + Practice)</label>
+      <textarea name="gp_details" rows="2"></textarea>
+
+      <label>How did you find Coach Pete Ryan?</label>
+      <input type="text" name="referral_source">
+
+      <label>Have you worked with any other coach or trainer before?</label>
+      <textarea name="previous_coaching" rows="3"></textarea>
+
+      <label>Is there anything else I should know about your current situation?</label>
+      <textarea name="other_notes" rows="4"></textarea>
+
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</body>
+</html>
