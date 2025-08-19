@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PAR-Q Form – Coach Pete Ryan</title>
+  <style>
+    body {
+      font-family: 'Helvetica Neue', sans-serif;
+      background-color: #ffffff;
+      color: #111;
+      margin: 0;
+      padding: 0;
+    }
+
+    .form-container {
+      max-width: 700px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: #f8f8f8;
+      border-radius: 8px;
+      border: 2px solid #111;
+    }
+
+    h1 {
+      text-transform: uppercase;
+      font-size: 1.8rem;
+      color: #d4af37;
+      margin-bottom: 0.5rem;
+    }
+
+    .form-intro {
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+      color: #444;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-top: 1.5rem;
+      color: #111;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 0.3rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
+
+    .yes-no {
+      margin-top: 0.5rem;
+    }
+
+    .yes-no input {
+      margin-right: 0.5rem;
+    }
+
+    button {
+      margin-top: 2rem;
+      width: 100%;
+      padding: 0.75rem;
+      background-color: #111;
+      color: #fff;
+      font-size: 1rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      text-transform: uppercase;
+    }
+
+    button:hover {
+      background-color: #d4af37;
+      color: #111;
+    }
+
+    textarea {
+      margin-top: 0.5rem;
+    }
+
+    .subsection {
+      margin-top: 2rem;
+      font-weight: bold;
+      font-size: 1.1rem;
+      color: #d4af37;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h1>PAR-Q Form</h1>
+    <p class="form-intro">This form screens for any medical concerns that could affect your training. Please be honest and detailed.</p>
+
+    <form method="POST" action="https://formspree.io/f/YOUR_ID_HERE">
+      
+      <div class="subsection">Standard Questions</div>
+
+      <label>Has your doctor ever said that you have a heart condition or that you should only do physical activity recommended by a doctor?</label>
+      <div class="yes-no">
+        <input type="radio" name="q1" value="Yes" required> Yes
+        <input type="radio" name="q1" value="No" required> No
+      </div>
+      <textarea name="q1_explanation" placeholder="Explain if Yes"></textarea>
+
+      <label>Do you feel pain in your chest when you do physical activity?</label>
+      <div class="yes-no">
+        <input type="radio" name="q2" value="Yes" required> Yes
+        <input type="radio" name="q2" value="No" required> No
+      </div>
+      <textarea name="q2_explanation" placeholder="Explain if Yes"></textarea>
+
+      <label>Have you had chest pain in the past month when not doing physical activity?</label>
+      <div class="yes-no">
+        <input type="radio" name="q3" value="Yes" required> Yes
+        <input type="radio" name="q3" value="No" required> No
+      </div>
+      <textarea name="q3_explanation" placeholder="Explain if Yes"></textarea>
+
+      <label>Do you lose your balance because of dizziness or do you ever lose consciousness?</label>
+      <div class="yes-no">
+        <input type="radio" name="q4" value="Yes" required> Yes
+        <input type="radio" name="q4" value="No" required> No
+      </div>
+      <textarea name="q4_explanation" placeholder="Explain if Yes"></textarea>
+
+      <label>Do you have a bone or joint problem that could be made worse by a change in physical activity?</label>
+      <div class="yes-no">
+        <input type="radio" name="q5" value="Yes" required> Yes
+        <input type="radio" name="q5" value="No" required> No
+      </div>
+      <textarea name="q5_explanation" placeholder="Explain if Yes"></textarea>
+
+      <label>Are you currently taking prescribed medications (e.g. for blood pressure, asthma, heart condition)?</label>
+      <div class="yes-no">
+        <input type="radio" name="q6" value="Yes" required> Yes
+        <input type="radio" name="q6" value="No" required> No
+      </div>
+      <textarea name="q6_explanation" placeholder="Explain if Yes"></textarea>
+
+      <label>Do you know of any other reason why you should not do physical activity?</label>
+      <div class="yes-no">
+        <input type="radio" name="q7" value="Yes" required> Yes
+        <input type="radio" name="q7" value="No" required> No
+      </div>
+      <textarea name="q7_explanation" placeholder="Explain if Yes"></textarea>
+
+      <div class="subsection">Extended Screening</div>
+
+      <label>Have you experienced rapid or unexplained weight loss or gain in the last 6 months?</label>
+      <textarea name="extended_weight_change"></textarea>
+
+      <label>Do you struggle with sleep, night sweats, or consistent fatigue?</label>
+      <textarea name="extended_sleep_fatigue"></textarea>
+
+      <label>Have you ever been diagnosed with depression, anxiety, or panic disorders?</label>
+      <textarea name="extended_mental_health"></textarea>
+
+      <label>Are there any reproductive health factors you’d like to disclose?</label>
+      <textarea name="extended_reproductive"></textarea>
+
+      <label>Is there anything you’ve never told a doctor, but feel might be relevant?</label>
+      <textarea name="extended_other_disclosure"></textarea>
+
+      <div class="subsection">Final Declaration</div>
+
+      <label>By submitting this form, I declare the information provided is true and accurate to the best of my knowledge.</label>
+      <div class="yes-no">
+        <input type="checkbox" name="declaration" required> I agree and understand
+      </div>
+
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</body>
+</html>
