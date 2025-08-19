@@ -1,1 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Medical History – Coach Pete Ryan</title>
+  <style>
+    body {
+      font-family: 'Helvetica Neue', sans-serif;
+      background-color: #ffffff;
+      color: #111;
+      margin: 0;
+      padding: 0;
+    }
 
+    .form-container {
+      max-width: 700px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: #f8f8f8;
+      border-radius: 8px;
+      border: 2px solid #111;
+    }
+
+    h1 {
+      text-transform: uppercase;
+      font-size: 1.8rem;
+      color: #d4af37;
+      margin-bottom: 0.5rem;
+    }
+
+    .form-intro {
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+      color: #444;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-top: 1.5rem;
+      color: #111;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="number"],
+    textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 0.3rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
+
+    button {
+      margin-top: 2rem;
+      width: 100%;
+      padding: 0.75rem;
+      background-color: #111;
+      color: #fff;
+      font-size: 1rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      text-transform: uppercase;
+    }
+
+    button:hover {
+      background-color: #d4af37;
+      color: #111;
+    }
+
+    .subsection {
+      margin-top: 2rem;
+      font-weight: bold;
+      font-size: 1.1rem;
+      color: #d4af37;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h1>Medical History</h1>
+    <p class="form-intro">The following questions help ensure your training is safe and tailored. Be honest — there is no judgement.</p>
+
+    <form method="POST" action="https://formspree.io/f/YOUR_ID_HERE">
+
+      <label>List any diagnosed medical conditions (e.g., asthma, diabetes, thyroid issues)</label>
+      <textarea name="diagnosed_conditions" rows="4"></textarea>
+
+      <label>Are you currently on any medications? Please list all with dosage and reason.</label>
+      <textarea name="medications" rows="4"></textarea>
+
+      <label>Have you had any surgeries? Include type, year, and outcome.</label>
+      <textarea name="surgeries" rows="4"></textarea>
+
+      <label>Have you experienced any chronic or recent injuries (e.g., back, knees, shoulders)?</label>
+      <textarea name="injuries" rows="4"></textarea>
+
+      <label>Do you have any allergies (food, medication, environmental)?</label>
+      <textarea name="allergies" rows="3"></textarea>
+
+      <label>How would you describe your sleep quality?</label>
+      <textarea name="sleep_quality" rows="2"></textarea>
+
+      <label>Do you snore or have diagnosed sleep apnoea?</label>
+      <textarea name="snore_apnoea" rows="2"></textarea>
+
+      <label>Do you drink alcohol? If yes, how much per week?</label>
+      <textarea name="alcohol_use" rows="2"></textarea>
+
+      <label>Do you smoke or vape? If so, how frequently?</label>
+      <textarea name="smoking" rows="2"></textarea>
+
+      <label>Do you use recreational drugs? (Cannabis, stimulants, etc.)</label>
+      <textarea name="recreational_drugs" rows="2"></textarea>
+
+      <label>If applicable: Do you menstruate? Any irregularities, cycle-related pain, or PCOS?</label>
+      <textarea name="menstrual" rows="3"></textarea>
+
+      <label>Have you ever had an eating disorder or disordered eating patterns?</label>
+      <textarea name="eating_disorder_history" rows="3"></textarea>
+
+      <label>Have you ever experienced depression, anxiety, or other mental health issues?</label>
+      <textarea name="mental_health_issues" rows="3"></textarea>
+
+      <label>Has your doctor ever advised you to avoid exercise for any reason?</label>
+      <textarea name="doctor_restrictions" rows="2"></textarea>
+
+      <label>Do you have a GP or consultant you’d like me to liaise with if needed? (Name + Contact)</label>
+      <textarea name="gp_contact" rows="3"></textarea>
+
+      <label>Is there anything you’ve avoided disclosing to a doctor that you feel I should know?</label>
+      <textarea name="hidden_disclosure" rows="4"></textarea>
+
+      <label>Any final notes or concerns about your health?</label>
+      <textarea name="final_notes" rows="3"></textarea>
+
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</body>
+</html>
