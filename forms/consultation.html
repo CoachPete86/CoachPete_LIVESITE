@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Initial Consultation – Coach Pete Ryan</title>
+  <style>
+    body {
+      font-family: 'Helvetica Neue', sans-serif;
+      background-color: #ffffff;
+      color: #111;
+      margin: 0;
+      padding: 0;
+    }
+
+    .form-container {
+      max-width: 700px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: #f8f8f8;
+      border-radius: 8px;
+      border: 2px solid #111;
+    }
+
+    h1 {
+      text-transform: uppercase;
+      font-size: 1.8rem;
+      color: #d4af37;
+      margin-bottom: 0.5rem;
+    }
+
+    .form-intro {
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+      color: #444;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-top: 1.5rem;
+      color: #111;
+    }
+
+    textarea, input[type="text"], input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      margin-top: 0.3rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
+
+    button {
+      margin-top: 2rem;
+      width: 100%;
+      padding: 0.75rem;
+      background-color: #111;
+      color: #fff;
+      font-size: 1rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      text-transform: uppercase;
+    }
+
+    button:hover {
+      background-color: #d4af37;
+      color: #111;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h1>Initial Consultation</h1>
+    <p class="form-intro">This form will help us get clear on your goals, lifestyle, mindset, and expectations — and set the foundation for real change.</p>
+
+    <form method="POST" action="https://formspree.io/f/YOUR_ID_HERE">
+
+      <label>What’s your primary goal?</label>
+      <textarea name="primary_goal" rows="3"></textarea>
+
+      <label>What would success look like in 12 weeks?</label>
+      <textarea name="twelve_week_success" rows="3"></textarea>
+
+      <label>What’s your long-term vision for your body and health?</label>
+      <textarea name="long_term_vision" rows="3"></textarea>
+
+      <label>On a scale of 1–10, how close are you to that vision right now?</label>
+      <input type="number" name="vision_score" min="1" max="10">
+
+      <label>What’s really driving you to do this now?</label>
+      <textarea name="real_motivation" rows="3"></textarea>
+
+      <label>What happens if nothing changes in the next 6–12 months?</label>
+      <textarea name="consequence_if_nothing_changes" rows="3"></textarea>
+
+      <label>What’s your typical day like (work, movement, stress)?</label>
+      <textarea name="day_routine" rows="4"></textarea>
+
+      <label>What’s your sleep like (hours, quality, time you go to bed)?</label>
+      <textarea name="sleep" rows="3"></textarea>
+
+      <label>Do you have any current responsibilities that could affect training? (e.g., kids, work travel)</label>
+      <textarea name="commitments" rows="3"></textarea>
+
+      <label>What are your biggest barriers to success?</label>
+      <textarea name="barriers" rows="3"></textarea>
+
+      <label>Are you being supported or sabotaged by the people around you?</label>
+      <textarea name="support_or_sabotage" rows="3"></textarea>
+
+      <label>Are you open to being challenged emotionally, not just physically?</label>
+      <textarea name="emotional_challenge" rows="2"></textarea>
+
+      <label>What do you expect from me as your coach?</label>
+      <textarea name="expectations_from_coach" rows="3"></textarea>
+
+      <label>What do you expect from yourself?</label>
+      <textarea name="expectations_from_self" rows="3"></textarea>
+
+      <label>Is there anything you’re scared to admit or afraid might hold you back?</label>
+      <textarea name="fear_or_shame" rows="3"></textarea>
+
+      <label>Any last words, thoughts, or things you want me to know before we begin?</label>
+      <textarea name="final_message" rows="3"></textarea>
+
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</body>
+</html>
