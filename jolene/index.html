@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jolene's 12-Week Complete Reset v2</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <h1 class="logo">Coach Pete Ryan</h1>
+                <nav class="nav">
+                    <button class="nav-btn active" data-section="home">Home</button>
+                    <button class="nav-btn" data-section="meals">Meals</button>
+                    <button class="nav-btn" data-section="shopping">Shopping</button>
+                    <button class="nav-btn" data-section="learn">Learn</button>
+                    <button class="nav-btn" data-section="adventure">Adventure</button>
+                    <button class="nav-btn" data-section="progress">Progress</button>
+                    <button class="nav-btn" data-section="settings">Settings</button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Hero Section -->
+        <section id="home" class="section hero-section">
+            <div class="container">
+                <div class="hero-carousel" id="heroCarousel">
+                    <div class="carousel-slide active" data-caption="Remember those trees we climbed? This is how we keep climbing them">
+                        <div class="adventure-placeholder">🌲 Tree Climbing Adventure</div>
+                    </div>
+                    <div class="carousel-slide" data-caption="Winter adventures build inner strength">
+                        <div class="adventure-placeholder">❄️ Winter Selfie</div>
+                    </div>
+                    <div class="carousel-slide" data-caption="Peace comes from within - find yours">
+                        <div class="adventure-placeholder">✌️ Peace Sign Bench</div>
+                    </div>
+                    <div class="carousel-slide" data-caption="Stay playful, stay strong, stay you">
+                        <div class="adventure-placeholder">😄 Playful Face-Off</div>
+                    </div>
+                </div>
+                
+                <div class="hero-content">
+                    <h1 class="hero-title">JOLENE'S 12-WEEK<br>COMPLETE RESET</h1>
+                    <p class="hero-tagline">Stay Strong, Stay Adventurous, Stay You</p>
+                    <div class="hero-motivation">
+                        <p class="hero-quote" id="heroQuote">Remember those trees we climbed? This is how we keep climbing them</p>
+                        <p class="hero-coach">- Pete</p>
+                    </div>
+                    <button class="btn btn--primary btn--lg hero-cta" id="startTodayBtn">START TODAY</button>
+                    
+                    <div class="current-phase" id="currentPhase">
+                        <h3>Your Current Phase</h3>
+                        <div class="phase-indicator">
+                            <span class="phase-name" id="phaseName">FOUNDATION</span>
+                            <span class="phase-weeks" id="phaseWeeks">Weeks 1-4</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Meals Section -->
+        <section id="meals" class="section meals-section hidden">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Today's Meal Plan</h2>
+                    <div class="controls-group">
+                        <div class="day-selector">
+                            <select id="daySelector" class="form-control">
+                                <option value="monday">Monday - Template A</option>
+                                <option value="tuesday">Tuesday - Template B</option>
+                                <option value="wednesday">Wednesday - Template C</option>
+                                <option value="thursday">Thursday - Template A</option>
+                                <option value="friday">Friday - Template B</option>
+                                <option value="saturday">Saturday - Template C</option>
+                                <option value="sunday">Sunday - Your Choice Day</option>
+                            </select>
+                        </div>
+                        <button class="btn btn--secondary emergency-btn" id="emergencyBtn">🚨 Emergency Backup Meal</button>
+                    </div>
+                </div>
+
+                <div class="meal-plan-container">
+                    <div class="meal-plan" id="mealPlan">
+                        <!-- Meals will be populated by JavaScript -->
+                    </div>
+
+                    <!-- Sunday Prep Flow -->
+                    <div class="prep-flow card hidden" id="prepFlow">
+                        <div class="card__body">
+                            <h3>🍳 Sunday 30-Minute Prep Flow</h3>
+                            <div class="prep-timer">
+                                <div class="timer-display" id="timerDisplay">30:00</div>
+                                <button class="btn btn--primary" id="startPrepBtn">Start Prep Session</button>
+                            </div>
+                            <div class="prep-steps" id="prepSteps">
+                                <div class="prep-step" data-step="1">
+                                    <h4>Step 1: Wash & Chop (8 mins)</h4>
+                                    <p>Wash and chop vegetables for the week</p>
+                                </div>
+                                <div class="prep-step" data-step="2">
+                                    <h4>Step 2: Cook Extra Protein (10 mins)</h4>
+                                    <p>Cook chicken, fish or eggs for easy meals</p>
+                                </div>
+                                <div class="prep-step" data-step="3">
+                                    <h4>Step 3: Bag Smoothie Dry Mix (5 mins)</h4>
+                                    <p>Pre-portion dry ingredients into freezer bags</p>
+                                </div>
+                                <div class="prep-step" data-step="4">
+                                    <h4>Step 4: Make Dressing (7 mins)</h4>
+                                    <p>Mix olive oil, lemon, herbs for the week</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Templates Overview -->
+                <div class="meal-templates">
+                    <h3>Weekly Templates</h3>
+                    <div class="templates-grid" id="templatesGrid">
+                        <!-- Templates will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Shopping List Section -->
+        <section id="shopping" class="section shopping-section hidden">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Shopping List</h2>
+                    <div class="controls-group">
+                        <div class="supermarket-toggle">
+                            <label class="toggle-label">
+                                <input type="checkbox" id="supermarketToggle" class="toggle-input">
+                                <span class="toggle-slider"></span>
+                                <span class="toggle-text">
+                                    <span class="store-ms">M&S</span>
+                                    <span class="store-sainsburys">Sainsbury's</span>
+                                </span>
+                            </label>
+                        </div>
+                        <button class="btn btn--primary" id="addAllWeekBtn">📋 Add All Week</button>
+                    </div>
+                </div>
+
+                <div class="shopping-lists">
+                    <div class="aisle-section" data-aisle="produce">
+                        <h3>🥬 Produce</h3>
+                        <div class="shopping-items" id="produceItems">
+                            <!-- Items populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <div class="aisle-section" data-aisle="dairy">
+                        <h3>🥛 Dairy</h3>
+                        <div class="shopping-items" id="dairyItems">
+                            <!-- Items populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <div class="aisle-section" data-aisle="pantry">
+                        <h3>🥫 Pantry</h3>
+                        <div class="shopping-items" id="pantryItems">
+                            <!-- Items populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <div class="aisle-section" data-aisle="frozen">
+                        <h3>🧊 Frozen</h3>
+                        <div class="shopping-items" id="frozenItems">
+                            <!-- Items populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <div class="aisle-section" data-aisle="deli">
+                        <h3>🥩 Deli</h3>
+                        <div class="shopping-items" id="deliItems">
+                            <!-- Items populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="shopping-actions">
+                    <button class="btn btn--secondary" id="printShoppingBtn">🖨️ Print Weekly PDF</button>
+                    <button class="btn btn--outline" id="clearListBtn">Clear List</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Learning Section -->
+        <section id="learn" class="section learn-section hidden">
+            <div class="container">
+                <h2>Daily Learning</h2>
+                
+                <div class="learning-content">
+                    <div class="daily-bite card">
+                        <div class="card__body">
+                            <h3>Today's Learning Bite (5 minutes)</h3>
+                            <h4 id="learningTitle">Why Protein at Breakfast Stops Your Body Eating Itself</h4>
+                            <div id="learningContent">
+                                <p>Morning cortisol + no protein = muscle breakdown. 25g protein = repair mode. Today's meal gives exactly what you need.</p>
+                                <p><strong>The Science:</strong> Cortisol peaks when you're stressed - your body breaks down muscle for fuel. Regular eating times with quality protein help regulate stress hormones and preserve your strength.</p>
+                                <p><strong>Your Action:</strong> Focus on protein-rich breakfasts as your daily muscle insurance policy.</p>
+                            </div>
+                            <label class="checkbox-label">
+                                <input type="checkbox" class="learning-checkbox" data-day="today">
+                                <span class="checkmark"></span>
+                                Learning Complete
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="weekly-module card">
+                        <div class="card__body">
+                            <h3 id="weeklyModuleTitle">Week 1 Deep Dive: How Food Stress Works</h3>
+                            <ul class="key-points" id="weeklyKeyPoints">
+                                <li>Cortisol peaks when you're stressed - body breaks down muscle for fuel</li>
+                                <li>Processed foods trigger more stress responses than whole foods</li>
+                                <li>Regular eating times help regulate stress hormones</li>
+                            </ul>
+                            <p><strong>Why This Matters:</strong> Understanding this connection helps you make choices that support your energy, not drain it.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Adventure Section -->
+        <section id="adventure" class="section adventure-section hidden">
+            <div class="container">
+                <h2>London Adventure</h2>
+                
+                <div class="current-adventure">
+                    <div class="adventure-card card">
+                        <div class="card__body">
+                            <h3 id="adventureTitle">Week 1: Royal Foundation Walk</h3>
+                            <div class="route-info" id="routeInfo">
+                                <p><strong>Route:</strong> Buckingham Palace → St. James's Park → Westminster Bridge</p>
+                                <p><strong>Distance:</strong> 2.5 miles</p>
+                                <p><strong>Difficulty:</strong> Easy - mostly flat</p>
+                                <p><strong>Today's Step Target:</strong> <span class="step-target" id="stepTargetDisplay">6,000 steps</span></p>
+                                <p><strong>Tube Stations:</strong> Victoria, Green Park, Westminster</p>
+                            </div>
+                            
+                            <div class="challenges">
+                                <h4>Discovery Challenges</h4>
+                                <div class="challenge-list" id="challengeList">
+                                    <!-- Challenges populated by JavaScript -->
+                                </div>
+                            </div>
+
+                            <div class="photo-upload">
+                                <h4>Adventure Proof</h4>
+                                <p>Upload a photo from your adventure today!</p>
+                                <button class="btn btn--secondary" id="photoUploadBtn">📸 Take Photo</button>
+                                <input type="file" id="photoUpload" accept="image/*" capture="camera" style="display: none;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step-tracker">
+                    <h3>Step Tracker</h3>
+                    <div class="steps-input">
+                        <input type="number" id="stepsInput" class="form-control" placeholder="Enter today's steps">
+                        <button class="btn btn--primary" id="updateStepsBtn">Update Steps</button>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="stepProgress"></div>
+                        <span class="progress-text" id="stepProgressText">0 / 6,000 steps</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Progress Section -->
+        <section id="progress" class="section progress-section hidden">
+            <div class="container">
+                <h2>Your Progress Dashboard</h2>
+                
+                <div class="daily-tracking">
+                    <h3>Today's Achievements</h3>
+                    <div class="achievement-grid">
+                        <div class="achievement-item" id="mealsAchievement">
+                            <div class="achievement-icon">🍽️</div>
+                            <div class="achievement-info">
+                                <h4>Meals Complete</h4>
+                                <div class="progress-circles">
+                                    <div class="circle" data-meal="1"></div>
+                                    <div class="circle" data-meal="2"></div>
+                                    <div class="circle" data-meal="3"></div>
+                                    <div class="circle" data-meal="4"></div>
+                                    <div class="circle" data-meal="5"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="achievement-item" id="stepsAchievement">
+                            <div class="achievement-icon">👟</div>
+                            <div class="achievement-info">
+                                <h4>Steps Target</h4>
+                                <p class="achievement-status" id="stepsStatus">Not Started</p>
+                            </div>
+                        </div>
+                        
+                        <div class="achievement-item" id="challengesAchievement">
+                            <div class="achievement-icon">🔍</div>
+                            <div class="achievement-info">
+                                <h4>Challenges Solved</h4>
+                                <p class="achievement-status" id="challengesStatus">0 / 4</p>
+                            </div>
+                        </div>
+                        
+                        <div class="achievement-item" id="learningAchievement">
+                            <div class="achievement-icon">📚</div>
+                            <div class="achievement-info">
+                                <h4>Learning Complete</h4>
+                                <p class="achievement-status" id="learningStatus">Not Started</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="weekly-scorecard card">
+                    <div class="card__body">
+                        <h3 id="scorecardTitle">Week 1 Scorecard</h3>
+                        <div class="scorecard-stats">
+                            <div class="stat">
+                                <div class="stat-number" id="weekMeals">0</div>
+                                <div class="stat-label">Meals Completed</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-number" id="weekSteps">0</div>
+                                <div class="stat-label">Average Daily Steps</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-number" id="weekChallenges">0</div>
+                                <div class="stat-label">Challenges Solved</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-number" id="weekLearning">0</div>
+                                <div class="stat-label">Learning Days</div>
+                            </div>
+                        </div>
+                        <div class="week-completion" id="weekCompletion">
+                            <button class="btn btn--primary btn--lg hidden" id="nextWeekBtn">🎉 Start Week 2</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Settings Section -->
+        <section id="settings" class="section settings-section hidden">
+            <div class="container">
+                <h2>Settings</h2>
+                
+                <div class="settings-content">
+                    <div class="setting-group card">
+                        <div class="card__body">
+                            <h3>Garlic & Onion Alerts</h3>
+                            <p>Show visual alerts for ingredients that may contain garlic or onions</p>
+                            <label class="toggle-label">
+                                <input type="checkbox" id="garlicOnionToggle" class="toggle-input" checked>
+                                <span class="toggle-slider"></span>
+                                <span class="toggle-text">
+                                    <span class="on-text">On</span>
+                                    <span class="off-text">Off</span>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="setting-group card">
+                        <div class="card__body">
+                            <h3>Current Phase</h3>
+                            <p>Your program automatically progresses after completing each phase</p>
+                            <div class="phase-status">
+                                <span class="current-phase-name" id="settingsCurrentPhase">Foundation Phase</span>
+                                <span class="phase-progress" id="settingsPhaseProgress">Week 1 of 4</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="setting-group card">
+                        <div class="card__body">
+                            <h3>Data & Privacy</h3>
+                            <p>All your progress is stored locally on your device</p>
+                            <button class="btn btn--outline" id="resetProgressBtn">Reset All Progress</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Emergency Backup Modal -->
+    <div class="modal hidden" id="emergencyModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>🚨 Emergency Backup Meals</h3>
+                <button class="modal-close" id="closeEmergencyModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Choose a quick, no-cook backup meal:</p>
+                <div class="backup-options">
+                    <button class="backup-option btn btn--outline" data-backup="1">
+                        <h4>Quick Protein Plate</h4>
+                        <p>Hard-boiled eggs + avocado + cucumber + olive oil</p>
+                    </button>
+                    <button class="backup-option btn btn--outline" data-backup="2">
+                        <h4>Simple Salmon Salad</h4>
+                        <p>Smoked salmon + mixed greens + tomatoes + lemon</p>
+                    </button>
+                    <button class="backup-option btn btn--outline" data-backup="3">
+                        <h4>Greek Yogurt Bowl</h4>
+                        <p>Greek yogurt + nuts + berries + honey</p>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confetti Container -->
+    <div id="confetti-container"></div>
+
+    <!-- Footer with Coach Contact -->
+    <footer class="footer">
+        <div class="container">
+            <div class="coach-contact">
+                <h3>Need Support? Coach Pete is Here</h3>
+                <div class="contact-info">
+                    <p><strong>Phone:</strong> <a href="tel:+447308518428">+44 7308 518428</a></p>
+                    <p><strong>Email:</strong> <a href="mailto:pete@coachpeteryan.com" target="_blank">pete@coachpeteryan.com</a></p>
+                    <p><strong>Website:</strong> <a href="https://coachpeteryan.com" target="_blank">coachpeteryan.com</a></p>
+                </div>
+                <p class="support-note">Available for questions, challenges, or celebrations - no matter how small</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
