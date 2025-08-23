@@ -12,7 +12,7 @@ root.render(
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/jolene/sw.js', { scope: '/jolene/' }).catch(console.warn);
+    navigator.serviceWorker.register('/jolenepwa/sw.js', { scope: '/jolenepwa/' }).catch(console.warn);
   });
 }
 
