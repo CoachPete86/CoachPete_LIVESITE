@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/jolenepwa/static/css/main.9d4a2697.css",
+    "main.js": "/jolenepwa/static/js/main.55f26d86.js",
+    "index.html": "/jolenepwa/index.html",
+    "main.9d4a2697.css.map": "/jolenepwa/static/css/main.9d4a2697.css.map",
+    "main.55f26d86.js.map": "/jolenepwa/static/js/main.55f26d86.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9d4a2697.css",
+    "static/js/main.55f26d86.js"
+  ]
+}
