@@ -78,7 +78,22 @@
     </style>
 </head>
 <body class="bg-brand-dark text-gray-200">
-
+<!-- Add this section just after <body> -->
+<div id="login-overlay" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50">
+    <form id="login-form" class="bg-brand-card border border-brand-green rounded-lg p-8 shadow-xl w-full max-w-sm mx-auto">
+        <h2 class="text-2xl font-marker brand-green-bright mb-4 text-center">Login to Access</h2>
+        <div class="mb-4">
+            <label class="block text-gray-300 mb-2" for="username">Username</label>
+            <input class="w-full px-3 py-2 rounded bg-gray-800 text-gray-200 focus:outline-none border border-brand-green" type="text" id="username" required>
+        </div>
+        <div class="mb-6">
+            <label class="block text-gray-300 mb-2" for="password">Password</label>
+            <input class="w-full px-3 py-2 rounded bg-gray-800 text-gray-200 focus:outline-none border border-brand-green" type="password" id="password" required>
+        </div>
+        <button type="submit" class="w-full bg-brand-green text-black font-bold py-2 rounded hover:bg-green-400 transition-colors duration-200">Login</button>
+        <p id="login-error" class="mt-4 text-center text-red-500 hidden">Invalid credentials. Please try again.</p>
+    </form>
+</div>
     <!-- Header Section -->
     <header class="container mx-auto px-4 sm:px-6 py-12 text-center">
         <h2 class="text-sm font-semibold uppercase tracking-widest text-gray-400">Prepared for Norma</h2>
@@ -822,6 +837,23 @@
             });
         });
     </script>
+<!-- Place this script before the closing </body> tag -->
+<script>
+    // --- SIMPLE LOGIN LOGIC ---
+    // Replace these with your desired credentials
+    const VALID_USERNAME = "norma";
+    const VALID_PASSWORD = "mamallama";
 
+    document.getElementById('login-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const username = document.getElementById('username').value.trim();
+        const password = document.getElementById('password').value.trim();
+        if (username === VALID_USERNAME && password === VALID_PASSWORD) {
+            document.getElementById('login-overlay').style.display = 'none';
+        } else {
+            document.getElementById('login-error').classList.remove('hidden');
+        }
+    });
+</script>
 </body>
 </html>
