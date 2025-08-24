@@ -36,11 +36,18 @@
                         <!-- Week buttons will be generated here -->
                     </div>
                 </div>
+                
                 <div class="progress-indicator">
                     <span id="progress-text" class="progress-text"></span>
                 </div>
             </nav>
-
+            <!-- Mode Tabs -->
+            <nav class="mode-nav" role="tablist" aria-label="Mode">
+                <div class="mode-group">
+                    <button id="tab-meals" class="mode-btn active" role="tab" aria-selected="true" aria-controls="meals-app">Meals</button>
+                         <button id="tab-walks" class="mode-btn" role="tab" aria-selected="false" aria-controls="walks-app">Walks</button>
+                </div>
+            </nav>
             <!-- Block Information -->
             <div id="block-info" class="block-info card">
                 <div class="card__body">
@@ -185,7 +192,45 @@
             </nav>
         </div>
     </div>
+<!-- Walks App -->
+<section id="walks-app" class="hidden" aria-labelledby="tab-walks" style="margin-top:1rem;">
+  <div class="card">
+    <div class="card__body">
+      <div class="walks-header" style="display:flex;justify-content:space-between;gap:1rem;align-items:center;">
+        <div>
+          <h3>Walks — 12-Week Planner</h3>
+          <div class="text-muted" style="font-size:.9rem;opacity:.8;">Start ~4 mi/day → build towards ~8 with recovery dips.</div>
+        </div>
+        <div>
+          <label for="walks-week" style="margin-right:.5rem;">Week:</label>
+          <select id="walks-week" aria-label="Select week"></select>
+        </div>
+      </div>
 
-    <script src="app.js"></script>
+      <div id="walks-week-grid" class="week-grid" style="margin-top:1rem;"></div>
+
+      <div id="walks-day-detail" class="card" style="margin-top:1rem;display:none;">
+        <div class="card__body">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:1rem;">
+            <h4 id="walks-day-title" style="margin:0;"></h4>
+            <button id="walks-back" class="nav-btn" aria-label="Back to week">← Back</button>
+          </div>
+          <div id="walks-detail-body" style="margin-top:.75rem;"></div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:1rem;">
+        <div class="card__body">
+          <h4 style="margin-top:0;">Do my own walk</h4>
+          <div style="display:flex;gap:.75rem;align-items:center;flex-wrap:wrap;">
+            <input id="steps-input" type="number" min="0" placeholder="Enter steps…" aria-label="Steps" style="padding:.5rem;border:1px solid #333;border-radius:.5rem;background:#111;color:#eee;">
+            <div id="steps-miles" aria-live="polite">0 steps ≈ 0.0 miles</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+<script src="walks.js"></script>
 </body>
 </html>
