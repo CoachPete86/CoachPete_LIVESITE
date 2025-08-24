@@ -1,4 +1,16 @@
 :root {
+  <style>
+  .hidden{display:none}
+  .mode-nav{margin:12px 0;}
+  .mode-btn{padding:.45rem .9rem;border:1px solid #333;border-radius:.7rem;background:#0f0f0f;color:#eee;margin-right:.5rem}
+  .mode-btn.active{background:#171717;border-color:#444}
+  .week-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.75rem}
+  @media(min-width:700px){.week-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+  .mini-note{opacity:.8;font-size:.9rem}
+  .pill{display:inline-block;padding:.2rem .5rem;border:1px solid #333;border-radius:999px;background:#111;color:#eee;font-size:.8rem}
+  .route-box{border:1px solid #333;border-radius:.75rem;padding:.75rem;background:#111}
+  .route-actions a{display:inline-block;margin-right:.5rem;margin-top:.25rem}
+</style>
   /* Primitive Color Tokens */
   --color-white: rgba(255, 255, 255, 1);
   --color-black: rgba(0, 0, 0, 1);
