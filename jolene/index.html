@@ -3,341 +3,189 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jolene's 12-Week Health & Learning Plan</title>
+    <title>Jolene – 12-Week Meal Plan</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="enhanced-styles.css">
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
+    <header id="main-header" class="header">
         <div class="container">
             <div class="header__content">
                 <div class="header__title-section">
-                    <h1 class="header__title">Jolene's Complete Health Plan</h1>
-                    <p class="header__tagline">12-Week Meal Plan • Daily Learning • Walking Programme</p>
+                    <h1 class="header__title">Jolene – 12-Week Meal Plan</h1>
+                    <p class="header__tagline">Onion-free • Pork-free • Lower sodium • Statin-safe • Thyroid-friendly</p>
                 </div>
                 <div class="header__actions">
                     <div class="search-container">
-                        <input type="text" id="search-input" class="search-input" placeholder="Search meals & content...">
+                        <input type="search" id="search-input" class="search-input" placeholder="Search meals or ingredients..." aria-label="Search meals">
                     </div>
-                    <button id="print-btn" class="btn btn--outline btn--sm">Print</button>
+                    <button id="print-btn" class="btn btn--outline">
+                        <span>Print / Save PDF</span>
+                    </button>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- Main Content -->
-    <main class="container">
-        <!-- Week Navigation -->
-        <nav class="primary-nav">
-            <div class="week-selector">
-                <span class="selector-label">Select Week:</span>
-                <div id="week-buttons" class="week-buttons"></div>
-            </div>
-            <div class="progress-indicator">
-                <span class="progress-text">Week Progress</span>
-            </div>
-        </nav>
-
-        <!-- Block Information -->
-        <section id="block-info" class="block-info card"></section>
-
-        <!-- Week Overview -->
-        <section class="week-overview card">
-            <div class="card__body">
-                <h3>Week Overview</h3>
-                <div id="week-grid" class="week-grid"></div>
-            </div>
-        </section>
-
-        <!-- Day Navigation -->
-        <nav class="day-nav">
-            <button id="prev-day" class="nav-btn">‹</button>
-            <div class="day-selector">
-                <span class="day-label">Day:</span>
-                <div id="day-buttons" class="day-buttons"></div>
-            </div>
-            <button id="next-day" class="nav-btn">›</button>
-        </nav>
-
-        <!-- Content Sections -->
-        <div class="content-sections">
-            
-            <!-- Section Navigation Tabs -->
-            <div class="section-tabs">
-                <button class="section-tab active" onclick="showSection('meals')">🍽️ Meals</button>
-                <button class="section-tab" onclick="showSection('learning')">📚 Learning</button>
-                <button class="section-tab" onclick="showSection('walking')">🚶‍♀️ Walking</button>
-            </div>
-
-            <!-- Day Content Header -->
-            <div id="day-content" class="day-content"></div>
-
-            <!-- Meals Section -->
-            <section id="meals-section" class="content-section">
-                <div class="section-header">
-                    <h2>Today's Meal Plan</h2>
-                    <p>Nutritionally balanced meals following your mini-block theme</p>
+    <main class="main">
+        <div class="container">
+            <!-- Primary Navigation - Week Selector -->
+            <nav class="primary-nav">
+                <div class="week-selector">
+                    <span class="selector-label">Select Week:</span>
+                    <div class="week-buttons" id="week-buttons">
+                        <!-- Week buttons will be generated here -->
+                    </div>
                 </div>
-                <div id="meals-container" class="meals-container"></div>
-                
-                <!-- Daily Nutrition Summary -->
-                <div id="daily-summary" class="daily-summary card">
-                    <div class="card__body">
-                        <h3>Daily Nutrition Summary</h3>
+                <div class="progress-indicator">
+                    <span id="progress-text" class="progress-text"></span>
+                </div>
+            </nav>
+
+            <!-- Block Information -->
+            <div id="block-info" class="block-info card">
+                <div class="card__body">
+                    <div class="block-header">
+                        <h2 id="block-title" class="block-title"></h2>
+                        <span id="block-badge" class="block-badge"></span>
+                    </div>
+                    <p id="block-description" class="block-description"></p>
+                    <div class="mini-block-legend">
+                        <h4>This Week's Schedule:</h4>
+                        <div class="legend-grid">
+                            <div class="legend-item">
+                                <span class="legend-dot mini-a"></span>
+                                <span>Mon & Wed: Mini Block A</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-dot mini-b"></span>
+                                <span>Tue & Thu: Mini Block B</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-dot mini-c"></span>
+                                <span>Fri & Sat: Mini Block C</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-dot free-day"></span>
+                                <span>Sunday: Free Day</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Week Overview Grid -->
+            <div id="week-overview" class="week-overview card">
+                <div class="card__body">
+                    <h3>Week Overview</h3>
+                    <div class="week-grid" id="week-grid">
+                        <!-- Day tiles will be generated here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Day Navigation -->
+            <nav class="day-nav">
+                <button id="prev-day" class="nav-btn" aria-label="Previous day">‹</button>
+                <div class="day-selector">
+                    <span class="day-label">Day:</span>
+                    <div id="day-buttons" class="day-buttons">
+                        <!-- Day buttons will be generated here -->
+                    </div>
+                </div>
+                <button id="next-day" class="nav-btn" aria-label="Next day">›</button>
+            </nav>
+
+            <!-- Content Area -->
+            <div id="content-area" class="content-area">
+                <!-- Day Content -->
+                <div id="day-content" class="day-content">
+                    <div class="day-header">
+                        <h3 id="day-title" class="day-title"></h3>
+                        <div id="day-meta" class="day-meta"></div>
+                    </div>
+
+                    <!-- Meals Container -->
+                    <div id="meals-container" class="meals-container">
+                        <!-- Meal cards will be inserted here -->
+                    </div>
+
+                    <!-- Free Day Content -->
+                    <div id="free-day-content" class="free-day-content hidden">
+                        <div class="card">
+                            <div class="card__body">
+                                <h4>Sunday Free Day Options</h4>
+                                <div class="free-day-options" id="free-day-options">
+                                    <!-- Free day suggestions will be inserted here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Daily Summary -->
+                    <div id="daily-summary" class="daily-summary">
                         <div class="summary-grid">
-                            <div class="daily-totals card">
+                            <div class="card daily-totals">
                                 <div class="card__body">
-                                    <h4>Today's Totals</h4>
-                                    <div id="nutrition-totals"></div>
+                                    <h4>Daily Nutrition Totals</h4>
+                                    <div id="daily-totals" class="nutrition-grid">
+                                        <!-- Nutrition totals will be inserted here -->
+                                    </div>
                                     <div id="nutrition-alerts" class="nutrition-alerts"></div>
                                 </div>
                             </div>
-                            <div class="why-works card">
+                            <div class="card why-works">
                                 <div class="card__body">
-                                    <h4>Why This Works</h4>
-                                    <div id="nutrition-explanation"></div>
+                                    <h4>Why This Day Works</h4>
+                                    <p id="why-works-text"></p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </section>
 
-            <!-- Learning Section -->
-            <section id="learning-section" class="content-section" style="display: none;">
-                <div class="section-header">
-                    <h2>Daily Learning Module</h2>
-                    <p>Build your nutrition knowledge with focused daily lessons</p>
-                </div>
-                
-                <!-- Learning Progress -->
-                <div class="progress-section">
-                    <div class="progress-header">
-                        <h3 class="progress-title">Learning Progress</h3>
-                        <span id="learning-progress-stats" class="progress-stats">Module progress</span>
-                    </div>
-                    <div class="progress-bar">
-                        <div id="learning-progress-fill" class="progress-fill" style="width: 0%"></div>
-                    </div>
-                </div>
-
-                <!-- Learning Content -->
-                <div id="learning-container"></div>
-                
-                <!-- Learning Overview Link -->
-                <div class="text-center">
-                    <button class="btn btn--secondary" onclick="app.showLearningOverview()">
-                        📊 View Complete Learning Progress
-                    </button>
-                </div>
-            </section>
-
-            <!-- Walking Section -->
-            <section id="walking-section" class="content-section" style="display: none;">
-                <div class="section-header">
-                    <h2>Today's Walking Plan</h2>
-                    <p>Progressive walking programme with beautiful London routes</p>
-                </div>
-                
-                <!-- Walking Progress -->
-                <div class="progress-section">
-                    <div class="progress-header">
-                        <h3 class="progress-title">Walking Progress</h3>
-                        <span id="walking-progress-stats" class="progress-stats">Weekly distance progress</span>
-                    </div>
-                    <div class="progress-bar">
-                        <div id="walking-progress-fill" class="progress-fill" style="width: 0%"></div>
-                    </div>
-                </div>
-
-                <!-- Walking Content -->
-                <div id="walking-container"></div>
-                
-                <!-- Walking Tips -->
-                <div class="card">
-                    <div class="card__body">
-                        <h3>Walking Tips & Safety</h3>
-                        <div class="highlight-tip">
-                            <strong>Safety First:</strong> Always carry water, wear appropriate footwear, 
-                            check weather conditions, and let someone know your route.
-                        </div>
-                        <ul>
-                            <li>Start each walk with a 5-minute warm-up at a gentle pace</li>
-                            <li>Maintain steady breathing - you should be able to hold a conversation</li>
-                            <li>Cool down with 5 minutes of slower walking and gentle stretching</li>
-                            <li>Listen to your body - rest if you feel pain or excessive fatigue</li>
-                            <li>Build distance gradually - don't rush the progression</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-        </div>
-
-        <!-- Weekly Information -->
-        <section id="weekly-info" class="weekly-info card">
-            <div class="card__body">
-                <h3>This Week's Support</h3>
-                <div class="info-grid">
-                    <div class="grocery-planning">
-                        <h4>Smart Shopping</h4>
-                        <div id="grocery-sections" class="grocery-sections">
-                            <div class="grocery-section">
-                                <h5>Fresh Produce</h5>
-                                <ul id="produce-list"></ul>
-                            </div>
-                            <div class="grocery-section">
-                                <h5>Proteins</h5>
-                                <ul id="proteins-list"></ul>
-                            </div>
-                            <div class="grocery-section">
-                                <h5>Pantry Essentials</h5>
-                                <ul id="pantry-list"></ul>
+                <!-- Weekly Information -->
+                <div id="weekly-info" class="weekly-info">
+                    <div class="info-grid">
+                        <div class="card">
+                            <div class="card__body">
+                                <h4>This Week's Grocery List</h4>
+                                <div class="grocery-sections">
+                                    <div class="grocery-section">
+                                        <h5>Produce</h5>
+                                        <ul id="produce-list"></ul>
+                                    </div>
+                                    <div class="grocery-section">
+                                        <h5>Proteins</h5>
+                                        <ul id="proteins-list"></ul>
+                                    </div>
+                                    <div class="grocery-section">
+                                        <h5>Pantry & Grains</h5>
+                                        <ul id="pantry-list"></ul>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="time-saving">
-                        <h4>Time-Saving Tips</h4>
-                        <ul id="tips-list"></ul>
+                        <div class="card">
+                            <div class="card__body">
+                                <h4>Time-Saving Tips</h4>
+                                <ul id="tips-list"></ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
     </main>
 
     <!-- Breadcrumb Navigation -->
-    <nav class="breadcrumb-nav">
+    <div class="breadcrumb-nav">
         <div class="container">
-            <div id="breadcrumb" class="breadcrumb"></div>
+            <nav aria-label="Breadcrumb">
+                <span id="breadcrumb" class="breadcrumb"></span>
+            </nav>
         </div>
-    </nav>
+    </div>
 
-    <!-- JavaScript -->
-    <script src="enhanced-app.js"></script>
-    
-    <!-- Section Navigation Script -->
-    <script>
-        function showSection(sectionName) {
-            // Hide all sections
-            document.querySelectorAll('.content-section').forEach(section => {
-                section.style.display = 'none';
-            });
-            
-            // Remove active class from all tabs
-            document.querySelectorAll('.section-tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            
-            // Show selected section
-            document.getElementById(sectionName + '-section').style.display = 'block';
-            
-            // Add active class to clicked tab
-            event.target.classList.add('active');
-            
-            // Update any section-specific content if needed
-            if (sectionName === 'learning' && window.app) {
-                app.updateLearningProgress();
-            } else if (sectionName === 'walking' && window.app) {
-                app.updateWalkingProgress();
-            }
-        }
-        
-        // Initialize first section
-        document.addEventListener('DOMContentLoaded', function() {
-            showSection('meals');
-        });
-    </script>
-
-    <!-- Enhanced App Methods -->
-    <script>
-        // Add these methods to the enhanced app class
-        if (typeof EnhancedMealPlanApp !== 'undefined') {
-            EnhancedMealPlanApp.prototype.updateLearningProgress = function() {
-                const currentModule = parseInt(this.getLearningModuleForDay().replace('M', ''));
-                const progressPercentage = Math.round((currentModule / 14) * 100);
-                
-                const progressFill = document.getElementById('learning-progress-fill');
-                const progressStats = document.getElementById('learning-progress-stats');
-                
-                if (progressFill) {
-                    progressFill.style.width = progressPercentage + '%';
-                }
-                
-                if (progressStats) {
-                    progressStats.textContent = `Module ${currentModule} of 14 (${progressPercentage}% through cycle)`;
-                }
-            };
-            
-            EnhancedMealPlanApp.prototype.updateWalkingProgress = function() {
-                const currentDistance = this.getWalkingDistanceForDay();
-                const weekProgress = ((this.currentDay - 1) / 7) * 100;
-                
-                const progressFill = document.getElementById('walking-progress-fill');
-                const progressStats = document.getElementById('walking-progress-stats');
-                
-                if (progressFill) {
-                    progressFill.style.width = weekProgress + '%';
-                }
-                
-                if (progressStats) {
-                    progressStats.textContent = `Day ${this.currentDay}/7 • ${currentDistance} miles today`;
-                }
-            };
-            
-            EnhancedMealPlanApp.prototype.showLearningOverview = function() {
-                // Create modal or new page showing complete learning progress
-                alert('Learning Overview: This would show your complete progress across all 14 modules, quiz scores, and revision schedule. Feature coming soon!');
-            };
-        }
-    </script>
-
-    <!-- Accessibility Enhancements -->
-    <script>
-        // Keyboard navigation for tabs
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
-                const tabs = document.querySelectorAll('.section-tab');
-                const activeTab = document.querySelector('.section-tab.active');
-                const currentIndex = Array.from(tabs).indexOf(activeTab);
-                
-                let newIndex;
-                if (e.key === 'ArrowLeft') {
-                    newIndex = currentIndex > 0 ? currentIndex - 1 : tabs.length - 1;
-                } else {
-                    newIndex = currentIndex < tabs.length - 1 ? currentIndex + 1 : 0;
-                }
-                
-                tabs[newIndex].click();
-                tabs[newIndex].focus();
-            }
-        });
-        
-        // Announce section changes to screen readers
-        function announceSection(sectionName) {
-            const announcement = document.createElement('div');
-            announcement.setAttribute('aria-live', 'polite');
-            announcement.setAttribute('aria-atomic', 'true');
-            announcement.className = 'sr-only';
-            announcement.textContent = `Now showing ${sectionName} section`;
-            document.body.appendChild(announcement);
-            
-            setTimeout(() => {
-                document.body.removeChild(announcement);
-            }, 1000);
-        }
-    </script>
-
-    <!-- Service Worker Registration (for offline functionality) -->
-    <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', function() {
-                navigator.serviceWorker.register('/sw.js').then(function(registration) {
-                    console.log('ServiceWorker registration successful');
-                }, function(err) {
-                    console.log('ServiceWorker registration failed');
-                });
-            });
-        }
-    </script>
+    <script src="app.js"></script>
 </body>
 </html>
