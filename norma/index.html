@@ -1,191 +1,827 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Homework Plan | Coach Pete Ryan</title>
+    <title>Norma's 15-Week Progressive Fitness Plan</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Permanent+Marker&display=swap" rel="stylesheet">
     <style>
+        html {
+            scroll-behavior: smooth;
+        }
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #000000;
-            color: #FFFFFF;
+            font-family: 'Montserrat', sans-serif;
+            /* --- NEW SPRAY EFFECT BACKGROUND --- */
+            background-color: #111111;
+            background-image: radial-gradient(rgba(0, 255, 127, 0.05) 1px, transparent 1px);
+            background-size: 15px 15px;
         }
-        /* Electric Yellow from your site */
-        .text-electric-yellow {
-            color: #F2FF00;
-            text-shadow: 0 0 8px rgba(242, 255, 0, 0.3); /* Added glow effect */
+        .font-marker {
+            font-family: 'Permanent Marker', cursive;
         }
-        .bg-electric-yellow {
-            background-color: #F2FF00;
-            box-shadow: 0 0 12px rgba(242, 255, 0, 0.3); /* Added glow effect */
+        /* --- NEW ELECTRIC GREEN PALETTE --- */
+        .brand-green-bright { 
+            color: #39FF14; /* Electric Green */
+            font-family: 'Permanent Marker', cursive;
+            text-shadow: 0 0 5px rgba(57, 255, 20, 0.7);
         }
-        .border-electric-yellow {
-            border-color: #F2FF00;
+        .brand-green-medium { 
+            color: #39FF14; 
         }
-        .icon-container {
-            background-color: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        .brand-green-large {
+            color: #39FF14;
+            font-family: 'Permanent Marker', cursive;
+            font-size: 1.25rem; /* text-xl */
+        }
+        .hover\:brand-green-light:hover { color: #98FB98; } /* PaleGreen */
+
+        .bg-brand-green { background-color: #39FF14; }
+        .border-brand-green { border-color: #39FF14; }
+
+        .bg-brand-dark { background-color: #111111; }
+        .bg-brand-card { background-color: #1a1a1a; }
+        .tab-active {
+            background-color: #39FF14;
+            color: #111111;
+        }
+        /* Modal styles */
+        .modal-backdrop {
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+        }
+        .modal-card {
+            background-color: rgba(26, 26, 26, 0.9);
+            border: 1px solid #39FF14;
+        }
+        /* Printable section */
+        @media print {
+            .no-print {
+                display: none;
+            }
+            .printable-section {
+                display: block !important;
+                page-break-before: always;
+            }
+            body {
+                background-image: none;
+                background-color: #ffffff;
+                color: #000000;
+            }
+            .brand-green-bright, .brand-green-medium, .brand-green-large { color: #000000; font-family: 'Montserrat', sans-serif; text-shadow: none;}
+            .bg-brand-card, .bg-brand-dark { background-color: #ffffff; }
+            .text-gray-200, .text-gray-300, .text-gray-400 { color: #000000; }
+            .border-brand-green { border-color: #000000; }
         }
     </style>
 </head>
-<body class="antialiased">
+<body class="bg-brand-dark text-gray-200">
 
     <!-- Header Section -->
-    <header class="py-8 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-4xl mx-auto text-center">
-            <h1 class="text-2xl sm:text-3xl font-black uppercase tracking-wider text-electric-yellow">Coach Pete Ryan</h1>
-            <p class="mt-2 text-lg text-gray-300">Your Custom Homework Strategy</p>
+    <header class="container mx-auto px-4 sm:px-6 py-12 text-center">
+        <h2 class="text-sm font-semibold uppercase tracking-widest text-gray-400">Prepared for Norma</h2>
+        <h1 class="text-4xl md:text-6xl font-extrabold mt-2 brand-green-bright tracking-wider">15-WEEK REBUILD PLAN</h1>
+        <p class="mt-4 max-w-3xl mx-auto text-gray-300">This is more than a fitness plan. This is a strategy to rebuild strength, forge resilience, and reclaim your confidence from the ground up. Trust the process. Do the work.</p>
+        <div class="mt-6 text-lg font-bold uppercase tracking-wider">
+            <a href="https://coachpeteryan.com" target="_blank" rel="noopener noreferrer">Coach Pete Ryan</a>
         </div>
     </header>
 
     <!-- Main Content -->
-    <main class="py-12 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-5xl mx-auto">
+    <main class="container mx-auto px-4 sm:px-6 pb-24">
 
-            <!-- Introduction -->
-            <div class="bg-gray-900/50 border border-gray-700 rounded-lg p-6 sm:p-8 mb-12">
-                <h2 class="text-3xl sm:text-4xl font-black text-white mb-4">Hey Mama Llama,</h2>
-                <p class="text-lg text-gray-300 leading-relaxed">
-                    Just checking in with an update on your plan. I've been thinking about the best way to structure your "homework" to complement the great work you're already doing with your Peloton and other activities.
-                </p>
-                <p class="mt-4 text-lg text-gray-300 leading-relaxed">
-                    Instead of just adding more of the same, I'm shifting our focus entirely. We're going to target the specific areas your current system isn't hitting. This is the smart approach to building a truly balanced and resilient body.
-                </p>
+        <!-- TABLE OF CONTENTS -->
+        <div class="bg-brand-card rounded-lg p-6 md:p-8 mb-12 no-print">
+            <h3 class="text-2xl font-bold mb-4 text-center brand-green-bright">TABLE OF CONTENTS</h3>
+            <ul class="space-y-2 text-gray-300">
+                <li><a href="#section-1" class="hover:brand-green-light"><strong>Section 1:</strong> The Foundation</a></li>
+                <li><a href="#section-2" class="hover:brand-green-light"><strong>Section 2:</strong> The Strategy</a></li>
+                <li>
+                    <a href="#section-3" class="hover:brand-green-light"><strong>Section 3:</strong> The 15-Week Rebuild Plan</a>
+                    <ul class="ml-6 mt-2 space-y-1 list-disc list-inside">
+                        <li><a href="#block-1" class="hover:brand-green-light text-sm">Weeks 1–2: Foundation & Re-Patterning</a></li>
+                        <li><a href="#block-2" class="hover:brand-green-light text-sm">Weeks 3–4: Building Capacity</a></li>
+                        <li><a href="#block-3" class="hover:brand-green-light text-sm">Weeks 5–7: Forging Strength</a></li>
+                        <li><a href="#block-4" class="hover:brand-green-light text-sm">Weeks 8–9: Peak Performance</a></li>
+                        <li><a href="#block-5" class="hover:brand-green-light text-sm">Weeks 10–12: Unbreakable</a></li>
+                        <li><a href="#block-6" class="hover:brand-green-light text-sm">Weeks 13–15: Legacy</a></li>
+                    </ul>
+                </li>
+                <li><a href="#section-4" class="hover:brand-green-light"><strong>Section 4:</strong> Beyond the Workout</a></li>
+                <li><a href="#section-5" class="hover:brand-green-light"><strong>Section 5:</strong> The Finish Line & Beyond</a></li>
+                <li><a href="#exercise-library" class="hover:brand-green-light"><strong>Exercise Library</strong></a></li>
+            </ul>
+        </div>
+        
+        <!-- SECTION 1: THE FOUNDATION -->
+        <div id="section-1" class="bg-brand-card rounded-lg p-6 md:p-8 mb-12">
+            <h3 class="text-2xl font-bold mb-6 text-center brand-green-bright">SECTION 1: THE FOUNDATION</h3>
+            
+            <div class="mb-8">
+                <h4 class="font-bold text-xl mb-2">1.1 A Message for You, Norma</h4>
+                <p class="text-gray-300">Alright, Mama Llama, the crusade starts now. You're officially back in the land of the living and in the Coach Pete Ryan family book. The physio sign-off was the green light; this plan is us hitting the accelerator. I have no doubt it's going to be fun. I expect I'll be sworn at, maybe even threatened, but I'm holding out for bribes (snacks and sweets always work). Time to get to work.</p>
+            </div>
+            
+            <div class="mb-8">
+                <h4 class="font-bold text-xl mb-2">1.2 Our Mission: The Three 'Re's</h4>
+                <p class="text-gray-300">Our mission for the next 15 weeks is simple and brutal. We're not 'training', we're rebuilding from the ground up.<br>
+                <strong>1. Re-wire:</strong> We're going to force your body to forget the hesitation. Every rep will teach your ankle and wrist that they are strong, stable, and capable of handling the work.<br>
+                <strong>2. Re-build:</strong> We will systematically hunt down any lingering weakness and replace it with solid, functional strength. Old points of injury become new armour.<br>
+                <strong>3. Re-claim:</strong> This is the big one. We're extinguishing the 'what if' and replacing it with the confidence to move without fear. By the end of this, you won't just be back; you'll be better.</p>
             </div>
 
-            <!-- Focus Areas Section -->
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div>
+                <h4 class="font-bold text-xl mb-2">1.3 Your Roadmap: How to Use This Plan</h4>
+                <p class="text-gray-300">Your plan is structured in two-week blocks, alternating between a **Strength Week** and a **Hybrid Week**. The circuits use a **45:15** work-to-rest ratio. You can click on any bolded exercise name to see instructions in a pop-up exercise card. Most importantly, listen to your body. Discomfort is where growth happens; sharp pain is a signal to stop and communicate with me.</p>
+            </div>
+        </div>
 
-                <!-- Focus Area 1: Core -->
-                <div class="bg-gray-900/50 border border-gray-700 rounded-lg p-6 sm:p-8 flex flex-col">
-                    <div class="flex-shrink-0">
-                        <div class="w-16 h-16 rounded-lg icon-container flex items-center justify-center mb-4">
-                            <!-- SVG Icon for Core -->
-                            <svg class="w-8 h-8 text-electric-yellow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24" stroke-width="1.5" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345h5.364c.518 0 .734.654.372 1.01l-4.36 3.162a.563.563 0 00-.182.557l1.636 4.892c.164.492-.421.928-.848.597L12 18.348l-4.506 3.267c-.427.33-.014.105-.848-.597l1.636-4.892a.563.563 0 00-.182-.557l-4.36-3.162c-.362-.356-.146-1.01..372-1.01h5.364a.563.563 0 00.475-.345L11.48 3.5z" />
-                            </svg>
+        <!-- SECTION 2: THE STRATEGY -->
+        <div id="section-2" class="bg-brand-card rounded-lg p-6 md:p-8 mb-12">
+            <h3 class="text-2xl font-bold mb-6 text-center brand-green-bright">SECTION 2: THE STRATEGY</h3>
+            
+            <div class="mb-8">
+                <h4 class="font-bold text-xl mb-2">2.1 Mission Critical: The "Chaturanga-Ready" Wrist Protocol</h4>
+                <p class="text-gray-300 mb-4">This is your dedicated homework, to be performed 3-4 times per week, even on rest days. The goal is to build load-bearing tolerance and control, paving the way for your chaturanga goal. Use your 2kg weight. Perform slowly.</p>
+                <ul class="list-disc list-inside text-gray-300">
+                    <li><strong>Wrist Curls (Palm Up):</strong> 3 sets of 15 reps.</li>
+                    <li><strong>Reverse Wrist Curls (Palm Down):</strong> 3 sets of 15 reps.</li>
+                    <li><strong>Static Splint Press:</strong> Gently lean against a wall for 3 sets of 20-second holds.</li>
+                </ul>
+            </div>
+            
+            <div>
+                <h4 class="font-bold text-xl mb-2">2.2 Mission Critical: The "Trust Your Ankle" Protocol</h4>
+                <p class="text-gray-300 mb-4">This is your non-negotiable warm-up before every single session. We are actively retraining the neural pathways to eliminate hesitation and build confidence from the ground up.</p>
+                <ul class="list-disc list-inside text-gray-300">
+                    <li><strong>Single-Leg Balance (Left Leg):</strong> 3 sets of 30-second holds.</li>
+                    <li><strong>Calf Raises:</strong> 2 sets of 20 reps, focusing on a slow, 3-second lowering phase.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- SECTION 3: THE 15-WEEK REBUILD PLAN -->
+        <div id="section-3">
+            <h3 class="text-2xl font-bold mb-6 text-center brand-green-bright">SECTION 3: THE 15-WEEK REBUILD PLAN</h3>
+            
+            <!-- NEW TIMETABLE SECTION -->
+            <div class="bg-brand-card rounded-lg p-6 md:p-8 mb-12">
+                <h4 class="text-xl font-bold text-center mb-6">Your Weekly Timetable (Example)</h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <h5 class="font-bold text-lg brand-green-medium text-center mb-4">STRENGTH WEEK</h5>
+                        <div class="grid grid-cols-3 gap-2 text-center text-xs">
+                            <div class="bg-brand-dark rounded p-2"><strong>MON</strong><p class="mt-1">Strength & Core</p></div>
+                            <div class="bg-green-900/50 rounded p-2"><strong>TUE</strong><p class="mt-1">1-on-1 PT (10:30)</p></div>
+                            <div class="bg-gray-800 rounded p-2"><strong>WED</strong><p class="mt-1">Rest / Rehab</p></div>
+                            <div class="bg-brand-dark rounded p-2"><strong>THU</strong><p class="mt-1">Peloton</p></div>
+                            <div class="bg-gray-800 rounded p-2"><strong>FRI</strong><p class="mt-1">Rest / Rehab</p></div>
+                            <div class="bg-brand-dark rounded p-2"><strong>SAT</strong><p class="mt-1">Strength & Core</p></div>
+                            <div class="bg-gray-800 rounded p-2"><strong>SUN</strong><p class="mt-1">Rest</p></div>
                         </div>
-                        <h3 class="text-2xl font-black text-electric-yellow">Focus 1: Reactivating Your Core</h3>
                     </div>
-                    <div class="flex-grow mt-4">
-                        <p class="text-gray-300 leading-relaxed">
-                            You highlighted your core as a weak spot. As I said on Tuesday, it's not weak at all—it's strong, just de-conditioned. It hasn't been challenged with the intensity we used to. Our first mission is to wake it up and get it firing properly again.
-                        </p>
+                    <div>
+                        <h5 class="font-bold text-lg brand-green-medium text-center mb-4">HYBRID WEEK</h5>
+                        <div class="grid grid-cols-3 gap-2 text-center text-xs">
+                            <div class="bg-brand-dark rounded p-2"><strong>MON</strong><p class="mt-1">Strength & Core</p></div>
+                            <div class="bg-green-900/50 rounded p-2"><strong>TUE</strong><p class="mt-1">1-on-1 PT (10:30)</p></div>
+                            <div class="bg-gray-800 rounded p-2"><strong>WED</strong><p class="mt-1">Rest / Rehab</p></div>
+                            <div class="bg-brand-dark rounded p-2"><strong>THU</strong><p class="mt-1">Peloton</p></div>
+                            <div class="bg-gray-800 rounded p-2"><strong>FRI</strong><p class="mt-1">Rest / Rehab</p></div>
+                            <div class="bg-brand-dark rounded p-2"><strong>SAT</strong><p class="mt-1">Yoga Recovery</p></div>
+                            <div class="bg-gray-800 rounded p-2"><strong>SUN</strong><p class="mt-1">Rest</p></div>
+                        </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- Focus Area 2: Mobility & Confidence -->
-                <div class="bg-gray-900/50 border border-gray-700 rounded-lg p-6 sm:p-8 flex flex-col">
-                     <div class="flex-shrink-0">
-                        <div class="w-16 h-16 rounded-lg icon-container flex items-center justify-center mb-4">
-                            <!-- SVG Icon for Mobility/Balance -->
-                            <svg class="w-8 h-8 text-electric-yellow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24" stroke-width="1.5" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 9.563C9 9.252 9.252 9 9.563 9h4.874c.311 0 .563.252.563.563v4.874c0 .311-.252.563-.563.563H9.563A.562.562 0 019 14.437V9.564z" />
-                            </svg>
-                        </div>
-                        <h3 class="text-2xl font-black text-electric-yellow">Focus 2: Confident Movement</h3>
-                    </div>
-                    <div class="flex-grow mt-4">
-                        <p class="text-gray-300 leading-relaxed">
-                           Mobility isn't just about flexibility; it's about having **confidence** in your movements. Your old injury has created a mental barrier around your left leg, which is completely normal. We saw it in the one-leg balance: when you consciously set up on the left, there was a hesitation that created shakiness and instability.
-                        </p>
-                         <p class="mt-4 text-gray-300 leading-relaxed">
-                           If we don't actively train this out, that anxiety can grow and create a mental "no-go zone." This can lead to complete avoidance of the issue and, worse, that same anxiety can latch on much easier to any new injuries. Given the number you've acquired recently, if you carry on at this rate we'll have to bubble-wrap you for our sessions! haha
-                        </p>
-                    </div>
+            <div id="workout-plan">
+                <!-- Data will be dynamically inserted here -->
+            </div>
+        </div>
+
+        <!-- SECTION 4: BEYOND THE WORKOUT -->
+        <div id="section-4" class="bg-brand-card rounded-lg p-6 md:p-8 mb-12">
+            <h3 class="text-2xl font-bold mb-6 text-center brand-green-bright">SECTION 4: BEYOND THE WORKOUT</h3>
+            
+            <div class="mb-8">
+                <h4 class="font-bold text-xl mb-2">4.1 Fuelling Your Rebuild: Simple Nutrition Principles</h4>
+                <p class="text-gray-300 mb-4">You can't out-train a bad diet. To get the most out of these sessions, focus on these three non-negotiable principles:</p>
+                <ul class="list-disc list-inside text-gray-300">
+                    <li><strong>Protein at Every Meal:</strong> Protein provides the building blocks to repair muscle tissue. Aim for a palm-sized portion with breakfast, lunch, and dinner.</li>
+                    <li><strong>Carbs Are Fuel:</strong> Don't fear carbs. They are your primary energy source. Focus on complex carbs like oats, brown rice, and sweet potatoes to power your workouts.</li>
+                    <li><strong>Hydration is Key:</strong> Water is essential for performance and recovery. Aim for 2-3 litres per day, more on training days.</li>
+                </ul>
+                <div class="mt-6 p-4 border border-brand-green rounded-lg">
+                    <h5 class="font-bold brand-green-large">Ready to Go Deeper?</h5>
+                    <p class="text-sm text-gray-300 mt-2">These principles are the foundation. When you're ready to optimise your energy, accelerate recovery, and dial in your nutrition with precision, let me know. We can build a fully personalised nutrition plan that aligns perfectly with your training and goals.</p>
                 </div>
+            </div>
+            
+            <div class="mb-8">
+                <h4 class="font-bold text-xl mb-2">4.2 Mindset: The Real Work</h4>
+                <p class="text-gray-300 mb-4">The workouts below are just instructions for your body. This section is the instruction manual for your mind. This is where the real transformation happens. Read this section before the first workout, and re-read it any time you feel doubt creeping in.</p>
                 
-                <!-- Focus Area 3: Squat Mechanics -->
-                <div class="bg-gray-900/50 border border-gray-700 rounded-lg p-6 sm:p-8 flex flex-col">
-                     <div class="flex-shrink-0">
-                        <div class="w-16 h-16 rounded-lg icon-container flex items-center justify-center mb-4">
-                            <!-- SVG Icon for Squat -->
-                            <svg class="w-8 h-8 text-electric-yellow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24" stroke-width="1.5" stroke="currentColor">
-                                <circle cx="12" cy="7" r="2" stroke-linecap="round" stroke-linejoin="round" />
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v4" />
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 13L9 17" />
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 13l3 4" />
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 17H7" />
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 17h2" />
-                            </svg>
-                        </div>
-                        <h3 class="text-2xl font-black text-electric-yellow">Focus 3: Reclaiming Your Squat</h3>
-                    </div>
-                    <div class="flex-grow mt-4">
-                        <p class="text-gray-300 leading-relaxed">
-                           Your Peloton and running have built fantastic leg strength, but they do so in a very specific range of motion. Over time, through a kind of 'gradual de-exposure,' if your knees aren't regularly taken through their full squat range, that natural movement pattern can lessen.
-                        </p>
-                        <p class="mt-4 text-gray-300 leading-relaxed">
-                           This forces other areas to compensate to get the job done, which is how seemingly unconnected issues can flare up. This can then start the same cycle elsewhere, causing a network of referral issues—all stemming from an issue that wasn't even causing pain in the first place. Our goal is to re-teach this full-range pattern to build a more supple and movement-efficient foundation.
-                        </p>
-                    </div>
+                <div class="mb-6">
+                    <h5 class="font-bold brand-green-large">Winning the First Battle: The Five-Minute Rule</h5>
+                    <p class="text-gray-300 mt-2">The hardest part of any workout is starting it. Motivation is a myth; discipline is a muscle. On days you feel you "can't be bothered," the only goal is to put your kit on and start the warm-up. That's it. Anyone can do five minutes. By the time those five minutes are up, the war against inertia is won, and you'll be ready to do the work.</p>
                 </div>
 
-            </div>
-
-            <!-- The Goal Section -->
-            <div class="mt-12 text-center">
-                 <div class="inline-block bg-electric-yellow text-black font-bold uppercase tracking-widest py-2 px-4 rounded-full">
-                    The Goal
+                <div class="mb-6">
+                    <h5 class="font-bold brand-green-large">Rewiring the Narrative: Every Rep is a Vote</h5>
+                    <p class="text-gray-300 mt-2">Right now, your brain has a well-worn story about your ankle and wrist: "Be careful. It's weak. Don't trust it." This plan is designed to systematically dismantle that story. Every single pain-free rep of a lunge, every stable single-leg balance, every controlled wrist curl is a vote for a new narrative. It's tangible proof that your body is strong and adaptable. We are literally re-wiring your brain to associate these movements with strength, not fear. Focus on the successful reps, not the memory of the injury.</p>
                 </div>
-                <p class="mt-6 max-w-3xl mx-auto text-xl sm:text-2xl text-gray-200 leading-relaxed">
-                    This targeted homework will make your entire fitness system more robust. We're not just adding work; we're adding intelligence to your training.
-                </p>
+
+                <div class="mb-6">
+                    <h5 class="font-bold brand-green-large">The Discomfort Dial: Learning the Difference Between Signals</h5>
+                    <p class="text-gray-300 mt-2">Imagine you have a dial. On one end is **Discomfort**, on the other is **Pain**. Discomfort is the burning in your quads during a wall sit, the tremble in your core during a plank, the gasp for air after a finisher. This is the growth zone. We lean into this. Pain is a sharp, specific, "stop" signal from a joint. It's a red light. Your job is to become a master at reading this dial. We chase discomfort, but we respect and listen to pain. Always.</p>
+                </div>
+
+                <div class="mb-6">
+                    <h5 class="font-bold brand-green-large">The Power of Visualisation: See it, Believe it, Do it</h5>
+                    <p class="text-gray-300 mt-2">Before your physio review in a few weeks, I want you to start a new drill. Every night before you go to sleep, spend 60 seconds vividly imagining yourself performing a perfect, strong, controlled chaturanga. Feel the stability in your wrist, the strength in your shoulders, the control in your core. The brain struggles to tell the difference between a vividly imagined event and a real one. By doing this, you are preparing the neural pathways for success long before we even attempt the movement.</p>
+                </div>
             </div>
 
+            <div>
+                <h4 class="font-bold text-xl mb-2">4.3 The Art of Recovery</h4>
+                <p class="text-gray-300">You don't get stronger in the gym; you get stronger while you recover. Prioritise this.<br>
+                <strong>Sleep:</strong> Aim for 7-8 hours of quality sleep per night. This is when your body repairs and rebuilds. <br>
+                <strong>Active Recovery:</strong> Your Yoga Recovery days are a crucial part of the strategy. They help to reduce muscle soreness and improve mobility, allowing you to hit the next session harder.</p>
+            </div>
         </div>
+
+        <!-- SECTION 5: THE FINISH LINE & BEYOND -->
+        <div id="section-5" class="bg-brand-card rounded-lg p-6 md:p-8 mb-12">
+            <h3 class="text-2xl font-bold mb-6 text-center brand-green-bright">SECTION 5: THE FINISH LINE & BEYOND</h3>
+            
+            <div class="mb-8">
+                <h4 class="font-bold text-xl mb-2">5.1 Measuring Success</h4>
+                <p class="text-gray-300">Forget the scales. Our success metrics are different. After 15 weeks, we'll measure success by:<br>
+                - Your confidence performing a single-leg balance on your left leg.<br>
+                - The load tolerance and lack of pain in your wrist during the rehab drills.<br>
+                - Your ability to complete 5 rounds of the final circuit without hesitation.<br>
+                - The feeling of being strong, capable, and in control of your own body again.</p>
+            </div>
+            
+            <div class="mb-8">
+                <h4 class="font-bold text-xl mb-2">5.2 Your Next Chapter</h4>
+                <p class="text-gray-300">This 15-week plan is the end of the beginning. It's designed to build a rock-solid foundation for whatever comes next, whether that's lifting heavier, mastering advanced yoga, or simply enjoying a strong, pain-free life. We'll use your progress here to map out the next exciting phase of your training after your physio review.</p>
+            </div>
+
+            <div>
+                <h4 class="font-bold text-xl mb-2">5.3 Contact & Support</h4>
+                <p class="text-gray-300">I'm with you every step of the way. If you have questions, if something doesn't feel right, or if you just need to vent after a tough session, you know how to reach me. Let's do this.</p>
+            </div>
+        </div>
+        
+        <!-- Exercise Library (Visible by default) -->
+        <div id="exercise-library" class="printable-section">
+             <h2 class="text-3xl md:text-4xl font-extrabold mt-12 mb-8 text-center brand-green-bright">Exercise Library</h2>
+             <!-- Library content will be generated by JS -->
+        </div>
+
     </main>
+    
+    <!-- Footer -->
+    <footer class="bg-black py-8 text-center text-gray-500 no-print">
+        <p>&copy; 2025 Coach Pete Ryan. All Rights Reserved.</p>
+        <p class="text-sm mt-2">Building Better People.</p>
+    </footer>
 
-    <!-- Investment Section -->
-    <div class="mt-16 max-w-4xl mx-auto text-center px-4">
-        <div class="bg-gray-900/50 border border-gray-700 rounded-lg p-6 sm:p-8">
-            <h2 class="text-2xl font-black text-electric-yellow mb-4">Your Training Investment</h2>
-            <p class="text-gray-300 text-lg leading-relaxed max-w-3xl mx-auto">
-                My standard 'Performance' package for new clients is £299/month (approx. £69 per session). As a valued returning client, your loyalty rate is **£60 per session**. This is only a £10 increase from your rate six years ago, which is less than £2 a year. In your original message you mentioned training up to December, so with that in mind here are two block options for you:
-            </p>
-            <div class="mt-8 border-t border-gray-700 pt-8 text-left grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div>
-                    <h3 class="font-bold text-white text-xl">1. Your Usual Block of 10</h3>
-                    <p class="text-gray-400 mt-1">Secure your usual block of 10 sessions at your loyalty rate for **£600**. This would mean purchasing another block around the week commencing October 20th, leaving you with 5 sessions in the bank post your December cut-off point.</p>
-                </div>
-                <div>
-                    <h3 class="font-bold text-white text-xl">2. The December Goal Package</h3>
-                    <p class="text-gray-400 mt-1">To cover your goal of training until December, this package includes all 15 remaining sessions for **£900**. This secures your slot for the rest of the year in one go.</p>
-                </div>
+    <!-- Exercise Modal -->
+    <div id="exercise-modal" class="fixed inset-0 z-50 items-center justify-center hidden no-print">
+        <div class="modal-backdrop fixed inset-0"></div>
+        <div class="modal-card relative w-11/12 max-w-md mx-auto my-12 rounded-lg shadow-lg p-6">
+            <button id="close-modal" class="absolute top-4 right-4 text-gray-400 hover:text-white text-3xl leading-none">&times;</button>
+            <h3 id="modal-title" class="text-2xl font-bold brand-green-medium mb-4">Exercise Name</h3>
+            <div>
+                <h4 class="font-bold mb-2">Key Focus:</h4>
+                <p id="modal-focus" class="text-gray-300 mb-4"></p>
+                <h4 class="font-bold mb-2">Instructions:</h4>
+                <ol id="modal-instructions" class="list-decimal list-inside text-gray-300 space-y-2"></ol>
             </div>
         </div>
     </div>
 
-    <!-- Payment Section -->
-    <div class="mt-16 max-w-xl mx-auto text-center px-4">
-        <h2 class="text-2xl font-black text-electric-yellow mb-4">Settle your sessions</h2>
-        <p class="text-gray-300 mb-6 text-lg">
-            You can use the link below to securely pay for your first session while you decide on a package. It accepts card, Apple Pay, Google Pay, or Revolut.
-        </p>
-        <a href="https://checkout.revolut.com/pay/bdfadeb2-376c-4f25-b6fe-8d9b9599270d"
-           class="inline-block bg-electric-yellow text-black font-bold py-3 px-6 rounded-full text-lg shadow-lg hover:bg-yellow-300 transition duration-200">
-           Pay Now
-        </a>
-        <p class="text-sm text-gray-500 mt-4">Thank you for training with me.<br>Coach Pete Ryan</p>
-        <p class="text-sm text-gray-400 mt-6 leading-relaxed">
-            If you'd prefer to pay via manual bank transfer, please use the details below:<br>
-            <b>Peter Patrick Ryan</b><br>
-            <b>Bank:</b> Revolut<br>
-            <b>Sort Code:</b> 04-00-75<br>
-            <b>Account:</b> 07935897<br>
-            Use your name or session date as the reference.
-        </p>
-    </div>
+    <script>
+        // --- DATABASE ---
+        const exerciseDatabase = {
+            'goblet-squats': {
+                title: 'Goblet Squats (2kg)',
+                instructions: [
+                    { type: 'heading', content: 'Setup:' },
+                    { type: 'item', content: 'Stand with your feet slightly wider than shoulder-width, toes pointing slightly outwards.' },
+                    { type: 'item', content: 'Hold the 2kg dumbbell vertically against your chest with both hands, like you\'re holding a goblet.' },
+                    { type: 'heading', content: 'Execution:' },
+                    { type: 'item', content: 'Brace your core and keep your chest proud. Initiate the movement by sending your hips back and down.' },
+                    { type: 'item', content: 'Lower yourself until your thighs are at least parallel to the floor, keeping your back straight.' },
+                    { type: 'item', content: 'Drive powerfully through your heels to return to the starting position.' },
+                    { type: 'heading', content: 'Coaching Cues:' },
+                    { type: 'item', content: '<strong>Ankle Focus:</strong> Consciously keep your left heel glued to the floor. Feel the stability. This is a safe movement.' },
+                    { type: 'item', content: 'Imagine you are spreading the floor apart with your feet as you lower down.' },
+                ]
+            },
+            'forearm-plank-knee-drive': {
+                title: 'Forearm Plank with Knee Drive',
+                instructions: [
+                    { type: 'heading', content: 'Setup:' },
+                    { type: 'item', content: 'Assume a plank position resting on your forearms and toes. Your body should form a dead straight line from head to heels.' },
+                    { type: 'heading', content: 'Execution:' },
+                    { type: 'item', content: 'Without letting your hips sag, slowly bring your right knee across your body towards your left elbow.' },
+                    { type: 'item', content: 'Pause for a second, squeezing your abs, then return the leg with control.' },
+                    { type: 'item', content: 'Repeat with the left knee towards the right elbow. The movement should be deliberate, not rushed.' },
+                    { type: 'heading', content: 'Coaching Cues:' },
+                    { type: 'item', content: '<strong>Wrist Safe:</strong> All pressure is through your forearms, protecting your wrist completely.' },
+                    { type: 'item', content: 'Imagine a glass of water on your lower back. Don\'t let it spill.' },
+                ]
+            },
+            'reverse-lunges': {
+                title: 'Alternating Reverse Lunges',
+                instructions: [
+                    { type: 'heading', content: 'Setup:' },
+                    { type: 'item', content: 'Stand tall with your feet together, core engaged.' },
+                    { type: 'heading', content: 'Execution:' },
+                    { type: 'item', content: 'Take a large, controlled step backwards with your right foot, landing on the ball of the foot.' },
+                    { type: 'item', content: 'Lower your hips until both knees are bent at approximately 90-degree angles.' },
+                    { type: 'item', content: 'Powerfully push off your back foot and drive through the heel of your front (left) foot to return to the start.' },
+                    { type: 'item', content: 'Alternate legs with each rep.' },
+                    { type: 'heading', content: 'Coaching Cues:' },
+                    { type: 'item', content: '<strong>Ankle Focus:</strong> The reverse lunge is safer for the ankle as it requires less deceleration. Trust it. Feel the stability as you push back up.' },
+                ]
+            },
+            'leg-raise-hip-lift': {
+                title: 'Leg Raise + Hip Lift',
+                instructions: [
+                    { type: 'heading', content: 'Setup:' },
+                    { type: 'item', content: 'Lie flat on your back with your legs straight. Place your hands under your glutes for lower back support.' },
+                    { type: 'heading', content: 'Execution:' },
+                    { type: 'item', content: 'Keeping your legs as straight as possible, slowly raise them until they are perpendicular to the floor.' },
+                    { type: 'item', content: 'At the top, perform a small "pulse" by lifting your hips directly up off the floor.' },
+                    { type: 'item', content: 'With control, lower your hips back down, and then slowly lower your legs, stopping just before they touch the floor.' },
+                    { type: 'heading', content: 'Coaching Cues:' },
+                    { type: 'item', content: 'The entire movement should be controlled. Do not use momentum to swing your legs.' },
+                    { type: 'item', content: 'Press your lower back into the floor throughout the entire exercise.' },
+                ]
+            },
+            'sumo-squats': {
+                title: 'Sumo Squats (2kg)',
+                instructions: [
+                    { type: 'heading', content: 'Setup:' },
+                    { type: 'item', content: 'Hold the 2kg weight in front of you, letting it hang down.' },
+                    { type: 'item', content: 'Take a stance that is significantly wider than your shoulders, with your toes pointed out at about 45 degrees.' },
+                    { type: 'heading', content: 'Execution:' },
+                    { type: 'item', content: 'Keeping your chest up and back straight, lower your hips down and back.' },
+                    { type: 'item', content: 'Actively push your knees out over your feet as you descend.' },
+                    { type: 'item', content: 'Drive through your heels to return to the starting position, squeezing your glutes at the top.' },
+                    { type: 'heading', content: 'Coaching Cues:' },
+                    { type: 'item', content: '<strong>Ankle Focus:</strong> The wide stance provides a very stable base. Trust your left ankle to support you.' },
+                    { type: 'item', content: 'Focus on the stretch in your inner thighs at the bottom of the movement.' },
+                ]
+            },
+            'dead-bug': {
+                title: 'Dead Bug',
+                instructions: [
+                    { type: 'heading', content: 'Setup:' },
+                    { type: 'item', content: 'Lie on your back. Lift your legs into a "tabletop" position (knees bent at 90 degrees over your hips).' },
+                    { type: 'item', content: 'Extend your arms straight up towards the ceiling.' },
+                    { type: 'item', content: 'Actively press your lower back into the floor. There should be no gap.' },
+                    { type: 'heading', content: 'Execution:' },
+                    { type: 'item', content: 'Slowly lower your right arm and left leg towards the floor at the same time.' },
+                    { type: 'item', content: 'Go as low as you can WITHOUT your lower back arching off the floor.' },
+                    { type: 'item', content: 'Return to the start with control and repeat on the other side (left arm, right leg).' },
+                    { type: 'heading', content: 'Coaching Cues:' },
+                    { type: 'item', content: 'This is an anti-extension exercise. The goal is to prevent your back from arching.' },
+                    { type: 'item', content: 'Slower is better. This is all about control.' },
+                ]
+            },
+            'step-ups': {
+                title: 'Step-Ups',
+                instructions: [
+                    { type: 'heading', content: 'Setup:' },
+                    { type: 'item', content: 'Stand in front of a low, sturdy step, box, or bottom stair.' },
+                    { type: 'item', content: 'Place your entire left foot firmly onto the centre of the step.' },
+                    { type: 'heading', content: 'Execution:' },
+                    { type: 'item', content: 'Shift your weight onto your left foot. Drive through your left heel to lift your body up until your left leg is straight.' },
+                    { type: 'item', content: 'Bring your right foot to lightly tap the step.' },
+                    { type: 'item', content: 'Slowly and with control, lower your right foot back to the floor. Complete all reps on one side before switching.' },
+                    { type: 'heading', content: 'Coaching Cues:' },
+                    { type: 'item', content: '<strong>Ankle Focus:</strong> This is a prime movement for rebuilding trust. The ankle is in a stable, controlled position. Focus on the feeling of strength as you drive up.' },
+                    { type: 'item', content: 'Avoid pushing off your back foot. The work should come from the front leg.' },
+                ]
+            },
+            'seated-knee-tucks': {
+                title: 'Seated Knee Tucks',
+                instructions: [
+                    { type: 'heading', content: 'Setup:' },
+                    { type: 'item', content: 'Sit on the floor and lean back slightly, supporting your upper body with your hands placed on the floor just behind you.' },
+                    { type: 'item', content: 'Extend your legs out in front of you, feet slightly off the floor.' },
+                    { type: 'heading', content: 'Execution:' },
+                    { type: 'item', content: 'Brace your core. Simultaneously pull your knees towards your chest and bring your chest towards your knees.' },
+                    { type: 'item', content: 'Squeeze your abs hard in the compressed position.' },
+                    { type: 'item', content: 'Slowly extend back to the starting position.' },
+                    { type: 'heading', content: 'Coaching Cues:' },
+                    { type: 'item', content: 'Think about crunching and compressing your entire midsection.' },
+                    { type: 'item', content: 'The movement should be driven by your abs, not by momentum.' },
+                ]
+            },
+             'single-leg-rdl': {
+                title: 'Single Leg RDL (2kg)',
+                instructions: [
+                    { type: 'heading', content: 'Setup:' },
+                    { type: 'item', content: 'Stand on your left leg, holding the 2kg weight in your right hand. Keep a slight bend in your left knee.' },
+                    { type: 'item', content: 'You can place your other hand on a wall or chair for balance support initially.' },
+                    { type: 'heading', content: 'Execution:' },
+                    { type: 'item', content: 'Keeping your back perfectly straight, hinge forward at your hip.' },
+                    { type: 'item', content: 'As you hinge, allow your right leg to extend straight back behind you for balance. The weight should lower towards the floor.' },
+                    { type: 'item', content: 'Go as low as you can while maintaining a flat back, then squeeze your left glute to pull yourself back to the starting position.' },
+                    { type: 'heading', content: 'Coaching Cues:' },
+                    { type: 'item', content: '<strong>Ankle Focus:</strong> Your ankle will be working hard to stabilise you. This is excellent for rebuilding strength. Focus on gripping the floor with your foot.' },
+                    { type: 'item', content: 'Imagine your body is a long, straight plank from head to back heel.' },
+                ]
+            },
+            'hollow-body-hold': {
+                title: 'Hollow Body Hold',
+                instructions: [
+                    { type: 'heading', content: 'Setup:' },
+                    { type: 'item', content: 'Lie on your back and press your lower back firmly into the floor.' },
+                    { type: 'heading', content: 'Execution:' },
+                    { type: 'item', content: 'Lift your head, shoulders, and legs off the floor. Your arms can be extended overhead or kept by your sides.' },
+                    { type: 'item', content: 'Find the lowest position you can hold your arms and legs without your lower back arching. Your body should form a shallow "banana" shape.' },
+                    { type: 'item', content: 'Hold this position, focusing on keeping your entire core braced.' },
+                    { type: 'heading', content: 'Coaching Cues:' },
+                    { type: 'item', content: 'If your back starts to arch, bring your knees and arms higher. The goal is core engagement, not how low you can go.' },
+                    { type: 'item', content: 'This is one of the toughest core exercises there is. Embrace the shake!' },
+                ]
+            },
+            'lateral-lunges': {
+                title: 'Lateral Lunges',
+                instructions: [
+                    { type: 'heading', content: 'Setup:' },
+                    { type: 'item', content: 'Stand with your feet together.' },
+                    { type: 'heading', content: 'Execution:' },
+                    { type: 'item', content: 'Take a large step directly out to your right side, keeping your left leg straight.' },
+                    { type: 'item', content: 'As you step, send your hips back and down, bending your right knee. Keep your chest up.' },
+                    { type: 'item', content: 'Push powerfully off your right foot to return to the starting position.' },
+                    { type: 'item', content: 'Alternate sides with each rep.' },
+                    { type: 'heading', content: 'Coaching Cues:' },
+                    { type: 'item', content: 'Think of it as a single-leg squat to the side. Most of your weight should be on the heel of the bent leg.' },
+                    { type: 'item', content: 'Feel the stretch in the inner thigh of your straight leg.' },
+                ]
+            },
+             'plank-hip-dips': {
+                title: 'Forearm Plank with Hip Dips',
+                instructions: [
+                    { type: 'heading', content: 'Setup:' },
+                    { type: 'item', content: 'Start in a strong forearm plank position, with your body in a straight line.' },
+                    { type: 'heading', content: 'Execution:' },
+                    { type: 'item', content: 'Keeping your core tight, slowly rotate your hips and dip your right hip towards the floor.' },
+                    { type: 'item', content: 'Return to the centre with control, then rotate and dip your left hip towards the floor.' },
+                    { type: 'item', content: 'The movement should be smooth and controlled, focusing on your obliques (side abs).' },
+                    { type: 'heading', content: 'Coaching Cues:' },
+                    { type: 'item', content: '<strong>Wrist Safe:</strong> This is a great way to challenge your core rotation without any pressure on your wrists.' },
+                    { type: 'item', content: 'Try to keep your shoulders as level as possible throughout the movement.' },
+                ]
+            },
+            'wall-sit': {
+                title: 'Wall Sit',
+                instructions: [
+                    { type: 'heading', content: 'Setup:' },
+                    { type: 'item', content: 'Stand with your back flat against a sturdy wall.' },
+                    { type: 'item', content: 'Walk your feet forward about two feet.' },
+                    { type: 'heading', content: 'Execution:' },
+                    { type: 'item', content: 'Slide your back down the wall until your thighs are parallel to the floor, as if you are sitting in an invisible chair.' },
+                    { type: 'item', content: 'Ensure your knees are directly above your ankles, forming a 90-degree angle.' },
+                    { type: 'item', content: 'Hold this position for the prescribed time.' },
+                    { type: 'heading', content: 'Coaching Cues:' },
+                    { type: 'item', content: '<strong>Ankle Focus:</strong> This is a fantastic isometric hold to build strength and stability around the knee and ankle without impact.' },
+                    { type: 'item', content: 'Press your entire back against the wall and keep your core engaged.' },
+                ]
+            },
+            'flutter-kicks': {
+                title: 'Flutter Kicks',
+                instructions: [
+                    { type: 'heading', content: 'Setup:' },
+                    { type: 'item', content: 'Lie on your back with your legs extended. Place your hands under your glutes to support your lower back.' },
+                    { type: 'heading', content: 'Execution:' },
+                    { type: 'item', content: 'Press your lower back into the floor. Lift your heels a few inches off the ground.' },
+                    { type: 'item', content: 'Perform small, rapid, alternating kicks, like you are swimming on your back.' },
+                    { type: 'item', content: 'The movement should come from your hips, not your knees.' },
+                    { type: 'heading', content: 'Coaching Cues:' },
+                    { type: 'item', content: 'The number one priority is keeping your lower back on the floor. If it starts to arch, make the kicks smaller or lift your legs higher.' },
+                ]
+            },
+            'curtsy-lunges': {
+                title: 'Curtsy Lunges',
+                instructions: [
+                    { type: 'heading', content: 'Setup:' },
+                    { type: 'item', content: 'Stand with your feet hip-width apart.' },
+                    { type: 'heading', content: 'Execution:' },
+                    { type: 'item', content: 'Step your right leg back and behind your left leg, as if you are doing a formal curtsy.' },
+                    { type: 'item', content: 'Lower your hips until your front (left) thigh is nearly parallel to the floor.' },
+                    { type: 'item', content: 'Push off your right foot and through your left heel to return to the start.' },
+                    { type: 'item', content: 'Alternate sides.' },
+                    { type: 'heading', content: 'Coaching Cues:' },
+                    { type: 'item', content: '<strong>Ankle Focus:</strong> This challenges your ankle stability in a new plane of motion. Focus on keeping your front knee tracking over your foot.' },
+                    { type: 'item', content: 'This is a great exercise for targeting the gluteus medius (the side of your glutes).' },
+                ]
+            },
+            'glute-bridge-march': {
+                title: 'Glute Bridge March',
+                instructions: [
+                    { type: 'heading', content: 'Setup:' },
+                    { type: 'item', content: 'Lie on your back with your knees bent, feet flat on the floor close to your glutes.' },
+                    { type: 'item', content: 'Lift your hips off the floor until your body forms a straight line from your shoulders to your knees. Squeeze your glutes hard.' },
+                    { type: 'heading', content: 'Execution:' },
+                    { type: 'item', content: 'Maintaining this bridge height, slowly lift your right foot off the floor and bring your knee towards your chest.' },
+                    { type: 'item', content: 'Lower your right foot back to the floor with control, without letting your hips drop.' },
+                    { type: 'item', content: 'Repeat with the left leg. The goal is to keep your hips perfectly still.' },
+                    { type: 'heading', content: 'Coaching Cues:' },
+                    { type: 'item', content: 'This is a core and glute stability exercise. The "march" should be slow and deliberate.' },
+                    { type: 'item', content: 'Don\'t let the hip of the leg you are lifting drop down.' },
+                ]
+            }
+        };
 
-    <!-- Footer -->
-    <footer class="mt-16 pb-8 text-center text-gray-500">
-        <p>&copy; 2025 Coach Pete Ryan. All Rights Reserved.</p>
-    </footer>
+        const planData = [
+            {
+                title: "Weeks 1–2: Foundation & Re-Patterning",
+                rotationNote: "This block alternates: <strong>Strength Week</strong>, then <strong>Hybrid Week</strong>.",
+                workouts: {
+                    'Strength & Core Circuit': {
+                        type: 'HIGHER INTENSITY',
+                        protocol: ["<strong>Structure:</strong> 45 seconds work / 15 seconds rest per exercise.", "<strong>Rest:</strong> 30 seconds rest at the end of the full circuit. Complete 3-4 rounds."],
+                        circuit: [
+                            { name: 'Goblet Squats (2kg)', id: 'goblet-squats', cue: '(Focus on control, left ankle stability)' },
+                            { name: 'Forearm Plank with Knee Drive', id: 'forearm-plank-knee-drive', cue: '(Slow, controlled cross-body motion)' },
+                            { name: 'Alternating Reverse Lunges', id: 'reverse-lunges', cue: '(Push through front heel)' },
+                            { name: 'Leg Raise + Hip Lift', id: 'leg-raise-hip-lift', cue: '(Press low back into floor)' },
+                        ],
+                        peloton: "<strong>Finisher:</strong> 5 min Tabata Ride (20s on, 10s off). Empty the tank."
+                    },
+                    'Peloton Conditioning': { type: 'HIGHER INTENSITY', content: "<p><strong>10 min HIIT & Hills Ride</strong>.</p>", protocol: ["Attack the intervals. Push resistance 2-3 points higher than cues.", "Use recoveries to control breathing, not to coast."] },
+                    'Yoga Recovery': { type: 'ACTIVE RECOVERY', note: "Focus on mobility, especially in the hips and ankles.", content: `<ul class="space-y-2 list-disc list-inside text-gray-300"><li>Ankle & Wrist Mobility Drills</li><li>Low Lunge → Crescent Lunge</li><li>Warrior II → Reverse Warrior → Triangle Pose</li><li>Seated Forward Fold & Supine Figure-4 Stretch</li><li>Legs Up The Wall (Ankle De-load)</li></ul>` }
+                }
+            },
+            {
+                title: "Weeks 3–4: Building Capacity",
+                rotationNote: "This block alternates: <strong>Strength Week</strong>, then <strong>Hybrid Week</strong>.",
+                workouts: {
+                    'Strength & Core Circuit': {
+                        type: 'HIGHER INTENSITY',
+                        protocol: ["<strong>Structure:</strong> 45 seconds work / 15 seconds rest per exercise.", "<strong>Rest:</strong> 30 seconds rest at the end of the full circuit. Complete 3-4 rounds."],
+                        circuit: [
+                            { name: 'Sumo Squats (2kg)', id: 'sumo-squats', cue: '(Drive knees out, stay tall)' },
+                            { name: 'Dead Bug', id: 'dead-bug', cue: '(Ultimate core control, no back arching)' },
+                            { name: 'Step-Ups', id: 'step-ups', cue: '(Drive up with purpose, control the down)' },
+                            { name: 'Seated Knee Tucks', id: 'seated-knee-tucks', cue: '(Lean back, compress hard)' },
+                        ],
+                        peloton: "<strong>Finisher:</strong> 6 min Progressive Climb. Increase resistance every 2 mins."
+                    },
+                    'Peloton Conditioning': { type: 'HIGHER INTENSITY', content: "<p><strong>10 min Power Ride</strong>.</p>", protocol: ["Focus on output (watts). Drive hard for the full 40s work periods.", "Stay active in the 20s recovery."] },
+                    'Yoga Recovery': { type: 'ACTIVE RECOVERY', note: "Focus on hamstring and hip flexibility.", content: `<ul class="space-y-2 list-disc list-inside text-gray-300"><li>Ankle & Wrist Mobility Drills</li><li>Wide-Leg Forward Fold Series</li><li>Goddess Pose</li><li>Supported Pigeon Pose</li><li>Reclined Spinal Twist</li></ul>` }
+                }
+            },
+            {
+                title: "Weeks 5–7: Forging Strength",
+                rotationNote: "A 3-week block. <strong>Strength -> Hybrid -> Strength</strong>.",
+                workouts: {
+                    'Strength & Core Circuit': {
+                        type: 'HIGHER INTENSITY',
+                        protocol: ["<strong>Structure:</strong> 45 seconds work / 15 seconds rest per exercise.", "<strong>Rest:</strong> 30 seconds rest at the end of the full circuit. Complete 4 rounds."],
+                        circuit: [
+                            { name: 'Single Leg RDL (2kg)', id: 'single-leg-rdl', cue: '(Hinge at hip, protect back)' },
+                            { name: 'Hollow Body Hold', id: 'hollow-body-hold', cue: '(The ultimate core test)' },
+                            { name: 'Lateral Lunges', id: 'lateral-lunges', cue: '(Sit deep into the hip)' },
+                            { name: 'Forearm Plank with Hip Dips', id: 'plank-hip-dips', cue: '(Control the rotation)' },
+                        ],
+                        peloton: "<strong>Finisher:</strong> 8 min HIIT Ride. Go for a PR."
+                    },
+                    'Peloton Conditioning': { type: 'HIGHER INTENSITY', content: "<p><strong>10 min Intervals Ride</strong>.</p>", protocol: ["Match the beat. Drive the cadence. Let the sweat pour.", "Find your limit in the last 2 intervals."] },
+                    'Yoga Recovery': { type: 'ACTIVE RECOVERY', note: "Full body flush and recovery.", content: `<ul class="space-y-2 list-disc list-inside text-gray-300"><li>Ankle & Wrist Mobility Drills</li><li>Gentle flow: Cat-Cow (on forearms), Low Lunge, Warrior series</li><li>Long-hold hip stretches</li><li>Happy Baby</li><li>Extended Savasana (Relaxation)</li></ul>` }
+                }
+            },
+            {
+                title: "Weeks 8–9: Peak Performance",
+                rotationNote: "This block alternates: <strong>Strength Week</strong>, then <strong>Hybrid Week</strong>.",
+                workouts: {
+                    'Strength & Core Circuit': {
+                        type: 'HIGHER INTENSITY',
+                        protocol: ["<strong>Structure:</strong> 45 seconds work / 15 seconds rest per exercise.", "<strong>Rest:</strong> 30 seconds rest at the end of the full circuit. Complete 4 rounds."],
+                        circuit: [
+                            { name: 'Wall Sit', id: 'wall-sit', cue: '(Thighs parallel to the floor)' },
+                            { name: 'Flutter Kicks', id: 'flutter-kicks', cue: '(Small, fast kicks)' },
+                            { name: 'Curtsy Lunges', id: 'curtsy-lunges', cue: '(Control the movement)' },
+                            { name: 'Dead Bug', id: 'dead-bug', cue: '(Focus on core stability)' },
+                        ],
+                        peloton: "<strong>Finisher:</strong> 9 min Progressive Climb. Push the resistance higher each block."
+                    },
+                    'Peloton Conditioning': { type: 'HIGHER INTENSITY', content: "<p><strong>10 min Climb Ride</strong>.</p>", protocol: ["Sustain a high effort on a heavy climb.", "Focus on mental toughness."] },
+                    'Yoga Recovery': { type: 'ACTIVE RECOVERY', note: "Focus on deep hip and hamstring release.", content: `<ul class="space-y-2 list-disc list-inside text-gray-300"><li>Ankle & Wrist Mobility Drills</li><li>Pigeon Pose Series</li><li>Seated Wide-Leg Forward Fold</li><li>Reclined Spinal Twist</li><li>Legs Up The Wall</li></ul>` }
+                }
+            },
+            {
+                title: "Weeks 10–12: Unbreakable",
+                rotationNote: "A 3-week block. <strong>Strength -> Hybrid -> Strength</strong>.",
+                workouts: {
+                    'Strength & Core Circuit': {
+                        type: 'HIGHER INTENSITY',
+                        protocol: ["<strong>Structure:</strong> 45 seconds work / 15 seconds rest per exercise.", "<strong>Rest:</strong> 30 seconds rest at the end of the full circuit. Complete 4-5 rounds."],
+                        circuit: [
+                            { name: 'Glute Bridge March', id: 'glute-bridge-march', cue: '(Keep hips high and level)' },
+                            { name: 'Hollow Body Hold', id: 'hollow-body-hold', cue: '(Full body tension)' },
+                            { name: 'Step-Ups', id: 'step-ups', cue: '(Explode up, control down)' },
+                            { name: 'Forearm Plank with Knee Drive', id: 'forearm-plank-knee-drive', cue: '(Oblique focus)' },
+                        ],
+                        peloton: "<strong>Finisher:</strong> 10 min HIIT & Hills Ride. A true test of endurance."
+                    },
+                    'Peloton Conditioning': { type: 'HIGHER INTENSITY', content: "<p><strong>10 min Tabata Ride</strong>.</p>", protocol: ["Maximal effort in every 20-second push.", "Leave nothing in the tank."] },
+                    'Yoga Recovery': { type: 'ACTIVE RECOVERY', note: "Focus on full-body restoration.", content: `<ul class="space-y-2 list-disc list-inside text-gray-300"><li>Ankle & Wrist Mobility Drills</li><li>Full-body gentle flow</li><li>Longer holds in your favourite poses</li><li>Extended Savasana (Relaxation)</li></ul>` }
+                }
+            },
+            {
+                title: "Weeks 13–15: Legacy",
+                rotationNote: "Final 3-week push. <strong>Strength -> Hybrid -> Strength</strong>. Finish Strong.",
+                workouts: {
+                    'Strength & Core Circuit': {
+                        type: 'HIGHER INTENSITY',
+                        protocol: ["<strong>Structure:</strong> 45 seconds work / 15 seconds rest per exercise.", "<strong>Rest:</strong> 30 seconds rest at the end of the full circuit. Complete 5 rounds."],
+                        circuit: [
+                            { name: 'Single Leg RDL (2kg)', id: 'single-leg-rdl', cue: '(Master the balance and control)' },
+                            { name: 'Leg Raise + Hip Lift', id: 'leg-raise-hip-lift', cue: '(Explosive lift, slow negative)' },
+                            { name: 'Sumo Squats (2kg)', id: 'sumo-squats', cue: '(Go for depth and power)' },
+                            { name: 'Forearm Plank with Hip Dips', id: 'plank-hip-dips', cue: '(Challenge your rotational strength)' },
+                        ],
+                        peloton: "<strong>Finisher:</strong> 10 min Max Effort Ride. Your choice: Tabata, Climb, or HIIT. Beat your best."
+                    },
+                    'Peloton Conditioning': { type: 'HIGHER INTENSITY', content: "<p><strong>Your Final Test: 10 min All Out Ride</strong>.</p>", protocol: ["This is it. A culmination of 15 weeks of hard work.", "Push your limits and see how far you've come."] },
+                    'Yoga Recovery': { type: 'ACTIVE RECOVERY', note: "Reflect and recover.", content: `<ul class="space-y-2 list-disc list-inside text-gray-300"><li>Ankle & Wrist Mobility Drills</li><li>A long, mindful flow of your favourite movements.</li><li>Celebrate your progress.</li><li>Extended Savasana (Relaxation)</li></ul>` }
+                }
+            }
+        ];
+
+        // --- RENDER LOGIC ---
+        const planContainer = document.getElementById('workout-plan');
+        const libraryContainer = document.getElementById('exercise-library');
+
+        const createExerciseHTML = (exercise) => {
+            return `<strong class="exercise-link brand-green-medium cursor-pointer hover:brand-green-light" data-id="${exercise.id}">${exercise.name}</strong> ${exercise.cue || ''}`;
+        };
+
+        planData.forEach((block, blockIndex) => {
+            const blockElement = document.createElement('div');
+            blockElement.id = `block-${blockIndex + 1}`;
+            blockElement.className = 'mb-12';
+            
+            let workoutTabs = Object.keys(block.workouts);
+            let tabsHTML = workoutTabs.map((tab, tabIndex) => `<button class="tab-button font-bold py-2 px-4 rounded-t-lg transition-colors duration-300 ${tabIndex === 0 ? 'tab-active' : 'bg-brand-card text-gray-400 hover:bg-gray-700'}" data-block="${blockIndex}" data-tab="${tabIndex}">${tab}</button>`).join('');
+
+            let contentHTML = workoutTabs.map((tab, tabIndex) => {
+                const workout = block.workouts[tab];
+                let workoutContentHTML = '';
+                
+                if (workout.type === 'HIGHER INTENSITY') {
+                    if (workout.circuit) {
+                        workoutContentHTML = `
+                            <div class="p-6">
+                                <h4 class="font-bold text-lg brand-green-medium mb-2">Intensity Protocol</h4>
+                                <ul class="space-y-2 list-disc list-inside text-gray-300 mb-6">${workout.protocol.map(p => `<li>${p}</li>`).join('')}</ul>
+                                <div class="grid md:grid-cols-2 gap-6">
+                                    <div>
+                                        <h4 class="font-bold text-lg brand-green-medium mb-2">The Circuit</h4>
+                                        <ul class="space-y-2 list-disc list-inside text-gray-300">${workout.circuit.map(e => `<li>${createExerciseHTML(e)}</li>`).join('')}</ul>
+                                    </div>
+                                    <div class="space-y-4 bg-brand-dark p-4 rounded-lg">
+                                        <h4 class="font-bold text-lg brand-green-medium mb-2">The Finisher</h4>
+                                        <p>${workout.peloton}</p>
+                                    </div>
+                                </div>
+                            </div>`;
+                    } else {
+                         workoutContentHTML = `
+                            <div class="p-6">
+                                <div class="mb-4">${workout.content}</div>
+                                <h4 class="font-bold text-lg brand-green-medium mb-2">Intensity Protocol</h4>
+                                <ul class="space-y-2 list-disc list-inside text-gray-300">${workout.protocol.map(p => `<li>${p}</li>`).join('')}</ul>
+                            </div>`;
+                    }
+                } else {
+                    workoutContentHTML = `
+                        <div class="p-6">
+                            <p class="italic text-gray-400 mb-4">${workout.note}</p>
+                            <h4 class="font-bold text-lg brand-green-medium mb-2">Wrist-Free Yoga Flow (30 min)</h4>
+                            ${workout.content}
+                        </div>`;
+                }
+                return `<div class="tab-content ${tabIndex === 0 ? '' : 'hidden'}" data-block="${blockIndex}" data-tab="${tabIndex}">${workoutContentHTML}</div>`;
+            }).join('');
+
+            blockElement.innerHTML = `
+                <div class="flex items-center mb-6">
+                    <div class="w-16 h-16 rounded-full bg-brand-green flex items-center justify-center text-black font-extrabold text-2xl flex-shrink-0 no-print">${blockIndex + 1}</div>
+                    <div class="ml-4">
+                        <h3 class="text-3xl font-bold">${block.title}</h3>
+                        <p class="text-sm text-gray-400 mt-1">${block.rotationNote}</p>
+                    </div>
+                </div>
+                <div class="flex border-b border-brand-green no-print">${tabsHTML}</div>
+                <div class="bg-brand-card rounded-b-lg">${contentHTML}</div>`;
+            planContainer.appendChild(blockElement);
+        });
+        
+        // Populate Printable Library
+        Object.values(exerciseDatabase).forEach(ex => {
+            let instructionsHTML = '';
+            ex.instructions.forEach(inst => {
+                if (inst.type === 'heading') {
+                    instructionsHTML += `<h5 class="font-bold mt-4">${inst.content}</h5>`;
+                } else {
+                    instructionsHTML += `<li class="ml-4">${inst.content}</li>`;
+                }
+            });
+            const libraryEntry = `
+                <div class="mb-8 p-4 border border-gray-700 rounded-lg">
+                    <h3 class="text-xl font-bold brand-green-medium">${ex.title}</h3>
+                    <ul class="list-disc list-inside">${instructionsHTML}</ul>
+                </div>`;
+            libraryContainer.innerHTML += libraryEntry;
+        });
+
+        // --- MODAL & INTERACTIVITY LOGIC ---
+        const modal = document.getElementById('exercise-modal');
+        const closeModalBtn = document.getElementById('close-modal');
+        const modalBackdrop = document.querySelector('.modal-backdrop');
+
+        const openModal = (exerciseId) => {
+            const exercise = exerciseDatabase[exerciseId];
+            if (!exercise) return;
+            
+            document.getElementById('modal-title').innerText = exercise.title;
+            const instructionsList = document.getElementById('modal-instructions');
+            instructionsList.innerHTML = ''; // Clear previous instructions
+            
+            let currentFocus = '';
+            let currentInstructions = [];
+
+            exercise.instructions.forEach(inst => {
+                if(inst.type === 'heading' && inst.content.toLowerCase().includes('cues')) {
+                    let focusItem = exercise.instructions.find(i => i.type === 'item' && exercise.instructions.indexOf(i) > exercise.instructions.indexOf(inst));
+                    if(focusItem) currentFocus = focusItem.content.replace(/<[^>]*>?/gm, '');
+                }
+                if (inst.type === 'heading' && inst.content.toLowerCase().includes('execution')) {
+                    let execIndex = exercise.instructions.indexOf(inst);
+                    for(let i = execIndex + 1; i < exercise.instructions.length; i++) {
+                        if(exercise.instructions[i].type === 'heading') break;
+                        currentInstructions.push(exercise.instructions[i].content);
+                    }
+                }
+            });
+
+            document.getElementById('modal-focus').innerHTML = currentFocus;
+            currentInstructions.forEach(step => {
+                const li = document.createElement('li');
+                li.innerHTML = step; // Use innerHTML to render bold tags
+                instructionsList.appendChild(li);
+            });
+            
+            modal.style.display = 'flex';
+        };
+
+        const closeModal = () => {
+            modal.style.display = 'none';
+        };
+
+        document.querySelectorAll('.exercise-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                const exerciseId = e.target.dataset.id;
+                openModal(exerciseId);
+            });
+        });
+
+        closeModalBtn.addEventListener('click', closeModal);
+        modalBackdrop.addEventListener('click', closeModal);
+        
+        document.querySelectorAll('.tab-button').forEach(button => {
+            button.addEventListener('click', () => {
+                const blockIndex = button.dataset.block;
+                const tabIndex = button.dataset.tab;
+
+                document.querySelectorAll(`.tab-button[data-block="${blockIndex}"]`).forEach(b => {
+                    b.classList.remove('tab-active');
+                    b.classList.add('bg-brand-card', 'text-gray-400', 'hover:bg-gray-700');
+                });
+                button.classList.add('tab-active');
+                button.classList.remove('bg-brand-card', 'text-gray-400', 'hover:bg-gray-700');
+
+                document.querySelectorAll(`.tab-content[data-block="${blockIndex}"]`).forEach(content => {
+                    content.classList.add('hidden');
+                });
+                document.querySelector(`.tab-content[data-block="${blockIndex}"][data-tab="${tabIndex}"]`).classList.remove('hidden');
+            });
+        });
+    </script>
 
 </body>
 </html>
