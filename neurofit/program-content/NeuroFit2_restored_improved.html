@@ -1,0 +1,1023 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>NeuroFit Advanced Programme</title>
+<style>
+ body { font-family: Arial, sans-serif; line-height: 1.6; margin: 20px; }
+ h1, h2, h3 { color: #004A7F; }
+ table { border-collapse: collapse; width: 100%; margin-bottom: 1em; }
+ table, th, td { border: 1px solid #ccc; }
+ th, td { padding: 8px; text-align: left; }
+ th { background-color: #004A7F; color: #fff; }
+ summary { cursor: pointer; font-weight: bold; }
+ .section { margin-bottom: 40px; }
+</style>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root {
+    --bg: #ffffff;
+    --fg: #0a0a0a;
+    --muted: #5a6b7b;
+    --brand: #0A66C2;
+    --brand-2: #004A7F;
+    --surface: #f6f8fb;
+    --border: #e3e8ef;
+    --link: #0A66C2;
+    --accent: #16a34a;
+  }
+  [data-theme="dark"] {
+    --bg: #0b0f14;
+    --fg: #e6e6e6;
+    --muted: #a3b1c2;
+    --brand: #6cb2ff;
+    --brand-2: #8ec8ff;
+    --surface: #121821;
+    --border: #243242;
+    --link: #8ec8ff;
+    --accent: #22c55e;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    line-height: 1.6;
+  }
+  .container { max-width: 1000px; margin: 0 auto; padding: 24px; }
+  header.site { position: sticky; top: 0; z-index: 20; backdrop-filter: saturate(180%) blur(8px); background: color-mix(in oklab, var(--bg), transparent 12%); border-bottom: 1px solid var(--border); }
+  header.site .bar { display: flex; align-items: center; gap: 12px; padding: 12px 24px; max-width: 1200px; margin: 0 auto; }
+  header.site h1 { font-size: 1.1rem; margin: 0; color: var(--brand-2); letter-spacing: 0.2px; }
+  .chip { font: 12px/1.2 system-ui; padding: 6px 10px; border-radius: 999px; border: 1px solid var(--border); color: var(--muted); }
+  .spacer { flex: 1; }
+  .btn { border: 1px solid var(--border); background: var(--surface); color: var(--fg); padding: 8px 12px; border-radius: 10px; cursor: pointer; font-size: 14px; }
+  .btn:hover { filter: brightness(0.98); }
+  .btn:active { transform: translateY(1px); }
+  .toc-drawer { position: fixed; top: 56px; right: 16px; bottom: 16px; width: min(340px, 90vw); background: var(--bg); border: 1px solid var(--border); border-radius: 12px; box-shadow: 0 10px 30px color-mix(in oklab, #000, transparent 70%); padding: 16px; overflow: auto; transform: translateX(120%); transition: transform .25s ease; z-index: 50; }
+  .toc-drawer.open { transform: translateX(0); }
+  .toc-drawer h3 { margin: 0 0 8px 0; color: var(--brand); }
+  .toc-drawer nav ul { list-style: none; padding-left: 0; margin: 0; }
+  .toc-drawer nav li { margin: 6px 0; }
+  .toc-drawer a { text-decoration: none; color: var(--link); }
+  .toc-drawer .muted { color: var(--muted); font-size: 12px; margin-bottom: 8px; }
+  main.container { padding-top: 18px; }
+  h1, h2, h3 { color: var(--brand-2); scroll-margin-top: 80px; }
+  h2 { border-top: 1px solid var(--border); padding-top: 24px; margin-top: 36px; }
+  h3 { margin-top: 22px; }
+  p, ul, ol { color: var(--fg); }
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.95rem; }
+  th, td { padding: 10px 12px; border: 1px solid var(--border); }
+  th { background: color-mix(in oklab, var(--brand-2), var(--bg) 85%); color: var(--fg); text-align: left; }
+  details { border: 1px solid var(--border); border-radius: 10px; padding: 8px 12px; background: var(--surface); margin: 10px 0; }
+  details summary { cursor: pointer; font-weight: 600; color: var(--brand-2); }
+  code, kbd { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 1px 6px; }
+  .callout { border-left: 4px solid var(--accent); background: color-mix(in oklab, var(--accent), var(--bg) 92%); padding: 12px 14px; border-radius: 8px; margin: 16px 0; }
+  .badge { display: inline-block; padding: 4px 8px; border-radius: 999px; background: color-mix(in oklab, var(--brand), var(--bg) 80%); color: var(--fg); font-size: 12px; }
+  .anchor { text-decoration: none; margin-left: 6px; opacity: 0; transition: opacity .2s ease; font-weight: 400; }
+  h2:hover .anchor, h3:hover .anchor { opacity: 1; }
+  .top { position: fixed; right: 16px; bottom: 16px; z-index: 60; border: 1px solid var(--border); background: var(--surface); color: var(--fg); padding: 10px 12px; border-radius: 999px; cursor: pointer; box-shadow: 0 6px 22px color-mix(in oklab, #000, transparent 75%); }
+  .section { margin-bottom: 32px; }
+  .toc-inline { font-size: 0.95rem; color: var(--muted); }
+  a { color: var(--link); }
+  hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+  @media print { header.site, .top, #tocDrawerToggle, #themeToggle { display: none !important; } body { background: #fff; color: #000; } a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 0.8em; color: #444; } }
+</style>
+
+</head>
+<body>
+
+<header class="site" role="banner">
+  <div class="bar">
+    <h1>NeuroFit Advanced Programme</h1>
+    <span class="chip">Updated layout</span>
+    <span class="spacer"></span>
+    <button id="tocDrawerToggle" class="btn" aria-controls="tocDrawer" aria-expanded="false">Contents</button>
+    <button id="themeToggle" class="btn" aria-pressed="false" title="Toggle dark mode">Dark</button>
+  </div>
+</header>
+<div id="tocDrawer" class="toc-drawer" aria-hidden="true">
+  <h3>Contents</h3>
+  <div class="muted">Auto-generated from H2/H3</div>
+  <nav id="tocNav"></nav>
+</div>
+
+<main class="container">
+<h1>NeuroFit Advanced Programme</h1>
+<p><strong>By Pete Ryan</strong> – two‑time British full‑contact kickboxing champion, personal trainer for 18 years and coach to UFC athletes.  This comprehensive programme combines strength, conditioning, mobility and mindset training to help busy professionals and athletes achieve peak performance.</p>
+<div class="section">
+<h2>Table of Contents</h2>
+<p>Use this outline to navigate the document.  Each heading below corresponds to a numbered section.</p>
+<ol>
+  <li>Quick‑Start Guide &amp; No‑Equipment Path</li>
+  <li>1. Introduction and Philosophy</li>
+  <li>2. Getting Started</li>
+  <li>3. Exercise Library</li>
+  <li>4. Programme Structure</li>
+  <li>5. Weekly Workouts</li>
+  <li>6. Advanced Nutrition Plan</li>
+  <li>7. Mindset &amp; Habits</li>
+  <li>8. Interactive Planner &amp; Progress Tracker</li>
+  <li>9. FAQs &amp; Troubleshooting</li>
+  <li>10. About Coach Pete &amp; Further Support</li>
+  <li>11. References &amp; Additional Resources</li>
+  <li>12. Glossary</li>
+  <li>13. Injury Prevention &amp; Recovery</li>
+  <li>14. Exercise &amp; ADHD</li>
+  <li>15. Video Demonstrations &amp; Resources</li>
+  <li>16. Advanced Track Addendum</li>
+  <li>17. Fighter Nutrition Annex</li>
+  <li>18. Additional Appendices (camp templates, HR zones, fight week run sheet)</li>
+</ol>
+</div>
+
+
+<div class="section">
+<!-- Quick‑Start Guide added for beginners -->
+<div class="section">
+<h2>Quick‑Start Guide</h2>
+<p>This brief overview helps you get moving quickly.  For full details, see the sections below.</p>
+<ol>
+<li><strong>Schedule your sessions:</strong> Allocate five days per week for training—three strength days, one conditioning day and one mobility day.  Use your calendar or the interactive Weekly Planner sheet.</li>
+<li><strong>Gather equipment or go equipment‑free:</strong> Ideally you should have adjustable dumbbells, a kettlebell (optional), a resistance band and a skipping rope.  If you don’t have kit, choose the <em>No‑Equipment Path</em> where all movements are replaced with body‑weight alternatives.  This path is highlighted in the Weekly Planner and comes pre‑populated for Weeks 1–12.</li>
+<li><strong>Warm up:</strong> Start each session with 5–10 minutes of dynamic movement to prepare your joints and muscles.</li>
+<li><strong>Work through the phases:</strong> The programme spans 12 weeks divided into Foundation (Weeks 1–3), Strength & Skill (Weeks 4–6), Hypertrophy & Conditioning (Weeks 7–9) and Power & Peak (Weeks 10–12).  Increase weights or reps gradually—no more than 10 % per week【126889423721339†L129-L170】.</li>
+<li><strong>Use the tools:</strong> The Excel workbook includes a <em>Sample Week</em> sheet to demonstrate how to log training, a <em>Macro Calculator</em> for daily nutrition targets, a <em>Meal Split</em> table to distribute macros across meals, a <em>Superset Builder</em> for higher density workouts and an <em>Advanced Metrics</em> sheet to analyse performance (including estimated one‑rep maxes, velocity and power).</li>
+<li><strong>Learn the lingo:</strong> <em>Reps</em> means the number of times you perform an exercise consecutively; <em>sets</em> refer to groups of reps; <em>RPE</em> stands for Rate of Perceived Exertion (1–10); <em>deload</em> is a planned reduction in volume or intensity.  See the Glossary section for more.</li>
+<li><strong>No‑Equipment Path CTA:</strong> If you have no equipment, scroll down to the <em>No‑Equipment Path</em> box below the Quick‑Start Guide.  It outlines exactly which exercises to perform for each week using only body‑weight variations—follow it from Week 1 to Week 12 without having to make decisions.</li>
+<li><strong>Beginner progress heuristics:</strong> If you increased weight or reps in two or more lifts this week, you’re progressing.  If nothing moves for two consecutive weeks, keep the same weight, add one extra rest day and repeat the week.  Aim to stay in the RPE 7–8 range and listen to your body.</li>
+<li><strong>Watch the Quick‑Start video:</strong> Use the 3‑minute <a href="https://example.com/quick-start-video" target="_blank">Quick‑Start Video</a> for a demonstration of how to fill in the planner and interpret charts.  Scan the QR code in the workbook or click this link.</li>
+</ol>
+</div>
+
+<h2>1. Introduction and Philosophy</h2>
+<p>
+For over eighteen years I have dedicated my life to the craft of physical training and human performance.  From winning two British full‑contact kickboxing titles to coaching UFC athletes in London, I’ve accrued more than 30,000 hours of one‑to‑one coaching.  Throughout that time I’ve observed that the most successful athletes and clients share common traits: discipline, resilience, a willingness to learn and an understanding that mindset is just as important as muscle.
+</p>
+<p>
+The NeuroFit programme is built on those principles.  It’s designed for busy people—including those with ADHD—who need structure without the monotony of generic gym plans.  Every element—from periodised strength sessions to conditioning circuits and mobility flows—has been tested on real clients.  You’ll find practical tools that can be implemented immediately, whether you’re training at home, in a gym or on the road.
+</p>
+<p>
+Throughout this guide you’ll also see references to mindset techniques I use with professional fighters: visualisation, breath work and habit stacking.  Use them in conjunction with the workouts to amplify your progress.  This isn’t just about building a body; it’s about strengthening your mind.
+</p>
+</div>
+
+
+<div class="section">
+<h2>2. Getting Started</h2>
+<p>
+Before you dive into the workouts, take a moment to set your baseline.  Identify your current fitness level: can you perform ten push‑ups with good form?  How many minutes can you skip without rest?  Note any injuries or limitations.  If you’re new to training, start with the regression options provided in the exercise library.
+</p>
+<p>
+Safety is paramount.  Each session should begin with a dynamic warm‑up: think arm circles, leg swings, hip openers and a light cardio element like skipping or brisk walking for five minutes.  Proper form trumps heavier weights.  If something feels wrong, stop and assess.
+</p>
+<p>
+<strong>Equipment Requirements:</strong> The programme uses minimal equipment: a pair of adjustable dumbbells, a kettlebell (optional), a resistance band and a skipping rope.  If you don’t have these, body‑weight variations are provided.
+</p>
+<p>
+<strong>Scheduling:</strong> Use the interactive planner included with this course to allocate your workouts.  I recommend training five days per week (three strength sessions, one conditioning, one mobility).  Two rest days are essential for recovery.  If you’re an athlete with additional sports practice, adjust accordingly.
+</p>
+</div>
+
+<div class="section">
+<h2>3. Exercise Library</h2>
+<p>
+Below is a curated selection of exercises used throughout this programme.  Click on each exercise title to reveal instructions, muscles worked, coaching cues and common errors.  High‑resolution illustrations demonstrate start and finish positions.  These drawings are stylised to protect client anonymity and highlight key postural points.
+</p>
+
+<p><strong>Body‑weight alternatives:</strong> If you do not have access to weights, you can still follow the programme.  For every dumbbell exercise, perform the body‑weight version: replace Goblet Squats with Prisoner Squats (hands behind head), Floor Press with Push‑Ups or Hands‑Elevated Push‑Ups, Romanian Deadlifts with Single‑Leg Hip Hinges and Rows with Inverted Rows under a sturdy table.  For weighted lunges, perform Walking Lunges or Step‑Ups onto a chair.  The conditioning and mobility work are already body‑weight based.  Refer to the drop‑down lists in the Weekly Planner for body‑weight substitutions.</p>
+
+<details>
+<summary>Squat (Lower Body)</summary>
+<p><strong>Muscles worked:</strong> Quadriceps, glutes, hamstrings, core.</p>
+<p><strong>Instructions:</strong> Stand with feet shoulder‑width apart.  Engage your core and sit your hips back as if into a chair, keeping chest up and knees tracking over toes.  Descend until thighs are parallel to the floor (or as low as mobility allows) then drive through the heels to stand.</p>
+<p><strong>Coaching cues:</strong> Maintain a neutral spine; push knees out slightly; avoid heel lift.</p>
+<p><strong>Common mistakes:</strong> Knees collapsing inward, rounding the lower back, rising onto toes.</p>
+</details>
+
+<!-- Additional exercises continued -->
+
+<details>
+<summary>Bulgarian Split Squat (Lower Body)</summary>
+<p><strong>Muscles worked:</strong> Quadriceps, glutes, hamstrings, calves, core stabilisers.</p>
+<p><strong>Instructions:</strong> Stand a couple of feet in front of a bench or step.  Place the top of one foot on the bench behind you.  Lower your body by bending the front knee while keeping your torso upright.  Descend until your front thigh is roughly parallel to the floor, then drive through the front heel to stand.  Repeat all reps on one leg before switching.</p>
+<p><strong>Coaching cues:</strong> Maintain a slight forward torso lean to target the glutes; avoid letting the front knee travel excessively past the toes; keep weight centred on the front foot.</p>
+<p><strong>Common mistakes:</strong> Balancing issues often arise; move slowly and use a wall for support if needed.  Don’t bounce at the bottom—control the movement to protect the knee joint.</p>
+</details>
+
+<details>
+<summary>Pike Push‑Up (Upper Body)</summary>
+<p><strong>Muscles worked:</strong> Shoulders (anterior deltoids), triceps, upper chest, core.</p>
+<p><strong>Instructions:</strong> Start in a downward dog position: hips high, hands shoulder‑width apart, feet hip‑width.  Bend your elbows to lower the top of your head toward the floor between your hands.  Push through your hands to return to the starting position.</p>
+<p><strong>Coaching cues:</strong> Keep your hips high to emphasise shoulder involvement; flaring elbows outwards reduces shoulder stress.  Look slightly forward rather than directly at the floor.</p>
+<p><strong>Progressions:</strong> Elevate your feet on a box or perform handstand push‑ups for increased difficulty.  To regress, place hands on an elevated surface.</p>
+</details>
+
+<details>
+<summary>Farmer’s Carry (Full Body)</summary>
+<p><strong>Muscles worked:</strong> Grip strength, forearms, traps, core, glutes, legs.</p>
+<p><strong>Instructions:</strong> Stand tall holding heavy dumbbells or kettlebells at your sides.  Brace your core and walk for a set distance (e.g. 40–50 metres) or time while maintaining upright posture.  Keep shoulder blades pulled back and down.</p>
+<p><strong>Coaching cues:</strong> Avoid leaning to one side; walk with controlled steps; maintain abdominal tension.  Choose a challenging weight that forces you to work but doesn’t compromise posture.</p>
+<p><strong>Variations:</strong> Suitcase carry (weight in one hand) challenges lateral stability; overhead carry trains shoulder stability.</p>
+</details>
+
+<details>
+<summary>Jump Squat (Plyometric)</summary>
+<p><strong>Muscles worked:</strong> Quadriceps, glutes, calves, core.</p>
+<p><strong>Instructions:</strong> Start with feet shoulder‑width apart.  Perform a quarter squat then explode upward, jumping as high as possible.  Land softly on the balls of your feet and immediately descend into the next repetition.</p>
+<p><strong>Coaching cues:</strong> Swing your arms to generate momentum; keep your knees aligned over your toes when landing; absorb impact by bending your knees and hips.</p>
+<p><strong>Safety tips:</strong> Avoid jump squats if you have knee or ankle issues.  Begin with low jumps and build height gradually.</p>
+</details>
+
+<details>
+<summary>Shadow Boxing (Conditioning)</summary>
+<p><strong>Muscles worked:</strong> Shoulders, arms, core, cardiovascular system.</p>
+<p><strong>Instructions:</strong> Assume an athletic stance with feet staggered.  Throw punches (jab, cross, hook, uppercut) into the air while moving around your space.  Visualise an opponent to improve reaction time and coordination.  Keep hands up and chin tucked.</p>
+<p><strong>Coaching cues:</strong> Rotate through your hips and shoulders with each punch; maintain guard with the non‑punching hand; integrate footwork by stepping in and out.</p>
+<p><strong>Benefits:</strong> Shadow boxing is a low‑impact way to build conditioning, coordination and mental focus.  It doubles as a dynamic warm‑up for the upper body.</p>
+</details>
+
+<details>
+<summary>High Knees (Conditioning)</summary>
+<p><strong>Muscles worked:</strong> Hip flexors, quadriceps, core, cardiovascular system.</p>
+<p><strong>Instructions:</strong> Run in place while driving your knees up toward your chest.  Move your arms in sync with your legs as if sprinting.  Focus on quick foot turnover.</p>
+<p><strong>Coaching cues:</strong> Stay light on your feet; keep your core tight; lean slightly forward.  Aim for knee height at hip level.</p>
+<p><strong>Variations:</strong> Perform high knees laterally or add a twist to involve the obliques.</p>
+</details>
+
+<details>
+<summary>Skipping Rope (Conditioning)</summary>
+<p><strong>Muscles worked:</strong> Calves, shoulders, forearms, cardiovascular system.</p>
+<p><strong>Instructions:</strong> Hold the rope handles at hip level.  Swing the rope overhead and jump with both feet as it passes under you.  Land softly and immediately jump again.  Maintain a steady rhythm.</p>
+<p><strong>Coaching cues:</strong> Keep your elbows close to your body; turn the rope with your wrists; jump low to conserve energy.</p>
+<p><strong>Progressions:</strong> Try alternate‑foot skipping, double‑unders (rope passes under twice per jump) or cross‑over jumps.</p>
+</details>
+
+<details>
+<summary>Inverted Row (Upper Body)</summary>
+<p><strong>Muscles worked:</strong> Upper back, biceps, rear deltoids, core.</p>
+<p><strong>Instructions:</strong> Position a bar in a squat rack or use a sturdy table.  Lie underneath it and grasp the bar with an overhand grip.  Keep your body straight and pull your chest to the bar by squeezing your shoulder blades.  Lower under control.</p>
+<p><strong>Coaching cues:</strong> Engage your glutes and core to keep a straight line; avoid shrugging shoulders; lead the movement with your elbows.</p>
+<p><strong>Regressions:</strong> Bend knees to reduce the lever arm or raise the bar height.  Progress by elevating your feet on a bench.</p>
+</details>
+
+<details>
+<summary>Broad Jump (Plyometric)</summary>
+<p><strong>Muscles worked:</strong> Glutes, hamstrings, quadriceps, calves, core.</p>
+<p><strong>Instructions:</strong> Stand with feet hip‑width apart.  Swing your arms back and bend your knees into a quarter squat.  Explosively jump forward, swinging arms forward to propel yourself.  Land softly on both feet and reset before the next jump.</p>
+<p><strong>Coaching cues:</strong> Focus on distance rather than height; maintain a neutral spine; absorb the landing by bending your knees and hips.</p>
+<p><strong>Safety considerations:</strong> Ensure there is sufficient space and that the landing surface is non‑slip.  Start with shorter jumps and gradually increase distance.</p>
+</details>
+
+<details>
+<summary>Medicine Ball Slam (Power)</summary>
+<p><strong>Muscles worked:</strong> Upper back, shoulders, core, glutes.</p>
+<p><strong>Instructions:</strong> Hold a medicine ball overhead with arms extended.  Engage your core and hinge slightly at the hips.  Slam the ball down to the ground in front of you with full force, following through with your body.  Catch the ball on the rebound or pick it up and repeat.</p>
+<p><strong>Coaching cues:</strong> Keep your chest up and avoid rounding your back; exhale as you slam; use your legs and hips to generate power rather than just your arms.</p>
+<p><strong>Benefits:</strong> Medicine ball slams enhance power, coordination and aggression release—useful for fighters needing explosive hip extension.</p>
+</details>
+
+
+
+<details>
+<summary>Lunge (Lower Body)</summary>
+<p><strong>Muscles worked:</strong> Quadriceps, glutes, hamstrings, calves.</p>
+<p><strong>Instructions:</strong> Step forward with your right foot, lower hips until both knees are bent at 90°.  The back knee should hover above the ground.  Push through the front foot to return.</p>
+<p><strong>Coaching cues:</strong> Keep torso upright, front knee aligned with ankle; engage core.</p>
+<p><strong>Common mistakes:</strong> Leaning forward, allowing front knee to collapse inward, bouncing off the back knee.</p>
+</details>
+
+<details>
+<summary>Push‑Up (Upper Body)</summary>
+<p><strong>Muscles worked:</strong> Chest, shoulders, triceps, core.</p>
+<p><strong>Instructions:</strong> Begin in a high plank with hands under shoulders.  Lower your body until your chest is an inch from the floor while keeping elbows at 45° and maintaining a straight line from head to heels.  Push back up.</p>
+<p><strong>Coaching cues:</strong> Brace your core; avoid letting hips sag; keep neck neutral.</p>
+<p><strong>Progressions/regressions:</strong> Elevate hands on a bench to reduce difficulty or perform from knees; elevate feet or add a clap for added difficulty.</p>
+</details>
+
+<details>
+<summary>Dumbbell Row (Upper Body)</summary>
+<p><strong>Muscles worked:</strong> Back (latissimus dorsi), rear shoulders, biceps, core.</p>
+<p><strong>Instructions:</strong> Hinge at the hips with a neutral spine and slight knee bend.  Hold a dumbbell in one hand; brace your core and pull the weight towards your hip, squeezing shoulder blades.  Lower under control.</p>
+<p><strong>Coaching cues:</strong> Don’t round your back; keep elbow close to your body; control the eccentric phase.</p>
+</details>
+
+<details>
+<summary>Plank (Core)</summary>
+<p><strong>Muscles worked:</strong> Abdominals, obliques, lower back, glutes.</p>
+<p><strong>Instructions:</strong> Place forearms on the floor with elbows under shoulders and legs extended.  Create a straight line from head to heels.  Engage your core and hold.  Breathe steadily.</p>
+<p><strong>Coaching cues:</strong> Avoid sagging hips; draw the belly button towards your spine; spread shoulder blades apart.</p>
+</details>
+
+<details>
+<summary>Kettlebell Swing (Full Body)</summary>
+<p><strong>Muscles worked:</strong> Hamstrings, glutes, core, shoulders.</p>
+<p><strong>Instructions:</strong> Stand with feet slightly wider than hip‑width.  Hinge at the hips and swing the kettlebell back between your legs.  Explosively drive hips forward to send the kettlebell to chest height.  Arms should remain relaxed; the power comes from the hips.</p>
+<p><strong>Coaching cues:</strong> Maintain a flat back; snap hips forward; don’t squat the swing.</p>
+</details>
+
+<details>
+<summary>Burpee (Full Body)</summary>
+<p><strong>Muscles worked:</strong> Full body conditioning focusing on chest, shoulders, legs and core.</p>
+<p><strong>Instructions:</strong> From standing, squat down and place hands on the floor.  Jump or step feet back into a plank.  Perform a press‑up, then jump feet forward to hands and explosively jump up, reaching hands overhead.</p>
+<p><strong>Coaching cues:</strong> Move fluidly; keep core engaged; land softly.</p>
+</details>
+
+<details>
+<summary>Goblet Squat (Lower Body)</summary>
+<p><strong>Muscles worked:</strong> Quadriceps, glutes, hamstrings, core.</p>
+<p><strong>Instructions:</strong> Hold a dumbbell or kettlebell close to your chest.  Perform a squat as described above.  The added load in front encourages an upright torso and core engagement.</p>
+</details>
+
+<details>
+<summary>Mountain Climbers (Conditioning)</summary>
+<p><strong>Muscles worked:</strong> Core, shoulders, legs, cardiovascular system.</p>
+<p><strong>Instructions:</strong> Assume a high plank.  Drive one knee towards your chest, then quickly switch legs, simulating a running motion.</p>
+<p><strong>Coaching cues:</strong> Maintain a neutral spine; keep your hips level; breathe rhythmically.</p>
+</details>
+
+<details>
+<summary>Yoga Flow (Mobility)</summary>
+<p><strong>Focus:</strong> Improves flexibility, joint mobility and mental calm.</p>
+<p><strong>Description:</strong> A sequence of dynamic stretches including downward dog, world’s greatest stretch, hip openers and thoracic rotation.  Hold each pose for two breath cycles, moving smoothly between them.</p>
+</details>
+
+<!-- Additional exercises to broaden the library and support progressions/regressions. -->
+
+<details>
+<summary>Pull‑Up/Chin‑Up (Upper Body)</summary>
+<p><strong>Muscles worked:</strong> Latissimus dorsi, biceps, forearms, upper back.</p>
+<p><strong>Instructions:</strong> Hang from a bar with hands slightly wider than shoulder width (pull‑up) or shoulder width with palms facing you (chin‑up).  Pull your chest towards the bar by squeezing your shoulder blades and engaging your back.  Lower under control until arms are fully extended.</p>
+<p><strong>Coaching cues:</strong> Engage your core; avoid swinging; drive elbows down towards your ribs.  If you cannot perform a full pull‑up, use an assistance band or perform negative repetitions (jump up and lower slowly).</p>
+<p><strong>Common mistakes:</strong> Shrugging the shoulders, craning the neck or kicking the legs.  Focus on quality reps over quantity.</p>
+</details>
+
+<details>
+<summary>Step‑Up (Lower Body)</summary>
+<p><strong>Muscles worked:</strong> Quadriceps, glutes, hamstrings, calves.</p>
+<p><strong>Instructions:</strong> Stand facing a sturdy bench or box.  Place one foot firmly on the box and drive through the heel to lift your body up.  Fully extend the top leg before bringing the other foot up.  Step back down under control.</p>
+<p><strong>Coaching cues:</strong> Keep your chest up and torso tall; avoid pushing off the trailing leg excessively; control the eccentric (lowering) phase.</p>
+<p><strong>Progressions/regressions:</strong> Hold dumbbells by your sides to increase difficulty; start with a lower step height if needed.</p>
+</details>
+
+<details>
+<summary>Dead Bug (Core)</summary>
+<p><strong>Muscles worked:</strong> Transverse abdominis, rectus abdominis, hip flexors.</p>
+<p><strong>Instructions:</strong> Lie on your back with arms extended toward the ceiling and hips and knees bent at 90°.  Slowly lower your right arm and left leg towards the floor while keeping the lower back pressed into the ground.  Return to the starting position and repeat on the opposite side.</p>
+<p><strong>Coaching cues:</strong> Breathe out as you extend; maintain core engagement; move slowly to maximise control.</p>
+<p><strong>Common mistakes:</strong> Letting the lower back arch off the floor or rushing the movement.  Quality over speed.</p>
+</details>
+
+<details>
+<summary>Single‑Arm Press (Upper Body)</summary>
+<p><strong>Muscles worked:</strong> Shoulders, triceps, core, obliques.</p>
+<p><strong>Instructions:</strong> Stand with feet shoulder‑width apart, holding a dumbbell at shoulder height in one hand.  Brace your core and press the weight overhead while keeping your torso upright.  Lower the weight under control.  Repeat on the other side.</p>
+<p><strong>Coaching cues:</strong> Don’t lean to one side; engage your obliques to resist rotation; exhale as you press.</p>
+<p><strong>Variations:</strong> Perform seated or half‑kneeling to challenge stability.</p>
+</details>
+
+<details>
+<summary>Russian Twist (Core)</summary>
+<p><strong>Muscles worked:</strong> Obliques, rectus abdominis, hip flexors.</p>
+<p><strong>Instructions:</strong> Sit on the floor with knees bent, lean back slightly and lift your heels off the ground.  Hold a weight or medicine ball with both hands and rotate your torso to bring the weight to the outside of one hip, then across to the other hip.  Maintain control.</p>
+<p><strong>Coaching cues:</strong> Keep your spine neutral; move from the torso, not just swinging arms; breathe steadily.</p>
+<p><strong>Modifications:</strong> Keep heels on the ground to make the exercise easier or use a heavier weight to increase difficulty.</p>
+</details>
+
+<details>
+<summary>Split Squat (Lower Body)</summary>
+<p><strong>Muscles worked:</strong> Quadriceps, glutes, hamstrings.</p>
+<p><strong>Instructions:</strong> Stand in a staggered stance with one foot forward and the other behind you on its toes.  Lower your back knee toward the floor while keeping the front knee at a right angle.  Drive through the front heel to return to the starting position.</p>
+<p><strong>Coaching cues:</strong> Keep torso upright; avoid letting the front knee travel beyond the toes; keep weight evenly distributed on the front foot.</p>
+<p><strong>Progressions:</strong> Elevate the rear foot (Bulgarian split squat) or hold dumbbells.</p>
+</details>
+
+<details>
+<summary>Bear Crawl (Full Body/Core)</summary>
+<p><strong>Muscles worked:</strong> Shoulders, core, hips, quadriceps.</p>
+<p><strong>Instructions:</strong> Begin on all fours with knees hovering just above the ground.  Move opposite hand and foot forward simultaneously while maintaining a neutral spine.  Continue crawling forward for a set distance, then reverse.</p>
+<p><strong>Coaching cues:</strong> Keep hips low; avoid swaying; engage the core to stabilise.</p>
+<p><strong>Variations:</strong> Crawl laterally or backward to challenge coordination.</p>
+</details>
+
+<details>
+<summary>Glute Bridge (Lower Body)</summary>
+<p><strong>Muscles worked:</strong> Glutes, hamstrings, lower back.</p>
+<p><strong>Instructions:</strong> Lie on your back with knees bent and feet flat on the floor hip‑width apart.  Drive through the heels to lift hips until your body forms a straight line from shoulders to knees.  Squeeze glutes at the top, then lower under control.</p>
+<p><strong>Coaching cues:</strong> Avoid overarching the lower back; maintain core engagement; pause briefly at the top.</p>
+<p><strong>Progressions:</strong> Elevate one foot for a single‑leg bridge or place feet on an elevated surface.</p>
+</details>
+
+</div>
+
+<div class="section">
+<h2>4. Programme Structure</h2>
+<p>
+The NeuroFit programme spans 12 weeks, divided into four phases.  Each phase lasts three weeks and follows principles of progressive overload, skill acquisition and recovery.
+</p>
+<p><strong>Phase 1 – Foundation and Mobility:</strong> Weeks 1–3 focus on mastering fundamental movement patterns, improving mobility and building work capacity.  You’ll perform moderate volumes at lower intensity, emphasising form.  Mobility flows and core stability exercises are integrated to enhance posture and prepare your joints for heavier loads.
+</p>
+<p><strong>Phase 2 – Strength & Skill:</strong> Weeks 4–6 introduce heavier lifts and complex movements like kettlebell swings, split squats and single‑arm rows.  Rep ranges decrease while intensity increases.  You’ll also practise skill elements such as footwork drills and shadow boxing to improve coordination and agility.
+</p>
+<p><strong>Phase 3 – Hypertrophy & Conditioning:</strong> Weeks 7–9 aim to build muscle endurance and cardiovascular fitness.  Sessions incorporate higher volumes (12–15 reps) and short rest periods.  Conditioning circuits (burpees, jump squats, mountain climbers) are added to drive metabolic demand.
+</p>
+<p><strong>Phase 4 – Power & Peak:</strong> Weeks 10–12 sharpen explosive power and peak strength.  Plyometric drills (broad jumps, clap push‑ups) and heavier compound lifts are emphasised.  Recovery protocols (active recovery, stretching, meditation) ensure you finish the programme energised rather than burnt out.
+</p>
+<p>
+Each phase includes deload adjustments if needed.  Listen to your body—if you experience excessive fatigue or soreness, reduce volume or take an additional rest day.
+</p>
+</div>
+
+<div class="section">
+<h2>5. Weekly Workouts</h2>
+<div style="border:1px solid #004A7F; padding:10px; margin-bottom:20px; background-color:#f0f8ff;">
+<h3>Progression &amp; Deload Guidelines</h3>
+<p>Use these rules of thumb to keep progressing while managing fatigue:</p>
+<ul>
+  <li><strong>Progression rule of operation:</strong> When a lift feels easy for all prescribed sets and reps at your current weight (RPE ≤7), add one rep to the final set at your next session.  If you still feel comfortable, add an extra set.  Only increase load (by 2.5 kg upper body or 5 kg lower body) once you can complete all sets and reps for two consecutive weeks with perfect form and RPE ≤8.</li>
+  <li><strong>Auto‑deload:</strong> If your estimated 1RM or weekly training volume drops by ≥10 % for two consecutive weeks, or your average RPE exceeds 8.5 for two weeks, schedule a deload in the following week.  During a deload, reduce volume by 30 % and intensity by 10 % to allow recovery.</li>
+  <li><strong>Plateau triage:</strong> When progress stalls, troubleshoot in this order: (1) <em>Recovery</em> – ensure you’re sleeping 7–8 hours and managing stress; (2) <em>Technique</em> – review form using the video demonstrations or a coach; (3) <em>Nutrition</em> – hit your macro targets and stay hydrated【318969622524147†L60-L68】; (4) <em>Programming</em> – adjust variables (reps, sets, tempo) before adding load.</li>
+  <li><strong>Deload triggers:</strong> Excessive soreness, poor sleep, reduced motivation or persistent joint pain are signs to deload early.  Listen to your body.</li>
+</ul>
+</div>
+
+<p>
+Below is a sample overview for Week 1.  Full session details for all twelve weeks follow this pattern.  Use the interactive HTML toggles to expand each session.
+</p>
+
+<details>
+<summary>Week 1 (Foundation)</summary>
+<h3>Strength Session A</h3>
+<ul>
+<li>Goblet Squat – 3 × 10 reps</li>
+<li>Push‑Up – 3 × 10 reps</li>
+<li>Dumbbell Row – 3 × 12 reps per side</li>
+<li>Plank – 3 × 30 seconds</li>
+</ul>
+<h3>Strength Session B</h3>
+<ul>
+<li>Reverse Lunge – 3 × 12 reps per leg</li>
+<li>Floor Press (Dumbbells) – 3 × 10 reps</li>
+<li>Glute Bridge – 3 × 15 reps</li>
+<li>Side Plank – 2 × 30 seconds per side</li>
+</ul>
+<h3>Strength Session C</h3>
+<ul>
+<li>Romanian Deadlift – 3 × 10 reps</li>
+<li>Body‑Weight Row (using table) – 3 × 12 reps</li>
+<li>Kettlebell Swing – 3 × 15 reps</li>
+<li>Bird Dog – 3 × 10 reps per side</li>
+</ul>
+<h3>Conditioning Session</h3>
+<p>Perform 30 seconds of each exercise with 15 seconds rest, repeat circuit 4 times:</p>
+<ul>
+<li>Skipping</li>
+<li>Mountain Climbers</li>
+<li>Jump Squats</li>
+<li>Shadow Boxing</li>
+</ul>
+<h3>Mobility Session</h3>
+<ul>
+<li>World’s Greatest Stretch – 2 × 5 reps per side</li>
+<li>Cat‑Cow – 2 × 10 reps</li>
+<li>Child’s Pose to Cobra – 2 × 8 reps</li>
+<li>Seated Forward Fold – hold 60 seconds</li>
+</ul>
+</details>
+
+    <!-- Additional weekly programming for Weeks 2–12 -->
+    <details>
+    <summary>Week 2 (Foundation – Continued)</summary>
+    <p>
+    Building on Week 1, Week 2 reinforces proper technique while introducing a modest increase in volume.  Add one additional set to each main lift if you feel comfortable.  Consider raising the weight by 2–5 kg or using a heavier kettlebell, but keep the movement quality impeccable.
+    </p>
+    <h3>Strength Session A</h3>
+    <ul>
+    <li>Goblet Squat – 3 × 12 reps</li>
+    <li>Push‑Up – 3 × 12 reps (regress to hands‑elevated if needed)</li>
+    <li>Dumbbell Row – 3 × 12 reps per side</li>
+    <li>Plank – 3 × 40 seconds</li>
+    </ul>
+    <h3>Strength Session B</h3>
+    <ul>
+    <li>Reverse Lunge – 3 × 14 reps per leg</li>
+    <li>Floor Press (Dumbbells) – 3 × 12 reps</li>
+    <li>Glute Bridge – 4 × 15 reps</li>
+    <li>Side Plank – 2 × 35 seconds per side</li>
+    </ul>
+    <h3>Strength Session C</h3>
+    <ul>
+    <li>Romanian Deadlift – 3 × 12 reps</li>
+    <li>Inverted Row – 3 × 12 reps</li>
+    <li>Kettlebell Swing – 3 × 18 reps</li>
+    <li>Bird Dog – 3 × 12 reps per side</li>
+    </ul>
+    <h3>Conditioning Session</h3>
+    <p>Increase each work interval to 35 seconds while keeping rest at 15 seconds.  Repeat the circuit four times:</p>
+    <ul>
+    <li>Skipping</li>
+    <li>Mountain Climbers</li>
+    <li>Jump Squats</li>
+    <li>Shadow Boxing</li>
+    </ul>
+    <h3>Mobility Session</h3>
+    <ul>
+    <li>World’s Greatest Stretch – 2 × 6 reps per side</li>
+    <li>Cat‑Cow – 2 × 12 reps</li>
+    <li>Child’s Pose to Cobra – 2 × 10 reps</li>
+    <li>Seated Forward Fold – hold 75 seconds</li>
+    </ul>
+    </details>
+
+    <details>
+    <summary>Week 3 (Foundation – Consolidation)</summary>
+    <p>
+    In Week 3 you will consolidate your newfound motor control.  Focus on perfect tempo: 2 seconds down, 1‑second pause at the bottom, 1 second up on your major lifts.  This slower cadence improves muscle engagement and strengthens connective tissue.  Keep the weight similar to Week 2 or increase only if you can maintain form.
+    </p>
+    <h3>Strength Session A</h3>
+    <ul>
+    <li>Goblet Squat – 4 × 10 reps (tempo 2‑1‑1)</li>
+    <li>Push‑Up – 4 × 10 reps (slow eccentric)</li>
+    <li>Single‑Arm Dumbbell Row – 4 × 10 reps per side</li>
+    <li>Plank with Shoulder Tap – 3 × 20 taps</li>
+    </ul>
+    <h3>Strength Session B</h3>
+    <ul>
+    <li>Walking Lunge – 4 × 12 steps per leg</li>
+    <li>Incline Push‑Up – 4 × 10 reps</li>
+    <li>Glute Bridge March – 3 × 20 reps</li>
+    <li>Side Plank with Leg Lift – 3 × 10 reps per side</li>
+    </ul>
+    <h3>Strength Session C</h3>
+    <ul>
+    <li>Romanian Deadlift – 4 × 10 reps</li>
+    <li>Inverted Row – 4 × 10 reps</li>
+    <li>Kettlebell Swing – 4 × 15 reps</li>
+    <li>Bird Dog – 4 × 10 reps per side</li>
+    </ul>
+    <h3>Conditioning Session</h3>
+    <p>Increase work interval to 40 seconds with 20 seconds rest.  Repeat circuit four times:</p>
+    <ul>
+    <li>High Knees</li>
+    <li>Burpees</li>
+    <li>Jump Lunges</li>
+    <li>Skater Hops</li>
+    </ul>
+    <h3>Mobility Session</h3>
+    <ul>
+    <li>Hip Flexor Stretch – 3 × 30 seconds per side</li>
+    <li>Thoracic Rotation – 3 × 10 reps per side</li>
+    <li>Downward Dog to Upward Dog – 3 × 10 reps</li>
+    <li>Breathing Meditation – 5 minutes</li>
+    </ul>
+    </details>
+
+    <details>
+    <summary>Weeks 4–6 (Strength & Skill)</summary>
+    <p>
+    These weeks shift the emphasis toward strength development and skill acquisition.  You’ll work with heavier loads (around 75–80% of your maximum) and lower rep ranges, while also incorporating coordination drills like shadow boxing combinations, skipping footwork patterns and agility ladder work.  Rest periods lengthen to 90–120 seconds to allow for recovery between heavy sets.
+    </p>
+    <p><strong>Strength Sessions:</strong></p>
+    <ul>
+    <li>
+    <strong>Session A:</strong> Deadlift – 4 × 8 reps; Overhead Press – 4 × 8 reps; Bent‑Over Row – 4 × 10 reps; Pallof Press – 3 × 12 reps per side.
+    </li>
+    <li>
+    <strong>Session B:</strong> Bulgarian Split Squat – 4 × 8 reps per leg; Chin‑Ups or Assisted Pull‑Ups – 4 × 6–8 reps; Dumbbell Bench Press – 4 × 8 reps; Side Plank with Reach – 3 × 12 reps per side.
+    </li>
+    <li>
+    <strong>Session C:</strong> Kettlebell Swing – 4 × 15 reps; Romanian Deadlift – 4 × 10 reps; Pike Push‑Up – 4 × 8 reps; Farmer’s Carry – 3 × 40 metres.
+    </li>
+    </ul>
+    <p><strong>Conditioning Sessions:</strong> Incorporate high‑intensity interval training (HIIT) circuits.  Perform 45 seconds of work with 20 seconds rest for 4–6 rounds of exercises like heavy rope slams, kettlebell high pulls, shuttle runs and shadow boxing combinations.  HIIT has been shown to improve cardiovascular fitness and reduce body fat in less time than traditional continuous training【82749230765895†L176-L358】.  Keep the effort high during work periods and recover fully during rest.</p>
+    <p><strong>Mobility Sessions:</strong> Continue dynamic flows, emphasising thoracic mobility and hip stability.  Spend extra time on foam rolling and static stretching of the hamstrings, hip flexors and pecs to counteract heavier lifting.</p>
+
+    <p><strong>Progression guidelines:</strong> Each week you should aim to add either 2.5 kg to your primary lifts or one additional repetition if load cannot be increased.  Adhere to the principle of progressive overload by no more than a 10% increase in volume or intensity per week【126889423721339†L129-L170】 to minimise injury risk.  Record your lifts in the exercise log and note perceived exertion.  If RPE remains below 7/10, consider raising the weight; if it’s above 9/10, maintain or slightly reduce load.</p>
+    <p>To enhance skill work, integrate specific drills: practise double‑unders (skipping rope passing under feet twice per jump), pivot footwork for striking sports and shadow boxing combinations (jab‑cross‑hook).  Perform these drills for 5–10 minutes before your conditioning circuits.  As you become more proficient, combine them into flow sequences to improve coordination and reaction times.</p>
+    </details>
+
+    <details>
+    <summary>Weeks 7–9 (Hypertrophy & Conditioning)</summary>
+    <p>
+    Your focus in this phase is muscle endurance and metabolic conditioning.  Increase rep ranges to 12–15 and reduce rest intervals to 60–90 seconds.  Introduce supersets (performing two exercises back‑to‑back) and circuits to raise your heart rate and induce metabolic stress.  Maintain progressive overload by increasing volume rather than dramatically increasing load.
+    </p>
+    <p><strong>Strength Sessions:</strong></p>
+    <ul>
+    <li>
+    <strong>Session A:</strong> Back Squat (or Goblet Squat if no barbell) – 4 × 12 reps; Incline Push‑Up or Dumbbell Bench Press – 4 × 12 reps; Bent‑Over Row – 4 × 12 reps; Plank with Knee Tuck – 3 × 15 reps.
+    </li>
+    <li>
+    <strong>Session B:</strong> Front Foot Elevated Split Squat – 4 × 12 reps per leg; Dips or Bench Dips – 4 × 12 reps; Single‑Arm Row – 4 × 12 reps; Reverse Crunch – 3 × 20 reps.
+    </li>
+    <li>
+    <strong>Session C:</strong> Hip Thrust – 4 × 15 reps; Pike Push‑Up – 4 × 10 reps; Bulgarian Split Squat – 4 × 12 reps per leg; Hollow Hold – 3 × 45 seconds.
+    </li>
+    </ul>
+    <p><strong>Conditioning Sessions:</strong> Utilise metabolic conditioning like Tabata: 20 seconds work, 10 seconds rest, repeated eight times for each exercise.  Try kettlebell swings, burpees, mountain climbers and jump lunges.  According to research, HIIT can reduce body fat and improve cardiovascular health【82749230765895†L176-L358】.  Keep intensity high and maintain quality movement.</p>
+    <p><strong>Mobility Sessions:</strong> Include active recovery techniques: foam rolling, targeted stretching and breathing exercises.  Gentle yoga flows help maintain flexibility as training volume increases.</p>
+
+    <p><strong>Progression guidelines:</strong> Due to the higher volumes, prioritise form over load.  If you complete all prescribed reps with ease and maintain good technique, increase the weight by 2 kg on lower‑body exercises or 1 kg on upper‑body lifts.  Alternatively, reduce rest periods by 10–15 seconds between supersets to elevate metabolic stress.  Maintain a training diary to track your responses; if fatigue accumulates, deload by reducing volume by 30% for a week before resuming progression.</p>
+    <p><strong>Example Superset:</strong> Combine Dumbbell Bench Press with Bent‑Over Row for 12 reps each, rest 60 seconds then repeat for 4 sets.  This pairing trains opposing muscle groups, maximising efficiency.  For added challenge, pair a lower‑body exercise like Split Squat with an upper‑body move such as Pike Push‑Up.</p>
+    </details>
+
+    <details>
+    <summary>Weeks 10–12 (Power & Peak)</summary>
+    <p>
+    The final phase sharpens explosive power and maximises strength.  You’ll work at higher intensities (85–90% of max) with low rep ranges, combined with plyometric drills to enhance rate of force development.  Rest intervals extend to 2–3 minutes to ensure full recovery between sets.  Pay close attention to technique as the loads increase.
+    </p>
+    <p><strong>Strength Sessions:</strong></p>
+    <ul>
+    <li>
+    <strong>Session A:</strong> Deadlift – 5 × 5 reps; Overhead Press – 5 × 5 reps; Weighted Pull‑Ups (or Assisted Pull‑Ups) – 4 × 6 reps; Plyometric Push‑Ups – 3 × 8 reps.
+    </li>
+    <li>
+    <strong>Session B:</strong> Back Squat – 5 × 4 reps; Bench Press – 5 × 5 reps; Bent‑Over Row – 5 × 6 reps; Jump Lunges – 3 × 10 reps per leg.
+    </li>
+    <li>
+    <strong>Session C:</strong> Power Clean (or Dumbbell Snatch if you have no barbell) – 5 × 3 reps; Push Press – 5 × 4 reps; Farmer’s Carry – 4 × 50 metres; L‑Sit Hold – 3 × 20 seconds.
+    </li>
+    </ul>
+    <p><strong>Conditioning Sessions:</strong> Perform short, intense sprints or heavy bag intervals.  For example, sprint at maximum effort for 20 seconds, then walk for 40 seconds; repeat for 10 rounds.  Alternatively, perform 60 seconds of punching combinations on a heavy bag followed by 60 seconds of shadow boxing to recover; repeat 6–8 rounds.</p>
+    <p><strong>Mobility Sessions:</strong> Dedicate extra time to recovery: foam rolling, static stretching and contrast showers (alternating hot and cold water).  Finish sessions with meditation or breathing exercises to calm the nervous system.</p>
+    <p><strong>Deload (Week 12):</strong> Reduce your training volume by half while keeping intensity at about 60–70% of normal.  Use this week to focus on technique, mobility and mental recovery.  A proper deload allows your body to consolidate adaptations and reduces the risk of injury or burnout【126889423721339†L271-L301】.</p>
+
+    <p><strong>Progression guidelines:</strong> Because of the high loads in the power phase, you should not chase volume.  Focus on quality reps with maximal intent.  Use long rest periods (2–3 minutes) to replenish phosphocreatine stores and maintain explosive output.  If you successfully complete all prescribed sets with good technique and a bar speed that remains consistent, add 2.5 kg to lower‑body lifts and 1 kg to upper‑body lifts the following session.  If form deteriorates, maintain or reduce load.</p>
+    <p><strong>Plyometric Drills:</strong> To build explosive power, integrate exercises like Broad Jumps (3 × 5), Box Jumps (3 × 8) and Med‑Ball Slams (4 × 10).  Perform these at the beginning of your strength session after an adequate warm‑up.  Focus on maximal effort with full recovery between sets to train fast‑twitch muscle fibres effectively.</p>
+    </details>
+
+</div>
+
+
+<div class="section">
+<h2>6. Advanced Nutrition Plan</h2>
+<p>
+Nutrition is the foundation of performance.  My philosophy is based on balance rather than deprivation.  I encourage clients to prioritise whole foods, adequate protein and hydration while allowing flexibility to enjoy life.
+</p>
+<p><strong>Macronutrients:</strong> Aim for roughly 2 grams of protein per kilogram of bodyweight to support recovery and muscle growth.  Carbohydrates should come from complex sources like oats, rice, potatoes, fruit and vegetables.  Healthy fats (olive oil, avocados, nuts) are essential for hormone production.
+</p>
+<p><strong>Meal Timing:</strong> Busy professionals often skip meals.  To maintain energy, plan three main meals and two snacks spaced 3–4 hours apart.  A post‑workout snack (e.g. Greek yoghurt with berries) within 30 minutes of training helps replenish glycogen.
+</p>
+<p><strong>Hydration:</strong> Dehydration impairs cognitive function and physical performance.  Aim for 2.5–3 litres of water daily.  Increase intake on hot days or when training intensely.  Keep a reusable bottle nearby and set reminders if necessary.
+</p>
+<p><strong>Sample Meal Plan (Maintenance – 2,500 kcal):</strong></p>
+<table>
+<tr><th>Meal</th><th>Food</th><th>Notes</th></tr>
+<tr><td>Breakfast</td><td>Porridge with oats, skimmed milk, blueberries and almond butter</td><td>Complex carbs, fibre, healthy fats</td></tr>
+<tr><td>Snack</td><td>Protein shake and banana</td><td>Refuels after morning workout</td></tr>
+<tr><td>Lunch</td><td>Grilled chicken, brown rice, mixed salad with olive oil</td><td>Balanced macros</td></tr>
+<tr><td>Snack</td><td>Greek yoghurt with honey and walnuts</td><td>High protein, healthy fats</td></tr>
+<tr><td>Dinner</td><td>Baked salmon, sweet potato, steamed broccoli</td><td>Omega‑3s and micronutrients</td></tr>
+</table>
+<p><strong>Tips:</strong> Batch cook on weekends, carry portable snacks, prioritise protein and vegetables when eating out.</p>
+
+<p><strong>Additional meal templates:</strong></p>
+<p><u>Fat‑loss focus (2,000 kcal):</u></p>
+<table>
+<tr><th>Meal</th><th>Food</th><th>Notes</th></tr>
+<tr><td>Breakfast</td><td>Scrambled eggs with spinach and mushrooms; whole‑grain toast</td><td>High protein, fibre, low GI</td></tr>
+<tr><td>Snack</td><td>Cottage cheese with cucumber and cherry tomatoes</td><td>Low fat, satiating</td></tr>
+<tr><td>Lunch</td><td>Grilled turkey burger, quinoa salad, mixed greens</td><td>Lean protein, complex carbs</td></tr>
+<tr><td>Snack</td><td>Apple with a handful of almonds</td><td>Healthy fats, micronutrients</td></tr>
+<tr><td>Dinner</td><td>Stir‑fried prawns with vegetables and cauliflower rice</td><td>Low carb, high nutrient density</td></tr>
+</table>
+
+<p><u>Muscle‑gain focus (3,000 kcal):</u></p>
+<table>
+<tr><th>Meal</th><th>Food</th><th>Notes</th></tr>
+<tr><td>Breakfast</td><td>Omelette with 4 eggs, peppers, onions and cheese; two slices of sourdough toast</td><td>High protein, caloric surplus</td></tr>
+<tr><td>Snack</td><td>Full‑fat Greek yoghurt with granola and honey</td><td>Carbohydrates for energy</td></tr>
+<tr><td>Lunch</td><td>Lean beef steak, mashed potatoes, steamed asparagus</td><td>Creatine, iron and complex carbs</td></tr>
+<tr><td>Snack</td><td>Protein shake with oats and peanut butter</td><td>Easy calories post‑workout</td></tr>
+<tr><td>Dinner</td><td>Whole‑meal pasta with homemade tomato sauce, chicken meatballs and side salad</td><td>Balanced macros, vitamin C</td></tr>
+</table>
+
+<p><strong>Hydration and fluid sources:</strong> In line with NHS Eatwell guidance, aim for 6–8 glasses (around 1.5–2 litres) of fluid per day【318969622524147†L60-L68】 as a baseline, and increase to at least 2.5–3 litres during intensive training periods or hot weather.  Suitable drinks include water, herbal teas, low‑sugar squash and lower‑fat milk.  Coffee and tea also contribute to fluid intake when consumed in moderation.  Avoid excessive consumption of high‑sugar energy drinks.</p>
+
+<p><strong>Supplement considerations:</strong> While whole foods should make up the bulk of your nutrition, certain evidence‑based supplements can support performance.  Creatine monohydrate (3–5 g daily) enhances strength and power output; Omega‑3 fish oil (1 g EPA/DHA) supports joint health and cognition; Vitamin D is particularly beneficial in the UK’s darker months.  Consult a healthcare provider before starting any supplement regimen.</p>
+</div>
+
+<div class="section">
+<h2>7. Mindset & Habits</h2>
+<p>
+Success in training isn’t solely physical; it’s a mental game.  Having coached fighters preparing for championship bouts, I’ve seen how mental resilience can differentiate champions from challengers.  You can use similar strategies in your own fitness journey.
+</p>
+<p><strong>Goal Setting:</strong> Write down three measurable goals for this programme—for example, “perform 20 unbroken push‑ups”, “deadlift my bodyweight” or “sleep 7 hours every night”.  Place these goals somewhere visible and review them weekly.
+</p>
+<p><strong>Visualisation:</strong> Spend five minutes daily picturing yourself completing your workouts with perfect form, feeling strong and energised.  Visualisation primes neural pathways and enhances confidence.
+</p>
+<p><strong>Breath Work:</strong> Incorporate diaphragmatic breathing exercises to manage stress and improve focus.  Try box breathing: inhale for 4 counts, hold for 4, exhale for 4, hold for 4; repeat for 2–3 minutes.
+</p>
+<p><strong>Habit Stacking:</strong> Link new habits to existing ones.  For example, after brushing your teeth in the morning, perform 10 body‑weight squats.  After dinner, perform a mobility routine while watching television.
+</p>
+<p><strong>ADHD‑Friendly Strategies:</strong> Use timers and alarms to signal the start of a workout.  Break tasks into small steps—lay out clothes, prepare water, set up exercise space.  Reward yourself after completing each session with something simple like a cup of tea or 10 minutes of a favourite podcast.
+</p>
+</p>
+<p><strong>Journalling:</strong> Dedicate five minutes at the end of each day to reflect on your training and nutrition choices.  Write down what went well, what challenged you and what adjustments you plan for tomorrow.  Journalling enhances self‑awareness and helps identify patterns that could hinder progress.</p>
+<p><strong>Positive self‑talk:</strong> Replace negative thoughts (“I can’t finish this set”) with constructive phrases (“I will give my best effort”).  Language shapes perception; by adopting encouraging self‑talk, you reinforce resilience and keep motivation high even during tough sessions.</p>
+<p><strong>Environment design:</strong> Set up your home or training space to minimise distractions.  Put your phone on airplane mode, prepare your equipment in advance and create a cue (like turning on a specific playlist) that signals “workout time”.  Environment strongly influences behaviour; designing it intentionally makes adherence easier.</p>
+
+<p><strong>Advanced mental skills:</strong> As you progress, integrate high‑level mindset techniques such as performance imagery (vividly rehearsing successful lifts or fights), self‑talk scripts (“calm and powerful”), and pre‑competition routines.  Record your mental preparation in your training journal; over time you’ll discover which rituals help you enter a flow state.  For competitive athletes, consult a sports psychologist to tailor strategies around arousal regulation, attentional focus and resilience under pressure.</p>
+</div>
+
+<div class="section">
+<h2>8. Interactive Planner & Progress Tracker</h2>
+<p>
+The interactive Excel spreadsheet included with this programme helps you stay organised and monitor your improvements.  It contains four sheets: Exercise Library, Weekly Planner, Exercise Log and Progress Tracker.
+</p>
+<p><strong>Exercise Library:</strong> This sheet lists all exercises used in the programme.  It powers the drop‑down menus in the planner and log so you can quickly select movements without typing.
+</p>
+<p><strong>Weekly Planner:</strong> Plan each week by selecting exercises from a drop‑down list.  Record sets, reps, weight, water intake and mood ratings.  Conditional formatting reminds you to drink at least 2 litres of water—cells with entries below 2 turn red.
+</p>
+<p><strong>Exercise Log:</strong> Use this sheet after each session to record actual performance.  Tracking sets, reps, weight and Rate of Perceived Exertion (RPE) allows you to gauge progress and adjust loads appropriately.
+</p>
+<p><strong>Progress Tracker:</strong> Summarises the number of sessions completed each week and displays an interactive bar chart.  You may also add additional charts (e.g. total volume lifted per week) to further analyse your progress.
+</p>
+
+<p><strong>New tools in this edition:</strong> To better support different fitness levels, the workbook now includes a <em>Sample Week</em> sheet pre‑populated with a Week 1 training log so you can see how to record your sessions.  The <em>Macro Calculator</em> sheet calculates daily protein, carbohydrate, fat and calorie targets based on your weight and goal (maintenance, fat loss or muscle gain).  The <em>Advanced Metrics</em> sheet helps experienced athletes estimate one‑rep maximums using the Epley formula and track total volume and RPE across sessions.  These additional sheets are designed to make the workbook more intuitive for beginners and more valuable for advanced trainees.</p>
+</div>
+
+<div class="section">
+<h2>9. FAQs & Troubleshooting</h2>
+<p><strong>Q: What if I don’t have dumbbells?</strong>  Use household objects (water bottles, backpacks) or perform body‑weight variations.  For instance, prisoner squats instead of goblet squats, or inverted rows under a sturdy table instead of dumbbell rows.
+</p>
+<p><strong>Q: How should I adjust if I’m an absolute beginner?</strong>  Start with the regression options in the exercise library.  Reduce volume by one third and extend rest periods.  Focus on mastering technique before increasing load.
+</p>
+<p><strong>Q: I’m sore all the time.  What do I do?</strong>  Occasional soreness is normal, especially early on.  Persistent soreness suggests insufficient recovery.  Prioritise sleep, hydration and nutrition.  Incorporate mobility work and take an extra rest day if necessary.
+</p>
+<p><strong>Q: Can I do this programme alongside running or sport?</strong>  Yes, but adjust the volume.  Treat strength sessions as support work.  Avoid scheduling intense conditioning sessions immediately before or after high‑intensity sport practices.
+</p>
+<p><strong>Q: What if I miss a week?</strong>  Pick up where you left off.  Don’t attempt to catch up by doubling sessions; this increases injury risk.  Long‑term consistency matters more than perfect adherence.
+</p>
+</div>
+
+<div class="section">
+<h2>10. About Coach Pete & Further Support</h2>
+<p>
+Pete Ryan began his career in 2006, training clients out of a small gym in London.  Over the next 18 years he built a reputation for transforming lives—coaching everyone from office workers to UFC fighters.  A two‑time British full‑contact kickboxing champion, Pete understands the physical and psychological demands of high‑level competition.  His training philosophy blends strength and conditioning with mindset coaching, helping clients cultivate resilience and mental clarity.
+</p>
+<p>
+Pete has logged over 30,000 hours of one‑to‑one coaching, focusing on quality movement, injury prevention and sustainable lifestyle change.  His approach is tailored: no cookie‑cutter plans, just strategic programming grounded in science and honed through years of hands‑on experience.  He runs his coaching practice through <a href="https://coachpeteryan.com">coachpeteryan.com</a>, offering bespoke programmes, group workshops and online resources.
+</p>
+<p>
+For personalised training or nutritional guidance beyond this programme, contact Pete via his website.  He offers one‑to‑one coaching packages, virtual consultations and bespoke programme design.  Follow him on social media for daily tips, workout demos and insights into the life of a professional coach.
+</p>
+</div>
+
+<div class="section">
+<h2>11. References & Additional Resources</h2>
+<p>
+Throughout this programme we have drawn on established strength and conditioning literature, peer‑reviewed research and Pete’s extensive coaching experience.  For further reading, consider the following resources:
+</p>
+<ul>
+<li><em>Strength Training for Performance</em> by Mark Rippetoe – foundational principles for compound lifts.</li>
+<li><em>The New Rules of Lifting</em> by Lou Schuler and Alwyn Cosgrove – periodisation, exercise selection and nutrition.</li>
+<li><em>Mind Gym: An Athlete’s Guide to Inner Excellence</em> by Gary Mack – mental strategies for sport and life.</li>
+<li><em>Atomic Habits</em> by James Clear – habit formation and behavioural change.</li>
+<li>Research articles on strength and conditioning from the Journal of Strength and Conditioning Research.</li>
+</ul>
+<p>
+Remember that no single programme fits everyone.  Adapt exercises, volumes and nutrition to your individual needs.  Consistency, patience and self‑awareness will yield the best results.
+</p>
+</div>
+
+<div class="section">
+<h2>12. Hydration & Recovery</h2>
+<p>
+Hydration and recovery are often overlooked components of a successful training programme.  Adequate fluid intake supports nutrient transport, joint lubrication and temperature regulation.  According to NHS guidelines, adults should drink 6–8 cups of fluid each day【318969622524147†L60-L68】, increasing intake when exercising or in hot environments.  Dehydration can impair physical performance and cognitive function, and even a 1–2% reduction in bodyweight due to fluid loss can negatively affect strength and endurance.
+</p>
+<p><strong>Hydration strategies:</strong> Begin your day with a glass of water and continue sipping throughout the day.  Carry a 1‑litre bottle and aim to refill it at least twice.  Flavour water with lemon, cucumber or mint if you find plain water boring.  Low‑sugar electrolyte drinks can help replace sodium and other minerals lost through sweat during prolonged sessions.  Monitor urine colour: pale straw indicates good hydration while darker yellow suggests you need more fluids.</p>
+<p><strong>Recovery methods:</strong> Incorporate active recovery between intense sessions: easy cycling, walking or gentle swimming increases circulation without taxing the nervous system.  Foam rolling and stretching help alleviate muscle tightness.  Prioritise sleep—7–9 hours per night—to allow tissues to repair and growth hormones to be released.  Mindful practices such as yoga, meditation and breath work calm the nervous system, improving mental resilience.</p>
+<p><strong>Nutrition & hydration synergy:</strong> Pair carbohydrates with hydration post‑workout.  Glycogen replenishment requires both carbohydrates and water; for every gram of glycogen stored, 3–4 grams of water are stored with it.  Combining a carbohydrate source (e.g. fruit or rice cakes) with a hydrating beverage accelerates recovery.</p>
+
+<p><strong>Electrolyte balance:</strong> Alongside water, ensure adequate intake of electrolytes such as sodium, potassium, calcium and magnesium.  These minerals facilitate muscle contraction, nerve function and fluid balance.  Natural sources include bananas (potassium), leafy greens (magnesium), dairy products (calcium) and a pinch of sea salt added to your meals.  For longer sessions or hot climates, consider electrolyte tablets or sports drinks that contain less than 6% sugar.</p>
+
+<p><strong>Sleep cycles:</strong> Deep sleep is when most of your physical recovery occurs.  Establish a consistent sleep schedule—go to bed and wake up at the same time every day.  Avoid screens for at least an hour before bed; the blue light can disrupt melatonin production.  Create a calming bedtime routine: stretch lightly, practise slow breathing or read a book.  Investing in a supportive mattress and pillow also promotes restorative sleep.</p>
+
+<p><strong>Mind recovery:</strong> Recovery isn’t only physical.  High‑stress levels can hinder performance and lead to overtraining.  Incorporate daily stress‑management practices like journalling, gratitude lists, and spending time outdoors.  Social connection—training with a partner or group—can increase accountability and motivation while providing emotional support.</p>
+</div>
+
+<div class="section">
+<h2>13. Post‑Programme & Continuing Progress</h2>
+<p>
+Upon completing the 12‑week NeuroFit journey, you may wonder what comes next.  The end of this programme is the beginning of your long‑term training lifestyle.  Set new goals: perhaps you want to run a 10 km race, learn a new sport or increase your deadlift.  Use the principles you’ve learned—progressive overload, balanced nutrition, consistency—to guide future programming.
+</p>
+<p><strong>Transition strategies:</strong> Take a week to recover (deload) after the final phase.  Use this time to assess strengths and weaknesses.  If certain lifts feel particularly challenging, focus on technique drills.  Consider repeating phases with modifications, such as emphasising single‑leg strength or adding plyometric volume.  Alternatively, try a different training style like Olympic lifting or cycling to keep stimulus novel.</p>
+<p><strong>Periodisation:</strong> Structure your training in cycles (e.g. 8–12 weeks) focusing on different qualities—strength, hypertrophy, endurance, power.  Varying intensities and volumes prevents plateaus and reduces injury risk.  Keep your interactive planner updated with new workouts and track progress continuously.</p>
+<p><strong>Self‑coaching vs. coaching support:</strong> Some athletes thrive by programming their own training, while others benefit from external guidance.  If you enjoy designing your own workouts, use the structure provided as a template.  If you prefer a more hands‑on approach, consider working with a coach to tailor programming to your evolving goals.</p>
+
+<p><strong>Cross‑training & new skills:</strong> Diversify your training to sustain motivation.  Try martial arts like Muay Thai or Brazilian jiu‑jitsu to develop coordination and self‑defence skills.  Join a cycling club, sign up for a rock‑climbing course or train for a charity run.  Cross‑training challenges your body in different planes of motion and reduces monotony, making you a more well‑rounded athlete.</p>
+
+<p><strong>Community & support:</strong> Seek out communities aligned with your goals.  Group classes, online forums or training partners provide accountability and camaraderie.  Participate in challenges—such as monthly mobility challenges or step counts—to stay engaged.  Share your progress on social media or in a private group to inspire others and celebrate victories.</p>
+
+<p><strong>Reflection & recalibration:</strong> At the end of each training cycle, reflect on what you’ve achieved and where you struggled.  Use your journal to evaluate performance metrics (weights lifted, times, body composition) and subjective markers (energy levels, motivation).  Adjust your next programme accordingly.  Continuous self‑evaluation fosters growth and prevents stagnation.</p>
+</div>
+
+<div class="section">
+<h2>14. Technology & Tools</h2>
+<p>
+Embracing technology can enhance adherence and provide deeper insights into your performance.  Beyond the interactive Excel workbook included here, there are numerous apps and devices to help you stay accountable.
+</p>
+<p><strong>Habit tracking apps:</strong> Tools like Habitica, Streaks or Todoist allow you to set daily tasks and reminders.  Marking off completed sessions can provide a sense of accomplishment and highlight consistency.</p>
+<p><strong>Wearables:</strong> Fitness trackers and smartwatches monitor heart rate, sleep and daily steps.  Use heart rate variability (HRV) data to gauge recovery readiness; lower HRV can indicate the need for an easier day.</p>
+<p><strong>Food logging:</strong> Apps such as MyFitnessPal or Cronometer make it easy to log meals and analyse macro and micronutrient intake.  While the meal plans provided offer a template, logging helps you adjust portions based on your individual needs and goals.</p>
+<p><strong>Video analysis:</strong> Filming your lifts allows you to check form and identify areas for improvement.  Apps with slow‑motion playback or drawing tools can help you visualise joint angles and posture.</p>
+
+<p><strong>Heart rate training:</strong> Many wearables provide real‑time heart rate feedback.  Use heart rate zones to optimise training intensity: Zone 2 (60–70% of max HR) for steady‑state cardio, Zone 3–4 (70–90%) for threshold work and intervals.  Tracking heart rate recovery (how quickly your heart rate drops after exercise) is an indicator of cardiovascular fitness.</p>
+
+<p><strong>Spreadsheet enhancements:</strong> While the provided Excel planner covers the essentials, you can customise it further.  Add formulas to calculate weekly volume (sets × reps × weight), track one‑rep max estimates using the Epley formula, or create pivot tables that summarise trends over months.  Visual dashboards make it easier to spot plateaus and successes.</p>
+
+<p><strong>Data privacy:</strong> When using apps and wearables, be aware of how your data is used.  Choose reputable services with transparent privacy policies.  Export your data regularly to maintain ownership and continuity should you switch platforms.</p>
+</div>
+
+<div class="section">
+<h2>15. Acknowledgements & Gratitude</h2>
+<p>
+This programme was created with the intention of giving you the highest quality training resource possible.  As a coach, I draw upon the knowledge gained from working with hundreds of clients, the support of fellow trainers, mentors and researchers in the field of sports science.  Thank you to my family and training partners for their endless encouragement.  I also appreciate the feedback from early readers and beta testers who helped refine the structure and content.
+</p>
+<p>
+Finally, thank you for committing to your health.  Your dedication to self‑improvement is inspiring.  Remember that fitness is a lifelong journey; continue to learn, challenge yourself and enjoy the process.
+</p>
+</div>
+
+<div class="section">
+<h2>16. Glossary & Training Concepts</h2>
+<p>
+Understanding terminology helps you make informed decisions about your training.  Below are key concepts used throughout this programme:
+</p>
+<ul>
+<li><strong>Repetitions (reps):</strong> The number of times you perform a specific movement in a set.  For example, 3 × 10 means three sets of ten repetitions.</li>
+<li><strong>Sets:</strong> A group of continuous repetitions.  You rest between sets.</li>
+<li><strong>Progressive overload:</strong> The gradual increase of stress placed on the body during training.  This can be achieved by adding weight, reps or sets, or reducing rest intervals.  Increases should be modest—no more than 10% per week【126889423721339†L129-L170】—to avoid injury.</li>
+<li><strong>Hypertrophy:</strong> The growth of muscle size achieved through moderate to high volumes (8–15 reps) with relatively short rest periods (60–90 seconds).</li>
+<li><strong>Strength:</strong> The ability to produce maximal force.  Typically trained with heavier loads (80–90% of one‑rep max) and low reps (3–6) with longer rest periods (2–3 minutes).</li>
+<li><strong>Power:</strong> The ability to exert force quickly.  Trained through plyometric exercises and explosive lifts with low reps and adequate rest.</li>
+<li><strong>Rate of Perceived Exertion (RPE):</strong> A subjective scale (usually 1–10) used to gauge workout intensity.  An RPE of 7 means you could have performed three more reps; an RPE of 9 means only one rep left in the tank.</li>
+<li><strong>Superset:</strong> Performing two exercises back‑to‑back without rest, typically targeting opposing muscle groups.</li>
+<li><strong>HIIT (High‑Intensity Interval Training):</strong> Short bursts of intense exercise followed by brief recovery periods.  Research indicates HIIT can improve cardiovascular fitness and body composition【82749230765895†L176-L358】.</li>
+<li><strong>Deload:</strong> A planned reduction in training volume or intensity to allow the body to recover and adapt.  Deloads typically occur every 4–8 weeks.</li>
+<li><strong>Mobility:</strong> The ability of joints to move through their full range of motion.  Mobility exercises include dynamic stretching, foam rolling and yoga flow.</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>17. Injury Prevention & Mobility</h2>
+<p>
+Injury prevention is fundamental to long‑term athletic success.  Incorporating mobility, stability and prehabilitation work will keep your joints healthy and reduce downtime.
+</p>
+<p><strong>Warm‑up sequence:</strong> Begin each session with 5–10 minutes of light cardio (jogging, skipping) followed by dynamic stretches (leg swings, arm circles).  This increases blood flow and activates muscles.  A proper warm‑up prepares your nervous system for the demands of training.</p>
+<p><strong>Prehabilitation exercises:</strong> Include movements that strengthen stabilising muscles.  Examples include Y‑T‑W shoulder raises (for rotator cuff health), glute activation drills (clamshells, band walks) and calf raises.  Perform these for 2–3 sets of 12–15 reps.</p>
+<p><strong>Stretching & mobility:</strong> After training, spend 10 minutes on static stretching.  Focus on tight areas such as hip flexors, hamstrings, chest and upper back.  Foam rolling can alleviate trigger points and improve tissue quality.  Incorporate yoga flows or Pilates sessions once a week to enhance flexibility.</p>
+<p><strong>Listen to your body:</strong> Persistent pain or discomfort is a warning sign.  Distinguish between muscular fatigue and joint pain.  If you experience sharp pain, stop the movement immediately and consult a healthcare professional.  Early intervention prevents minor issues from becoming major injuries.</p>
+</div>
+
+<div class="section">
+<h2>18. Exercise & ADHD – Neurobiological Insights</h2>
+<p>
+Emerging research suggests that physical activity benefits individuals with Attention‑Deficit/Hyperactivity Disorder (ADHD).  Exercise increases levels of neurotransmitters like dopamine and norepinephrine, which play a crucial role in attention and executive function.  By boosting these chemicals naturally, exercise can enhance focus, reduce impulsivity and improve mood.
+</p>
+<p><strong>Cognitive benefits:</strong> Aerobic activity—such as running, cycling or skipping rope—improves blood flow to the brain.  High‑intensity interval training stimulates the release of brain‑derived neurotrophic factor (BDNF), which supports neuroplasticity.  Strength training has been shown to reduce anxiety and improve self‑esteem, indirectly aiding those with ADHD.</p>
+<p><strong>Practical application:</strong> For individuals with ADHD, structure is key.  Short, varied workouts maintain engagement.  Including coordination drills and complex movements (e.g. kettlebell flows, agility ladder) challenges the brain and body simultaneously.  Keeping sessions between 30–45 minutes can prevent fatigue and boredom.</p>
+<p><strong>Mindfulness integration:</strong> Combine exercise with mindful practices.  Focus on breathing and bodily sensations during lifts.  End your session with a brief meditation or stretching routine.  These practices help cultivate awareness and calm, countering the restlessness often experienced with ADHD.</p>
+
+<p><strong>Time of day:</strong> Many individuals with ADHD benefit from training earlier in the day.  Exercise stimulates dopamine release, which may enhance concentration throughout the morning and early afternoon.  Morning workouts also establish momentum and reduce the likelihood of distractions interfering later in the day.  However, the optimal timing varies—experiment to find when you feel most focused and energised.</p>
+
+<p><strong>Cross‑lateral movements:</strong> Exercises that cross the body’s midline (e.g. cross‑crawls, crawling patterns, contralateral dead bugs) engage both hemispheres of the brain.  These movements may improve coordination and neural integration, which can translate into better focus and cognitive processing.  Incorporate such drills in your warm‑ups or as active recovery between sets.</p>
+</div>
+
+<!-- Video Demonstrations Section moved here to follow main content -->
+<div class="section">
+<h2>19. Video Demonstrations & Additional Resources</h2>
+<p>
+While written descriptions and diagrams are useful, watching movement in action accelerates learning.  Search for “Coach Pete Ryan exercise demonstrations” or explore curated playlists on our website for step‑by‑step video guides.  Videos cover correct form, common mistakes and alternatives for every movement in this programme.
+</p>
+<p>
+If you prefer third‑party tutorials, reputable channels like the NHS Fitness Studio, Bodybuilding.com and official CrossFit® channels provide quality demonstrations.  Always prioritise videos produced by certified professionals to avoid misinformation.
+</p>
+<p>
+Subscribers to our coaching service receive exclusive access to a private video library and can request personalised form checks.  Contact us via <a href="https://coachpeteryan.com">coachpeteryan.com</a> for more information.
+</p>
+</div>
+
+<div class="section">
+<h2>20. Advanced Track Addendum</h2>
+<p>
+For athletes with several years of strength training or those preparing for combat sports, this addendum provides advanced programming options.  Incorporate these sessions in place of or alongside the core plan once you have established a solid foundation.
+</p>
+<p><strong>Heavy barbell work:</strong> Two times per week, perform compound lifts at higher intensities (80–90% of one‑rep max) with low rep ranges to build maximal strength.  A sample session might include: Back Squat 5 × 5, Bench Press 5 × 5, Weighted Pull‑Ups 4 × 6 and Barbell Hip Thrust 4 × 8.  Rest 2–3 minutes between sets to allow full recovery.  Adjust load based on your estimated 1RM from the Advanced Metrics sheet.
+</p>
+<p><strong>Olympic lift variations:</strong> To develop power, include exercises like Power Clean, Hang Snatch and Push Jerk once per week.  Perform 4–6 sets of 3–4 repetitions with moderate weight focusing on speed and technique.  These lifts require coaching; if unfamiliar, start with Dumbbell Snatches and Kettlebell Swings to build coordination.
+</p>
+<p><strong>Complexes & contrast training:</strong> Pair a heavy lift with a plyometric movement to enhance rate of force development.  For example, perform a set of Back Squats followed by Broad Jumps (3 × 5) or Bench Press followed by Plyometric Push‑Ups (3 × 6).  This contrast method potentiates the nervous system and translates to explosive striking power.
+</p>
+<p><strong>Conditioning for fighters:</strong> Replace steady‑state cardio with high‑intensity intervals: 5 × 3‑minute rounds on the heavy bag with 1‑minute rest, or sled pushes and sprints.  Incorporate footwork drills, shadow boxing with weights and reaction ball drills to sharpen agility and speed.
+</p>
+<p><strong>Advanced mental training:</strong> Use goal‑specific visualisation: mentally rehearse fight scenarios, successful lifts and competition day routines.  Develop pre‑fight rituals and anchor phrases (“calm and explosive”) to control arousal levels.  Consult sports psychology resources for techniques like arousal regulation, attentional focus and imagery scripts.
+</p>
+</div>
+
+<div class="section">
+<h2>21. Fighter Nutrition Annex</h2>
+<p>
+Competition athletes need to balance fuelling performance with making weight.  This annex outlines basic principles—consult a registered nutritionist for individualised plans.
+</p>
+<p><strong>Cutting safely:</strong> Begin weight reduction 6–8 weeks before competition.  Reduce daily calorie intake by 10–20% and focus on maintaining protein intake (2.5 g per kilogram).  Gradually decrease carbohydrate portions while keeping enough for high‑intensity sessions.  Increase leafy vegetables and lean proteins to maintain satiety.
+</p>
+<p><strong>Carb cycling:</strong> Plan higher carbohydrate days on heavy training or sparring days and lower carbohydrate days on rest or technical sessions.  This strategy keeps glycogen stores replenished for performance while encouraging fat utilisation on lighter days.
+</p>
+<p><strong>Hydration & sodium manipulation:</strong> Hydrate thoroughly during camp—aim for 3–4 litres of fluid per day.  In the final week, gradually reduce sodium intake and monitor water consumption as per coaching guidance.  Avoid extreme dehydration practices; research shows that adequate hydration supports cognitive performance and recovery【318969622524147†L60-L68】.
+</p>
+<p><strong>Rehydration post weigh‑in:</strong> Consume electrolyte‑rich fluids immediately after weigh‑ins (e.g. oral rehydration solutions).  Follow with a carbohydrate‑rich meal (rice, fruit, simple sugars) and lean protein to replenish muscle glycogen and kick‑start recovery.
+</p>
+<p><strong>Supplement timing:</strong> Caffeine (3–6 mg/kg) taken 45 minutes before training can enhance performance; beta‑alanine (2–5 g/day) may improve muscular endurance.  Creatine cycles can be continued in fight camp; there is no evidence it causes water retention in subcutaneous tissues at moderate dosages.  Always trial supplements during training, not on competition day.
+</p>
+</div>
+</main>
+
+<script>
+(function(){
+  function slugify(text){
+    return text.toLowerCase()
+      .replace(/[^a-z0-9\s\-]/g,'')
+      .trim()
+      .replace(/\s+/g,'-')
+      .replace(/\-+/g,'-');
+  }
+  function buildTOC(){
+    const tocNav = document.getElementById('tocNav');
+    if(!tocNav) return;
+    const main = document.querySelector('main');
+    const headers = main ? main.querySelectorAll('h2, h3') : document.querySelectorAll('h2, h3');
+    const ul = document.createElement('ul');
+    let currentH2Li = null;
+    headers.forEach(h => {
+      let id = h.id;
+      if(!id || id.trim()===""){
+        id = slugify(h.textContent);
+        if(!id) return;
+        let uniq = id, i=1;
+        while(document.getElementById(uniq)){ uniq = id + '-' + (i++); }
+        id = uniq; h.id = id;
+      }
+      const a = document.createElement('a');
+      a.href = '#' + id; a.className = 'anchor'; a.textContent = '#'; a.setAttribute('aria-label','Link to section');
+      if(!h.querySelector('.anchor')) h.appendChild(a);
+      const li = document.createElement('li');
+      const link = document.createElement('a');
+      link.href = '#' + id; link.textContent = h.textContent.replace('#','').trim();
+      li.appendChild(link);
+      if(h.tagName === 'H2'){
+        ul.appendChild(li);
+        currentH2Li = li;
+        const sub = document.createElement('ul'); sub.style.marginLeft = '12px';
+        currentH2Li.appendChild(sub);
+      } else {
+        const sub = currentH2Li ? currentH2Li.querySelector('ul') : ul;
+        sub.appendChild(li);
+      }
+    });
+    tocNav.innerHTML = '';
+    tocNav.appendChild(ul);
+  }
+  function setupToggles(){
+    const drawer = document.getElementById('tocDrawer');
+    const btn = document.getElementById('tocDrawerToggle');
+    if(btn && drawer){
+      btn.addEventListener('click', () => {
+        const open = drawer.classList.toggle('open');
+        drawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+        btn.setAttribute('aria-expanded', String(open));
+      });
+    }
+    const themeBtn = document.getElementById('themeToggle');
+    const root = document.documentElement;
+    const apply = (mode) => {
+      root.setAttribute('data-theme', mode);
+      localStorage.setItem('nf-theme', mode);
+      themeBtn.textContent = mode === 'dark' ? 'Light' : 'Dark';
+      themeBtn.setAttribute('aria-pressed', mode === 'dark' ? 'true' : 'false');
+    };
+    if(themeBtn){
+      const saved = localStorage.getItem('nf-theme');
+      if(saved === 'dark' || saved === 'light') apply(saved);
+      themeBtn.addEventListener('click', () => {
+        const cur = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        apply(cur);
+      });
+    }
+    const topBtn = document.createElement('button');
+    topBtn.className = 'top'; topBtn.type = 'button'; topBtn.title = 'Back to top';
+    topBtn.textContent = '↑ Top';
+    topBtn.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+    document.body.appendChild(topBtn);
+  }
+  document.addEventListener('DOMContentLoaded', function(){
+    buildTOC();
+    setupToggles();
+  });
+})();
+</script>
+
+</body>
+</html>

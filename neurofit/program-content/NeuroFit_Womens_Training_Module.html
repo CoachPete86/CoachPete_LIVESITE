@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>NeuroFit Women's Specialized Training Module</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root {
+    --primary: #004A7F;
+    --secondary: #0A66C2;
+    --accent: #16a34a;
+    --pink: #ff69b4;
+    --rose: #f43f5e;
+    --surface: #ffffff;
+    --bg: #fafafa;
+    --text: #1f2937;
+    --border: #e5e7eb;
+  }
+  
+  * { box-sizing: border-box; }
+  
+  body {
+    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    scroll-behavior: smooth;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background: var(--surface);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  }
+  
+  @media (min-width: 768px) {
+    .container { padding: 40px; }
+    body { margin: 20px; }
+  }
+  
+  /* Modern Navigation */
+  .nav-header {
+    position: sticky;
+    top: 0;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    z-index: 100;
+    border-bottom: 1px solid var(--border);
+    margin: -40px -40px 20px -40px;
+    padding: 15px 40px;
+  }
+  
+  .nav-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+  
+  .cycle-tracker {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, var(--pink), var(--rose));
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+  }
+  
+  .nav-btn {
+    background: var(--secondary);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  
+  .nav-btn:hover {
+    background: var(--primary);
+    transform: translateY(-1px);
+  }
+  h1 { color: #004A7F; text-align: center; border-bottom: 3px solid #004A7F; padding-bottom: 20px; }
+  h2 { color: #0A66C2; border-left: 4px solid #0A66C2; padding-left: 15px; margin-top: 30px; }
+  h3 { color: #16a34a; margin-top: 20px; }
+  .module { background: #f8f9fa; padding: 20px; margin: 15px 0; border-radius: 8px; border-left: 4px solid #004A7F; }
+  .cycle-phase { background: #fff0f5; padding: 15px; margin: 10px 0; border-radius: 6px; border: 1px solid #ff69b4; }
+  .warning { background: #fff3cd; padding: 15px; margin: 10px 0; border-radius: 6px; border-left: 4px solid #ffc107; }
+  .highlight { background: linear-gradient(135deg, #004A7F 0%, #ff69b4 100%); color: white; padding: 20px; border-radius: 10px; margin: 20px 0; }
+  .phase-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin: 20px 0; }
+  .phase-card { background: #fff; border: 2px solid #ff69b4; border-radius: 10px; padding: 15px; }
+  table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+  th, td { padding: 12px; border: 1px solid #ddd; text-align: left; }
+  th { background: #f8f9fa; font-weight: 600; }
+  ul { padding-left: 25px; }
+  li { margin: 8px 0; }
+  .callout { background: #fff0f5; border-left: 4px solid #ff69b4; padding: 15px; margin: 15px 0; }
+  .exercise-demo { background: #e8f4fd; padding: 15px; margin: 10px 0; border-radius: 6px; }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <!-- Modern Navigation with Cycle Tracking -->
+  <div class="nav-header">
+    <div class="nav-controls">
+      <div class="cycle-tracker">
+        <span>🌸</span>
+        <span id="cyclePhase">Track Your Cycle</span>
+      </div>
+      <button class="nav-btn" onclick="toggleCycleTracker()">📅 Cycle</button>
+      <button class="nav-btn" onclick="togglePregnancyMode()">🤱 Pregnancy</button>
+      <button class="nav-btn" onclick="toggleTableOfContents()">📋 Contents</button>
+      <button class="nav-btn" onclick="printPage()">🖨️ Print</button>
+    </div>
+  </div>
+
+<h1>NeuroFit Women's Specialised Training</h1>
+<div class="highlight">
+  <h2 style="color: white; border: none; margin: 0; padding: 0;">Training Designed for the Female Body</h2>
+  <p><strong>Science-based programming that honours women's unique physiology</strong> - from menstrual cycle optimisation to pregnancy-safe exercise and menopause support.</p>
+</div>
+
+<h2>Understanding Female Physiology in Training</h2>
+
+<div class="callout">
+  <p><strong>Why Women Need Different Programming:</strong></p>
+  <ul>
+    <li>Hormonal fluctuations affect energy, strength, and recovery</li>
+    <li>Different muscle fibre composition and recovery rates</li>
+    <li>Unique considerations for bone health and joint stability</li>
+    <li>Pregnancy and postpartum physical changes</li>
+    <li>Menopause and its impact on metabolism and bone density</li>
+    <li>Higher risk of certain injuries (ACL, stress fractures)</li>
+  </ul>
+</div>
+
+<h2>Menstrual Cycle Periodization</h2>
+
+<div class="module">
+  <h3>Training with Your Cycle, Not Against It</h3>
+  <p>Research shows that women can optimise their training by aligning workouts with hormonal fluctuations. This approach maximises performance while minimising fatigue and injury risk.</p>
+
+  <div class="phase-grid">
+    <div class="phase-card">
+      <h4>Menstrual Phase (Days 1-5)</h4>
+      <p><strong>Hormones:</strong> Low estrogen and progesterone</p>
+      <p><strong>Energy:</strong> Lower, but pain tolerance higher</p>
+      <p><strong>Training Focus:</strong></p>
+      <ul>
+        <li>Gentle movement and mobility</li>
+        <li>Light strength training</li>
+        <li>Yoga and stretching</li>
+        <li>Walking or easy cardio</li>
+      </ul>
+    </div>
+    
+    <div class="phase-card">
+      <h4>Follicular Phase (Days 1-13)</h4>
+      <p><strong>Hormones:</strong> Rising estrogen</p>
+      <p><strong>Energy:</strong> Gradually increasing</p>
+      <p><strong>Training Focus:</strong></p>
+      <ul>
+        <li>Build training intensity</li>
+        <li>Skill acquisition</li>
+        <li>Higher training volume</li>
+        <li>Strength and power work</li>
+      </ul>
+    </div>
+    
+    <div class="phase-card">
+      <h4>Ovulatory Phase (Days 14-16)</h4>
+      <p><strong>Hormones:</strong> Peak estrogen, LH surge</p>
+      <p><strong>Energy:</strong> Highest energy and strength</p>
+      <p><strong>Training Focus:</strong></p>
+      <ul>
+        <li>Maximum intensity training</li>
+        <li>Personal record attempts</li>
+        <li>High-intensity intervals</li>
+        <li>Competition or testing days</li>
+      </ul>
+    </div>
+    
+    <div class="phase-card">
+      <h4>Luteal Phase (Days 15-28)</h4>
+      <p><strong>Hormones:</strong> Rising progesterone</p>
+      <p><strong>Energy:</strong> Decreasing, higher fatigue</p>
+      <p><strong>Training Focus:</strong></p>
+      <ul>
+        <li>Moderate intensity</li>
+        <li>Focus on technique</li>
+        <li>Strength endurance</li>
+        <li>Prepare for deload</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="module">
+  <h3>Sample 4-Week Cycle-Based Program</h3>
+  
+  <table>
+    <tr>
+      <th>Week</th>
+      <th>Cycle Phase</th>
+      <th>Training Focus</th>
+      <th>Volume</th>
+      <th>Intensity</th>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>Menstrual/Early Follicular</td>
+      <td>Movement preparation, technique</td>
+      <td>Low</td>
+      <td>60-70%</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Mid-Follicular</td>
+      <td>Strength building, skill development</td>
+      <td>Moderate</td>
+      <td>70-80%</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>Ovulatory</td>
+      <td>Peak performance, PR attempts</td>
+      <td>High</td>
+      <td>80-95%</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>Luteal</td>
+      <td>Strength endurance, recovery</td>
+      <td>Moderate</td>
+      <td>65-75%</td>
+    </tr>
+  </table>
+</div>
+
+<h2>Pregnancy and Exercise</h2>
+
+<div class="warning">
+  <strong>Important:</strong> Always consult with your GP or midwife before starting or continuing any exercise programme during pregnancy. These guidelines are for educational purposes and should not replace NHS medical advice.
+</div>
+
+<div class="module">
+  <h3>First Trimester (Weeks 1-13)</h3>
+  
+  <h4>Key Considerations:</h4>
+  <ul>
+    <li>Fatigue and nausea may affect energy levels</li>
+    <li>Avoid exercises lying flat on back after 12 weeks</li>
+    <li>Stay hydrated and avoid overheating</li>
+    <li>Listen to your body - pregnancy varies greatly</li>
+  </ul>
+
+  <div class="exercise-demo">
+    <h4>Safe First Trimester Workout (20 minutes)</h4>
+    <p><strong>Frequency:</strong> 3-4 times per week</p>
+    
+    <h5>Warm-up (5 minutes)</h5>
+    <ul>
+      <li>Gentle marching in place - 1 minute</li>
+      <li>Arm circles and shoulder rolls - 1 minute</li>
+      <li>Pelvic tilts and cat-cow stretches - 1 minute</li>
+      <li>Side bends and gentle twists - 2 minutes</li>
+    </ul>
+
+    <h5>Main Workout (12 minutes)</h5>
+    <ul>
+      <li><strong>Circuit A (3 rounds):</strong>
+        <ul>
+          <li>Wall push-ups × 8-12</li>
+          <li>Supported squats × 10-15</li>
+          <li>Modified planks (from knees) × 30 seconds</li>
+          <li>Standing marches × 10 each leg</li>
+        </ul>
+      </li>
+      <li><strong>Circuit B (3 rounds):</strong>
+        <ul>
+          <li>Seated rows (with resistance band) × 10-12</li>
+          <li>Standing calf raises × 15</li>
+          <li>Bird dog holds × 20 seconds each side</li>
+          <li>Breathing squats × 8-10</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h5>Cool-down (3 minutes)</h5>
+    <ul>
+      <li>Prenatal stretches focusing on hips and back</li>
+      <li>Deep breathing exercises</li>
+      <li>Relaxation and mindfulness</li>
+    </ul>
+  </div>
+</div>
+
+<div class="module">
+  <h3>Second Trimester (Weeks 14-27)</h3>
+  
+  <h4>The "Golden Period" of Pregnancy</h4>
+  <p>Most women feel their best during this time. Energy returns and morning sickness typically subsides.</p>
+
+  <h4>Exercise Modifications:</h4>
+  <ul>
+    <li>Avoid supine (lying on back) positions</li>
+    <li>Modify core exercises to prevent diastasis recti</li>
+    <li>Focus on posture and pelvic floor strength</li>
+    <li>Begin incorporating birth preparation exercises</li>
+  </ul>
+
+  <div class="exercise-demo">
+    <h4>Second Trimester Strength Circuit (25 minutes)</h4>
+    
+    <h5>Prenatal Strength Exercises:</h5>
+    <ul>
+      <li><strong>Goblet Squats</strong> - Wide stance for growing belly
+        <ul>
+          <li>3 sets × 10-12 reps</li>
+          <li>Focus on glute activation</li>
+        </ul>
+      </li>
+      <li><strong>Incline Push-ups</strong> - Hands elevated on bench
+        <ul>
+          <li>3 sets × 8-10 reps</li>
+          <li>Maintains chest and arm strength</li>
+        </ul>
+      </li>
+      <li><strong>Single-arm Row</strong> - Using dumbbell
+        <ul>
+          <li>3 sets × 10 each arm</li>
+          <li>Supports postural muscles</li>
+        </ul>
+      </li>
+      <li><strong>Side-lying Leg Lifts</strong> - Hip abductor strength
+        <ul>
+          <li>2 sets × 12 each side</li>
+          <li>Prevents hip pain</li>
+        </ul>
+      </li>
+      <li><strong>Modified Planks</strong> - Wall or incline position
+        <ul>
+          <li>3 sets × 20-30 seconds</li>
+          <li>Core stability without strain</li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="module">
+  <h3>Third Trimester (Weeks 28-40)</h3>
+  
+  <h4>Preparing for Labor and Delivery</h4>
+  <p>Focus shifts to mobility, comfort, and birth preparation while maintaining fitness safely.</p>
+
+  <div class="exercise-demo">
+    <h4>Labor Preparation Routine (15-20 minutes daily)</h4>
+    
+    <h5>Birth Ball Exercises:</h5>
+    <ul>
+      <li>Pelvic circles and figure-8s - 3 minutes</li>
+      <li>Gentle bouncing - 2 minutes</li>
+      <li>Supported squats - 10 reps</li>
+      <li>Hip openers and stretches - 5 minutes</li>
+    </ul>
+
+    <h5>Pelvic Floor Focus:</h5>
+    <ul>
+      <li>Kegel exercises - 3 sets of 10</li>
+      <li>Deep breathing with pelvic awareness</li>
+      <li>Cat-cow stretches - 1 minute</li>
+      <li>Child's pose modifications - 2 minutes</li>
+    </ul>
+  </div>
+</div>
+
+<h2>Postpartum Recovery</h2>
+
+<div class="module">
+  <h3>The Fourth Trimester (0-12 weeks postpartum)</h3>
+  
+  <div class="warning">
+    <strong>Remember:</strong> Get clearance from your healthcare provider before returning to exercise, typically around 6 weeks postpartum (or longer after C-section).
+  </div>
+
+  <h4>Week 1-2: Gentle Reactivation</h4>
+  <div class="exercise-demo">
+    <h5>Breath and Core Connection</h5>
+    <ul>
+      <li>Diaphragmatic breathing - 5 minutes, 3x daily</li>
+      <li>Gentle pelvic tilts - 10 reps</li>
+      <li>Transverse abdominis activation - hold 5 seconds × 10</li>
+      <li>Neck and shoulder rolls - 1 minute</li>
+      <li>Walking as tolerated - start with 5-10 minutes</li>
+    </ul>
+  </div>
+
+  <h4>Week 3-6: Progressive Movement</h4>
+  <div class="exercise-demo">
+    <h5>Gentle Reactivation Circuit</h5>
+    <ul>
+      <li>Wall push-ups - 2 sets × 5-8</li>
+      <li>Glute bridges - 2 sets × 8-10</li>
+      <li>Modified planks - 2 sets × 15 seconds</li>
+      <li>Standing marches - 10 each leg</li>
+      <li>Heel raises - 2 sets × 12</li>
+      <li>Walking - gradually increase to 20-30 minutes</li>
+    </ul>
+  </div>
+
+  <h4>Week 6-12: Gradual Progression</h4>
+  <p>After medical clearance, gradually return to more structured exercise:</p>
+  <ul>
+    <li>Start with 50% of pre-pregnancy intensity</li>
+    <li>Progress slowly - increase by 10% each week</li>
+    <li>Pay attention to pelvic floor symptoms</li>
+    <li>Modify exercises for breastfeeding comfort</li>
+  </ul>
+</div>
+
+<h2>Menopause and Fitness</h2>
+
+<div class="module">
+  <h3>Training Through Hormonal Changes</h3>
+  
+  <h4>Understanding Menopausal Changes:</h4>
+  <ul>
+    <li>Declining estrogen affects bone density</li>
+    <li>Metabolic rate decreases</li>
+    <li>Muscle mass naturally declines</li>
+    <li>Sleep quality may be affected</li>
+    <li>Joint stiffness increases</li>
+    <li>Body composition shifts</li>
+  </ul>
+
+  <h4>Exercise Priorities for Menopause:</h4>
+  <ol>
+    <li><strong>Strength Training</strong> - Combat muscle loss and support bone health</li>
+    <li><strong>Weight-Bearing Exercise</strong> - Maintain bone density</li>
+    <li><strong>Balance and Coordination</strong> - Prevent falls and maintain independence</li>
+    <li><strong>Flexibility and Mobility</strong> - Counter joint stiffness</li>
+    <li><strong>Cardiovascular Health</strong> - Support heart health and mood</li>
+  </ol>
+
+  <div class="exercise-demo">
+    <h4>Menopause-Optimized Workout (35 minutes)</h4>
+    <p><strong>Frequency:</strong> 4 times per week (2 strength, 2 cardio)</p>
+
+    <h5>Strength Days (25 minutes):</h5>
+    <ul>
+      <li><strong>Compound Movements (15 minutes):</strong>
+        <ul>
+          <li>Squats - 3 sets × 8-12</li>
+          <li>Chest press - 3 sets × 8-12</li>
+          <li>Rows - 3 sets × 8-12</li>
+          <li>Overhead press - 3 sets × 8-12</li>
+        </ul>
+      </li>
+      <li><strong>Bone-Building Focus (10 minutes):</strong>
+        <ul>
+          <li>Step-ups - 2 sets × 10 each leg</li>
+          <li>Heel drops - 2 sets × 15</li>
+          <li>Balance challenges - 2 minutes</li>
+          <li>Core stability - 3 minutes</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h5>Cardio Days (35 minutes):</h5>
+    <ul>
+      <li>5-minute warm-up</li>
+      <li>20 minutes moderate-intensity cardio</li>
+      <li>5 minutes high-intensity intervals</li>
+      <li>5-minute cool-down with stretching</li>
+    </ul>
+  </div>
+</div>
+
+<h2>Women-Specific Injury Prevention</h2>
+
+<div class="module">
+  <h3>ACL Injury Prevention Program</h3>
+  <p>Women are 2-8 times more likely to suffer ACL injuries. This programme reduces risk through neuromuscular training.</p>
+
+  <div class="exercise-demo">
+    <h4>ACL Prevention Warm-up (10 minutes)</h4>
+    <p><strong>Perform before all lower body workouts</strong></p>
+
+    <ul>
+      <li><strong>Dynamic Warm-up (3 minutes):</strong>
+        <ul>
+          <li>Light jogging or marching</li>
+          <li>Leg swings - front/back and side/side</li>
+          <li>High knees and butt kicks</li>
+        </ul>
+      </li>
+      <li><strong>Neuromuscular Training (7 minutes):</strong>
+        <ul>
+          <li>Single-leg balance - 30 seconds each leg</li>
+          <li>Jump landing practice - 10 soft landings</li>
+          <li>Lateral bounds - 8 each direction</li>
+          <li>Glute bridges - 15 reps</li>
+          <li>Clamshells - 12 each side</li>
+          <li>Single-leg squats - 5 each leg</li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+  <h4>Key Movement Cues for Women:</h4>
+  <ul>
+    <li><strong>Landing mechanics:</strong> Land softly with knees behind toes</li>
+    <li><strong>Knee tracking:</strong> Knees stay aligned over toes, don't cave inward</li>
+    <li><strong>Hip activation:</strong> Engage glutes before quad-dominant movements</li>
+    <li><strong>Core stability:</strong> Maintain neutral spine during all movements</li>
+  </ul>
+</div>
+
+<h2>Nutrition for Women's Health</h2>
+
+<div class="module">
+  <h3>Female-Specific Nutrition Considerations</h3>
+
+  <table>
+    <tr>
+      <th>Life Stage</th>
+      <th>Key Nutrients</th>
+      <th>Special Considerations</th>
+      <th>Supplement Recommendations</th>
+    </tr>
+    <tr>
+      <td>Reproductive Years</td>
+      <td>Iron, folate, calcium</td>
+      <td>Menstrual iron loss</td>
+      <td>Iron (if deficient), Vitamin D</td>
+    </tr>
+    <tr>
+      <td>Pregnancy</td>
+      <td>Folate, iron, omega-3s</td>
+      <td>Increased calorie needs</td>
+      <td>Prenatal vitamin, DHA</td>
+    </tr>
+    <tr>
+      <td>Breastfeeding</td>
+      <td>All nutrients increased</td>
+      <td>Extra 500 calories/day</td>
+      <td>Continue prenatal, consider B12</td>
+    </tr>
+    <tr>
+      <td>Menopause</td>
+      <td>Calcium, vitamin D, protein</td>
+      <td>Decreased metabolism</td>
+      <td>Calcium, Vitamin D, Omega-3</td>
+    </tr>
+  </table>
+
+  <h4>Cycle-Synced Nutrition</h4>
+  <div class="cycle-phase">
+    <h5>Menstrual Phase</h5>
+    <ul>
+      <li>Increase iron-rich foods (lean meat, spinach, lentils)</li>
+      <li>Anti-inflammatory foods (berries, fatty fish, turmeric)</li>
+      <li>Magnesium for cramp relief (dark chocolate, nuts)</li>
+    </ul>
+  </div>
+
+  <div class="cycle-phase">
+    <h5>Follicular Phase</h5>
+    <ul>
+      <li>Light, fresh foods (salads, lean proteins)</li>
+      <li>Complex carbs for energy (quinoa, sweet potatoes)</li>
+      <li>Probiotic foods for gut health</li>
+    </ul>
+  </div>
+
+  <div class="cycle-phase">
+    <h5>Ovulatory Phase</h5>
+    <ul>
+      <li>Raw foods and antioxidants</li>
+      <li>Anti-inflammatory spices</li>
+      <li>Fiber-rich foods to support estrogen metabolism</li>
+    </ul>
+  </div>
+
+  <div class="cycle-phase">
+    <h5>Luteal Phase</h5>
+    <ul>
+      <li>Complex carbs for serotonin support</li>
+      <li>Healthy fats (avocados, nuts)</li>
+      <li>Magnesium and B6 for PMS symptoms</li>
+    </ul>
+  </div>
+</div>
+
+<h2>Body Image and Mental Health</h2>
+
+<div class="module">
+  <h3>Building a Healthy Relationship with Exercise</h3>
+  
+  <h4>Shifting from Punishment to Empowerment</h4>
+  <ul>
+    <li><strong>Focus on function over form</strong> - What can your body do?</li>
+    <li><strong>Celebrate non-scale victories</strong> - Strength gains, energy levels</li>
+    <li><strong>Practice self-compassion</strong> - Talk to yourself like a good friend</li>
+    <li><strong>Find movement you enjoy</strong> - Exercise shouldn't be torture</li>
+    <li><strong>Honor your body's signals</strong> - Rest when needed</li>
+  </ul>
+
+  <h4>Mindfulness Practices for Women</h4>
+  <div class="exercise-demo">
+    <h5>Body Appreciation Meditation (5 minutes)</h5>
+    <ol>
+      <li>Sit comfortably and close your eyes</li>
+      <li>Take 5 deep breaths</li>
+      <li>Starting from your toes, thank each part of your body</li>
+      <li>Focus on what each part allows you to do</li>
+      <li>End with gratitude for your body's strength and resilience</li>
+    </ol>
+  </div>
+</div>
+
+<div class="highlight">
+  <h3 style="color: white; margin-top: 0;">Empowering Women Through Fitness</h3>
+  <p>This specialised programme recognises that women's bodies are complex and beautiful. By honouring hormonal fluctuations, supporting reproductive health, and building both physical and mental strength, we create a sustainable approach to fitness that serves women throughout their lives.</p>
+</div>
+
+</div>
+
+<!-- Advanced JavaScript for Women's Health Features -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  initializeCycleTracking();
+  initializePregnancyMode();
+  initializeNavigation();
+});
+
+// Menstrual Cycle Tracking System
+function initializeCycleTracking() {
+  const savedCycleDay = localStorage.getItem('neurofit-cycle-day');
+  const savedCycleStart = localStorage.getItem('neurofit-cycle-start');
+  
+  if (savedCycleStart) {
+    const daysSinceStart = Math.floor((new Date() - new Date(savedCycleStart)) / (1000 * 60 * 60 * 24));
+    updateCyclePhase(daysSinceStart);
+  }
+}
+
+function toggleCycleTracker() {
+  let cycleModal = document.getElementById('cycleModal');
+  
+  if (!cycleModal) {
+    cycleModal = document.createElement('div');
+    cycleModal.id = 'cycleModal';
+    cycleModal.style.cssText = `
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.5); z-index: 1000;
+      display: flex; align-items: center; justify-content: center;
+    `;
+    
+    cycleModal.innerHTML = `
+      <div style="background: white; padding: 30px; border-radius: 12px; max-width: 500px; box-shadow: 0 20px 40px rgba(0,0,0,0.2);">
+        <h3 style="margin: 0 0 20px 0; color: var(--primary);">Cycle Tracking</h3>
+        <p>When did your last period start?</p>
+        <input type="date" id="cycleStartDate" style="padding: 10px; border: 1px solid #ddd; border-radius: 6px; width: 100%; margin: 10px 0;">
+        <div style="display: flex; gap: 15px; margin-top: 20px;">
+          <button onclick="saveCycleData()" style="background: var(--pink); color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer;">Save</button>
+          <button onclick="closeCycleModal()" style="background: #ccc; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer;">Cancel</button>
+        </div>
+        <div id="cycleRecommendations" style="margin-top: 20px; padding: 15px; background: #f0f9ff; border-radius: 6px; display: none;">
+          <h4 style="margin: 0 0 10px 0; color: var(--secondary);">Training Recommendations</h4>
+          <div id="cycleAdvice"></div>
+        </div>
+      </div>
+    `;
+    
+    document.body.appendChild(cycleModal);
+  }
+  
+  cycleModal.style.display = cycleModal.style.display === 'none' ? 'flex' : 'none';
+}
+
+function saveCycleData() {
+  const startDate = document.getElementById('cycleStartDate').value;
+  if (startDate) {
+    localStorage.setItem('neurofit-cycle-start', startDate);
+    const daysSinceStart = Math.floor((new Date() - new Date(startDate)) / (1000 * 60 * 60 * 24));
+    updateCyclePhase(daysSinceStart);
+    
+    // Show recommendations
+    showCycleRecommendations(daysSinceStart);
+  }
+}
+
+function updateCyclePhase(daysSinceStart) {
+  const cyclePhaseEl = document.getElementById('cyclePhase');
+  let phase, emoji;
+  
+  if (daysSinceStart <= 5) {
+    phase = 'Menstrual Phase';
+    emoji = '🔴';
+  } else if (daysSinceStart <= 13) {
+    phase = 'Follicular Phase';
+    emoji = '🌱';
+  } else if (daysSinceStart <= 16) {
+    phase = 'Ovulatory Phase';
+    emoji = '⭐';
+  } else {
+    phase = 'Luteal Phase';
+    emoji = '🌙';
+  }
+  
+  if (cyclePhaseEl) {
+    cyclePhaseEl.innerHTML = `${emoji} ${phase}`;
+  }
+}
+
+function showCycleRecommendations(daysSinceStart) {
+  const recommendationsEl = document.getElementById('cycleRecommendations');
+  const adviceEl = document.getElementById('cycleAdvice');
+  
+  let advice = '';
+  
+  if (daysSinceStart <= 5) {
+    advice = `
+      <p><strong>Menstrual Phase (Days 1-5)</strong></p>
+      <ul>
+        <li>Focus on gentle movement and restorative practices</li>
+        <li>Light strength training with reduced intensity</li>
+        <li>Prioritise iron-rich foods and anti-inflammatory nutrition</li>
+        <li>Extra rest and self-care</li>
+      </ul>
+    `;
+  } else if (daysSinceStart <= 13) {
+    advice = `
+      <p><strong>Follicular Phase (Days 6-13)</strong></p>
+      <ul>
+        <li>Gradually increase training intensity</li>
+        <li>Perfect time for skill acquisition and learning new exercises</li>
+        <li>Higher training volume tolerance</li>
+        <li>Focus on complex carbohydrates for energy</li>
+      </ul>
+    `;
+  } else if (daysSinceStart <= 16) {
+    advice = `
+      <p><strong>Ovulatory Phase (Days 14-16)</strong></p>
+      <ul>
+        <li>Peak energy and strength - go for personal records!</li>
+        <li>Maximum intensity training sessions</li>
+        <li>High-intensity intervals and challenging workouts</li>
+        <li>Great time for competition or testing days</li>
+      </ul>
+    `;
+  } else {
+    advice = `
+      <p><strong>Luteal Phase (Days 17-28)</strong></p>
+      <ul>
+        <li>Moderate intensity, focus on technique</li>
+        <li>Strength endurance training</li>
+        <li>Prepare for next cycle deload</li>
+        <li>Support with magnesium and B6 for PMS symptoms</li>
+      </ul>
+    `;
+  }
+  
+  adviceEl.innerHTML = advice;
+  recommendationsEl.style.display = 'block';
+}
+
+function closeCycleModal() {
+  document.getElementById('cycleModal').style.display = 'none';
+}
+
+// Pregnancy Mode Toggle
+function togglePregnancyMode() {
+  const isPregnancyMode = localStorage.getItem('neurofit-pregnancy-mode') === 'true';
+  
+  if (isPregnancyMode) {
+    localStorage.setItem('neurofit-pregnancy-mode', 'false');
+    document.body.classList.remove('pregnancy-mode');
+    alert('Pregnancy mode disabled. Regular training recommendations will be shown.');
+  } else {
+    localStorage.setItem('neurofit-pregnancy-mode', 'true');
+    document.body.classList.add('pregnancy-mode');
+    alert('Pregnancy mode enabled. All recommendations will be pregnancy-safe.');
+  }
+}
+
+// Navigation System
+function initializeNavigation() {
+  const headers = document.querySelectorAll('h2, h3');
+  headers.forEach((header, index) => {
+    header.id = `section-${index}`;
+    header.style.scrollMarginTop = '100px';
+  });
+}
+
+function toggleTableOfContents() {
+  let tocModal = document.getElementById('tocModal');
+  
+  if (!tocModal) {
+    const headers = Array.from(document.querySelectorAll('h2, h3'));
+    const tocItems = headers.map((header, index) => ({
+      text: header.textContent.trim(),
+      id: `section-${index}`,
+      level: header.tagName
+    }));
+    
+    tocModal = document.createElement('div');
+    tocModal.id = 'tocModal';
+    tocModal.style.cssText = `
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.5); z-index: 1000;
+      display: flex; align-items: center; justify-content: center;
+    `;
+    
+    const tocContent = `
+      <div style="background: white; padding: 30px; border-radius: 12px; max-width: 500px; max-height: 80vh; overflow-y: auto;">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px;">
+          <h3 style="margin: 0; color: var(--primary);">Table of Contents</h3>
+          <button onclick="closeTOC()" style="background: none; border: none; font-size: 24px; cursor: pointer;">×</button>
+        </div>
+        <div>
+          ${tocItems.map(item => `
+            <div style="padding: 8px 0; cursor: pointer; border-bottom: 1px solid #eee; padding-left: ${item.level === 'H3' ? '20px' : '0'};">
+              <a href="#${item.id}" onclick="closeTOC()" style="text-decoration: none; color: var(--secondary);">${item.text}</a>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `;
+    
+    tocModal.innerHTML = tocContent;
+    document.body.appendChild(tocModal);
+  }
+  
+  tocModal.style.display = tocModal.style.display === 'none' ? 'flex' : 'none';
+}
+
+function closeTOC() {
+  document.getElementById('tocModal').style.display = 'none';
+}
+
+function printPage() {
+  window.print();
+}
+
+// Initialize pregnancy mode if previously enabled
+if (localStorage.getItem('neurofit-pregnancy-mode') === 'true') {
+  document.body.classList.add('pregnancy-mode');
+}
+</script>
+
+</body>
+</html>

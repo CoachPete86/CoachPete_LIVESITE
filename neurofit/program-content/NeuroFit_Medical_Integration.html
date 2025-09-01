@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuroFit Medical Integration | NHS-Compatible Health Monitoring</title>
+    <meta name="description" content="NHS-compliant health monitoring system integrating fitness, mental health, and medical data for comprehensive patient care.">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --nhs-blue: #005EB8;
+            --nhs-dark-blue: #003087;
+            --nhs-light-blue: #41B6E6;
+            --nhs-green: #00A499;
+            --nhs-purple: #8A1538;
+            --nhs-yellow: #FFB81C;
+            --nhs-red: #DA020E;
+            --nhs-grey: #768692;
+            --light-grey: #F0F4F5;
+            --white: #FFFFFF;
+            --text: #212B32;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--light-grey);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: var(--nhs-blue);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--nhs-blue);
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-avatar {
+            width: 36px;
+            height: 36px;
+            background: var(--nhs-light-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        /* Navigation */
+        .nav {
+            background: var(--nhs-dark-blue);
+            padding: 0.5rem 0;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            background: rgba(255,255,255,0.1);
+        }
+
+        /* Main Content */
+        .main {
+            padding: 2rem 0;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-left: 4px solid var(--nhs-blue);
+        }
+
+        .card h3 {
+            color: var(--nhs-blue);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .metric {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .metric-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--nhs-green);
+        }
+
+        .metric-label {
+            font-size: 0.9rem;
+            color: var(--nhs-grey);
+        }
+
+        .risk-indicator {
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .risk-low {
+            background: #E8F5E8;
+            color: var(--nhs-green);
+        }
+
+        .risk-medium {
+            background: #FFF4E6;
+            color: var(--nhs-yellow);
+        }
+
+        .risk-high {
+            background: #FDE8E8;
+            color: var(--nhs-red);
+        }
+
+        /* Patient Section */
+        .patient-section {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .patient-card {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .patient-header {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--light-grey);
+        }
+
+        .patient-info {
+            flex: 1;
+        }
+
+        .patient-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--nhs-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .patient-id {
+            color: var(--nhs-grey);
+            font-size: 0.9rem;
+        }
+
+        .status-badge {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .status-active {
+            background: #E8F5E8;
+            color: var(--nhs-green);
+        }
+
+        .status-review {
+            background: #FFF4E6;
+            color: #CC7A00;
+        }
+
+        /* Health Metrics */
+        .health-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .health-metric {
+            text-align: center;
+            padding: 1.5rem;
+            background: var(--light-grey);
+            border-radius: 8px;
+        }
+
+        .health-metric-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--nhs-blue);
+            display: block;
+        }
+
+        .health-metric-label {
+            font-size: 0.9rem;
+            color: var(--nhs-grey);
+            margin-top: 0.5rem;
+        }
+
+        .health-metric-trend {
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+        }
+
+        .trend-up {
+            color: var(--nhs-green);
+        }
+
+        .trend-down {
+            color: var(--nhs-red);
+        }
+
+        .trend-stable {
+            color: var(--nhs-grey);
+        }
+
+        /* Progress Chart */
+        .progress-chart {
+            margin: 2rem 0;
+        }
+
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .chart-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--nhs-blue);
+        }
+
+        .time-selector {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .time-btn {
+            padding: 0.25rem 0.75rem;
+            border: 1px solid var(--nhs-grey);
+            background: white;
+            color: var(--nhs-grey);
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+
+        .time-btn.active {
+            background: var(--nhs-blue);
+            color: white;
+            border-color: var(--nhs-blue);
+        }
+
+        .chart-container {
+            height: 200px;
+            background: white;
+            border-radius: 8px;
+            padding: 1rem;
+            display: flex;
+            align-items: end;
+            gap: 0.5rem;
+            border: 1px solid var(--light-grey);
+        }
+
+        .chart-bar {
+            flex: 1;
+            background: var(--nhs-light-blue);
+            border-radius: 2px 2px 0 0;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .chart-bar:hover {
+            background: var(--nhs-blue);
+        }
+
+        /* Medical Data Integration */
+        .medical-integration {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .integration-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .sync-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .sync-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--nhs-green);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        .data-sources {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .data-source {
+            border: 1px solid var(--light-grey);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .source-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--nhs-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            margin: 0 auto 1rem;
+        }
+
+        .source-name {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .source-status {
+            font-size: 0.8rem;
+            color: var(--nhs-green);
+        }
+
+        /* Recommendations */
+        .recommendations {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-left: 4px solid var(--nhs-green);
+        }
+
+        .recommendation-item {
+            padding: 1rem;
+            border-bottom: 1px solid var(--light-grey);
+            display: flex;
+            gap: 1rem;
+        }
+
+        .recommendation-item:last-child {
+            border-bottom: none;
+        }
+
+        .recommendation-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--nhs-light-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .recommendation-content {
+            flex: 1;
+        }
+
+        .recommendation-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--nhs-blue);
+        }
+
+        .recommendation-text {
+            font-size: 0.9rem;
+            color: var(--nhs-grey);
+        }
+
+        .priority-high {
+            border-left-color: var(--nhs-red);
+        }
+
+        .priority-medium {
+            border-left-color: var(--nhs-yellow);
+        }
+
+        .priority-low {
+            border-left-color: var(--nhs-green);
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: var(--nhs-blue);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--nhs-dark-blue);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--nhs-blue);
+            border: 2px solid var(--nhs-blue);
+        }
+
+        .btn-secondary:hover {
+            background: var(--nhs-blue);
+            color: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .patient-section {
+                grid-template-columns: 1fr;
+            }
+            
+            .health-metrics {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .data-sources {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-menu {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">NF</div>
+                    <div>
+                        <h1 style="font-size: 1.3rem;">NeuroFit Medical</h1>
+                        <div style="font-size: 0.8rem; opacity: 0.9;">NHS-Compatible Health Platform</div>
+                    </div>
+                </div>
+                
+                <div class="user-info">
+                    <div class="user-avatar">DR</div>
+                    <div>
+                        <div style="font-size: 0.9rem;">Dr. Sarah Reynolds</div>
+                        <div style="font-size: 0.8rem; opacity: 0.8;">GP Practice Manager</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="nav">
+        <div class="container">
+            <ul class="nav-menu">
+                <li><a href="#dashboard" class="active">Patient Dashboard</a></li>
+                <li><a href="#analytics">Health Analytics</a></li>
+                <li><a href="#integration">NHS Integration</a></li>
+                <li><a href="#reports">Clinical Reports</a></li>
+                <li><a href="#settings">Practice Settings</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main">
+        <div class="container">
+            <!-- Overview Cards -->
+            <div class="dashboard-grid">
+                <div class="card">
+                    <h3>Active Patients</h3>
+                    <div class="metric">
+                        <span class="metric-value">1,247</span>
+                        <span class="risk-indicator risk-low">Healthy</span>
+                    </div>
+                    <div class="metric-label">Using NeuroFit programme</div>
+                </div>
+                
+                <div class="card">
+                    <h3>Health Improvements</h3>
+                    <div class="metric">
+                        <span class="metric-value">86%</span>
+                        <span class="risk-indicator risk-low">Positive</span>
+                    </div>
+                    <div class="metric-label">Patients showing improvement</div>
+                </div>
+                
+                <div class="card">
+                    <h3>Clinical Alerts</h3>
+                    <div class="metric">
+                        <span class="metric-value">3</span>
+                        <span class="risk-indicator risk-medium">Review</span>
+                    </div>
+                    <div class="metric-label">Requiring attention</div>
+                </div>
+            </div>
+
+            <!-- Patient Focus Section -->
+            <div class="patient-section">
+                <div class="patient-card">
+                    <div class="patient-header">
+                        <div class="patient-info">
+                            <div class="patient-name">James Mitchell</div>
+                            <div class="patient-id">NHS No: 123 456 7890 | DOB: 15/03/1985 | Age: 38</div>
+                        </div>
+                        <div class="status-badge status-active">Active Programme</div>
+                    </div>
+
+                    <div class="health-metrics">
+                        <div class="health-metric">
+                            <span class="health-metric-value">142/89</span>
+                            <div class="health-metric-label">Blood Pressure</div>
+                            <div class="health-metric-trend trend-down">↓ 12% this month</div>
+                        </div>
+                        
+                        <div class="health-metric">
+                            <span class="health-metric-value">24.8</span>
+                            <div class="health-metric-label">BMI</div>
+                            <div class="health-metric-trend trend-down">↓ 2.1 since start</div>
+                        </div>
+                        
+                        <div class="health-metric">
+                            <span class="health-metric-value">7.2</span>
+                            <div class="health-metric-label">Stress Level</div>
+                            <div class="health-metric-trend trend-down">↓ 1.8 improvement</div>
+                        </div>
+                        
+                        <div class="health-metric">
+                            <span class="health-metric-value">89%</span>
+                            <div class="health-metric-label">Programme Adherence</div>
+                            <div class="health-metric-trend trend-up">↑ 12% this week</div>
+                        </div>
+                    </div>
+
+                    <div class="progress-chart">
+                        <div class="chart-header">
+                            <div class="chart-title">Wellness Progress</div>
+                            <div class="time-selector">
+                                <button class="time-btn">7D</button>
+                                <button class="time-btn active">30D</button>
+                                <button class="time-btn">90D</button>
+                                <button class="time-btn">1Y</button>
+                            </div>
+                        </div>
+                        <div class="chart-container" id="progressChart">
+                            <div class="chart-bar" style="height: 45%"></div>
+                            <div class="chart-bar" style="height: 52%"></div>
+                            <div class="chart-bar" style="height: 48%"></div>
+                            <div class="chart-bar" style="height: 63%"></div>
+                            <div class="chart-bar" style="height: 71%"></div>
+                            <div class="chart-bar" style="height: 68%"></div>
+                            <div class="chart-bar" style="height: 77%"></div>
+                            <div class="chart-bar" style="height: 82%"></div>
+                            <div class="chart-bar" style="height: 79%"></div>
+                            <div class="chart-bar" style="height: 86%"></div>
+                            <div class="chart-bar" style="height: 91%"></div>
+                            <div class="chart-bar" style="height: 94%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recommendations">
+                    <h3 style="color: var(--nhs-blue); margin-bottom: 1.5rem;">Clinical Recommendations</h3>
+                    
+                    <div class="recommendation-item priority-high">
+                        <div class="recommendation-icon">!</div>
+                        <div class="recommendation-content">
+                            <div class="recommendation-title">Blood Pressure Monitoring</div>
+                            <div class="recommendation-text">Recent readings show improvement. Consider reducing medication review from weekly to fortnightly.</div>
+                        </div>
+                    </div>
+                    
+                    <div class="recommendation-item priority-medium">
+                        <div class="recommendation-icon">💡</div>
+                        <div class="recommendation-content">
+                            <div class="recommendation-title">ADHD Focus Improvement</div>
+                            <div class="recommendation-text">NeuroFit data shows 34% improvement in focus duration. Consider workplace adjustments discussion.</div>
+                        </div>
+                    </div>
+                    
+                    <div class="recommendation-item priority-low">
+                        <div class="recommendation-icon">✓</div>
+                        <div class="recommendation-content">
+                            <div class="recommendation-title">Continue Current Programme</div>
+                            <div class="recommendation-text">Excellent adherence and progress. Schedule 6-week review to assess long-term goals.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NHS Integration -->
+            <div class="medical-integration">
+                <div class="integration-header">
+                    <h3 style="color: var(--nhs-blue);">NHS Systems Integration</h3>
+                    <div class="sync-status">
+                        <div class="sync-indicator"></div>
+                        <span style="font-size: 0.9rem;">Live sync active</span>
+                    </div>
+                </div>
+                
+                <div class="data-sources">
+                    <div class="data-source">
+                        <div class="source-icon">GP</div>
+                        <div class="source-name">SystmOne</div>
+                        <div class="source-status">✓ Connected</div>
+                        <div style="font-size: 0.8rem; color: var(--nhs-grey); margin-top: 0.5rem;">Last sync: 2 min ago</div>
+                    </div>
+                    
+                    <div class="data-source">
+                        <div class="source-icon">📊</div>
+                        <div class="source-name">NHS Digital</div>
+                        <div class="source-status">✓ Connected</div>
+                        <div style="font-size: 0.8rem; color: var(--nhs-grey); margin-top: 0.5rem;">API v3.2 active</div>
+                    </div>
+                    
+                    <div class="data-source">
+                        <div class="source-icon">🏥</div>
+                        <div class="source-name">Hospital Trust</div>
+                        <div class="source-status">✓ Connected</div>
+                        <div style="font-size: 0.8rem; color: var(--nhs-grey); margin-top: 0.5rem;">FHIR R4 compatible</div>
+                    </div>
+                    
+                    <div class="data-source">
+                        <div class="source-icon">📱</div>
+                        <div class="source-name">NHS App</div>
+                        <div class="source-status">✓ Integrated</div>
+                        <div style="font-size: 0.8rem; color: var(--nhs-grey); margin-top: 0.5rem;">Patient access enabled</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <button class="btn btn-primary" onclick="generateReport()">Generate Clinical Report</button>
+                <button class="btn btn-secondary" onclick="scheduleReview()">Schedule Review</button>
+                <button class="btn btn-secondary" onclick="updateTreatment()">Update Treatment Plan</button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Simulate real-time data updates
+        function updateMetrics() {
+            const metrics = document.querySelectorAll('.metric-value');
+            metrics.forEach((metric, index) => {
+                if (Math.random() < 0.1) { // 10% chance to update
+                    const currentText = metric.textContent;
+                    if (currentText.includes('%')) {
+                        const value = parseInt(currentText);
+                        const change = Math.floor(Math.random() * 3) - 1;
+                        metric.textContent = Math.max(0, Math.min(100, value + change)) + '%';
+                    } else if (currentText.includes('/')) {
+                        // Blood pressure simulation
+                        const [systolic, diastolic] = currentText.split('/').map(n => parseInt(n));
+                        const sysChange = Math.floor(Math.random() * 6) - 3;
+                        const diaChange = Math.floor(Math.random() * 4) - 2;
+                        metric.textContent = `${Math.max(90, Math.min(180, systolic + sysChange))}/${Math.max(60, Math.min(120, diastolic + diaChange))}`;
+                    }
+                }
+            });
+        }
+
+        // Update chart heights to simulate progress
+        function updateChart() {
+            const bars = document.querySelectorAll('.chart-bar');
+            bars.forEach(bar => {
+                if (Math.random() < 0.15) {
+                    const currentHeight = parseInt(bar.style.height);
+                    const change = Math.floor(Math.random() * 6) - 3;
+                    const newHeight = Math.max(20, Math.min(100, currentHeight + change));
+                    bar.style.height = newHeight + '%';
+                }
+            });
+        }
+
+        // Button interactions
+        function generateReport() {
+            alert('📄 Clinical report generated successfully!\n\nReport includes:\n• NeuroFit programme adherence data\n• Health metric improvements\n• ADHD-specific outcomes\n• Clinical recommendations\n\nReport has been saved to patient record and sent to your NHS email.');
+        }
+
+        function scheduleReview() {
+            alert('📅 Review appointment scheduled!\n\nAppointment details:\n• Patient: James Mitchell\n• Date: Next Tuesday 2:30 PM\n• Type: NeuroFit progress review\n• Duration: 20 minutes\n\nAppointment added to SystmOne and patient notified via NHS App.');
+        }
+
+        function updateTreatment() {
+            alert('💊 Treatment plan updated!\n\nChanges made:\n• Blood pressure medication review scheduled\n• NeuroFit programme intensity increased\n• ADHD workplace assessment recommended\n• Follow-up in 4 weeks\n\nUpdates synced to NHS Digital and patient care record.');
+        }
+
+        // Chart interaction
+        document.querySelectorAll('.chart-bar').forEach((bar, index) => {
+            bar.addEventListener('click', function() {
+                const weekAgo = new Date();
+                weekAgo.setDate(weekAgo.getDate() - (11 - index) * 2.5);
+                const dateStr = weekAgo.toLocaleDateString('en-GB');
+                const height = this.style.height;
+                alert(`📊 Data Point Details\n\nDate: ${dateStr}\nWellness Score: ${height}\n\nMetrics included:\n• Exercise adherence\n• Sleep quality\n• Stress levels\n• ADHD symptom management\n• Overall health indicators`);
+            });
+        });
+
+        // Time selector functionality
+        document.querySelectorAll('.time-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.time-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Simulate chart data change
+                const bars = document.querySelectorAll('.chart-bar');
+                bars.forEach(bar => {
+                    const randomHeight = Math.floor(Math.random() * 60) + 20;
+                    bar.style.height = randomHeight + '%';
+                });
+            });
+        });
+
+        // Auto-update data every 30 seconds
+        setInterval(() => {
+            updateMetrics();
+            updateChart();
+        }, 30000);
+
+        // Initial chart animation
+        setTimeout(() => {
+            document.querySelectorAll('.chart-bar').forEach((bar, index) => {
+                setTimeout(() => {
+                    bar.style.opacity = '1';
+                    bar.style.transform = 'scaleY(1)';
+                }, index * 100);
+            });
+        }, 500);
+
+        // Navigation highlighting
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelectorAll('.nav-menu a').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Simulate different dashboard views
+                if (this.textContent === 'Health Analytics') {
+                    alert('📈 Health Analytics Dashboard\n\nViewing practice-wide analytics:\n• 1,247 active patients\n• 86% showing health improvements\n• £127K NHS cost savings this year\n• Top conditions: Hypertension, ADHD, Anxiety');
+                } else if (this.textContent === 'NHS Integration') {
+                    alert('🔗 NHS Integration Settings\n\nSystem Status:\n✓ SystmOne - Connected\n✓ NHS Digital API - Active\n✓ FHIR R4 - Compliant\n✓ Data encryption - AES-256\n✓ GDPR compliance - Verified');
+                } else if (this.textContent === 'Clinical Reports') {
+                    alert('📋 Clinical Reports Module\n\nAvailable reports:\n• Monthly practice summary\n• NeuroFit outcomes analysis\n• ADHD patient progress\n• Cost-benefit analysis\n• Population health trends');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

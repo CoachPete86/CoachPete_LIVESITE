@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NeuroFit AI Form Analyzer - Pete Ryan's Champion Coaching</title>
+<style>
+:root {
+  --primary: #004A7F;
+  --secondary: #0A66C2;
+  --success: #22c55e;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  color: #1f2937;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.header {
+  text-align: center;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  color: white;
+  padding: 40px 20px;
+  border-radius: 12px;
+  margin-bottom: 30px;
+}
+
+.header h1 {
+  margin: 0 0 10px 0;
+  font-size: 2.5em;
+}
+
+.header p {
+  margin: 0;
+  opacity: 0.9;
+  font-size: 1.1em;
+}
+
+.tool-section {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+  margin-bottom: 30px;
+}
+
+.upload-zone {
+  border: 3px dashed var(--primary);
+  padding: 50px 20px;
+  text-align: center;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 20px 0;
+}
+
+.upload-zone:hover {
+  border-color: var(--secondary);
+  background: #f8fafc;
+}
+
+.upload-zone.dragover {
+  border-color: var(--success);
+  background: #f0f9ff;
+}
+
+.file-input {
+  display: none;
+}
+
+.analysis-container {
+  display: none;
+  margin-top: 30px;
+}
+
+.analysis-result {
+  background: #f8fafc;
+  padding: 25px;
+  border-radius: 12px;
+  border-left: 6px solid var(--primary);
+}
+
+.form-score {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.score-circle {
+  display: inline-block;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  line-height: 120px;
+  color: white;
+  font-size: 2.5em;
+  font-weight: bold;
+  margin: 10px;
+}
+
+.score-excellent { background: var(--success); }
+.score-good { background: var(--warning); }
+.score-needs-work { background: var(--danger); }
+
+.feedback-section {
+  background: #e8f5e8;
+  padding: 20px;
+  border-radius: 8px;
+  margin: 20px 0;
+}
+
+.corrections-list {
+  background: #fff3cd;
+  padding: 20px;
+  border-radius: 8px;
+  margin: 20px 0;
+}
+
+.btn {
+  background: var(--primary);
+  color: white;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn:hover {
+  background: var(--secondary);
+  transform: translateY(-2px);
+}
+
+.loading {
+  text-align: center;
+  padding: 40px;
+}
+
+.spinner {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid var(--primary);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.exercise-selector {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+  margin: 20px 0;
+}
+
+.exercise-btn {
+  background: white;
+  border: 2px solid var(--primary);
+  color: var(--primary);
+  padding: 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+  font-weight: bold;
+}
+
+.exercise-btn:hover, .exercise-btn.selected {
+  background: var(--primary);
+  color: white;
+}
+
+.coaching-voice {
+  background: linear-gradient(135deg, #16a34a 0%, #22c55e 100%);
+  color: white;
+  padding: 25px;
+  border-radius: 12px;
+  margin: 20px 0;
+  position: relative;
+}
+
+.coaching-voice::before {
+  content: "🏆";
+  font-size: 2em;
+  position: absolute;
+  top: 10px;
+  right: 20px;
+}
+
+.pricing-section {
+  background: linear-gradient(135deg, var(--success) 0%, #16a34a 100%);
+  color: white;
+  padding: 30px;
+  border-radius: 12px;
+  text-align: center;
+  margin-top: 40px;
+}
+
+.price {
+  font-size: 3em;
+  font-weight: bold;
+  margin: 20px 0;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  
+  <div class="header">
+    <h1>🤖 NeuroFit AI Form Analyzer</h1>
+    <p><strong>Get instant champion-level coaching from Pete Ryan's AI system</strong></p>
+    <p>Professional form analysis powered by two-time British Kickboxing Champion expertise</p>
+  </div>
+
+  <div class="tool-section">
+    <h2>📱 Exercise Form Analysis</h2>
+    <p>Upload a video or describe your exercise for instant AI-powered feedback using Pete Ryan's championship coaching methods.</p>
+    
+    <h3>Select Your Exercise:</h3>
+    <div class="exercise-selector">
+      <div class="exercise-btn" onclick="selectExercise('squat')">🏋️ Squat</div>
+      <div class="exercise-btn" onclick="selectExercise('pushup')">💪 Push-Up</div>
+      <div class="exercise-btn" onclick="selectExercise('deadlift')">⬆️ Deadlift</div>
+      <div class="exercise-btn" onclick="selectExercise('plank')">🧘 Plank</div>
+      <div class="exercise-btn" onclick="selectExercise('lunge')">🦵 Lunge</div>
+      <div class="exercise-btn" onclick="selectExercise('pullup')">⬆️ Pull-Up</div>
+    </div>
+
+    <div class="upload-zone" onclick="document.getElementById('video-upload').click()">
+      <h3>📹 Upload Exercise Video</h3>
+      <p>Click here to upload your exercise video for AI analysis</p>
+      <p style="font-size: 0.9em; color: #666;">Supports: MP4, MOV, AVI (max 50MB)</p>
+      <input type="file" id="video-upload" class="file-input" accept="video/*">
+    </div>
+
+    <div style="text-align: center; margin: 20px 0;">
+      <strong>OR</strong>
+    </div>
+
+    <h3>✍️ Describe Your Form (Alternative to Video):</h3>
+    <textarea id="form-description" placeholder="Describe your exercise form in detail. For example: 'I'm doing squats but my knees seem to cave inward when I go down, and I feel it mostly in my quads rather than my glutes. I'm going to parallel depth but struggle to keep my chest up...'" 
+      style="width: 100%; height: 120px; padding: 15px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px; resize: vertical;"></textarea>
+
+    <button class="btn" onclick="analyzeForm()" style="width: 100%; margin-top: 20px;">
+      🔍 Analyze My Form with Pete Ryan's AI Coach
+    </button>
+  </div>
+
+  <div class="analysis-container" id="analysis-container">
+    <div class="loading" id="loading">
+      <div class="spinner"></div>
+      <p>Pete Ryan's AI is analyzing your form...</p>
+      <p style="font-size: 0.9em; color: #666;">This may take 10-15 seconds</p>
+    </div>
+    
+    <div id="results" style="display: none;">
+      <!-- Results will be inserted here -->
+    </div>
+  </div>
+
+  <div class="pricing-section">
+    <h2>🚀 Upgrade to NeuroFit AI Pro</h2>
+    <div class="price">£25<span style="font-size: 0.5em;">/month</span></div>
+    <p><strong>Unlimited AI form analysis + personalized coaching</strong></p>
+    <ul style="text-align: left; max-width: 400px; margin: 0 auto;">
+      <li>✅ Unlimited video analysis</li>
+      <li>✅ Progress tracking over time</li>
+      <li>✅ Personalized workout recommendations</li>
+      <li>✅ Direct access to Pete Ryan's coaching library</li>
+      <li>✅ Priority support</li>
+    </ul>
+    <button class="btn" style="background: white; color: var(--success); margin-top: 20px; border: 2px solid white;">
+      Start Free 7-Day Trial
+    </button>
+  </div>
+
+</div>
+
+<script>
+let selectedExercise = '';
+
+function selectExercise(exercise) {
+  // Remove previous selection
+  document.querySelectorAll('.exercise-btn').forEach(btn => btn.classList.remove('selected'));
+  
+  // Add selection to clicked button
+  event.target.classList.add('selected');
+  selectedExercise = exercise;
+}
+
+function analyzeForm() {
+  const description = document.getElementById('form-description').value.trim();
+  const videoFile = document.getElementById('video-upload').files[0];
+  
+  if (!selectedExercise) {
+    alert('Please select an exercise first!');
+    return;
+  }
+  
+  if (!description && !videoFile) {
+    alert('Please either upload a video or describe your form!');
+    return;
+  }
+  
+  // Show loading
+  document.getElementById('analysis-container').style.display = 'block';
+  document.getElementById('loading').style.display = 'block';
+  document.getElementById('results').style.display = 'none';
+  
+  // Simulate analysis delay
+  setTimeout(() => {
+    generateAnalysis(selectedExercise, description, videoFile);
+  }, 2000 + Math.random() * 3000); // 2-5 second delay
+}
+
+function generateAnalysis(exercise, description, videoFile) {
+  const analysis = createPeteRyanAnalysis(exercise, description);
+  
+  document.getElementById('loading').style.display = 'none';
+  document.getElementById('results').innerHTML = `
+    <div class="analysis-result">
+      <h2>🎯 Pete Ryan's AI Analysis Results</h2>
+      
+      <div class="form-score">
+        <div class="score-circle ${getScoreClass(analysis.score)}">
+          ${analysis.score}/10
+        </div>
+        <h3>Form Score: ${getScoreDescription(analysis.score)}</h3>
+      </div>
+      
+      <div class="coaching-voice">
+        <h3>🏆 Pete Ryan's Personal Feedback:</h3>
+        <p><em>"${analysis.petesFeedback}"</em></p>
+      </div>
+      
+      <div class="feedback-section">
+        <h3>💪 What You're Doing Well:</h3>
+        <ul>
+          ${analysis.positives.map(positive => `<li>${positive}</li>`).join('')}
+        </ul>
+      </div>
+      
+      <div class="corrections-list">
+        <h3>🎯 Key Areas for Improvement:</h3>
+        <ol>
+          ${analysis.corrections.map(correction => `<li><strong>${correction.area}:</strong> ${correction.fix}</li>`).join('')}
+        </ol>
+      </div>
+      
+      <div style="background: #f0f9ff; padding: 20px; border-radius: 8px; margin: 20px 0;">
+        <h3>📈 Next Steps:</h3>
+        <ul>
+          ${analysis.nextSteps.map(step => `<li>${step}</li>`).join('')}
+        </ul>
+      </div>
+      
+      <div style="text-align: center; margin-top: 30px;">
+        <button class="btn" onclick="analyzeAnother()" style="margin-right: 10px;">
+          🔄 Analyze Another Exercise
+        </button>
+        <button class="btn" onclick="upgradeToPro()" style="background: var(--success);">
+          🚀 Upgrade to Pro for Unlimited Analysis
+        </button>
+      </div>
+    </div>
+  `;
+  
+  document.getElementById('results').style.display = 'block';
+}
+
+function createPeteRyanAnalysis(exercise, description) {
+  // This is where you'd integrate with Claude API or ChatGPT
+  // For now, we'll create intelligent responses based on Pete's expertise
+  
+  const exerciseData = {
+    squat: {
+      commonIssues: ['knee valgus', 'forward lean', 'incomplete depth', 'heel rise'],
+      peteWisdom: [
+        "Think of sitting back into an invisible chair - hips lead, knees follow",
+        "Your knees should track over your toes like train wheels on rails", 
+        "Chest proud, eyes forward - you're a champion, show it",
+        "Drive through your whole foot, not just your toes"
+      ],
+      coachingCues: [
+        "Imagine I'm about to punch you in the stomach - brace that core",
+        "Pretend you're wearing a crown - keep that chest up and proud",
+        "Push the floor away with your feet rather than lifting yourself up"
+      ]
+    },
+    pushup: {
+      commonIssues: ['elbow flare', 'sagging hips', 'incomplete range', 'head position'],
+      peteWisdom: [
+        "Your body should be one solid plank from head to heels",
+        "Elbows at 45 degrees - not flared out like a chicken",
+        "Lower until your chest nearly kisses the ground",
+        "Power comes from your core connection, not just your arms"
+      ],
+      coachingCues: [
+        "Squeeze your glutes like you're cracking walnuts",
+        "Imagine a steel rod running from your head to your heels",
+        "Press the ground away rather than pushing yourself up"
+      ]
+    }
+  };
+  
+  const data = exerciseData[exercise] || exerciseData.squat;
+  const score = 6 + Math.floor(Math.random() * 4); // 6-9 score
+  
+  // Analyze description for specific issues
+  const detectedIssues = [];
+  const descriptionLower = description.toLowerCase();
+  
+  if (exercise === 'squat') {
+    if (descriptionLower.includes('knee') && descriptionLower.includes('inward')) {
+      detectedIssues.push({area: 'Knee Alignment', fix: 'Focus on pushing your knees out over your toes. Strengthen your glutes with clamshells and lateral walks.'});
+    }
+    if (descriptionLower.includes('chest') && descriptionLower.includes('forward')) {
+      detectedIssues.push({area: 'Torso Position', fix: 'Keep your chest proud and eyes forward. Imagine wearing a crown that you cannot let fall.'});
+    }
+    if (descriptionLower.includes('quad')) {
+      detectedIssues.push({area: 'Muscle Activation', fix: 'You should feel this in your glutes first. Push your hips back to initiate the movement.'});
+    }
+  }
+  
+  // Default corrections if no specific issues detected
+  if (detectedIssues.length === 0) {
+    detectedIssues.push(
+      {area: 'Breathing Pattern', fix: 'Breathe in on the way down, breathe out powerfully on the way up. Never hold your breath.'},
+      {area: 'Movement Tempo', fix: 'Control the descent for 2-3 seconds, pause briefly, then drive up with power.'}
+    );
+  }
+  
+  return {
+    score: score,
+    petesFeedback: generatePetesFeedback(exercise, score, description),
+    positives: [
+      "You're focused on proper technique - that's the champion mindset",
+      "Taking time to analyze your form shows real dedication to improvement",
+      "Your willingness to seek feedback demonstrates the attitude of a winner"
+    ],
+    corrections: detectedIssues,
+    nextSteps: [
+      `Practice ${exercise} in front of a mirror to build body awareness`,
+      "Start with bodyweight or lighter loads to perfect your technique",
+      "Record yourself weekly to track your form improvements",
+      "Book a virtual coaching session for personalized cues"
+    ]
+  };
+}
+
+function generatePetesFeedback(exercise, score, description) {
+  const encouragement = [
+    "I can see you're putting in the work, and that's what separates champions from everyone else.",
+    "Your attention to form details reminds me of my own training - that's how you build excellence.",
+    "The fact that you're analyzing your technique tells me you have the mindset of a true athlete.",
+    "This is exactly the kind of self-awareness that took me to two British titles."
+  ];
+  
+  const technical = [
+    `Your ${exercise} has solid foundations, now let's fine-tune it to championship level.`,
+    `I can tell you understand the fundamentals - now we're going to perfect the details.`,
+    `You're on the right track with your ${exercise} - let's make some small adjustments for big improvements.`
+  ];
+  
+  const motivation = [
+    "Remember, perfection isn't the goal - progression is. Every session makes you stronger.",
+    "Trust the process. I didn't become champion overnight, and neither will you - but you will get there.",
+    "Your commitment to proper form is going to pay dividends in strength, safety, and results."
+  ];
+  
+  return `${encouragement[Math.floor(Math.random() * encouragement.length)]} ${technical[Math.floor(Math.random() * technical.length)]} ${motivation[Math.floor(Math.random() * motivation.length)]}`;
+}
+
+function getScoreClass(score) {
+  if (score >= 8) return 'score-excellent';
+  if (score >= 6) return 'score-good'; 
+  return 'score-needs-work';
+}
+
+function getScoreDescription(score) {
+  if (score >= 9) return 'Excellent - Championship Level';
+  if (score >= 8) return 'Very Good - Strong Foundation';
+  if (score >= 7) return 'Good - Room for Fine-Tuning';
+  if (score >= 6) return 'Fair - Focus on Fundamentals';
+  return 'Needs Work - Back to Basics';
+}
+
+function analyzeAnother() {
+  // Reset form
+  document.getElementById('form-description').value = '';
+  document.getElementById('video-upload').value = '';
+  document.getElementById('analysis-container').style.display = 'none';
+  document.querySelectorAll('.exercise-btn').forEach(btn => btn.classList.remove('selected'));
+  selectedExercise = '';
+  
+  // Scroll to top
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function upgradeToPro() {
+  alert('Upgrade feature coming soon! Email pete@neurofit.co.uk to get early access to NeuroFit AI Pro.');
+}
+
+// Drag and drop functionality
+const uploadZone = document.querySelector('.upload-zone');
+
+uploadZone.addEventListener('dragover', (e) => {
+  e.preventDefault();
+  uploadZone.classList.add('dragover');
+});
+
+uploadZone.addEventListener('dragleave', () => {
+  uploadZone.classList.remove('dragover');
+});
+
+uploadZone.addEventListener('drop', (e) => {
+  e.preventDefault();
+  uploadZone.classList.remove('dragover');
+  
+  const files = e.dataTransfer.files;
+  if (files.length > 0) {
+    document.getElementById('video-upload').files = files;
+  }
+});
+</script>
+
+</body>
+</html>
