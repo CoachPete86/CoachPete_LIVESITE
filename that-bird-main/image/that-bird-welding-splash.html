@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>That Bird — Welding Splash</title>
+<style>
+  html,body{height:100%;margin:0;background:#0a0a0a;overflow:hidden}
+  .wrap{position:relative;display:grid;place-items:center;height:100%}
+  .frame{position:relative;width:min(68vmin,720px);}
+  #logo{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;z-index:2;filter:drop-shadow(0 8px 24px rgba(0,0,0,.8))}
+  svg{display:block;width:100%;height:auto;opacity:.001} /* invisible path carrier */
+  canvas{position:fixed;inset:0;pointer-events:none;z-index:3}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="frame">
+    <img id="logo" src="that-bird-logo.png" alt="That Bird"/>
+    <svg id="carrier" viewBox="0 0 1024 1024">
+      <path id="logoPath" d="M 554.0,46.0 L 571.0,50.0 L 589.0,61.0 L 603.0,76.0 L 616.0,99.0 L 623.0,126.0 L 623.0,146.0 L 609.0,183.0 L 641.0,209.0 L 679.0,250.0 L 751.0,304.0 L 810.0,360.0 L 810.0,426.0 L 802.0,530.0 L 824.0,517.0 L 831.0,519.0 L 829.0,541.0 L 819.0,564.0 L 789.0,595.0 L 817.0,595.0 L 808.0,617.0 L 791.0,633.0 L 759.0,646.0 L 776.0,651.0 L 762.0,667.0 L 741.0,677.0 L 721.0,680.0 L 717.0,690.0 L 707.0,697.0 L 686.0,726.0 L 648.0,764.0 L 626.0,793.0 L 571.0,842.0 L 629.0,836.0 L 695.0,818.0 L 752.0,792.0 L 809.0,756.0 L 827.0,754.0 L 852.0,771.0 L 883.0,811.0 L 888.0,823.0 L 888.0,839.0 L 880.0,854.0 L 860.0,872.0 L 824.0,894.0 L 717.0,943.0 L 622.0,968.0 L 524.0,975.0 L 435.0,966.0 L 329.0,937.0 L 212.0,882.0 L 180.0,861.0 L 165.0,843.0 L 163.0,821.0 L 170.0,807.0 L 209.0,759.0 L 226.0,753.0 L 244.0,757.0 L 293.0,786.0 L 357.0,814.0 L 431.0,835.0 L 482.0,841.0 L 429.0,796.0 L 334.0,679.0 L 308.0,673.0 L 287.0,661.0 L 279.0,650.0 L 294.0,644.0 L 264.0,630.0 L 247.0,613.0 L 239.0,593.0 L 265.0,593.0 L 236.0,559.0 L 228.0,539.0 L 226.0,517.0 L 231.0,515.0 L 251.0,528.0 L 257.0,528.0 L 248.0,396.0 L 248.0,361.0 L 252.0,354.0 L 305.0,303.0 L 383.0,244.0 L 422.0,207.0 L 479.0,172.0 L 473.0,149.0 L 473.0,130.0 L 479.0,112.0 L 492.0,96.0 L 512.0,87.0 L 526.0,87.0 L 536.0,92.0 L 523.0,99.0 L 513.0,114.0 L 509.0,132.0 L 511.0,152.0 L 521.0,139.0 L 562.0,108.0 L 570.0,93.0 L 571.0,77.0 L 566.0,63.0 L 553.0,47.0 L 554.0,46.0 Z" fill="none" stroke="none"/>
+    </svg>
+  </div>
+</div>
+<canvas id="fx"></canvas>
+<script>
+// Welding-style torch and sparks following SVG path
+
+const canvas = document.getElementById('fx');
+const ctx = canvas.getContext('2d', { alpha:true });
+function fit(){ canvas.width=innerWidth; canvas.height=innerHeight; }
+addEventListener('resize', fit, {passive:true}); fit();
+
+const path = document.getElementById('logoPath');
+const svg  = document.getElementById('carrier');
+
+// neon palette
+const palette = ['#00FFFF','#6AFF00','#FFD300','#FF6A00','#FF00E1'];
+let particles = [];
+
+function bboxMatrix(){
+  const box = svg.getBoundingClientRect();
+  const vb = svg.viewBox.baseVal;
+  return { sx: box.width/vb.width, sy: box.height/vb.height, dx: box.left, dy: box.top };
+}
+
+class Particle {
+  constructor(x,y,vx,vy,life,clr,thick){ 
+    this.x=x; this.y=y; this.vx=vx; this.vy=vy; 
+    this.life=life; this.max=life; this.clr=clr; this.thick=thick; 
+    this.px=x; this.py=y;
+  }
+  step(dt){
+    this.px=this.x; this.py=this.y;
+    this.vy += 600*dt/1000; // slight gravity
+    this.x  += this.vx*dt/1000;
+    this.y  += this.vy*dt/1000;
+    this.vx *= 0.992; this.vy *= 0.992;
+    this.life -= dt;
+  }
+  draw(){
+    const a = Math.max(this.life/this.max,0);
+    ctx.globalAlpha = Math.min(1, a*1.3);
+    ctx.lineWidth = this.thick*(0.5 + 0.5*a);
+    ctx.strokeStyle = this.clr;
+    ctx.shadowColor = this.clr;
+    ctx.shadowBlur = 22;
+    ctx.beginPath();
+    ctx.moveTo(this.px, this.py);
+    ctx.lineTo(this.x, this.y);
+    ctx.stroke();
+    ctx.globalAlpha = 1; ctx.shadowBlur = 0;
+  }
+}
+
+let t=0;           // 0..1 over path
+let speed=0.25;    // rounds per second
+let last=performance.now();
+
+function tick(now){
+  const dt = Math.min(32, now-last); last=now;
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+
+  const {sx,sy,dx,dy} = bboxMatrix();
+  const L = path.getTotalLength();
+  t = (t + (dt/1000)*speed) % 1;
+
+  const p  = path.getPointAtLength(L*t);
+  const p2 = path.getPointAtLength(L*((t+0.002)%1));
+  const tx = p2.x - p.x, ty = p2.y - p.y;
+  const tl = Math.hypot(tx,ty)||1, ux=tx/tl, uy=ty/tl;
+
+  // screen coords of torch tip
+  const x = dx + p.x*sx, y = dy + p.y*sy;
+
+  // draw torch flame cone
+  ctx.save();
+  ctx.translate(x,y);
+  ctx.rotate(Math.atan2(uy,ux));
+  const grad = ctx.createRadialGradient(0,0,0, 0,0,20);
+  grad.addColorStop(0,'#ffffff');
+  grad.addColorStop(0.2,'#fff6d5');
+  grad.addColorStop(0.6,'#ffd200');
+  grad.addColorStop(1,'rgba(255,100,0,0)');
+  ctx.fillStyle = grad;
+  ctx.beginPath();
+  ctx.ellipse(6,0, 18,8, 0, 0, Math.PI*2);
+  ctx.fill();
+  ctx.restore();
+
+  // emit sparks in a cone from torch tip (not pixel-based)
+  for(let i=0;i<14;i++){
+    const spread = (Math.random()*0.7 + 0.05);   // cone width
+    const angle = Math.atan2(uy,ux) + (Math.random()-0.5)*0.6; // +/- cone
+    const spd = 350 + Math.random()*320;
+    const vx = Math.cos(angle)*spd*spread;
+    const vy = Math.sin(angle)*spd*spread;
+    particles.push(new Particle(x,y,vx,vy, 260+Math.random()*360, palette[(Math.random()*palette.length)|0], 2.2));
+  }
+
+  // draw molten trail glow on the path at tip
+  ctx.beginPath();
+  ctx.arc(x,y,5,0,Math.PI*2);
+  ctx.fillStyle='#fff';
+  ctx.shadowColor='#00ffff';
+  ctx.shadowBlur=28;
+  ctx.fill();
+  ctx.shadowBlur=0;
+
+  // update particles
+  for(let i=particles.length-1;i>=0;i--){
+    const p=particles[i];
+    p.step(dt); p.draw();
+    if(p.life<=0) particles.splice(i,1);
+  }
+
+  requestAnimationFrame(tick);
+}
+requestAnimationFrame(tick);
+</script>
+</body>
+</html>
