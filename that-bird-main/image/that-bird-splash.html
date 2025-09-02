@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>That Bird — Splash</title>
+<style>
+  html,body {margin:0;height:100%;background:#0a0a0a;overflow:hidden;}
+  .wrap {position:relative;width:100%;height:100%;display:grid;place-items:center;}
+  .svgbox {position:relative;width:min(68vmin,720px);}
+  svg {display:block;width:100%;height:auto;filter:drop-shadow(0 12px 40px rgba(0,0,0,.7));}
+  #logoImage {position:absolute;inset:0; width:100%; height:100%; object-fit:contain; z-index:2; pointer-events:none;}
+  canvas {position:fixed;inset:0; z-index:1; pointer-events:none;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="svgbox">
+    <img id="logoImage" src="A_digital_illustration_of_a_mascot_logo_features_a Background Removed.png" alt="That Bird"/>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <style>
+      .logo-outline { fill: none; stroke: #00ffff; stroke-width: 3; }
+    </style>
+  </defs>
+  <!-- Optional: show the image for reference; commented out for pure vector -->
+  <!-- <image href="A_digital_illustration_of_a_mascot_logo_features_a Background Removed.png" x="0" y="0" width="1024" height="1024" /> -->
+  <path id="logoPath" class="logo-outline" d="M 554.0,46.0 L 571.0,50.0 L 589.0,61.0 L 603.0,76.0 L 616.0,99.0 L 623.0,126.0 L 623.0,146.0 L 609.0,183.0 L 641.0,209.0 L 679.0,250.0 L 751.0,304.0 L 810.0,360.0 L 810.0,426.0 L 802.0,530.0 L 824.0,517.0 L 831.0,519.0 L 829.0,541.0 L 819.0,564.0 L 789.0,595.0 L 817.0,595.0 L 808.0,617.0 L 791.0,633.0 L 759.0,646.0 L 776.0,651.0 L 762.0,667.0 L 741.0,677.0 L 721.0,680.0 L 717.0,690.0 L 707.0,697.0 L 686.0,726.0 L 648.0,764.0 L 626.0,793.0 L 571.0,842.0 L 629.0,836.0 L 695.0,818.0 L 752.0,792.0 L 809.0,756.0 L 827.0,754.0 L 852.0,771.0 L 883.0,811.0 L 888.0,823.0 L 888.0,839.0 L 880.0,854.0 L 860.0,872.0 L 824.0,894.0 L 717.0,943.0 L 622.0,968.0 L 524.0,975.0 L 435.0,966.0 L 329.0,937.0 L 212.0,882.0 L 180.0,861.0 L 165.0,843.0 L 163.0,821.0 L 170.0,807.0 L 209.0,759.0 L 226.0,753.0 L 244.0,757.0 L 293.0,786.0 L 357.0,814.0 L 431.0,835.0 L 482.0,841.0 L 429.0,796.0 L 334.0,679.0 L 308.0,673.0 L 287.0,661.0 L 279.0,650.0 L 294.0,644.0 L 264.0,630.0 L 247.0,613.0 L 239.0,593.0 L 265.0,593.0 L 236.0,559.0 L 228.0,539.0 L 226.0,517.0 L 231.0,515.0 L 251.0,528.0 L 257.0,528.0 L 248.0,396.0 L 248.0,361.0 L 252.0,354.0 L 305.0,303.0 L 383.0,244.0 L 422.0,207.0 L 479.0,172.0 L 473.0,149.0 L 473.0,130.0 L 479.0,112.0 L 492.0,96.0 L 512.0,87.0 L 526.0,87.0 L 536.0,92.0 L 523.0,99.0 L 513.0,114.0 L 509.0,132.0 L 511.0,152.0 L 521.0,139.0 L 562.0,108.0 L 570.0,93.0 L 571.0,77.0 L 566.0,63.0 L 553.0,47.0 L 554.0,46.0 Z"/>
+</svg>
+
+  </div>
+</div>
+<canvas id="fx"></canvas>
+<script>
+// Canvas sparks that follow the SVG path
+const canvas = document.getElementById('fx');
+const ctx = canvas.getContext('2d', {alpha:true});
+function size(){canvas.width=innerWidth; canvas.height=innerHeight;}
+addEventListener('resize', size); size();
+
+const neon = ['#00FFFF','#FF00FF','#00FF66','#FFD300','#FF4D00'];
+let particles = [];
+
+const svg = document.querySelector('svg');
+const path = document.getElementById('logoPath');
+const img = document.getElementById('logoImage');
+
+// Fit SVG on screen center via its clientBox
+function getMatrix() {
+  const box = svg.getBoundingClientRect();
+  const vb = svg.viewBox.baseVal;
+  const sx = box.width / vb.width;
+  const sy = box.height / vb.height;
+  const dx = box.left;
+  const dy = box.top;
+  return {sx, sy, dx, dy};
+}
+
+class Spark{ 
+  constructor(x,y,vx,vy,life,c){this.x=x;this.y=y;this.vx=vx;this.vy=vy;this.life=life;this.max=life;this.c=c;}
+  step(dt){ this.vy+=400*dt/1000; this.x+=this.vx*dt/1000; this.y+=this.vy*dt/1000; this.vx*=0.995; this.vy*=0.995; this.life-=dt; }
+  draw(){ const a=Math.max(this.life/this.max,0); ctx.globalAlpha = Math.min(a*1.2,1);
+    ctx.beginPath(); ctx.arc(this.x,this.y,1.2+2*(1-a),0,Math.PI*2);
+    ctx.fillStyle=this.c; ctx.shadowColor=this.c; ctx.shadowBlur=18; ctx.fill();
+    ctx.globalAlpha=1; ctx.shadowBlur=0; }
+}
+
+let t=0; let speed=0.22; // rounds per second
+let last=performance.now();
+
+function tick(now){
+  const dt=Math.min(32, now-last); last=now;
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+
+  const {sx,sy,dx,dy} = getMatrix();
+  const L = path.getTotalLength();
+  t += (dt/1000)*speed;
+  if(t>1) t -= 1;
+
+  const p = path.getPointAtLength(L*t);
+  const p2 = path.getPointAtLength(L*(t+0.001)%1);
+  const nx = (p2.x-p.x); const ny = (p2.y-p.y);
+  const nlen = Math.hypot(nx,ny)||1; const ux = nx/nlen, uy = ny/nlen;
+
+  // screen coords
+  const sxp = dx + p.x*sx, syp = dy + p.y*sy;
+
+  // emit sparks
+  for(let i=0;i<12;i++){ 
+    const spread=(Math.random()-0.5)*1.2;
+    const spd=220+Math.random()*260;
+    const vx = (ux*spd + (-uy)*spd*spread), vy = (uy*spd + (ux)*spd*spread*0.4);
+    particles.push(new Spark(sxp, syp, vx, vy, 320+Math.random()*320, neon[(Math.random()*neon.length)|0]));
+  }
+
+  // torch glow
+  ctx.beginPath(); ctx.arc(sxp, syp, 7, 0, Math.PI*2);
+  ctx.fillStyle='#fff'; ctx.shadowColor='#0ff'; ctx.shadowBlur=30; ctx.fill();
+  ctx.shadowBlur=0;
+
+  // update and draw particles
+  for(let j=particles.length-1;j>=0;j--){ const s=particles[j]; s.step(dt); s.draw(); if(s.life<=0) particles.splice(j,1);}
+  requestAnimationFrame(tick);
+}
+requestAnimationFrame(tick);
+</script>
+</body>
+</html>
