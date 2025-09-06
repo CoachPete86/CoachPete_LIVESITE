@@ -104,7 +104,6 @@
 /* Always hide mobile menu by default */
 .mobile-menu{display:none}
 
-
     /* Hero */
     .hero{position:relative;min-height:100dvh;display:grid;place-items:center;isolation:isolate}
     .hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;filter:contrast(1.05) brightness(.7);z-index:0;transition:filter .3s}
@@ -173,7 +172,7 @@
     .faq summary{cursor:pointer;font-weight:800}
     .faq p{color:#d6d6d6}
 
-    /* Pricing */
+    /* Old Pricing (kept harmless). New pricing overrides below. */
     .pricing{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem}
     .tier{background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(255,255,255,.0));border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:1.6rem}
     .price{font-family:Oswald,sans-serif;font-size:2.2rem;color:#fff}
@@ -198,9 +197,6 @@
     .social{display:flex;gap:1.2rem;justify-content:center;margin-bottom:1rem}
     .social a{color:#c8c8c8}
     .social a:hover{color:var(--primary-orange)}
-    .insta-feed{margin:1.7rem auto 0;display:flex;justify-content:center;gap:.8rem}
-    .insta-thumb{width:58px;height:58px;border-radius:8px;object-fit:cover;box-shadow:0 2px 8px #222}
-    .insta-thumb[alt="placeholder"]{background:#292929}
 
     /* Mobile */
     @media (max-width:900px){
@@ -225,6 +221,32 @@
     .sticky-cta{position:sticky;bottom:0;display:none;background:rgba(18,18,20,.9);backdrop-filter:blur(10px);padding:.6rem;border-top:1px solid rgba(255,255,255,.08);z-index:8500}
     .sticky-cta .wrap{display:flex;gap:.6rem;justify-content:center}
     @media (max-width:700px){.sticky-cta{display:block}}
+
+    /* ===== Upgraded Pricing & Plans ===== */
+    .pricing-sub{color:#d0d0d0;text-align:center;margin:-.5rem 0 1.5rem}
+    .plan-table{border:1px solid rgba(255,255,255,.08);border-radius:16px;overflow:hidden;background:var(--card);box-shadow:var(--shadow);margin:0 0 1.5rem}
+    .plan-table .t-row{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:.8rem;padding:1rem 1.2rem;border-top:1px solid rgba(255,255,255,.06)}
+    .plan-table .t-row:first-child{border-top:none}
+    .plan-table .t-head{background:rgba(255,255,255,.04);font-weight:800;text-transform:uppercase;letter-spacing:.06em}
+    .plan-table .was{opacity:.6;text-decoration:line-through;margin-right:.35rem}
+    .pricing-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;margin-top:1.2rem}
+    .tier+.tier{} /* keep spacing rules consistent */
+    .tier .badge{position:absolute;top:12px;right:12px;background:linear-gradient(90deg,var(--primary-orange),var(--secondary-orange));color:#fff;border-radius:999px;padding:.25rem .6rem;font-weight:800;font-size:.8rem}
+    .tier.best{border-color:rgba(255,255,255,.22);box-shadow:0 12px 44px rgba(0,0,0,.28)}
+    .tier-hdr .price{font-family:Oswald,sans-serif;font-size:2.1rem;color:#fff}
+    .tier-hdr .price small{color:#bbb;font-size:.9rem}
+    .tier-hdr .price-sub{color:#cfcfcf;margin-top:.2rem}
+    .features{list-style:none;padding:0;margin:1rem 0 1.2rem;display:grid;gap:.5rem}
+    .features li{position:relative;padding-left:1.3rem;color:#ddd}
+    .features li::before{content:"✔";position:absolute;left:0;top:.1rem;color:var(--accent-blue)}
+    .cta-stack{display:grid;gap:.6rem}
+    .lt-offer{margin:1.2rem 0 0;padding:1rem 1.2rem;border:1px dashed rgba(255,255,255,.25);border-radius:14px;background:rgba(255,107,53,.08)}
+    .trust{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.8rem;margin:1.2rem 0 0}
+    .trust-item{display:flex;align-items:center;gap:.6rem;background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:.8rem 1rem}
+    .trust-item.link{border-style:dashed}
+    .faq.compact details{margin:.4rem 0}
+    @media(max-width:1000px){.pricing-grid{grid-template-columns:1fr}}
+    @media(max-width:700px){.plan-table .t-row{grid-template-columns:1.4fr .9fr .9fr .9fr}}
   </style>
 </head>
 <body>
@@ -377,14 +399,112 @@
       </div>
     </section>
 
-    <!-- Pricing -->
-    <section aria-label="Pricing">
+    <!-- Pricing & Plans -->
+    <section id="pricing" aria-label="Pricing & Plans">
       <div class="wrap">
-        <h2 class="section-title" data-reveal>Coaching Tiers</h2>
-        <div class="pricing">
-          <div class="tier" data-reveal><h3 class="kicker">Foundation</h3><div class="price">£149 <small>/ month</small></div><ul><li>Custom plan • Monthly check-in</li><li>App access & resources</li></ul></div>
-          <div class="tier" data-reveal><h3 class="kicker">Performance</h3><div class="price">£299 <small>/ month</small></div><ul><li>Weekly coaching • Form feedback</li><li>Nutrition guidance • Messaging</li></ul></div>
-          <div class="tier" data-reveal><h3 class="kicker">Elite</h3><div class="price">£595 <small>/ month</small></div><ul><li>2x weekly calls • Full support</li><li>Priority access • VIP programming</li></ul></div>
+        <h2 class="section-title" data-reveal>Pricing & Plans</h2>
+        <p class="pricing-sub" data-reveal>Which plan suits you?</p>
+
+        <div class="plan-table" data-reveal>
+          <div class="t-row t-head">
+            <div>Plan</div><div>Sessions / week</div><div>Online price</div><div>In-person price</div>
+          </div>
+          <div class="t-row">
+            <div>Essential</div><div>1</div>
+            <div><span class="was">£120</span> <strong>£99/mo</strong></div>
+            <div><span class="was">£180</span> <strong>£150/mo</strong></div>
+          </div>
+          <div class="t-row">
+            <div>Accelerate</div><div>2</div>
+            <div><span class="was">£200</span> <strong>£165/mo</strong></div>
+            <div><span class="was">£320</span> <strong>£275/mo</strong></div>
+          </div>
+          <div class="t-row">
+            <div>Elite</div><div>3</div>
+            <div><strong>£300/mo</strong></div>
+            <div><strong>£440/mo</strong></div>
+          </div>
+        </div>
+
+        <div class="pricing-grid">
+          <article class="tier" data-reveal>
+            <div class="tier-hdr">
+              <h3 class="kicker">Essential</h3>
+              <div class="price"><span class="was">£120</span> £99 <small>/ mo online</small></div>
+              <div class="price-sub">£150 / mo in-person</div>
+            </div>
+            <ul class="features">
+              <li>1 personal coaching session / week (online or in-person)</li>
+              <li>Personalised monthly training plan</li>
+              <li>App workout planner & habit tracker</li>
+              <li>Monthly progress review</li>
+              <li>Direct messaging support (Mon–Fri)</li>
+              <li>Flexible scheduling</li>
+            </ul>
+            <div class="cta-stack">
+              <a class="btn" href="#contact">Start Your Transformation</a>
+              <a class="btn btn--ghost" href="https://cal.com/coachpete/consultation" target="_blank" rel="noopener">Book Free Intro Call</a>
+            </div>
+          </article>
+
+          <article class="tier best" data-reveal>
+            <div class="badge">Most Popular</div>
+            <div class="tier-hdr">
+              <h3 class="kicker">Accelerate</h3>
+              <div class="price"><span class="was">£200</span> £165 <small>/ mo online</small></div>
+              <div class="price-sub">£275 / mo in-person</div>
+            </div>
+            <ul class="features">
+              <li>2 personal coaching sessions / week</li>
+              <li>Custom fitness & nutrition, updated weekly</li>
+              <li>Priority response, extended support hours</li>
+              <li>Progress dashboard with instant feedback</li>
+              <li>Monthly nutrition & lifestyle review</li>
+              <li>All Essential benefits included</li>
+            </ul>
+            <div class="cta-stack">
+              <a class="btn" href="#contact">Claim Your Offer Spot</a>
+              <a class="btn btn--ghost" href="https://cal.com/coachpete/consultation" target="_blank" rel="noopener">Book Free Intro Call</a>
+            </div>
+          </article>
+
+          <article class="tier" data-reveal>
+            <div class="tier-hdr">
+              <h3 class="kicker">Elite</h3>
+              <div class="price">£300 <small>/ mo online</small></div>
+              <div class="price-sub">£440 / mo in-person</div>
+            </div>
+            <ul class="features">
+              <li>3 personal coaching sessions / week</li>
+              <li>Unlimited priority support (7 days)</li>
+              <li>Full lifestyle, nutrition & accountability</li>
+              <li>Weekly deep-dive review & roadmap</li>
+              <li>VIP perks: guest passes, events, workshops</li>
+              <li>All Accelerate benefits included</li>
+            </ul>
+            <div class="cta-stack">
+              <a class="btn" href="#contact">Start Your Transformation</a>
+              <a class="btn btn--ghost" href="https://cal.com/coachpete/consultation" target="_blank" rel="noopener">Book Free Intro Call</a>
+            </div>
+          </article>
+        </div>
+
+        <div class="lt-offer" data-reveal>
+          <strong>Limited-Time Offer:</strong> Sign up for Essential or Accelerate before <u>30 September 2025</u> and lock discounted rates for your first 3 months. Limited spaces.
+        </div>
+
+        <div class="trust" data-reveal>
+          <div class="trust-item"><i class="fa-solid fa-shield-heart"></i> 17+ years’ experience</div>
+          <div class="trust-item"><i class="fa-solid fa-people-group"></i> 200+ client success stories</div>
+          <a class="trust-item link" href="#testimonials"><i class="fa-solid fa-star"></i> Read 5-star reviews</a>
+        </div>
+
+        <div class="faq compact" data-reveal>
+          <details><summary>Can I start online and switch to in-person?</summary><p>Yes. Request changes at monthly renewal.</p></details>
+          <details><summary>What is included in each session?</summary><p>Expert coaching, real-time feedback, plan updates, accountability, and Q&A.</p></details>
+          <details><summary>Is there a contract?</summary><p>No long-term contract. Cancel or change with 7 days’ notice before renewal.</p></details>
+          <details><summary>Where do sessions take place?</summary><p>In-person in Hertfordshire; online via Zoom or the coaching app.</p></details>
+          <details><summary>What happens at sign-up?</summary><p>Tailored onboarding plus your first action plan within 48 hours.</p></details>
         </div>
       </div>
     </section>
@@ -472,30 +592,30 @@
     window.addEventListener('load',hideLoader);
     setTimeout(hideLoader,4000);
 
- // Mobile menu + hamburger animation
-  const burger = document.getElementById('burger');
-  const mobile = document.getElementById('mobile-menu');
-  burger?.addEventListener('click', ()=>{
-    const open = mobile.style.display === 'flex';
-    mobile.style.display = open ? 'none' : 'flex';
-    burger.setAttribute('aria-expanded', String(!open));
-    burger.classList.toggle('open', !open);
-  });
-  mobile?.addEventListener('click', e=>{
-    if(e.target.tagName === 'A'){
-      mobile.style.display = 'none';
-      burger.setAttribute('aria-expanded','false');
-      burger.classList.remove('open');
-    }
-  });
+    // Mobile menu + hamburger animation
+    const burger = document.getElementById('burger');
+    const mobile = document.getElementById('mobile-menu');
+    burger?.addEventListener('click', ()=>{
+      const open = mobile.style.display === 'flex';
+      mobile.style.display = open ? 'none' : 'flex';
+      burger.setAttribute('aria-expanded', String(!open));
+      burger.classList.toggle('open', !open);
+    });
+    mobile?.addEventListener('click', e=>{
+      if(e.target.tagName === 'A'){
+        mobile.style.display = 'none';
+        burger.setAttribute('aria-expanded','false');
+        burger.classList.remove('open');
+      }
+    });
 
-  /* INSERT THIS RESIZE GUARD RIGHT HERE */
-  window.addEventListener('resize', ()=>{
-    if (window.innerWidth > 900) {
-      if (mobile) mobile.style.display = 'none';
-      if (burger) { burger.setAttribute('aria-expanded','false'); burger.classList.remove('open'); }
-    }
-  });
+    // Resize guard: ensure hidden menu when upscaling
+    window.addEventListener('resize', ()=>{
+      if (window.innerWidth > 900) {
+        if (mobile) mobile.style.display = 'none';
+        if (burger) { burger.setAttribute('aria-expanded','false'); burger.classList.remove('open'); }
+      }
+    });
 
     // Dark mode toggle
     const darkToggle=document.getElementById('darkToggle');
