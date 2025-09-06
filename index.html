@@ -24,7 +24,9 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet" />
 
   <!-- Preload hero image as LCP fallback -->
-  <link rel="preload" as="image" href="https://raw.githubusercontent.com/CoachPete86/images/3749c527ecaa3e8a8d6b597d4604fa57023f18b1/coach_hero_ext.png" imagesrcset="https://raw.githubusercontent.com/CoachPete86/images/3749c527ecaa3e8a8d6b597d4604fa57023f18b1/coach_hero_ext.png 1600w" />
+  <link rel="preload" as="image"
+        href="https://raw.githubusercontent.com/CoachPete86/images/3749c527ecaa3e8a8d6b597d4604fa57023f18b1/coach_hero_ext.png"
+        imagesrcset="https://raw.githubusercontent.com/CoachPete86/images/3749c527ecaa3e8a8d6b597d4604fa57023f18b1/coach_hero_ext.png 1600w" />
 
   <style>
     :root{
@@ -37,15 +39,15 @@
       --cta-gradient: linear-gradient(90deg, var(--primary-orange), var(--secondary-orange));
     }
     html{scroll-behavior:smooth}
-    body{margin:0;font-family:"Open Sans",system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial; color:var(--text); background:
+    body{
+      margin:0;font-family:"Open Sans",system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial; color:var(--text); background:
       radial-gradient(1200px 800px at 10% -10%, rgba(255,107,53,.08), transparent 60%),
       radial-gradient(800px 600px at 100% 0%, rgba(0,212,255,.06), transparent 50%),
       var(--header-gradient);
-      line-height:1.6; overflow-x:hidden; transition:background 0.3s;}
-    body.darkmode {
-      background: #18181b;
-      color: #ececec;
+      line-height:1.6; overflow-x:hidden; transition:background 0.3s;
     }
+    body.darkmode { background:#18181b; color:#ececec; }
+
     /* Accessibility */
     a:focus, button:focus, input:focus, textarea:focus{outline:3px solid var(--focus); outline-offset:2px}
     .skip-link{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
@@ -74,37 +76,18 @@
     /* Hero */
     .hero{position:relative;min-height:100dvh;display:grid;place-items:center;isolation:isolate}
     .hero img {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center top;
-      filter: contrast(1.05) brightness(.7);
-      z-index: 0;
-      transition:filter .3s;
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; object-position: center top;
+      filter: contrast(1.05) brightness(.7); z-index: 0; transition:filter .3s;
     }
-    .hero__content {
-      position: relative;
-      z-index: 2;
-      text-align:center;
-      padding:6rem 1.25rem;
-      max-width:920px;
-    }
+    .hero__content { position: relative; z-index: 2; text-align:center; padding:6rem 1.25rem; max-width:920px; }
     .hero::after {
-      content:"";
-      position:absolute;
-      inset:0;
+      content:""; position:absolute; inset:0;
       background:radial-gradient(1200px 600px at 50% 10%, transparent, rgba(0,0,0,.55) 60%, rgba(0,0,0,.75));
-      pointer-events:none;
-      z-index: 1;
+      pointer-events:none; z-index: 1;
     }
-    /* SVG wave overlay for hero */
-    .hero-wave {
-      position: absolute;
-      left: 0; bottom: 0; width: 100vw; height: 140px; z-index: 2;
-      pointer-events: none;
-    }
+    .hero-wave { position: absolute; left: 0; bottom: 0; width: 100vw; height: 140px; z-index: 2; pointer-events: none; }
+
     .title{font-family:Oswald,sans-serif;font-weight:900;text-transform:uppercase;line-height:1;margin:0 0 .6rem;letter-spacing:.09em;font-size:clamp(2.6rem,7.2vw,5.8rem)}
     .title span{background:linear-gradient(90deg,#fff, #ddd);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:0 8px 40px rgba(0,0,0,.45)}
     .kicker{font-size:clamp(1.05rem,2.6vw,1.4rem);letter-spacing:.25em;text-transform:uppercase;color:var(--primary-orange);font-weight:700}
@@ -133,7 +116,13 @@
     /* Stats */
     .stats{background:var(--dark-3);border-top:2px solid rgba(255,255,255,.06);border-bottom:2px solid rgba(255,255,255,.06)}
     .stats__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}
-    .stat{background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.0));border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);padding:1.6rem;text-align:center;box-shadow[...]
+    .stat{
+      background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.0));
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:var(--radius);
+      padding:1.6rem;text-align:center;
+      box-shadow: var(--shadow);
+    }
     .stat__num{font-family:Oswald,sans-serif;font-size:2.6rem;color:var(--primary-orange)}
     .stat__label{color:#eaeaea;opacity:.9;text-transform:uppercase;letter-spacing:.08em;font-weight:700}
 
@@ -155,7 +144,13 @@
     /* Process */
     .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-top:1.5rem;position:relative;}
     .step{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:1.4rem;text-align:center;position:relative;}
-    .step .num{width:70px;height:70px;margin:auto;margin-bottom:1rem;border-radius:50%;display:grid;place-items:center;background:linear-gradient(45deg,var(--primary-orange),var(--secondary-orange));f[...]
+    .step .num{
+      width:70px;height:70px;margin:auto;margin-bottom:1rem;border-radius:50%;
+      display:grid;place-items:center;
+      background:linear-gradient(45deg,var(--primary-orange),var(--secondary-orange));
+      color:#fff;font-family:Oswald,sans-serif;font-weight:800;font-size:1.6rem;
+      box-shadow:0 6px 18px rgba(0,0,0,.35);
+    }
     /* Progress bar for steps */
     .steps::before {
       content:"";position:absolute;top:35px;left:10%;right:10%;height:8px;background:linear-gradient(90deg,var(--primary-orange),var(--accent-blue));border-radius:4px;z-index:0;
@@ -166,7 +161,6 @@
     .slider{display:grid;gap:1rem;max-width:860px;margin:auto;position:relative;}
     .quote{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:1.8rem;font-style:italic}
     .quote__by{margin-top:1rem;color:var(--primary-orange);font-family:Oswald,sans-serif}
-    /* Slider controls */
     .slider-controls{display:flex;justify-content:center;gap:1.2rem;margin-top:1rem;}
     .slider-dot{width:16px;height:16px;border-radius:50%;background:var(--muted);opacity:.45;cursor:pointer;transition:background .2s;}
     .slider-dot.active{background:var(--primary-orange);opacity:1;}
@@ -178,7 +172,7 @@
     .faq summary{cursor:pointer;font-weight:800}
     .faq p{color:#d6d6d6}
 
-    /* Pricing (optional showcase) */
+    /* Pricing */
     .pricing{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem}
     .tier{background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(255,255,255,.0));border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:1.6rem}
     .price{font-family:Oswald,sans-serif;font-size:2.2rem;color:#fff}
@@ -216,7 +210,8 @@
       .mobile-menu{position:fixed;inset:60px 0 auto 0;background:#121214;border-bottom:1px solid rgba(255,255,255,.08);display:none;flex-direction:column;gap:1rem;padding:1.2rem;z-index:8000}
       .mobile-menu a{color:#fff;text-decoration:none;font-weight:700}
     }
-    /* Reveal animations (respect motion preferences) */
+
+    /* Reveal animations */
     [data-reveal]{opacity:0;transform:translateY(16px);transition:opacity .6s ease, transform .6s ease}
     .in-view{opacity:1;transform:none}
     @media (prefers-reduced-motion: reduce){
@@ -224,6 +219,7 @@
       [data-reveal]{opacity:1;transform:none}
       .btn, .card, .step{transition:none}
     }
+
     /* Sticky mobile CTA */
     .sticky-cta{position:sticky;bottom:0;display:none;background:rgba(18,18,20,.9);backdrop-filter:blur(10px);padding:.6rem;border-top:1px solid rgba(255,255,255,.08);z-index:8500}
     .sticky-cta .wrap{display:flex;gap:.6rem;justify-content:center}
@@ -240,7 +236,7 @@
   <nav class="navbar" aria-label="Primary">
     <div class="nav__wrap">
       <a class="logo" href="#home">Coach Pete Ryan</a>
-      <div class="nav__menu" aria-hidden="true">
+      <div class="nav__menu">
         <a href="#home" class="active">Home</a>
         <a href="#about">About</a>
         <a href="#services">Services</a>
@@ -287,7 +283,7 @@
       <p class="lede">Your partner in building a stronger body and an unbreakable mind, no matter where you start.</p>
       <div class="cta-row">
         <a class="btn" href="#contact"><i class="fa-solid fa-bolt"></i> Start Your Journey</a>
-        <a class="btn btn--ghost" href="https://cal.com/coachpete/consultation" target="_blank" rel="noopener">Book a Free Consult</a>
+        <a class="btn btn--ghost" href="https://cal.com/coachpete/consultation" target="_blank" rel="noopener noreferrer">Book a Free Consult</a>
       </div>
     </div>
   </header>
@@ -295,7 +291,7 @@
   <!-- Sticky CTA (mobile) -->
   <div class="sticky-cta" aria-hidden="true">
     <div class="wrap">
-      <a class="btn" href="https://wa.me/447308518428" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+      <a class="btn" href="https://wa.me/447308518428" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
       <a class="btn btn--ghost" href="#contact"><i class="fa-solid fa-envelope"></i> Message</a>
     </div>
   </div>
@@ -386,7 +382,7 @@
     <!-- Process -->
     <section id="process">
       <div class="wrap">
-        <h2 class="section-title" data-reveal>My 4‑Step Process</h2>
+        <h2 class="section-title" data-reveal>My 4-Step Process</h2>
         <div class="steps">
           <div class="step" data-reveal>
             <div class="num">1</div>
@@ -419,7 +415,6 @@
         <div class="slider" data-reveal id="testimonialSlider">
           <blockquote class="quote">“Pete didn't just change my body, he changed my entire mindset. Stronger mentally and physically than ever.”<div class="quote__by">— Sarah M., Business Executive</div></blockquote>
           <blockquote class="quote" style="display:none;">“I was terrified of the gym. Pete built a plan from the ground up and celebrated every small win. He gave me back my self-belief.”<div class="quote__by">— John L.</div></blockquote>
-          <!-- Add more blockquotes as needed -->
           <div class="slider-controls">
             <span class="slider-dot active"></span>
             <span class="slider-dot"></span>
@@ -439,7 +434,7 @@
           </details>
           <details>
             <summary>Do you offer online coaching?</summary>
-            <p>Yes. Remote coaching includes training plans, video feedback, and weekly check‑ins.</p>
+            <p>Yes. Remote coaching includes training plans, video feedback, and weekly check-ins.</p>
           </details>
           <details>
             <summary>How soon will I see results?</summary>
@@ -449,7 +444,7 @@
       </div>
     </section>
 
-    <!-- Pricing (optional showcase; replace with real) -->
+    <!-- Pricing -->
     <section aria-label="Pricing">
       <div class="wrap">
         <h2 class="section-title" data-reveal>Coaching Tiers</h2>
@@ -458,7 +453,7 @@
             <h3 class="kicker">Foundation</h3>
             <div class="price">£149 <small>/ month</small></div>
             <ul>
-              <li>Custom plan • Monthly check‑in</li>
+              <li>Custom plan • Monthly check-in</li>
               <li>App access & resources</li>
             </ul>
           </div>
@@ -533,10 +528,10 @@
       <a href="#contact">Contact</a>
     </div>
     <div class="social" aria-label="Social links">
-      <a href="https://instagram.com/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-      <a href="https://facebook.com/" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-      <a href="https://linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-      <a href="https://youtube.com/" target="_blank" rel="noopener" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+      <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="https://facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+      <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+      <a href="https://youtube.com/" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
     </div>
     <div class="insta-feed">
       <img src="https://placehold.co/58x58?text=IG" alt="placeholder" class="insta-thumb" />
@@ -546,7 +541,7 @@
     <div>© <span id="year"></span> Coach Pete Ryan • Building Better People</div>
   </footer>
 
-  <!-- JSON‑LD Schema -->
+  <!-- JSON-LD Schema -->
   <script type="application/ld+json" id="schema-json">
   {
     "@context": "https://schema.org",
@@ -579,17 +574,23 @@
       burger.setAttribute('aria-expanded', String(!open));
       burger.classList.toggle('open', !open);
     });
-    mobile?.addEventListener('click',e=>{ if(e.target.tagName==='A'){ mobile.style.display='none'; burger.setAttribute('aria-expanded','false'); burger.classList.remove('open'); } });
+    mobile?.addEventListener('click',e=>{
+      if(e.target.tagName==='A'){
+        mobile.style.display='none';
+        burger.setAttribute('aria-expanded','false');
+        burger.classList.remove('open');
+      }
+    });
 
     // Dark mode toggle
     const darkToggle = document.getElementById('darkToggle');
-    darkToggle.addEventListener('click', () => {
+    darkToggle?.addEventListener('click', () => {
       document.body.classList.toggle('darkmode');
       darkToggle.innerHTML = document.body.classList.contains('darkmode')
         ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-regular fa-moon"></i>';
     });
 
-    // Reveal on scroll (with reduced motion support)
+    // Reveal on scroll (respect motion preferences)
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if(!prefersReduced){
       const obs=new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting&&e.target.classList.add('in-view')), {threshold:0.12});
@@ -598,43 +599,47 @@
       document.querySelectorAll('[data-reveal]').forEach(el=>el.classList.add('in-view'));
     }
 
-    // Active link highlight
+    // Active link highlight (guard if sections missing)
     const links=[...document.querySelectorAll('.nav__menu a')];
-    const ids=links.map(a=>a.getAttribute('href')).filter(Boolean).map(h=>h.replace('#',''));
+    const ids=links.map(a=>a.getAttribute('href')).filter(Boolean).map(h=>h.replace('#','')).filter(Boolean);
     const sections=ids.map(id=>document.getElementById(id)).filter(Boolean);
-    window.addEventListener('scroll',()=>{
-      const pos=scrollY+120; let active=null;
-      sections.forEach(s=>{ if(pos >= s.offsetTop) active=s.id; });
-      links.forEach(a=>a.classList.toggle('active', a.getAttribute('href')==='#'+active));
-    });
+    if (sections.length){
+      window.addEventListener('scroll',()=>{
+        const pos=scrollY+120; let active=null;
+        sections.forEach(s=>{ if(pos >= s.offsetTop) active=s.id; });
+        links.forEach(a=>a.classList.toggle('active', a.getAttribute('href')==='#'+active));
+      });
+    }
 
     // Animated counters
     function animateCounter(el){
       const target=+el.dataset.count||0; const dur=1600; const start=performance.now();
       function tick(now){
-        const p=Math.min((now-start)/dur,1); el.textContent=Math.floor(target*p).toLocaleString('en-GB');
+        const p=Math.min((now-start)/dur,1);
+        el.textContent=Math.floor(target*p).toLocaleString('en-GB');
         if(p<1) requestAnimationFrame(tick);
       }
       requestAnimationFrame(tick);
     }
-    const statObs=new IntersectionObserver(es=>{
-      if(es.some(e=>e.isIntersecting)){
-        document.querySelectorAll('.stat__num').forEach(animateCounter);
-        statObs.disconnect();
-      }
-    },{threshold:0.25});
-    statObs.observe(document.querySelector('.stats'));
+    const statsSection=document.querySelector('.stats');
+    if (statsSection){
+      const statObs=new IntersectionObserver(es=>{
+        if(es.some(e=>e.isIntersecting)){
+          document.querySelectorAll('.stat__num').forEach(animateCounter);
+          statObs.disconnect();
+        }
+      },{threshold:0.25});
+      statObs.observe(statsSection);
+    }
 
     // Testimonial slider (simple)
     const slider = document.getElementById('testimonialSlider');
     if (slider) {
       const quotes = slider.querySelectorAll('.quote');
       const dots = slider.querySelectorAll('.slider-dot');
-      let current = 0;
       function show(idx) {
         quotes.forEach((q,i) => q.style.display = i === idx ? '' : 'none');
         dots.forEach((d,i) => d.classList.toggle('active', i === idx));
-        current = idx;
       }
       dots.forEach((dot,i)=>dot.addEventListener('click',()=>show(i)));
       show(0);
@@ -647,7 +652,7 @@
       const btn=document.getElementById('submitBtn');
       const status=document.getElementById('formStatus');
       const gotcha=form.querySelector('[name="_gotcha"]').value;
-      // Basic inline validation
+
       const name=document.getElementById('name');
       const email=document.getElementById('email');
       const msg=document.getElementById('message');
@@ -667,7 +672,6 @@
       }catch(err){ status.className='status bad'; status.textContent='Network error. Please try again.'; }
       finally{ btn.disabled=false; btn.textContent='Send Message'; status.style.display='block'; }
     });
-    // Inline validation on blur
     ['name','email','message'].forEach(id=>{
       const el=document.getElementById(id);
       if(el) el.addEventListener('blur',()=>{
@@ -678,7 +682,7 @@
     });
 
     // Footer year
-    document.getElementById('year').textContent=new Date().getFullYear();
+    const yEl=document.getElementById('year'); if (yEl) yEl.textContent=new Date().getFullYear();
 
     // PWA manifest + Service Worker (single-file friendly)
     (function(){
@@ -692,7 +696,31 @@
       const link=document.createElement('link'); link.rel='manifest'; link.href=url; document.head.appendChild(link);
 
       if('serviceWorker' in navigator){
-        const swCode=`self.addEventListener('install',e=>{e.waitUntil(caches.open('coachpete-v1').then(c=>c.addAll(['./'])))});self.addEventListener('fetch',e=>{e.respondWith(caches.match(e.request).t[...]
+        const swCode = `
+self.addEventListener('install', event => {
+  event.waitUntil(
+    caches.open('coachpete-v1').then(cache => cache.addAll(['./']))
+  );
+  self.skipWaiting();
+});
+self.addEventListener('activate', event => {
+  event.waitUntil(self.clients.claim());
+});
+self.addEventListener('fetch', event => {
+  const req = event.request;
+  if (req.method !== 'GET') return;
+  event.respondWith(
+    caches.match(req).then(cached => {
+      const fetchPromise = fetch(req).then(resp => {
+        const copy = resp.clone();
+        caches.open('coachpete-v1').then(cache => cache.put(req, copy)).catch(()=>{});
+        return resp;
+      }).catch(()=>cached);
+      return cached || fetchPromise;
+    })
+  );
+});
+        `.trim();
         const swBlob=new Blob([swCode],{type:'text/javascript'});
         const swURL=URL.createObjectURL(swBlob);
         navigator.serviceWorker.register(swURL).catch(()=>{});
