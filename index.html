@@ -34,9 +34,9 @@
       --dark:#0f0f10; --dark-2:#161617; --dark-3:#1f2022; --text:#e6e6e6; --muted:#bdbdbd;
       --card:#222326; --line:#2f3033; --focus:#7dd3fc;
       --radius:14px; --shadow:0 10px 30px rgba(0,0,0,.35);
-      --footer-bg: #121213;
-      --header-gradient: linear-gradient(180deg, var(--dark) 60%, var(--dark-2) 100%);
-      --cta-gradient: linear-gradient(90deg, var(--primary-orange), var(--secondary-orange));
+      --footer-bg:#121213;
+      --header-gradient:linear-gradient(180deg, var(--dark) 60%, var(--dark-2) 100%);
+      --cta-gradient:linear-gradient(90deg, var(--primary-orange), var(--secondary-orange));
     }
     html{scroll-behavior:smooth}
     body{
@@ -44,9 +44,9 @@
       radial-gradient(1200px 800px at 10% -10%, rgba(255,107,53,.08), transparent 60%),
       radial-gradient(800px 600px at 100% 0%, rgba(0,212,255,.06), transparent 50%),
       var(--header-gradient);
-      line-height:1.6; overflow-x:hidden; transition:background 0.3s;
+      line-height:1.6; overflow-x:hidden; transition:background .3s;
     }
-    body.darkmode { background:#18181b; color:#ececec; }
+    body.darkmode{background:#18181b;color:#ececec}
 
     /* Accessibility */
     a:focus, button:focus, input:focus, textarea:focus{outline:3px solid var(--focus); outline-offset:2px}
@@ -54,59 +54,43 @@
     .skip-link:focus{position:fixed;left:1rem;top:1rem;width:auto;height:auto;padding:.6rem 1rem;background:#111;color:#fff;border-radius:8px;z-index:10000}
 
     /* Loader */
-    .loader{position:fixed;inset:0;display:grid;place-items:center;background:rgba(10,10,11,.98);z-index:9999;transition:opacity .6s ease}
+    .loader{position:fixed;inset:0;display:grid;place-items:center;background:rgba(10,10,11,.98);z-index:9999;transition:opacity .35s ease}
     .loader.hidden{opacity:0;pointer-events:none}
     .loader__text{font-family:Oswald,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--primary-orange);font-weight:700}
 
     /* Nav */
     .navbar{position:sticky;top:0;z-index:9000;background:rgba(15,15,16,.6);backdrop-filter:saturate(140%) blur(12px);border-bottom:1px solid rgba(255,255,255,.06)}
     .nav__wrap{max-width:1200px;margin:auto;padding:.9rem 1.25rem;display:flex;align-items:center;justify-content:space-between}
-    .logo{font-family:Oswald,sans-serif;font-weight:900;color:var(--primary-orange);text-decoration:none;letter-spacing:.08em;text-transform:uppercase;font-size:1.7rem;}
+    .logo{font-family:Oswald,sans-serif;font-weight:900;color:var(--primary-orange);text-decoration:none;letter-spacing:.08em;text-transform:uppercase;font-size:1.7rem}
     .nav__menu{display:flex;gap:1.25rem}
     .nav__menu a{color:var(--text);text-decoration:none;font-weight:600;letter-spacing:.04em}
-    .nav__menu a.active, .nav__menu a:hover{color:var(--primary-orange)}
-    .hamburger{display:none;gap:6px;flex-direction:column;cursor:pointer;border:none;background:none;padding:0;}
-    .hamburger span{width:26px;height:2px;background:#e8e8e8;border-radius:1px;transition:all .3s;}
-    .hamburger.open span:nth-child(1){transform:translateY(8px) rotate(45deg);}
-    .hamburger.open span:nth-child(2){opacity:0;}
-    .hamburger.open span:nth-child(3){transform:translateY(-8px) rotate(-45deg);}
-    .dark-toggle {margin-left:1.5rem; font-size:1.5rem; cursor:pointer;}
-    .dark-toggle:focus {outline:3px solid var(--focus);}
+    .nav__menu a.active,.nav__menu a:hover{color:var(--primary-orange)}
+    .hamburger{display:none;gap:6px;flex-direction:column;cursor:pointer;border:none;background:none;padding:0}
+    .hamburger span{width:26px;height:2px;background:#e8e8e8;border-radius:1px;transition:all .3s}
+    .hamburger.open span:nth-child(1){transform:translateY(8px) rotate(45deg)}
+    .hamburger.open span:nth-child(2){opacity:0}
+    .hamburger.open span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+    .dark-toggle{margin-left:1.5rem;font-size:1.5rem;cursor:pointer}
+    .dark-toggle:focus{outline:3px solid var(--focus)}
 
     /* Hero */
     .hero{position:relative;min-height:100dvh;display:grid;place-items:center;isolation:isolate}
-    .hero img {
-      position: absolute; inset: 0; width: 100%; height: 100%;
-      object-fit: cover; object-position: center top;
-      filter: contrast(1.05) brightness(.7); z-index: 0; transition:filter .3s;
-    }
-    .hero__content { position: relative; z-index: 2; text-align:center; padding:6rem 1.25rem; max-width:920px; }
-    .hero::after {
-      content:""; position:absolute; inset:0;
-      background:radial-gradient(1200px 600px at 50% 10%, transparent, rgba(0,0,0,.55) 60%, rgba(0,0,0,.75));
-      pointer-events:none; z-index: 1;
-    }
-    .hero-wave { position: absolute; left: 0; bottom: 0; width: 100vw; height: 140px; z-index: 2; pointer-events: none; }
+    .hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;filter:contrast(1.05) brightness(.7);z-index:0;transition:filter .3s}
+    .hero__content{position:relative;z-index:2;text-align:center;padding:6rem 1.25rem;max-width:920px}
+    .hero::after{content:"";position:absolute;inset:0;background:radial-gradient(1200px 600px at 50% 10%, transparent, rgba(0,0,0,.55) 60%, rgba(0,0,0,.75));pointer-events:none;z-index:1}
+    .hero-wave{position:absolute;left:0;bottom:0;width:100vw;height:140px;z-index:2;pointer-events:none}
 
     .title{font-family:Oswald,sans-serif;font-weight:900;text-transform:uppercase;line-height:1;margin:0 0 .6rem;letter-spacing:.09em;font-size:clamp(2.6rem,7.2vw,5.8rem)}
-    .title span{background:linear-gradient(90deg,#fff, #ddd);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:0 8px 40px rgba(0,0,0,.45)}
+    .title span{background:linear-gradient(90deg,#fff,#ddd);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:0 8px 40px rgba(0,0,0,.45)}
     .kicker{font-size:clamp(1.05rem,2.6vw,1.4rem);letter-spacing:.25em;text-transform:uppercase;color:var(--primary-orange);font-weight:700}
     .lede{margin:1rem auto 2rem;color:#d0d0d0;max-width:680px}
     .cta-row{display:flex;gap:.8rem;flex-wrap:wrap;justify-content:center}
-    .btn{
-      --g: var(--cta-gradient);
-      display:inline-flex;align-items:center;gap:.6rem;border:none;border-radius:999px;padding:.9rem 1.2rem;background:var(--g);color:#fff;font-weight:700;
-      font-size:1.18rem;box-shadow:0 2px 12px rgba(0,0,0,.13);cursor:pointer;transition:transform .14s, box-shadow .14s, background .2s;
-      position:relative;overflow:hidden;
-    }
-    .btn::after{
-      content:"";position:absolute;left:0;top:0;width:100%;height:100%;border-radius:999px;pointer-events:none;
-      background:rgba(255,255,255,.09);opacity:0;transition:opacity .18s;
-    }
-    .btn:active::after{opacity:1;}
-    .btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.22);}
-    .btn--ghost{background:transparent;border:1.5px solid rgba(255,255,255,.2);color:var(--primary-orange);}
-    .btn--ghost:hover{background:rgba(255,107,53,.07);color:#fff;}
+    .btn{--g:var(--cta-gradient);display:inline-flex;align-items:center;gap:.6rem;border:none;border-radius:999px;padding:.9rem 1.2rem;background:var(--g);color:#fff;font-weight:700;font-size:1.18rem;box-shadow:0 2px 12px rgba(0,0,0,.13);cursor:pointer;transition:transform .14s,box-shadow .14s,background .2s;position:relative;overflow:hidden}
+    .btn::after{content:"";position:absolute;left:0;top:0;width:100%;height:100%;border-radius:999px;pointer-events:none;background:rgba(255,255,255,.09);opacity:0;transition:opacity .18s}
+    .btn:active::after{opacity:1}
+    .btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.22)}
+    .btn--ghost{background:transparent;border:1.5px solid rgba(255,255,255,.2);color:var(--primary-orange)}
+    .btn--ghost:hover{background:rgba(255,107,53,.07);color:#fff}
 
     /* Sections */
     section{padding:5rem 0}
@@ -116,13 +100,7 @@
     /* Stats */
     .stats{background:var(--dark-3);border-top:2px solid rgba(255,255,255,.06);border-bottom:2px solid rgba(255,255,255,.06)}
     .stats__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}
-    .stat{
-      background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.0));
-      border:1px solid rgba(255,255,255,.08);
-      border-radius:var(--radius);
-      padding:1.6rem;text-align:center;
-      box-shadow: var(--shadow);
-    }
+    .stat{background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(255,255,255,.0));border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);padding:1.6rem;text-align:center;box-shadow:var(--shadow)}
     .stat__num{font-family:Oswald,sans-serif;font-size:2.6rem;color:var(--primary-orange)}
     .stat__label{color:#eaeaea;opacity:.9;text-transform:uppercase;letter-spacing:.08em;font-weight:700}
 
@@ -134,41 +112,32 @@
 
     /* Services */
     .services__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.2rem}
-    .card{position:relative;background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:1.6rem;box-shadow:var(--shadow);transition:transform .15s, box-shadow .2s;}
-    .card:hover{transform:translateY(-6px) scale(1.03);box-shadow:0 12px 44px rgba(0,0,0,.22);}
-    .card i{font-size:1.8rem;color:var(--primary-orange);transition:color .18s;}
-    .card:hover i{color:var(--accent-blue);}
+    .card{position:relative;background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:1.6rem;box-shadow:var(--shadow);transition:transform .15s,box-shadow .2s}
+    .card:hover{transform:translateY(-6px) scale(1.03);box-shadow:0 12px 44px rgba(0,0,0,.22)}
+    .card i{font-size:1.8rem;color:var(--primary-orange);transition:color .18s}
+    .card:hover i{color:var(--accent-blue)}
     .card h3{font-family:Oswald,sans-serif;text-transform:uppercase;font-weight:700;margin:.8rem 0 .4rem}
     .card p{color:#cfcfcf}
 
     /* Process */
-    .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-top:1.5rem;position:relative;}
-    .step{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:1.4rem;text-align:center;position:relative;}
-    .step .num{
-      width:70px;height:70px;margin:auto;margin-bottom:1rem;border-radius:50%;
-      display:grid;place-items:center;
-      background:linear-gradient(45deg,var(--primary-orange),var(--secondary-orange));
-      color:#fff;font-family:Oswald,sans-serif;font-weight:800;font-size:1.6rem;
-      box-shadow:0 6px 18px rgba(0,0,0,.35);
-    }
-    /* Progress bar for steps */
-    .steps::before {
-      content:"";position:absolute;top:35px;left:10%;right:10%;height:8px;background:linear-gradient(90deg,var(--primary-orange),var(--accent-blue));border-radius:4px;z-index:0;
-    }
-    .step {z-index:1;}
+    .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-top:1.5rem;position:relative}
+    .step{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:1.4rem;text-align:center;position:relative}
+    .step .num{width:70px;height:70px;margin:auto;margin-bottom:1rem;border-radius:50%;display:grid;place-items:center;background:linear-gradient(45deg,var(--primary-orange),var(--secondary-orange));color:#fff;font-family:Oswald,sans-serif;font-weight:800;font-size:1.6rem;box-shadow:0 6px 18px rgba(0,0,0,.35)}
+    .steps::before{content:"";position:absolute;top:35px;left:10%;right:10%;height:8px;background:linear-gradient(90deg,var(--primary-orange),var(--accent-blue));border-radius:4px;z-index:0}
+    .step{z-index:1}
 
     /* Testimonials */
-    .slider{display:grid;gap:1rem;max-width:860px;margin:auto;position:relative;}
+    .slider{display:grid;gap:1rem;max-width:860px;margin:auto;position:relative}
     .quote{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:1.8rem;font-style:italic}
     .quote__by{margin-top:1rem;color:var(--primary-orange);font-family:Oswald,sans-serif}
-    .slider-controls{display:flex;justify-content:center;gap:1.2rem;margin-top:1rem;}
-    .slider-dot{width:16px;height:16px;border-radius:50%;background:var(--muted);opacity:.45;cursor:pointer;transition:background .2s;}
-    .slider-dot.active{background:var(--primary-orange);opacity:1;}
+    .slider-controls{display:flex;justify-content:center;gap:1.2rem;margin-top:1rem}
+    .slider-dot{width:16px;height:16px;border-radius:50%;background:var(--muted);opacity:.45;cursor:pointer;transition:background .2s}
+    .slider-dot.active{background:var(--primary-orange);opacity:1}
 
     /* FAQ */
     .faq{max-width:900px;margin:auto}
-    .faq details{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:1rem 1.2rem;margin:.7rem 0;transition:background .14s;}
-    .faq details[open]{background:rgba(255,107,53,.06);}
+    .faq details{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:1rem 1.2rem;margin:.7rem 0;transition:background .14s}
+    .faq details[open]{background:rgba(255,107,53,.06)}
     .faq summary{cursor:pointer;font-weight:800}
     .faq p{color:#d6d6d6}
 
@@ -182,8 +151,8 @@
     .contact{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start}
     form{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:1.4rem}
     label{font-weight:700}
-    input, textarea{width:100%;padding:.9rem;margin-top:.35rem;border-radius:10px;border:1px solid #3a3b3f;background:#1a1b1e;color:#fff}
-    input:focus, textarea:focus{border-color:var(--primary-orange)}
+    input,textarea{width:100%;padding:.9rem;margin-top:.35rem;border-radius:10px;border:1px solid #3a3b3f;background:#1a1b1e;color:#fff}
+    input:focus,textarea:focus{border-color:var(--primary-orange)}
     .error{display:none;color:#ffb4a8;font-size:.9rem}
     .status{display:none;margin-top:.8rem;border-radius:10px;padding:.8rem;text-align:center}
     .status.ok{display:block;background:rgba(34,197,94,.18);color:#86efac}
@@ -191,18 +160,18 @@
 
     /* Footer */
     footer{border-top:1px solid rgba(255,255,255,.08);background:var(--footer-bg);padding:2.5rem 0;text-align:center;color:#a0a0a0}
-    .footer-links{display:flex;justify-content:center;gap:2.5rem;margin-bottom:1rem;}
-    .footer-links a{color:var(--accent-blue);text-decoration:none;font-weight:700;}
-    .footer-links a:hover{color:var(--primary-orange);}
+    .footer-links{display:flex;justify-content:center;gap:2.5rem;margin-bottom:1rem}
+    .footer-links a{color:var(--accent-blue);text-decoration:none;font-weight:700}
+    .footer-links a:hover{color:var(--primary-orange)}
     .social{display:flex;gap:1.2rem;justify-content:center;margin-bottom:1rem}
     .social a{color:#c8c8c8}
-    .social a:hover{color:var(--primary-orange);}
-    .insta-feed{margin:1.7rem auto 0;display:flex;justify-content:center;gap:.8rem;}
-    .insta-thumb{width:58px;height:58px;border-radius:8px;object-fit:cover;box-shadow:0 2px 8px #222;}
-    .insta-thumb[alt="placeholder"] {background:#292929;}
+    .social a:hover{color:var(--primary-orange)}
+    .insta-feed{margin:1.7rem auto 0;display:flex;justify-content:center;gap:.8rem}
+    .insta-thumb{width:58px;height:58px;border-radius:8px;object-fit:cover;box-shadow:0 2px 8px #222}
+    .insta-thumb[alt="placeholder"]{background:#292929}
 
     /* Mobile */
-    @media (max-width: 900px){
+    @media (max-width:900px){
       .about{grid-template-columns:1fr}
       .contact{grid-template-columns:1fr}
       .nav__menu{display:none}
@@ -212,12 +181,12 @@
     }
 
     /* Reveal animations */
-    [data-reveal]{opacity:0;transform:translateY(16px);transition:opacity .6s ease, transform .6s ease}
+    [data-reveal]{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
     .in-view{opacity:1;transform:none}
-    @media (prefers-reduced-motion: reduce){
+    @media (prefers-reduced-motion:reduce){
       .hero img{display:block}
       [data-reveal]{opacity:1;transform:none}
-      .btn, .card, .step{transition:none}
+      .btn,.card,.step{transition:none}
     }
 
     /* Sticky mobile CTA */
@@ -230,7 +199,7 @@
   <a href="#main" class="skip-link">Skip to content</a>
 
   <!-- Loader -->
-  <div class="loader" id="loader"><div class="loader__text">Building Better People</div></div>
+  <div class="loader" id="loader"><div class="loader__text">BUILDING BETTER PEOPLE</div></div>
 
   <!-- Nav -->
   <nav class="navbar" aria-label="Primary">
@@ -264,16 +233,12 @@
 
   <!-- Hero -->
   <header class="hero" id="home" role="banner">
-    <img 
-      src="https://raw.githubusercontent.com/CoachPete86/images/3749c527ecaa3e8a8d6b597d4604fa57023f18b1/coach_hero_ext.png"
-      alt="Coach Pete Ryan"
-    />
+    <img src="https://raw.githubusercontent.com/CoachPete86/images/3749c527ecaa3e8a8d6b597d4604fa57023f18b1/coach_hero_ext.png" alt="Coach Pete Ryan"/>
     <svg class="hero-wave" viewBox="0 0 1440 140" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
       <path d="M0,80 C360,180 1080,0 1440,80 L1440,140 L0,140 Z" fill="url(#waveGradient)"/>
       <defs>
         <linearGradient id="waveGradient" x1="0" x2="1440" y1="0" y2="0" gradientUnits="userSpaceOnUse">
-          <stop stop-color="#ff6b35" />
-          <stop offset="1" stop-color="#00d4ff" />
+          <stop stop-color="#ff6b35" /><stop offset="1" stop-color="#00d4ff" />
         </linearGradient>
       </defs>
     </svg>
@@ -300,22 +265,10 @@
   <section class="stats" aria-label="Stats">
     <div class="wrap">
       <div class="stats__grid">
-        <div class="stat" data-reveal>
-          <div class="stat__num" data-count="30000">0</div>
-          <div class="stat__label">PT Coaching Hours</div>
-        </div>
-        <div class="stat" data-reveal>
-          <div class="stat__num" data-count="18">0</div>
-          <div class="stat__label">Years Experience</div>
-        </div>
-        <div class="stat" data-reveal>
-          <div class="stat__num" data-count="4500">0</div>
-          <div class="stat__label">Lives Transformed</div>
-        </div>
-        <div class="stat" data-reveal>
-          <div class="stat__num" data-count="24">0</div>
-          <div class="stat__label">Support, 7 Days</div>
-        </div>
+        <div class="stat" data-reveal><div class="stat__num" data-count="30000">0</div><div class="stat__label">PT Coaching Hours</div></div>
+        <div class="stat" data-reveal><div class="stat__num" data-count="18">0</div><div class="stat__label">Years Experience</div></div>
+        <div class="stat" data-reveal><div class="stat__num" data-count="4500">0</div><div class="stat__label">Lives Transformed</div></div>
+        <div class="stat" data-reveal><div class="stat__num" data-count="24">0</div><div class="stat__label">Support, 7 Days</div></div>
       </div>
     </div>
   </section>
@@ -345,36 +298,12 @@
       <div class="wrap">
         <h2 class="section-title" data-reveal>My Services</h2>
         <div class="services__grid">
-          <a class="card" href="/personal-training.html" data-reveal>
-            <i class="fas fa-dumbbell" aria-hidden="true"></i>
-            <h3>Personal Training</h3>
-            <p>Custom programmes that meet you where you are and push your limits safely for results that stick.</p>
-          </a>
-          <a class="card" href="/mindset-coaching.html" data-reveal>
-            <i class="fas fa-brain" aria-hidden="true"></i>
-            <h3>Mindset Coaching</h3>
-            <p>Break limiting beliefs and build the mental game of a champion — in the gym and in life.</p>
-          </a>
-          <a class="card" href="/group-training.html" data-reveal>
-            <i class="fas fa-users" aria-hidden="true"></i>
-            <h3>Group Training</h3>
-            <p>High-energy sessions that blend team motivation with pro coaching.</p>
-          </a>
-          <a class="card" href="/online-coaching.html" data-reveal>
-            <i class="fas fa-mobile-alt" aria-hidden="true"></i>
-            <h3>Online Coaching</h3>
-            <p>World-class coaching from anywhere with full support.</p>
-          </a>
-          <a class="card" href="/nutrition-guidance.html" data-reveal>
-            <i class="fas fa-apple-alt" aria-hidden="true"></i>
-            <h3>Nutrition Guidance</h3>
-            <p>Sustainable strategies that fuel your performance. No fads.</p>
-          </a>
-          <a class="card" href="/lifestyle-transformation.html" data-reveal>
-            <i class="fas fa-chart-line" aria-hidden="true"></i>
-            <h3>Lifestyle Transformation</h3>
-            <p>Fitness, mindset, and nutrition — engineered for long-term change.</p>
-          </a>
+          <a class="card" href="/personal-training.html" data-reveal><i class="fas fa-dumbbell" aria-hidden="true"></i><h3>Personal Training</h3><p>Custom programmes that meet you where you are and push your limits safely for results that stick.</p></a>
+          <a class="card" href="/mindset-coaching.html" data-reveal><i class="fas fa-brain" aria-hidden="true"></i><h3>Mindset Coaching</h3><p>Break limiting beliefs and build the mental game of a champion — in the gym and in life.</p></a>
+          <a class="card" href="/group-training.html" data-reveal><i class="fas fa-users" aria-hidden="true"></i><h3>Group Training</h3><p>High-energy sessions that blend team motivation with pro coaching.</p></a>
+          <a class="card" href="/online-coaching.html" data-reveal><i class="fas fa-mobile-alt" aria-hidden="true"></i><h3>Online Coaching</h3><p>World-class coaching from anywhere with full support.</p></a>
+          <a class="card" href="/nutrition-guidance.html" data-reveal><i class="fas fa-apple-alt" aria-hidden="true"></i><h3>Nutrition Guidance</h3><p>Sustainable strategies that fuel your performance. No fads.</p></a>
+          <a class="card" href="/lifestyle-transformation.html" data-reveal><i class="fas fa-chart-line" aria-hidden="true"></i><h3>Lifestyle Transformation</h3><p>Fitness, mindset, and nutrition — engineered for long-term change.</p></a>
         </div>
       </div>
     </section>
@@ -384,26 +313,10 @@
       <div class="wrap">
         <h2 class="section-title" data-reveal>My 4-Step Process</h2>
         <div class="steps">
-          <div class="step" data-reveal>
-            <div class="num">1</div>
-            <h3>Assessment</h3>
-            <p>Full evaluation of fitness, mindset, and goals to map your path.</p>
-          </div>
-          <div class="step" data-reveal>
-            <div class="num">2</div>
-            <h3>Strategy</h3>
-            <p>Custom plan combining training, mindset, and lifestyle.</p>
-          </div>
-          <div class="step" data-reveal>
-            <div class="num">3</div>
-            <h3>Implementation</h3>
-            <p>Guided execution with adjustments and accountability.</p>
-          </div>
-          <div class="step" data-reveal>
-            <div class="num">4</div>
-            <h3>Transformation</h3>
-            <p>Lock in results with repeatable tools and habits.</p>
-          </div>
+          <div class="step" data-reveal><div class="num">1</div><h3>Assessment</h3><p>Full evaluation of fitness, mindset, and goals to map your path.</p></div>
+          <div class="step" data-reveal><div class="num">2</div><h3>Strategy</h3><p>Custom plan combining training, mindset, and lifestyle.</p></div>
+          <div class="step" data-reveal><div class="num">3</div><h3>Implementation</h3><p>Guided execution with adjustments and accountability.</p></div>
+          <div class="step" data-reveal><div class="num">4</div><h3>Transformation</h3><p>Lock in results with repeatable tools and habits.</p></div>
         </div>
       </div>
     </section>
@@ -415,10 +328,7 @@
         <div class="slider" data-reveal id="testimonialSlider">
           <blockquote class="quote">“Pete didn't just change my body, he changed my entire mindset. Stronger mentally and physically than ever.”<div class="quote__by">— Sarah M., Business Executive</div></blockquote>
           <blockquote class="quote" style="display:none;">“I was terrified of the gym. Pete built a plan from the ground up and celebrated every small win. He gave me back my self-belief.”<div class="quote__by">— John L.</div></blockquote>
-          <div class="slider-controls">
-            <span class="slider-dot active"></span>
-            <span class="slider-dot"></span>
-          </div>
+          <div class="slider-controls"><span class="slider-dot active"></span><span class="slider-dot"></span></div>
         </div>
       </div>
     </section>
@@ -428,18 +338,9 @@
       <div class="wrap">
         <h2 class="section-title" data-reveal>FAQ</h2>
         <div class="faq">
-          <details>
-            <summary>Do you work with beginners?</summary>
-            <p>Yes. We'll start from your current level and progress safely and intelligently.</p>
-          </details>
-          <details>
-            <summary>Do you offer online coaching?</summary>
-            <p>Yes. Remote coaching includes training plans, video feedback, and weekly check-ins.</p>
-          </details>
-          <details>
-            <summary>How soon will I see results?</summary>
-            <p>Expect early wins in 2–4 weeks and significant changes within 12 weeks with consistency.</p>
-          </details>
+          <details><summary>Do you work with beginners?</summary><p>Yes. We'll start from your current level and progress safely and intelligently.</p></details>
+          <details><summary>Do you offer online coaching?</summary><p>Yes. Remote coaching includes training plans, video feedback, and weekly check-ins.</p></details>
+          <details><summary>How soon will I see results?</summary><p>Expect early wins in 2–4 weeks and significant changes within 12 weeks with consistency.</p></details>
         </div>
       </div>
     </section>
@@ -449,30 +350,9 @@
       <div class="wrap">
         <h2 class="section-title" data-reveal>Coaching Tiers</h2>
         <div class="pricing">
-          <div class="tier" data-reveal>
-            <h3 class="kicker">Foundation</h3>
-            <div class="price">£149 <small>/ month</small></div>
-            <ul>
-              <li>Custom plan • Monthly check-in</li>
-              <li>App access & resources</li>
-            </ul>
-          </div>
-          <div class="tier" data-reveal>
-            <h3 class="kicker">Performance</h3>
-            <div class="price">£299 <small>/ month</small></div>
-            <ul>
-              <li>Weekly coaching • Form feedback</li>
-              <li>Nutrition guidance • Messaging</li>
-            </ul>
-          </div>
-          <div class="tier" data-reveal>
-            <h3 class="kicker">Elite</h3>
-            <div class="price">£595 <small>/ month</small></div>
-            <ul>
-              <li>2x weekly calls • Full support</li>
-              <li>Priority access • VIP programming</li>
-            </ul>
-          </div>
+          <div class="tier" data-reveal><h3 class="kicker">Foundation</h3><div class="price">£149 <small>/ month</small></div><ul><li>Custom plan • Monthly check-in</li><li>App access & resources</li></ul></div>
+          <div class="tier" data-reveal><h3 class="kicker">Performance</h3><div class="price">£299 <small>/ month</small></div><ul><li>Weekly coaching • Form feedback</li><li>Nutrition guidance • Messaging</li></ul></div>
+          <div class="tier" data-reveal><h3 class="kicker">Elite</h3><div class="price">£595 <small>/ month</small></div><ul><li>2x weekly calls • Full support</li><li>Priority access • VIP programming</li></ul></div>
         </div>
       </div>
     </section>
@@ -522,10 +402,7 @@
 
   <footer>
     <div class="footer-links" aria-label="Quick links">
-      <a href="#home">Home</a>
-      <a href="#about">About</a>
-      <a href="#services">Services</a>
-      <a href="#contact">Contact</a>
+      <a href="#home">Home</a><a href="#about">About</a><a href="#services">Services</a><a href="#contact">Contact</a>
     </div>
     <div class="social" aria-label="Social links">
       <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
@@ -544,26 +421,30 @@
   <!-- JSON-LD Schema -->
   <script type="application/ld+json" id="schema-json">
   {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Pete Ryan",
-    "alternateName": "Coach Pete Ryan",
-    "description": "Personal Trainer & Mindset Coach in Hertfordshire, UK.",
-    "url": "https://coachpeteryan.com/",
-    "image": "https://raw.githubusercontent.com/CoachPete86/images/3749c527ecaa3e8a8d6b597d4604fa57023f18b1/coach_hero_ext.png",
-    "telephone": "+44 7308 518428",
-    "email": "mailto:pete@coachpeteryan.com",
-    "address": {
-      "@type": "PostalAddress",
-      "addressCountry": "GB",
-      "addressRegion": "Hertfordshire"
-    }
+    "@context":"https://schema.org",
+    "@type":"Person",
+    "name":"Pete Ryan",
+    "alternateName":"Coach Pete Ryan",
+    "description":"Personal Trainer & Mindset Coach in Hertfordshire, UK.",
+    "url":"https://coachpeteryan.com/",
+    "image":"https://raw.githubusercontent.com/CoachPete86/images/3749c527ecaa3e8a8d6b597d4604fa57023f18b1/coach_hero_ext.png",
+    "telephone":"+44 7308 518428",
+    "email":"mailto:pete@coachpeteryan.com",
+    "address":{"@type":"PostalAddress","addressCountry":"GB","addressRegion":"Hertfordshire"}
   }
   </script>
 
   <script>
-    // Loader
-    window.addEventListener('load',()=>document.getElementById('loader').classList.add('hidden'));
+    // Robust loader hide
+    function hideLoader(){
+      const l=document.getElementById('loader');
+      if(!l||l.classList.contains('hidden')) return;
+      l.classList.add('hidden');
+      setTimeout(()=>{ try{ l.remove(); }catch(_){} },450);
+    }
+    document.addEventListener('DOMContentLoaded',()=>{ requestAnimationFrame(()=>requestAnimationFrame(hideLoader)); });
+    window.addEventListener('load',hideLoader);
+    setTimeout(hideLoader,4000);
 
     // Mobile menu + hamburger animation
     const burger=document.getElementById('burger');
@@ -571,8 +452,8 @@
     burger?.addEventListener('click',()=>{
       const open=mobile.style.display==='flex';
       mobile.style.display=open?'none':'flex';
-      burger.setAttribute('aria-expanded', String(!open));
-      burger.classList.toggle('open', !open);
+      burger.setAttribute('aria-expanded',String(!open));
+      burger.classList.toggle('open',!open);
     });
     mobile?.addEventListener('click',e=>{
       if(e.target.tagName==='A'){
@@ -583,37 +464,37 @@
     });
 
     // Dark mode toggle
-    const darkToggle = document.getElementById('darkToggle');
-    darkToggle?.addEventListener('click', () => {
+    const darkToggle=document.getElementById('darkToggle');
+    darkToggle?.addEventListener('click',()=>{
       document.body.classList.toggle('darkmode');
-      darkToggle.innerHTML = document.body.classList.contains('darkmode')
-        ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-regular fa-moon"></i>';
+      darkToggle.innerHTML=document.body.classList.contains('darkmode')
+        ?'<i class="fa-solid fa-sun"></i>':'<i class="fa-regular fa-moon"></i>';
     });
 
-    // Reveal on scroll (respect motion preferences)
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    // Reveal on scroll
+    const prefersReduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if(!prefersReduced){
-      const obs=new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting&&e.target.classList.add('in-view')), {threshold:0.12});
+      const obs=new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting&&e.target.classList.add('in-view')),{threshold:0.12});
       document.querySelectorAll('[data-reveal]').forEach(el=>obs.observe(el));
-    } else {
+    }else{
       document.querySelectorAll('[data-reveal]').forEach(el=>el.classList.add('in-view'));
     }
 
-    // Active link highlight (guard if sections missing)
+    // Active link highlight
     const links=[...document.querySelectorAll('.nav__menu a')];
     const ids=links.map(a=>a.getAttribute('href')).filter(Boolean).map(h=>h.replace('#','')).filter(Boolean);
     const sections=ids.map(id=>document.getElementById(id)).filter(Boolean);
-    if (sections.length){
+    if(sections.length){
       window.addEventListener('scroll',()=>{
-        const pos=scrollY+120; let active=null;
-        sections.forEach(s=>{ if(pos >= s.offsetTop) active=s.id; });
-        links.forEach(a=>a.classList.toggle('active', a.getAttribute('href')==='#'+active));
+        const pos=scrollY+120;let active=null;
+        sections.forEach(s=>{ if(pos>=s.offsetTop) active=s.id; });
+        links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+active));
       });
     }
 
     // Animated counters
     function animateCounter(el){
-      const target=+el.dataset.count||0; const dur=1600; const start=performance.now();
+      const target=+el.dataset.count||0;const dur=1600;const start=performance.now();
       function tick(now){
         const p=Math.min((now-start)/dur,1);
         el.textContent=Math.floor(target*p).toLocaleString('en-GB');
@@ -622,7 +503,7 @@
       requestAnimationFrame(tick);
     }
     const statsSection=document.querySelector('.stats');
-    if (statsSection){
+    if(statsSection){
       const statObs=new IntersectionObserver(es=>{
         if(es.some(e=>e.isIntersecting)){
           document.querySelectorAll('.stat__num').forEach(animateCounter);
@@ -632,27 +513,26 @@
       statObs.observe(statsSection);
     }
 
-    // Testimonial slider (simple)
-    const slider = document.getElementById('testimonialSlider');
-    if (slider) {
-      const quotes = slider.querySelectorAll('.quote');
-      const dots = slider.querySelectorAll('.slider-dot');
-      function show(idx) {
-        quotes.forEach((q,i) => q.style.display = i === idx ? '' : 'none');
-        dots.forEach((d,i) => d.classList.toggle('active', i === idx));
+    // Testimonial slider
+    const slider=document.getElementById('testimonialSlider');
+    if(slider){
+      const quotes=slider.querySelectorAll('.quote');
+      const dots=slider.querySelectorAll('.slider-dot');
+      function show(i){
+        quotes.forEach((q,idx)=>q.style.display=idx===i?'':'none');
+        dots.forEach((d,idx)=>d.classList.toggle('active',idx===i));
       }
-      dots.forEach((dot,i)=>dot.addEventListener('click',()=>show(i)));
+      dots.forEach((d,i)=>d.addEventListener('click',()=>show(i)));
       show(0);
     }
 
-    // Form handling with client-side validation + Formspree
+    // Form handling
     const form=document.getElementById('contact-form');
-    form?.addEventListener('submit', async (e)=>{
+    form?.addEventListener('submit',async e=>{
       e.preventDefault();
       const btn=document.getElementById('submitBtn');
       const status=document.getElementById('formStatus');
       const gotcha=form.querySelector('[name="_gotcha"]').value;
-
       const name=document.getElementById('name');
       const email=document.getElementById('email');
       const msg=document.getElementById('message');
@@ -662,15 +542,15 @@
       document.getElementById('err-name').style.display=okName?'none':'block';
       document.getElementById('err-email').style.display=okEmail?'none':'block';
       document.getElementById('err-message').style.display=okMsg?'none':'block';
-      if(!okName||!okEmail||!okMsg||gotcha){return}
-      btn.disabled=true; btn.textContent='Sending…';
+      if(!okName||!okEmail||!okMsg||gotcha) return;
+      btn.disabled=true;btn.textContent='Sending…';
       try{
-        const fd=new FormData(form); fd.append('_ts', Date.now());
-        const res=await fetch(form.action,{method:form.method,body:fd,headers:{'Accept':'application/json'}});
-        if(res.ok){ status.className='status ok'; status.textContent="Thanks — I'll be in touch soon."; form.reset(); }
-        else{ status.className='status bad'; status.textContent='There was a problem submitting your form.'; }
-      }catch(err){ status.className='status bad'; status.textContent='Network error. Please try again.'; }
-      finally{ btn.disabled=false; btn.textContent='Send Message'; status.style.display='block'; }
+        const fd=new FormData(form);fd.append('_ts',Date.now());
+        const res=await fetch(form.action,{method:form.method,body:fd,headers:{Accept:'application/json'}});
+        if(res.ok){status.className='status ok';status.textContent="Thanks — I'll be in touch soon.";form.reset();}
+        else{status.className='status bad';status.textContent='There was a problem submitting your form.';}
+      }catch(_){status.className='status bad';status.textContent='Network error. Please try again.';}
+      finally{btn.disabled=false;btn.textContent='Send Message';status.style.display='block';}
     });
     ['name','email','message'].forEach(id=>{
       const el=document.getElementById(id);
@@ -682,41 +562,37 @@
     });
 
     // Footer year
-    const yEl=document.getElementById('year'); if (yEl) yEl.textContent=new Date().getFullYear();
+    const yEl=document.getElementById('year'); if(yEl) yEl.textContent=new Date().getFullYear();
 
-    // PWA manifest + Service Worker (single-file friendly)
+    // PWA manifest + Service Worker
     (function(){
       const icons=[
-        {src:'https://raw.githubusercontent.com/CoachPete86/images/main/icon-192.png', sizes:'192x192', type:'image/png'},
-        {src:'https://raw.githubusercontent.com/CoachPete86/images/main/icon-512.png', sizes:'512x512', type:'image/png'}
+        {src:'https://raw.githubusercontent.com/CoachPete86/images/main/icon-192.png',sizes:'192x192',type:'image/png'},
+        {src:'https://raw.githubusercontent.com/CoachPete86/images/main/icon-512.png',sizes:'512x512',type:'image/png'}
       ];
-      const manifest={name:'Coach Pete Ryan', short_name:'Coach Pete', start_url:'./', display:'standalone', background_color:'#0f0f10', theme_color:'#1a1a1a', icons};
+      const manifest={name:'Coach Pete Ryan',short_name:'Coach Pete',start_url:'./',display:'standalone',background_color:'#0f0f10',theme_color:'#1a1a1a',icons};
       const blob=new Blob([JSON.stringify(manifest)],{type:'application/json'});
       const url=URL.createObjectURL(blob);
-      const link=document.createElement('link'); link.rel='manifest'; link.href=url; document.head.appendChild(link);
+      const link=document.createElement('link');link.rel='manifest';link.href=url;document.head.appendChild(link);
 
       if('serviceWorker' in navigator){
-        const swCode = `
-self.addEventListener('install', event => {
-  event.waitUntil(
-    caches.open('coachpete-v1').then(cache => cache.addAll(['./']))
-  );
+        const swCode=`
+self.addEventListener('install',e=>{
+  e.waitUntil(caches.open('coachpete-v1').then(c=>c.addAll(['./'])));
   self.skipWaiting();
 });
-self.addEventListener('activate', event => {
-  event.waitUntil(self.clients.claim());
-});
-self.addEventListener('fetch', event => {
-  const req = event.request;
-  if (req.method !== 'GET') return;
-  event.respondWith(
-    caches.match(req).then(cached => {
-      const fetchPromise = fetch(req).then(resp => {
-        const copy = resp.clone();
-        caches.open('coachpete-v1').then(cache => cache.put(req, copy)).catch(()=>{});
-        return resp;
+self.addEventListener('activate',e=>{ e.waitUntil(self.clients.claim()); });
+self.addEventListener('fetch',e=>{
+  const r=e.request;
+  if(r.method!=='GET') return;
+  e.respondWith(
+    caches.match(r).then(cached=>{
+      const fetcher=fetch(r).then(res=>{
+        const copy=res.clone();
+        caches.open('coachpete-v1').then(c=>c.put(r,copy)).catch(()=>{});
+        return res;
       }).catch(()=>cached);
-      return cached || fetchPromise;
+      return cached || fetcher;
     })
   );
 });
@@ -728,7 +604,7 @@ self.addEventListener('fetch', event => {
     })();
   </script>
 
-  <!-- Optional: privacy-friendly analytics (Plausible) -->
+  <!-- Optional analytics -->
   <!-- <script defer data-domain="coachpeteryan.com" src="https://plausible.io/js/script.js"></script> -->
 </body>
 </html>
