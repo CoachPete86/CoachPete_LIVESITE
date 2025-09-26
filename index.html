@@ -1,34 +1,29 @@
 <!DOCTYPE html>
+
 <html lang="en-GB">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Coach Pete Ryan — Personal Trainer & Mindset Coach</title>
-  <meta name="description" content="Transform your life with Coach Pete Ryan. Mindset, fitness, and health coaching for real, lasting change." />
-  <meta name="theme-color" content="#1a1a1a" />
-  <link rel="canonical" href="https://coachpeteryan.com/" />
-
-  <!-- Open Graph / Twitter -->
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Coach Pete Ryan — Personal Trainer & Mindset Coach" />
-  <meta property="og:description" content="Transform your life with Coach Pete Ryan. Mindset, fitness, and health coaching for real, lasting change." />
-  <meta property="og:image" content="https://raw.githubusercontent.com/CoachPete86/images/3749c527ecaa3e8a8d6b597d4604fa57023f18b1/coach_hero_ext.png" />
-  <meta property="og:image:width" content="1600" />
-  <meta property="og:image:height" content="900" />
-  <meta name="twitter:card" content="summary_large_image" />
-
-  <!-- Fonts & Icons -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700;900&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet" />
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet" />
-
-  <!-- Preload hero image as LCP fallback -->
-  <link rel="preload" as="image"
-        href="https://raw.githubusercontent.com/CoachPete86/images/3749c527ecaa3e8a8d6b597d4604fa57023f18b1/coach_hero_ext.png"
-        imagesrcset="https://raw.githubusercontent.com/CoachPete86/images/3749c527ecaa3e8a8d6b597d4604fa57023f18b1/coach_hero_ext.png 1600w" />
-
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Coach Pete Ryan — Personal Trainer &amp; Mindset Coach</title>
+<meta content="Transform your life with Coach Pete Ryan. Mindset, fitness, and health coaching for real, lasting change." name="description"/>
+<meta content="#1a1a1a" name="theme-color"/>
+<link href="https://coachpeteryan.com/" rel="canonical"/>
+<!-- Open Graph / Twitter -->
+<meta content="website" property="og:type"/>
+<meta content="Coach Pete Ryan — Personal Trainer &amp; Mindset Coach" property="og:title"/>
+<meta content="Transform your life with Coach Pete Ryan. Mindset, fitness, and health coaching for real, lasting change." property="og:description"/>
+<meta content="https://raw.githubusercontent.com/CoachPete86/images/3749c527ecaa3e8a8d6b597d4604fa57023f18b1/coach_hero_ext.png" property="og:image"/>
+<meta content="1600" property="og:image:width"/>
+<meta content="900" property="og:image:height"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<!-- Fonts & Icons -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700;900&amp;family=Open+Sans:wght@300;400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet"/>
+<!-- Preload hero image as LCP fallback -->
+<link as="image" href="https://raw.githubusercontent.com/CoachPete86/images/3749c527ecaa3e8a8d6b597d4604fa57023f18b1/coach_hero_ext.png" imagesrcset="https://raw.githubusercontent.com/CoachPete86/images/3749c527ecaa3e8a8d6b597d4604fa57023f18b1/coach_hero_ext.png 1600w" rel="preload"/>
+<style>
     :root{
       --primary-orange:#ff6b35; --secondary-orange:#ff8c42; --accent-blue:#00d4ff;
       --dark:#0f0f10; --dark-2:#161617; --dark-3:#1f2022; --text:#e6e6e6; --muted:#bdbdbd;
@@ -229,6 +224,7 @@
     .plan-table .t-row:first-child{border-top:none}
     .plan-table .t-head{background:rgba(255,255,255,.04);font-weight:800;text-transform:uppercase;letter-spacing:.06em}
     .plan-table .was{opacity:.6;text-decoration:line-through;margin-right:.35rem}
+    .tier .was{opacity:.6;text-decoration:line-through;margin-right:.35rem}
     .pricing-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;margin-top:1.2rem}
     .tier+.tier{} /* keep spacing rules consistent */
     .tier .badge{position:absolute;top:12px;right:12px;background:linear-gradient(90deg,var(--primary-orange),var(--secondary-orange));color:#fff;border-radius:999px;padding:.25rem .6rem;font-weight:800;font-size:.8rem}
@@ -250,322 +246,320 @@
   </style>
 </head>
 <body>
-  <a href="#main" class="skip-link">Skip to content</a>
-
-  <!-- Loader -->
-  <div class="loader" id="loader"><div class="loader__text">BUILDING BETTER PEOPLE</div></div>
-
-  <!-- Nav -->
-  <nav class="navbar" aria-label="Primary">
-    <div class="nav__wrap">
-      <a class="logo" href="#home">Coach Pete Ryan</a>
-      <div class="nav__menu">
-        <a href="#home" class="active">Home</a>
-        <a href="#about">About</a>
-        <a href="#services">Services</a>
-        <a href="#process">Process</a>
-        <a href="#testimonials">Testimonials</a>
-        <a href="#faq">FAQ</a>
-        <a href="#contact">Contact</a>
-        <a href="/Challenge.html">6 Week Challenge</a>
-      </div>
-      <button class="hamburger" id="burger" aria-label="Open menu" aria-controls="mobile-menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-      <button class="dark-toggle" id="darkToggle" aria-label="Toggle dark mode"><i class="fa-regular fa-moon"></i></button>
-    </div>
-    <div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Mobile menu">
-      <a href="#about">About</a>
-      <a href="#services">Services</a>
-      <a href="#process">Process</a>
-      <a href="#testimonials">Testimonials</a>
-      <a href="#faq">FAQ</a>
-      <a href="#contact">Contact</a>
-      <a href="/Challenge.html">6 Week Challenge</a>
-    </div>
-  </nav>
-
-  <!-- Hero -->
-  <header class="hero" id="home" role="banner">
-    <img src="https://raw.githubusercontent.com/CoachPete86/images/3749c527ecaa3e8a8d6b597d4604fa57023f18b1/coach_hero_ext.png" alt="Coach Pete Ryan"/>
-    <svg class="hero-wave" viewBox="0 0 1440 140" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-      <path d="M0,80 C360,180 1080,0 1440,80 L1440,140 L0,140 Z" fill="url(#waveGradient)"/>
-      <defs>
-        <linearGradient id="waveGradient" x1="0" x2="1440" y1="0" y2="0" gradientUnits="userSpaceOnUse">
-          <stop stop-color="#ff6b35" /><stop offset="1" stop-color="#00d4ff" />
-        </linearGradient>
-      </defs>
-    </svg>
-    <div class="hero__content" data-reveal>
-      <div class="kicker">Fighter — Mentor — Athlete — Coach</div>
-      <h1 class="title"><span>Coach Pete Ryan</span></h1>
-      <p class="lede">Your partner in building a stronger body and an unbreakable mind, no matter where you start.</p>
-      <div class="cta-row">
-        <a class="btn" href="#contact"><i class="fa-solid fa-bolt"></i> Start Your Journey</a>
-        <a class="btn btn--ghost" href="https://cal.com/coachpete/consultation" target="_blank" rel="noopener noreferrer">Book a Free Consult</a>
-      </div>
-    </div>
-  </header>
-
-  <!-- Sticky CTA (mobile) -->
-  <div class="sticky-cta" aria-hidden="true">
-    <div class="wrap">
-      <a class="btn" href="https://wa.me/447308518428" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
-      <a class="btn btn--ghost" href="#contact"><i class="fa-solid fa-envelope"></i> Message</a>
-    </div>
-  </div>
-
-  <!-- Stats -->
-  <section class="stats" aria-label="Stats">
-    <div class="wrap">
-      <div class="stats__grid">
-        <div class="stat" data-reveal><div class="stat__num" data-count="30000">0</div><div class="stat__label">PT Coaching Hours</div></div>
-        <div class="stat" data-reveal><div class="stat__num" data-count="18">0</div><div class="stat__label">Years Experience</div></div>
-        <div class="stat" data-reveal><div class="stat__num" data-count="4500">0</div><div class="stat__label">Lives Transformed</div></div>
-        <div class="stat" data-reveal><div class="stat__num" data-count="24">0</div><div class="stat__label">Support, 7 Days</div></div>
-      </div>
-    </div>
-  </section>
-
-  <main id="main">
-    <!-- About -->
-    <section class="wrap" id="about">
-      <div class="about">
-        <div data-reveal>
-          <h2 class="section-title">The <span style="color:var(--primary-orange)">Code</span> I Live By</h2>
-          <p>Show up. Give your best effort. Learn from every step. Never quit. This code builds lasting results.</p>
-          <p>With nearly two decades in personal training and mindset coaching, I've helped people break limits and achieve extraordinary results.</p>
-          <p>I don't just train bodies — I build unbreakable minds and unstoppable people.</p>
-          <p style="margin-top:1rem"><a class="btn" href="#services">Discover My Methods</a></p>
+<a class="skip-link" href="#main">Skip to content</a>
+<!-- Loader -->
+<div class="loader" id="loader"><div class="loader__text">BUILDING BETTER PEOPLE</div></div>
+<!-- Nav -->
+<nav aria-label="Primary" class="navbar">
+<div class="nav__wrap">
+<a class="logo" href="#home">Coach Pete Ryan</a>
+<div class="nav__menu">
+<a class="active" href="#home">Home</a>
+<a href="#about">About</a>
+<a href="#services">Services</a>
+<a href="#process">Process</a>
+<a href="#testimonials">Testimonials</a>
+<a href="#faq">FAQ</a>
+<a href="#contact">Contact</a>
+<a href="/Challenge.html">6 Week Challenge</a>
+</div>
+<button aria-controls="mobile-menu" aria-expanded="false" aria-label="Open menu" class="hamburger" id="burger">
+<span></span><span></span><span></span>
+</button>
+<button aria-label="Toggle dark mode" class="dark-toggle" id="darkToggle"><i class="fa-regular fa-moon"></i></button>
+</div>
+<div aria-label="Mobile menu" aria-modal="true" class="mobile-menu" id="mobile-menu" role="dialog">
+<a href="#about">About</a>
+<a href="#services">Services</a>
+<a href="#process">Process</a>
+<a href="#testimonials">Testimonials</a>
+<a href="#faq">FAQ</a>
+<a href="#contact">Contact</a>
+<a href="/Challenge.html">6 Week Challenge</a>
+</div>
+</nav>
+<!-- Hero -->
+<header class="hero" id="home" role="banner">
+<img alt="Coach Pete Ryan" src="https://raw.githubusercontent.com/CoachPete86/images/3749c527ecaa3e8a8d6b597d4604fa57023f18b1/coach_hero_ext.png"/>
+<svg class="hero-wave" fill="none" preserveaspectratio="none" viewbox="0 0 1440 140" xmlns="http://www.w3.org/2000/svg">
+<path d="M0,80 C360,180 1080,0 1440,80 L1440,140 L0,140 Z" fill="url(#waveGradient)"></path>
+<defs>
+<lineargradient gradientunits="userSpaceOnUse" id="waveGradient" x1="0" x2="1440" y1="0" y2="0">
+<stop stop-color="#ff6b35"></stop><stop offset="1" stop-color="#00d4ff"></stop>
+</lineargradient>
+</defs>
+</svg>
+<div class="hero__content" data-reveal="">
+<div class="kicker">Fighter — Mentor — Athlete — Coach</div>
+<h1 class="title"><span>Coach Pete Ryan</span></h1>
+<p class="lede">Your partner in building a stronger body and an unbreakable mind, no matter where you start.</p>
+<div class="cta-row">
+<a class="btn" href="#contact"><i class="fa-solid fa-bolt"></i> Start Your Journey</a>
+<a class="btn btn--ghost" href="https://cal.com/coachpete/consultation" rel="noopener noreferrer" target="_blank">Book a Free Consult</a>
+</div>
+</div>
+</header>
+<!-- Sticky CTA (mobile) -->
+<div aria-hidden="true" class="sticky-cta">
+<div class="wrap">
+<a class="btn" href="https://wa.me/447308518428" rel="noopener noreferrer" target="_blank"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+<a class="btn btn--ghost" href="#contact"><i class="fa-solid fa-envelope"></i> Message</a>
+</div>
+</div>
+<!-- Stats -->
+<section aria-label="Stats" class="stats">
+<div class="wrap">
+<div class="stats__grid">
+<div class="stat" data-reveal=""><div class="stat__num" data-count="30000">30000</div><div class="stat__label">PT Coaching Hours</div></div>
+<div class="stat" data-reveal=""><div class="stat__num" data-count="19">19</div><div class="stat__label">Years Experience</div></div>
+<div class="stat" data-reveal=""><div class="stat__num" data-count="4500">4500</div><div class="stat__label">Lives Transformed</div></div>
+<div class="stat" data-reveal=""><div class="stat__num" data-count="24">24</div><div class="stat__label">Support, 7 Days</div></div>
+</div>
+</div>
+</section>
+<main id="main">
+<!-- About -->
+<section class="wrap" id="about">
+<div class="about">
+<div data-reveal="">
+<h2 class="section-title">The <span style="color:var(--primary-orange)">Code</span> I Live By</h2>
+<p>Show up. Give your best effort. Learn from every step. Never quit. This code builds lasting results.</p>
+<p>With nearly two decades in personal training and mindset coaching, I've helped people break limits and achieve extraordinary results.</p>
+<p>I don't just train bodies — I build unbreakable minds and unstoppable people.</p>
+<p style="margin-top:1rem"><a class="btn" href="#services">Discover My Methods</a></p>
+</div>
+<div class="about__img" data-reveal="">
+<picture>
+<source srcset="https://raw.githubusercontent.com/coachpete86/CoachPete_LIVESITE/main/Photoshoot_Coach_2.png" type="image/webp"/>
+<img alt="Coach Pete Ryan coaching" decoding="async" loading="lazy" src="https://raw.githubusercontent.com/coachpete86/CoachPete_LIVESITE/main/Photoshoot_Coach_2.png"/>
+</picture>
+</div>
+</div>
+</section>
+<!-- Services -->
+<section id="services">
+<div class="wrap">
+<h2 class="section-title" data-reveal="">My Services</h2>
+<div class="services__grid">
+<a class="card" data-reveal="" href="/personal-training.html"><i aria-hidden="true" class="fas fa-dumbbell"></i><h3>Personal Training</h3><p>Custom programmes that meet you where you are and push your limits safely for results that stick.</p></a>
+<a class="card" data-reveal="" href="/mindset-coaching.html"><i aria-hidden="true" class="fas fa-brain"></i><h3>Mindset Coaching</h3><p>Break limiting beliefs and build the mental game of a champion — in the gym and in life.</p></a>
+<a class="card" data-reveal="" href="/group-training.html"><i aria-hidden="true" class="fas fa-users"></i><h3>Group Training</h3><p>High-energy sessions that blend team motivation with pro coaching.</p></a>
+<a class="card" data-reveal="" href="/online-coaching.html"><i aria-hidden="true" class="fas fa-mobile-alt"></i><h3>Online Coaching</h3><p>World-class coaching from anywhere with full support.</p></a>
+<a class="card" data-reveal="" href="/nutrition-guidance.html"><i aria-hidden="true" class="fas fa-apple-alt"></i><h3>Nutrition Guidance</h3><p>Sustainable strategies that fuel your performance. No fads.</p></a>
+<a class="card" data-reveal="" href="/lifestyle-transformation.html"><i aria-hidden="true" class="fas fa-chart-line"></i><h3>Lifestyle Transformation</h3><p>Fitness, mindset, and nutrition — engineered for long-term change.</p></a>
+</div>
+</div>
+<!-- How It Works (compact, reused pattern) -->
+<section aria-label="How it works" id="how">
+<div class="wrap">
+<h2 class="section-title" data-reveal="">How It Works</h2>
+<div class="features-grid" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem">
+<div class="card" data-reveal="" style="background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.2rem">
+<h3 class="kicker">1. Strategy Call</h3>
+<p>Clarify goals, constraints, injuries, and lifestyle. We map a plan that fits your week, not the other way round.</p>
+</div>
+<div class="card" data-reveal="" style="background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.2rem">
+<h3 class="kicker">2. Custom Programming</h3>
+<p>Training and nutrition built for your body and environment—delivered clearly with progress markers.</p>
+</div>
+<div class="card" data-reveal="" style="background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.2rem">
+<h3 class="kicker">3. Weekly Check‑ins</h3>
+<p>We review metrics, adjust, and keep momentum. No fluff—just consistent execution and honest feedback.</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<!-- Process -->
+<section id="process">
+<div class="wrap">
+<h2 class="section-title" data-reveal="">My 4-Step Process</h2>
+<div class="steps">
+<div class="step" data-reveal=""><div class="num">1</div><h3>Assessment</h3><p>Full evaluation of fitness, mindset, and goals to map your path.</p></div>
+<div class="step" data-reveal=""><div class="num">2</div><h3>Strategy</h3><p>Custom plan combining training, mindset, and lifestyle.</p></div>
+<div class="step" data-reveal=""><div class="num">3</div><h3>Implementation</h3><p>Guided execution with adjustments and accountability.</p></div>
+<div class="step" data-reveal=""><div class="num">4</div><h3>Transformation</h3><p>Lock in results with repeatable tools and habits.</p></div>
+</div>
+</div>
+</section>
+<!-- Testimonials -->
+<section id="testimonials">
+<div class="wrap">
+<h2 class="section-title" data-reveal="">What My Clients Say</h2>
+<div class="slider" data-reveal="" id="testimonialSlider">
+<blockquote class="quote">“Pete didn't just change my body, he changed my entire mindset. Stronger mentally and physically than ever.”<div class="quote__by">— Sarah M., Business Executive</div></blockquote>
+<blockquote class="quote" style="display:none;">“I was terrified of the gym. Pete built a plan from the ground up and celebrated every small win. He gave me back my self-belief.”<div class="quote__by">— John L.</div></blockquote>
+<div class="slider-controls"><span class="slider-dot active"></span><span class="slider-dot"></span></div>
+</div>
+</div>
+</section>
+<!-- FAQ -->
+<section id="faq">
+<div class="wrap">
+<h2 class="section-title" data-reveal="">FAQ</h2>
+<div class="faq">
+<details><summary>Do you work with beginners?</summary><p>Yes. We'll start from your current level and progress safely and intelligently.</p></details>
+<details><summary>Do you offer online coaching?</summary><p>Yes. Remote coaching includes training plans, video feedback, and weekly check-ins.</p></details>
+<details><summary>How soon will I see results?</summary><p>Expect early wins in 2–4 weeks and significant changes within 12 weeks with consistency.</p></details>
+</div>
+</div>
+</section>
+<!-- Pricing & Plans -->
+<section aria-label="Pricing &amp; Plans" id="pricing">
+<div class="wrap">
+<h2 class="section-title" data-reveal="">Pricing &amp; Plans</h2>
+<p class="pricing-sub" data-reveal="">Which plan suits you?</p>
+<div class="plan-table" data-reveal="">
+<div class="t-row t-head">
+<div>Plan</div><div>Sessions / week</div><div>Online price</div><div>In-person price</div>
+</div>
+<div class="t-row">
+<div>Essential</div><div>1</div>
+<div><span class="was">£120</span> <strong>£99/mo</strong></div>
+<div><span class="was">£180</span> <strong>£150/mo</strong></div>
+</div>
+<div class="t-row">
+<div>Accelerate</div><div>2</div>
+<div><span class="was">£200</span> <strong>£165/mo</strong></div>
+<div><span class="was">£320</span> <strong>£275/mo</strong></div>
+</div>
+<div class="t-row">
+<div>Elite</div><div>3</div>
+<div><strong>£300/mo</strong></div>
+<div><strong>£440/mo</strong></div>
+</div>
+</div>
+<div class="pricing-grid">
+<article class="tier" data-reveal="">
+<div class="tier-hdr">
+<h3 class="kicker">Essential</h3>
+<div class="price"><span class="was">£120</span> £99 <small>/ mo online</small></div>
+<div class="price-sub">£150 / mo in-person</div>
+</div>
+<ul class="features">
+<li>1 personal coaching session / week (online or in-person)</li>
+<li>Personalised monthly training plan</li>
+<li>App workout planner &amp; habit tracker</li>
+<li>Monthly progress review</li>
+<li>Direct messaging support (Mon–Fri)</li>
+<li>Flexible scheduling</li>
+</ul>
+<div class="cta-stack">
+<a class="btn" href="#contact">Start Your Transformation</a>
+<a class="btn btn--ghost" href="https://cal.com/coachpete/consultation" rel="noopener" target="_blank">Book Free Intro Call</a>
+</div>
+</article>
+<article class="tier best" data-reveal="">
+<div class="badge">Most Popular</div>
+<div class="tier-hdr">
+<h3 class="kicker">Accelerate</h3>
+<div class="price"><span class="was">£200</span> £165 <small>/ mo online</small></div>
+<div class="price-sub">£275 / mo in-person</div>
+</div>
+<ul class="features">
+<li>2 personal coaching sessions / week</li>
+<li>Custom fitness &amp; nutrition, updated weekly</li>
+<li>Priority response, extended support hours</li>
+<li>Progress dashboard with instant feedback</li>
+<li>Monthly nutrition &amp; lifestyle review</li>
+<li>All Essential benefits included</li>
+</ul>
+<div class="cta-stack">
+<a class="btn" href="#contact">Claim Your Offer Spot</a>
+<a class="btn btn--ghost" href="https://cal.com/coachpete/consultation" rel="noopener" target="_blank">Book Free Intro Call</a>
+</div>
+</article>
+<article class="tier" data-reveal="">
+<div class="tier-hdr">
+<h3 class="kicker">Elite</h3>
+<div class="price">£300 <small>/ mo online</small></div>
+<div class="price-sub">£440 / mo in-person</div>
+</div>
+<ul class="features">
+<li>3 personal coaching sessions / week</li>
+<li>Unlimited priority support (7 days)</li>
+<li>Full lifestyle, nutrition &amp; accountability</li>
+<li>Weekly deep-dive review &amp; roadmap</li>
+<li>VIP perks: guest passes, events, workshops</li>
+<li>All Accelerate benefits included</li>
+</ul>
+<div class="cta-stack">
+<a class="btn" href="#contact">Start Your Transformation</a>
+<a class="btn btn--ghost" href="https://cal.com/coachpete/consultation" rel="noopener" target="_blank">Book Free Intro Call</a>
+</div>
+</article>
+</div>
+<div class="lt-offer" data-reveal="">
+<strong>Limited-Time Offer:</strong> Sign up for Essential or Accelerate before <u>30 September 2025</u> and lock discounted rates for your first 3 months. Limited spaces.
         </div>
-        <div class="about__img" data-reveal>
-          <picture>
-            <source type="image/webp" srcset="https://raw.githubusercontent.com/coachpete86/CoachPete_LIVESITE/main/Photoshoot_Coach_2.png" />
-            <img src="https://raw.githubusercontent.com/coachpete86/CoachPete_LIVESITE/main/Photoshoot_Coach_2.png" alt="Coach Pete Ryan coaching" loading="lazy" decoding="async"/>
-          </picture>
-        </div>
-      </div>
-    </section>
-
-    <!-- Services -->
-    <section id="services">
-      <div class="wrap">
-        <h2 class="section-title" data-reveal>My Services</h2>
-        <div class="services__grid">
-          <a class="card" href="/personal-training.html" data-reveal><i class="fas fa-dumbbell" aria-hidden="true"></i><h3>Personal Training</h3><p>Custom programmes that meet you where you are and push your limits safely for results that stick.</p></a>
-          <a class="card" href="/mindset-coaching.html" data-reveal><i class="fas fa-brain" aria-hidden="true"></i><h3>Mindset Coaching</h3><p>Break limiting beliefs and build the mental game of a champion — in the gym and in life.</p></a>
-          <a class="card" href="/group-training.html" data-reveal><i class="fas fa-users" aria-hidden="true"></i><h3>Group Training</h3><p>High-energy sessions that blend team motivation with pro coaching.</p></a>
-          <a class="card" href="/online-coaching.html" data-reveal><i class="fas fa-mobile-alt" aria-hidden="true"></i><h3>Online Coaching</h3><p>World-class coaching from anywhere with full support.</p></a>
-          <a class="card" href="/nutrition-guidance.html" data-reveal><i class="fas fa-apple-alt" aria-hidden="true"></i><h3>Nutrition Guidance</h3><p>Sustainable strategies that fuel your performance. No fads.</p></a>
-          <a class="card" href="/lifestyle-transformation.html" data-reveal><i class="fas fa-chart-line" aria-hidden="true"></i><h3>Lifestyle Transformation</h3><p>Fitness, mindset, and nutrition — engineered for long-term change.</p></a>
-        </div>
-      </div>
-    </section>
-
-    <!-- Process -->
-    <section id="process">
-      <div class="wrap">
-        <h2 class="section-title" data-reveal>My 4-Step Process</h2>
-        <div class="steps">
-          <div class="step" data-reveal><div class="num">1</div><h3>Assessment</h3><p>Full evaluation of fitness, mindset, and goals to map your path.</p></div>
-          <div class="step" data-reveal><div class="num">2</div><h3>Strategy</h3><p>Custom plan combining training, mindset, and lifestyle.</p></div>
-          <div class="step" data-reveal><div class="num">3</div><h3>Implementation</h3><p>Guided execution with adjustments and accountability.</p></div>
-          <div class="step" data-reveal><div class="num">4</div><h3>Transformation</h3><p>Lock in results with repeatable tools and habits.</p></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Testimonials -->
-    <section id="testimonials">
-      <div class="wrap">
-        <h2 class="section-title" data-reveal>What My Clients Say</h2>
-        <div class="slider" data-reveal id="testimonialSlider">
-          <blockquote class="quote">“Pete didn't just change my body, he changed my entire mindset. Stronger mentally and physically than ever.”<div class="quote__by">— Sarah M., Business Executive</div></blockquote>
-          <blockquote class="quote" style="display:none;">“I was terrified of the gym. Pete built a plan from the ground up and celebrated every small win. He gave me back my self-belief.”<div class="quote__by">— John L.</div></blockquote>
-          <div class="slider-controls"><span class="slider-dot active"></span><span class="slider-dot"></span></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- FAQ -->
-    <section id="faq">
-      <div class="wrap">
-        <h2 class="section-title" data-reveal>FAQ</h2>
-        <div class="faq">
-          <details><summary>Do you work with beginners?</summary><p>Yes. We'll start from your current level and progress safely and intelligently.</p></details>
-          <details><summary>Do you offer online coaching?</summary><p>Yes. Remote coaching includes training plans, video feedback, and weekly check-ins.</p></details>
-          <details><summary>How soon will I see results?</summary><p>Expect early wins in 2–4 weeks and significant changes within 12 weeks with consistency.</p></details>
-        </div>
-      </div>
-    </section>
-
-    <!-- Pricing & Plans -->
-    <section id="pricing" aria-label="Pricing & Plans">
-      <div class="wrap">
-        <h2 class="section-title" data-reveal>Pricing & Plans</h2>
-        <p class="pricing-sub" data-reveal>Which plan suits you?</p>
-
-        <div class="plan-table" data-reveal>
-          <div class="t-row t-head">
-            <div>Plan</div><div>Sessions / week</div><div>Online price</div><div>In-person price</div>
-          </div>
-          <div class="t-row">
-            <div>Essential</div><div>1</div>
-            <div><span class="was">£120</span> <strong>£99/mo</strong></div>
-            <div><span class="was">£180</span> <strong>£150/mo</strong></div>
-          </div>
-          <div class="t-row">
-            <div>Accelerate</div><div>2</div>
-            <div><span class="was">£200</span> <strong>£165/mo</strong></div>
-            <div><span class="was">£320</span> <strong>£275/mo</strong></div>
-          </div>
-          <div class="t-row">
-            <div>Elite</div><div>3</div>
-            <div><strong>£300/mo</strong></div>
-            <div><strong>£440/mo</strong></div>
-          </div>
-        </div>
-
-        <div class="pricing-grid">
-          <article class="tier" data-reveal>
-            <div class="tier-hdr">
-              <h3 class="kicker">Essential</h3>
-              <div class="price"><span class="was">£120</span> £99 <small>/ mo online</small></div>
-              <div class="price-sub">£150 / mo in-person</div>
-            </div>
-            <ul class="features">
-              <li>1 personal coaching session / week (online or in-person)</li>
-              <li>Personalised monthly training plan</li>
-              <li>App workout planner & habit tracker</li>
-              <li>Monthly progress review</li>
-              <li>Direct messaging support (Mon–Fri)</li>
-              <li>Flexible scheduling</li>
-            </ul>
-            <div class="cta-stack">
-              <a class="btn" href="#contact">Start Your Transformation</a>
-              <a class="btn btn--ghost" href="https://cal.com/coachpete/consultation" target="_blank" rel="noopener">Book Free Intro Call</a>
-            </div>
-          </article>
-
-          <article class="tier best" data-reveal>
-            <div class="badge">Most Popular</div>
-            <div class="tier-hdr">
-              <h3 class="kicker">Accelerate</h3>
-              <div class="price"><span class="was">£200</span> £165 <small>/ mo online</small></div>
-              <div class="price-sub">£275 / mo in-person</div>
-            </div>
-            <ul class="features">
-              <li>2 personal coaching sessions / week</li>
-              <li>Custom fitness & nutrition, updated weekly</li>
-              <li>Priority response, extended support hours</li>
-              <li>Progress dashboard with instant feedback</li>
-              <li>Monthly nutrition & lifestyle review</li>
-              <li>All Essential benefits included</li>
-            </ul>
-            <div class="cta-stack">
-              <a class="btn" href="#contact">Claim Your Offer Spot</a>
-              <a class="btn btn--ghost" href="https://cal.com/coachpete/consultation" target="_blank" rel="noopener">Book Free Intro Call</a>
-            </div>
-          </article>
-
-          <article class="tier" data-reveal>
-            <div class="tier-hdr">
-              <h3 class="kicker">Elite</h3>
-              <div class="price">£300 <small>/ mo online</small></div>
-              <div class="price-sub">£440 / mo in-person</div>
-            </div>
-            <ul class="features">
-              <li>3 personal coaching sessions / week</li>
-              <li>Unlimited priority support (7 days)</li>
-              <li>Full lifestyle, nutrition & accountability</li>
-              <li>Weekly deep-dive review & roadmap</li>
-              <li>VIP perks: guest passes, events, workshops</li>
-              <li>All Accelerate benefits included</li>
-            </ul>
-            <div class="cta-stack">
-              <a class="btn" href="#contact">Start Your Transformation</a>
-              <a class="btn btn--ghost" href="https://cal.com/coachpete/consultation" target="_blank" rel="noopener">Book Free Intro Call</a>
-            </div>
-          </article>
-        </div>
-
-        <div class="lt-offer" data-reveal>
-          <strong>Limited-Time Offer:</strong> Sign up for Essential or Accelerate before <u>30 September 2025</u> and lock discounted rates for your first 3 months. Limited spaces.
-        </div>
-
-        <div class="trust" data-reveal>
-          <div class="trust-item"><i class="fa-solid fa-shield-heart"></i> 17+ years’ experience</div>
-          <div class="trust-item"><i class="fa-solid fa-people-group"></i> 200+ client success stories</div>
-          <a class="trust-item link" href="#testimonials"><i class="fa-solid fa-star"></i> Read 5-star reviews</a>
-        </div>
-
-        <div class="faq compact" data-reveal>
-          <details><summary>Can I start online and switch to in-person?</summary><p>Yes. Request changes at monthly renewal.</p></details>
-          <details><summary>What is included in each session?</summary><p>Expert coaching, real-time feedback, plan updates, accountability, and Q&A.</p></details>
-          <details><summary>Is there a contract?</summary><p>No long-term contract. Cancel or change with 7 days’ notice before renewal.</p></details>
-          <details><summary>Where do sessions take place?</summary><p>In-person in Hertfordshire; online via Zoom or the coaching app.</p></details>
-          <details><summary>What happens at sign-up?</summary><p>Tailored onboarding plus your first action plan within 48 hours.</p></details>
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact -->
-    <section id="contact">
-      <div class="wrap">
-        <h2 class="section-title" data-reveal>Get In Touch</h2>
-        <div class="contact">
-          <div data-reveal>
-            <h3>Ready to transform your life?</h3>
-            <p>Tell me your goals and we'll build a plan that works for you.</p>
-            <p><i class="fas fa-phone"></i> <a href="tel:+447308518428">+44 7308 518428</a></p>
-            <p><i class="fas fa-envelope"></i> <a href="mailto:pete@coachpeteryan.com">pete@coachpeteryan.com</a></p>
-            <p><i class="fas fa-map-marker-alt"></i> Hertfordshire, UK</p>
-            <p><i class="fas fa-clock"></i> Mon–Fri: 06:00–20:00 • Sat–Sun: 08:00–18:00</p>
-          </div>
-
-          <form id="contact-form" action="https://formspree.io/f/xgvyagkq" method="POST" novalidate data-reveal>
-            <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true" />
-            <div>
-              <label for="name">Name</label>
-              <input id="name" name="name" type="text" required aria-required="true" />
-              <div class="error" id="err-name">Please enter your name.</div>
-            </div>
-            <div>
-              <label for="email">Email</label>
-              <input id="email" name="email" type="email" required aria-required="true" />
-              <div class="error" id="err-email">Enter a valid email address.</div>
-            </div>
-            <div>
-              <label for="phone">Phone (optional)</label>
-              <input id="phone" name="phone" type="tel" inputmode="tel" />
-            </div>
-            <div>
-              <label for="message">Message</label>
-              <textarea id="message" name="message" rows="4" placeholder="Tell me about your goals…" required aria-required="true"></textarea>
-              <div class="error" id="err-message">Please include a brief message.</div>
-            </div>
-            <button class="btn" type="submit" id="submitBtn">Send Message</button>
-            <div class="status" id="formStatus" role="status" aria-live="polite"></div>
-          </form>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="footer-links" aria-label="Quick links">
-      <a href="#home">Home</a><a href="#about">About</a><a href="#services">Services</a><a href="#contact">Contact</a>
-    </div>
-    <div class="social" aria-label="Social links">
-      <a href="https://instagram.com/coachedbypete" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-      <a href="https://facebook.com/coachpeteryan" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-      <a href="https://linkedin.com/coachpeteryan" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-    </div>
-    <div>© <span id="year"></span> Coach Pete Ryan • Building Better People</div>
-  </footer>
-
-  <!-- JSON-LD Schema -->
-  <script type="application/ld+json" id="schema-json">
+<div class="trust" data-reveal="">
+<div class="trust-item"><i class="fa-solid fa-shield-heart"></i> 17+ years’ experience</div>
+<div class="trust-item"><i class="fa-solid fa-people-group"></i> 200+ client success stories</div>
+<a class="trust-item link" href="#testimonials"><i class="fa-solid fa-star"></i> Read 5-star reviews</a>
+</div>
+<div class="faq compact" data-reveal="">
+<details><summary>Can I start online and switch to in-person?</summary><p>Yes. Request changes at monthly renewal.</p></details>
+<details><summary>What is included in each session?</summary><p>Expert coaching, real-time feedback, plan updates, accountability, and Q&amp;A.</p></details>
+<details><summary>Is there a contract?</summary><p>No long-term contract. Cancel or change with 7 days’ notice before renewal.</p></details>
+<details><summary>Where do sessions take place?</summary><p>In-person in Hertfordshire; online via Zoom or the coaching app.</p></details>
+<details><summary>What happens at sign-up?</summary><p>Tailored onboarding plus your first action plan within 48 hours.</p></details>
+</div>
+</div>
+</section>
+<!-- Contact -->
+<section id="contact">
+<div class="wrap">
+<h2 class="section-title" data-reveal="">Get In Touch</h2>
+<div class="contact">
+<div data-reveal="">
+<h3>Ready to transform your life?</h3>
+<p>Tell me your goals and we'll build a plan that works for you.</p>
+<p><i class="fas fa-phone"></i> <a href="tel:+447308518428">+44 7308 518428</a></p>
+<p><i class="fas fa-envelope"></i> <a href="mailto:pete@coachpeteryan.com">pete@coachpeteryan.com</a></p>
+<p><i class="fas fa-map-marker-alt"></i> Hertfordshire, UK</p>
+<p><i class="fas fa-clock"></i> Mon–Fri: 06:00–20:00 • Sat–Sun: 08:00–18:00</p>
+</div>
+<form action="https://formspree.io/f/xgvyagkq" data-reveal="" id="contact-form" method="POST" novalidate="">
+<input aria-hidden="true" autocomplete="off" name="_gotcha" style="display:none" tabindex="-1" type="text"/>
+<div>
+<label for="name">Name</label>
+<input aria-required="true" id="name" name="name" required="" type="text"/>
+<div class="error" id="err-name">Please enter your name.</div>
+</div>
+<div>
+<label for="email">Email</label>
+<input aria-required="true" id="email" name="email" required="" type="email"/>
+<div class="error" id="err-email">Enter a valid email address.</div>
+</div>
+<div>
+<label for="phone">Phone (optional)</label>
+<input id="phone" inputmode="tel" name="phone" type="tel"/>
+</div>
+<div>
+<label for="message">Message</label>
+<textarea aria-required="true" id="message" name="message" placeholder="Tell me about your goals…" required="" rows="4"></textarea>
+<div class="error" id="err-message">Please include a brief message.</div>
+</div>
+<button class="btn" id="submitBtn" type="submit">Send Message</button>
+<div aria-live="polite" class="status" id="formStatus" role="status"></div>
+</form>
+</div>
+</div>
+</section>
+</main>
+<footer>
+<div aria-label="Quick links" class="footer-links">
+<a href="#home">Home</a><a href="#about">About</a><a href="#services">Services</a><a href="#contact">Contact</a>
+</div>
+<div aria-label="Social links" class="social">
+<a aria-label="Instagram" href="https://instagram.com/coachedbypete" rel="noopener noreferrer" target="_blank"><i class="fab fa-instagram"></i></a>
+<a aria-label="Facebook" href="https://facebook.com/coachpeteryan" rel="noopener noreferrer" target="_blank"><i class="fab fa-facebook"></i></a>
+<a aria-label="LinkedIn" href="https://linkedin.com/coachpeteryan" rel="noopener noreferrer" target="_blank"><i class="fab fa-linkedin"></i></a>
+</div>
+<div>© <span id="year"></span> Coach Pete Ryan • Building Better People</div>
+</footer>
+<!-- JSON-LD Schema -->
+<script id="schema-json" type="application/ld+json">
   {
     "@context":"https://schema.org",
     "@type":"Person",
@@ -579,8 +573,7 @@
     "address":{"@type":"PostalAddress","addressCountry":"GB","addressRegion":"Hertfordshire"}
   }
   </script>
-
-  <script>
+<script>
     // Robust loader hide
     function hideLoader(){
       const l=document.getElementById('loader');
@@ -757,8 +750,7 @@ self.addEventListener('fetch',e=>{
       }
     })();
   </script>
-
-  <!-- Optional analytics -->
-  <!-- <script defer data-domain="coachpeteryan.com" src="https://plausible.io/js/script.js"></script> -->
-</body>
+<!-- Optional analytics -->
+<!-- <script defer data-domain="coachpeteryan.com" src="https://plausible.io/js/script.js"></script> -->
+<script defer="defer" src="https://cal.com/embed/embed.js" type="text/javascript"></script></body>
 </html>
